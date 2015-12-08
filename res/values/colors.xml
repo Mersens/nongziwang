@@ -11,7 +11,11 @@
     <color name="base_color_text_gray">#9fa0a0</color>
     <color name="base_color_text_white">#ffffff</color>
     <color name="dialog_color_title">#cacaca</color>
-        <color name="black2">#ffeeeeee</color>
+    <color name="gray_text_color">#9e9e9e</color>
+    <color name="black2">#ffeeeeee</color>
+    <color name="black">#000000</color>
+    <color name="black_text_color">#656565</color>
+    <color name="activity_graybg">#f7f7f7</color>
     <!-- 覆盖颜色 -->
     <color name="bgColor_overlay">#60000000</color>
     <color name="bgColor_overlay_black">#95000000</color>

@@ -3,21 +3,28 @@ package com.nongziwang.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.nongziwang.activity.SearchFragmentActivity;
 import com.nongziwang.adapter.ViewPagerAdapter;
 import com.nongziwang.main.R;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class Fragment1 extends BaseFragment {
 	private View view;
@@ -25,11 +32,12 @@ public class Fragment1 extends BaseFragment {
 	private ListView listView;
 	private LayoutInflater mInflater;
 	private ViewPager viewpager;
-	private int[] pics = { R.drawable.java, R.drawable.android_and_ios, R.drawable.wp,
-			R.drawable.icon_android};
+	private int[] pics = { R.drawable.banner, R.drawable.banner, R.drawable.banner};
+			
 	private Runnable viewpagerRunnable;
 	private static Handler handler;
 	private RadioGroup dotLayout;
+	private LinearLayout layout_search;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,10 +57,23 @@ public class Fragment1 extends BaseFragment {
 		viewpager=(ViewPager) bannersView.findViewById(R.id.viewpager);
 		dotLayout = (RadioGroup)bannersView.findViewById(R.id.advertise_point_group);
 		listView=(ListView) view.findViewById(R.id.listView);
+		layout_search=(LinearLayout) view.findViewById(R.id.layout_search);
 		listView.addHeaderView(bannersView);
 	}
 
 	private void initDatas() {
+		layout_search.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(getActivity(),SearchFragmentActivity.class);
+				startActivity(intent);
+				getActivity().overridePendingTransition(R.anim.bottom_open,0);
+				
+				
+			}
+		});
 		listView.setAdapter(new BaseAdapter() {
 			
 			@Override

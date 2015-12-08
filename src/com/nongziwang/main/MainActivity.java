@@ -19,14 +19,14 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	private Fragment[] fragments;
 
 	private ImageView img_home;
-	private ImageView img_account;
-	private ImageView img_more;
-	private ImageView img_more1;
+	private ImageView img_product;
+	private ImageView img_info;
+	private ImageView img_user;
 
 	private RelativeLayout layout_home;
-	private RelativeLayout layout_account;
-	private RelativeLayout layout_more;
-	private RelativeLayout layout_more1;
+	private RelativeLayout layout_product;
+	private RelativeLayout layout_info;
+	private RelativeLayout layout_user;
 	private RelativeLayout[] mTabs;
 
 	private int index;
@@ -49,27 +49,27 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
 		mTabs = new RelativeLayout[4];
 		layout_home = (RelativeLayout) findViewById(R.id.layout_home);
-		layout_account = (RelativeLayout) findViewById(R.id.layout_account);
-		layout_more = (RelativeLayout) findViewById(R.id.layout_more);
-		layout_more1 = (RelativeLayout) findViewById(R.id.layout_more1);
+		layout_product = (RelativeLayout) findViewById(R.id.layout_product);
+		layout_info = (RelativeLayout) findViewById(R.id.layout_info);
+		layout_user = (RelativeLayout) findViewById(R.id.layout_user);
 		img_home = (ImageView) findViewById(R.id.img_home);
-		img_account = (ImageView) findViewById(R.id.img_account);
-		img_more = (ImageView) findViewById(R.id.img_more);
-		img_more1 = (ImageView) findViewById(R.id.img_more1);
+		img_product = (ImageView) findViewById(R.id.img_product);
+		img_info = (ImageView) findViewById(R.id.img_info);
+		img_user = (ImageView) findViewById(R.id.img_user);
 
 		mTabs[0] = layout_home;
-		mTabs[1] = layout_account;
-		mTabs[2] = layout_more;
-		mTabs[3] = layout_more1;
+		mTabs[1] = layout_product;
+		mTabs[2] = layout_info;
+		mTabs[3] = layout_user;
 		getSupportFragmentManager().beginTransaction()
 		.add(R.id.fragment_container, fragments[0])
 		.show(fragments[0]).commit();
 	}
 	private void initEvents() {
 		layout_home.setOnClickListener(this);
-		layout_account.setOnClickListener(this);
-		layout_more.setOnClickListener(this);
-		layout_more1.setOnClickListener(this);
+		layout_product.setOnClickListener(this);
+		layout_info.setOnClickListener(this);
+		layout_user.setOnClickListener(this);
 	}
 
 
@@ -80,15 +80,15 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			index = 0;
 			setTab(0);
 			break;
-		case R.id.layout_account:
+		case R.id.layout_product:
 			index = 1;
 			setTab(1);
 			break;
-		case R.id.layout_more:
+		case R.id.layout_info:
 			index = 2;
 			setTab(2);
 			break;
-		case R.id.layout_more1:
+		case R.id.layout_user:
 			index = 3;
 			setTab(3);
 			break;
@@ -112,25 +112,25 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		resetImgs();
 		switch (index) {
 		case 0:
-			img_home.setImageResource(R.drawable.icon_home_pressed);
+			img_home.setImageResource(R.drawable.icon_shouye_pressed);
 			break;
 		case 1:
-			img_account.setImageResource(R.drawable.icon_account_pressed);
+			img_product.setImageResource(R.drawable.icon_chanpin_pressed);
 			break;
 		case 2:
-			img_more.setImageResource(R.drawable.icon_more_pressd);
+			img_info.setImageResource(R.drawable.icon_zixun_pressed);
 			break;
 		case 3:
-			img_more1.setImageResource(R.drawable.icon_more_pressd);
+			img_user.setImageResource(R.drawable.icon_geren_pressed);
 			break;
 		}
 	}
 
 	private void resetImgs() {
-		img_home.setImageResource(R.drawable.icon_home_normal);
-		img_account.setImageResource(R.drawable.icon_account_normal);
-		img_more.setImageResource(R.drawable.icon_more_normal);
-		img_more1.setImageResource(R.drawable.icon_more_normal);
+		img_home.setImageResource(R.drawable.icon_shouye_normal);
+		img_product.setImageResource(R.drawable.icon_chanpin_normal);
+		img_info.setImageResource(R.drawable.icon_zixun_normal);
+		img_user.setImageResource(R.drawable.icon_geren_normal);
 	}
 
 

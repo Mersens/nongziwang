@@ -11,6 +11,7 @@
     <dimen name="progress_margin">22dp</dimen>
     <dimen name="progress_width">150dp</dimen>
     <dimen name="text_size">15dp</dimen>
+    <dimen name="text_mid_size">12dp</dimen>
     <!-- padding -->
     <dimen name="padding_svprogresshuddefault">15dp</dimen>
     <!-- 窗口最小宽度 -->
