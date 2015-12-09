@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:background="@color/white_color"
     android:orientation="vertical" >
-
+    <include
+        android:id="@+id/common_search_title"
+        layout="@layout/layout_common_search_title" />
 
     <FrameLayout
         android:id="@+id/fragmentContainer"

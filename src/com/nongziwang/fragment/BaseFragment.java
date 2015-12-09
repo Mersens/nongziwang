@@ -173,7 +173,13 @@ public abstract class BaseFragment extends Fragment {
 		context.overridePendingTransition(R.anim.left_in,
 				R.anim.left_out);
 	}
-	
+	public <T> void intentAction(Activity context, Class<T> cls,String params) {
+		Intent intent = new Intent(context, cls);
+		intent.putExtra("params", params);
+		startActivity(intent);
+		context.overridePendingTransition(R.anim.left_in,
+				R.anim.left_out);
+	}
 	/**
 	 * @author Mersens
 	 * finishActivity()

@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 
+import com.nongziwang.application.CustomApplcation;
 import com.nongziwang.main.R;
 import com.nongziwang.view.HeadView;
 import com.nongziwang.view.HeadView.HeaderStyle;
@@ -30,6 +31,7 @@ public class BaseActivity extends FragmentActivity{
 		super.onCreate(arg0);
 		//设置禁止横屏
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		CustomApplcation.getInstance().addActivity(this);
 		activity=this;
 		//获取手机屏幕的高度和宽度
 		DisplayMetrics metrics=new DisplayMetrics();

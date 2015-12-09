@@ -2,11 +2,12 @@ package com.nongziwang.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.nongziwang.activity.SearchFragmentActivity;
+import com.nongziwang.activity.TypeSearchFragmentActivity;
 import com.nongziwang.adapter.ViewPagerAdapter;
 import com.nongziwang.main.R;
-
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,24 +27,30 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class Fragment1 extends BaseFragment {
+public class Fragment1 extends BaseFragment implements OnClickListener {
 	private View view;
 	private View bannersView;
 	private ListView listView;
 	private LayoutInflater mInflater;
 	private ViewPager viewpager;
-	private int[] pics = { R.drawable.banner, R.drawable.banner, R.drawable.banner};
-			
+	private int[] pics = { R.drawable.banner, R.drawable.banner,
+			R.drawable.banner };
+
 	private Runnable viewpagerRunnable;
 	private static Handler handler;
 	private RadioGroup dotLayout;
 	private LinearLayout layout_search;
 
+	private LinearLayout layout_huafei;
+	private LinearLayout layout_zhongzi;
+	private LinearLayout layout_nongyao;
+	private LinearLayout layout_nongji;
+	private LinearLayout layout_nongmo;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.layout_fragment1, container,
-				false);
+		view = inflater.inflate(R.layout.layout_fragment1, container, false);
 		handler = new Handler();
 		initViews();
 		setBanners();
@@ -52,48 +59,66 @@ public class Fragment1 extends BaseFragment {
 	}
 
 	private void initViews() {
-		mInflater=LayoutInflater.from(getActivity());
-		bannersView= mInflater.inflate(R.layout.layout_banners, null);
-		viewpager=(ViewPager) bannersView.findViewById(R.id.viewpager);
-		dotLayout = (RadioGroup)bannersView.findViewById(R.id.advertise_point_group);
-		listView=(ListView) view.findViewById(R.id.listView);
-		layout_search=(LinearLayout) view.findViewById(R.id.layout_search);
+		mInflater = LayoutInflater.from(getActivity());
+		bannersView = mInflater.inflate(R.layout.layout_banners, null);
+		viewpager = (ViewPager) bannersView.findViewById(R.id.viewpager);
+		dotLayout = (RadioGroup) bannersView
+				.findViewById(R.id.advertise_point_group);
+		listView = (ListView) view.findViewById(R.id.listView);
+		layout_huafei = (LinearLayout) bannersView
+				.findViewById(R.id.layout_huafei);
+		layout_zhongzi = (LinearLayout) bannersView
+				.findViewById(R.id.layout_zhongzi);
+		layout_nongyao = (LinearLayout) bannersView
+				.findViewById(R.id.layout_nongyao);
+		layout_nongji = (LinearLayout) bannersView
+				.findViewById(R.id.layout_nongji);
+		layout_nongmo = (LinearLayout) bannersView
+				.findViewById(R.id.layout_nongmo);
+		layout_search = (LinearLayout) view.findViewById(R.id.layout_search);
+		layout_huafei.setOnClickListener(this);
+		layout_zhongzi.setOnClickListener(this);
+		layout_nongyao.setOnClickListener(this);
+		layout_nongji.setOnClickListener(this);
+		layout_nongmo.setOnClickListener(this);
 		listView.addHeaderView(bannersView);
 	}
 
+	@SuppressLint("ViewHolder")
 	private void initDatas() {
 		layout_search.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent=new Intent(getActivity(),SearchFragmentActivity.class);
+				Intent intent = new Intent(getActivity(),
+						SearchFragmentActivity.class);
 				startActivity(intent);
-				getActivity().overridePendingTransition(R.anim.bottom_open,0);
-				
-				
+				getActivity().overridePendingTransition(R.anim.bottom_open, 0);
+
 			}
 		});
 		listView.setAdapter(new BaseAdapter() {
-			
+
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
-				
-				return mInflater.inflate(R.layout.listview_type_item, parent,false);
+
+				return mInflater.inflate(R.layout.listview_type_item, parent,
+						false);
 			}
-			
+
 			@Override
 			public long getItemId(int position) {
 				// TODO Auto-generated method stub
 				return position;
 			}
-			
+
 			@Override
 			public Object getItem(int position) {
 				// TODO Auto-generated method stub
 				return null;
 			}
-			
+
 			@Override
 			public int getCount() {
 				// TODO Auto-generated method stub
@@ -101,36 +126,32 @@ public class Fragment1 extends BaseFragment {
 			}
 		});
 	}
-	public void setBanners(){
+
+	public void setBanners() {
 		initListener();
 		int len = pics.length;
 		View view = null;
 		ImageView imageview;
 		LayoutInflater mInflater = LayoutInflater.from(getActivity());
 		List<View> lists = new ArrayList<View>();
-		for (int i = 0; i < len; i++)
-		{
+		for (int i = 0; i < len; i++) {
 			view = mInflater.inflate(R.layout.imageview_layout, null);
 			imageview = (ImageView) view.findViewById(R.id.viewpager_imageview);
 			imageview.setBackgroundResource(pics[i]);
 			lists.add(view);
 		}
-		viewpager.setAdapter(new ViewPagerAdapter(getActivity(),lists));
+		viewpager.setAdapter(new ViewPagerAdapter(getActivity(), lists));
 		initRunnable();
 	}
-	
+
 	@SuppressWarnings("deprecation")
-	private void initListener()
-	{
-		viewpager.setOnPageChangeListener(new OnPageChangeListener()
-		{
+	private void initListener() {
+		viewpager.setOnPageChangeListener(new OnPageChangeListener() {
 			boolean isScrolled = false;
 
 			@Override
-			public void onPageScrollStateChanged(int status)
-			{
-				switch (status)
-				{
+			public void onPageScrollStateChanged(int status) {
+				switch (status) {
 				case 1:
 					isScrolled = false;
 					break;
@@ -140,12 +161,9 @@ public class Fragment1 extends BaseFragment {
 				case 0:
 
 					if (viewpager.getCurrentItem() == viewpager.getAdapter()
-							.getCount() - 1 && !isScrolled)
-					{
+							.getCount() - 1 && !isScrolled) {
 						viewpager.setCurrentItem(0);
-					}
-					else if (viewpager.getCurrentItem() == 0 && !isScrolled)
-					{
+					} else if (viewpager.getCurrentItem() == 0 && !isScrolled) {
 						viewpager.setCurrentItem(viewpager.getAdapter()
 								.getCount() - 1);
 					}
@@ -154,53 +172,78 @@ public class Fragment1 extends BaseFragment {
 			}
 
 			@Override
-			public void onPageScrolled(int position, float arg1, int arg2)
-			{
+			public void onPageScrolled(int position, float arg1, int arg2) {
 				((RadioButton) dotLayout.getChildAt(position)).setChecked(true);
 			}
 
 			@Override
-			public void onPageSelected(int index)
-			{
-				
+			public void onPageSelected(int index) {
+
 			}
 		});
 	}
-	
+
 	private static final int TIME = 3000;
 
-	protected void initRunnable()
-	{
-		viewpagerRunnable = new Runnable()
-		{
+	protected void initRunnable() {
+		viewpagerRunnable = new Runnable() {
 
 			@Override
-			public void run()
-			{
+			public void run() {
 				int nowIndex = viewpager.getCurrentItem();
 				int count = viewpager.getAdapter().getCount();
-				if (nowIndex + 1 >= count)
-				{
+				if (nowIndex + 1 >= count) {
 					viewpager.setCurrentItem(0);
-				} else
-				{
+				} else {
 					viewpager.setCurrentItem(nowIndex + 1);
 				}
 				handler.postDelayed(viewpagerRunnable, TIME);
 			}
 		};
 		handler.postDelayed(viewpagerRunnable, TIME);
-		
+
 	}
-	
+
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
 		handler.removeCallbacks(viewpagerRunnable);
 	}
+
 	@Override
 	protected void lazyLoad() {
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.layout_huafei:
+			intentAction(getActivity(), TypeSearchFragmentActivity.class,
+					CommonSearchFragment.HUAFEI);
+			break;
+		case R.id.layout_zhongzi:
+			intentAction(getActivity(), TypeSearchFragmentActivity.class,
+					CommonSearchFragment.ZHONGZI);
+
+			break;
+		case R.id.layout_nongyao:
+			intentAction(getActivity(), TypeSearchFragmentActivity.class,
+					CommonSearchFragment.NONGYAO);
+
+			break;
+		case R.id.layout_nongji:
+			intentAction(getActivity(), TypeSearchFragmentActivity.class,
+					CommonSearchFragment.NONGJI);
+
+			break;
+		case R.id.layout_nongmo:
+			intentAction(getActivity(), TypeSearchFragmentActivity.class,
+					CommonSearchFragment.NONGMO);
+
+			break;
+		}
 
 	}
 

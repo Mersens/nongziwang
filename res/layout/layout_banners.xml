@@ -48,6 +48,7 @@
         android:orientation="horizontal" >
 
         <LinearLayout
+            android:id="@+id/layout_huafei"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -70,6 +71,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_zhongzi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -92,6 +94,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_nongyao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -114,6 +117,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_nongji"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -136,6 +140,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_nongmo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
