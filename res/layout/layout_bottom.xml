@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/main_bottom"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_hight"
+        android:layout_height="@dimen/bottom_hight"
         android:background="@color/white_color"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
@@ -38,7 +38,17 @@
                     android:focusable="false"
                     android:scaleType="centerInside"
                     android:src="@drawable/icon_shouye_pressed" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                   android:layout_centerHorizontal="true"
+                    android:text="@string/bottom_name_home" />
+
             </RelativeLayout>
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -64,7 +74,17 @@
                     android:focusable="false"
                     android:scaleType="centerInside"
                     android:src="@drawable/icon_chanpin_normal" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                     android:layout_centerHorizontal="true"
+                    android:text="@string/bottom_name_project" />
+
             </RelativeLayout>
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -90,7 +110,17 @@
                     android:focusable="false"
                     android:scaleType="centerInside"
                     android:src="@drawable/icon_zixun_normal" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                     android:layout_centerHorizontal="true"
+                    android:text="@string/bottom_name_info" />
+
             </RelativeLayout>
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -116,6 +146,15 @@
                     android:focusable="false"
                     android:scaleType="centerInside"
                     android:src="@drawable/icon_geren_normal" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                     android:layout_centerHorizontal="true"
+                    android:text="@string/bottom_name_user" />
+
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>

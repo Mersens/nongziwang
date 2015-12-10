@@ -2,7 +2,8 @@
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="actionbar_hight">50dp</dimen>
+    <dimen name="actionbar_hight">52dp</dimen>
+    <dimen name="bottom_hight">58dp</dimen>
     <dimen name="title_size">20dp</dimen>
     <dimen name="common_text_size">18dp</dimen>
     <dimen name="left_title_text_size">15dp</dimen>
@@ -10,8 +11,10 @@
     <dimen name="title_margin">10dp</dimen>
     <dimen name="progress_margin">22dp</dimen>
     <dimen name="progress_width">150dp</dimen>
-    <dimen name="text_size">15dp</dimen>
+    <dimen name="text_size">14dp</dimen>
     <dimen name="text_mid_size">12dp</dimen>
+    <dimen name="img_hight_size">48dp</dimen>
+    <dimen name="img_wight_size">48dp</dimen>
     <!-- padding -->
     <dimen name="padding_svprogresshuddefault">15dp</dimen>
     <!-- 窗口最小宽度 -->

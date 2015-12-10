@@ -57,9 +57,10 @@
 
             <ImageView
                 android:id="@+id/imageView1"
+                android:layout_width="@dimen/img_wight_size"
+                android:layout_height="@dimen/img_hight_size"
+                android:scaleType="centerInside"
                 android:paddingTop="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:src="@drawable/icon_huafei" />
 
             <TextView
@@ -67,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:text="化肥" />
+                android:text="@string/type_name_hufei" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,9 +81,10 @@
 
             <ImageView
                 android:id="@+id/imageView2"
+                android:layout_width="@dimen/img_wight_size"
+                android:layout_height="@dimen/img_hight_size"
                 android:paddingTop="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
                 android:src="@drawable/icon_zhongzi" />
 
             <TextView
@@ -90,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:text="种子" />
+                android:text="@string/type_name_zhongzi" />
         </LinearLayout>
 
         <LinearLayout
@@ -103,9 +105,10 @@
 
             <ImageView
                 android:id="@+id/imageView3"
+                android:layout_width="@dimen/img_wight_size"
+                android:layout_height="@dimen/img_hight_size"
                 android:paddingTop="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
                 android:src="@drawable/icon_nongyao" />
 
             <TextView
@@ -113,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:text="农药" />
+                android:text="@string/type_name_nongyao" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,9 +129,10 @@
 
             <ImageView
                 android:id="@+id/imageView4"
+                android:layout_width="@dimen/img_wight_size"
+                android:layout_height="@dimen/img_hight_size"
                 android:paddingTop="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
                 android:src="@drawable/icon_tuolaji" />
 
             <TextView
@@ -136,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:text="农机" />
+                android:text="@string/type_name_nongji" />
         </LinearLayout>
 
         <LinearLayout
@@ -149,9 +153,10 @@
 
             <ImageView
                 android:id="@+id/imageView5"
+                android:layout_width="@dimen/img_wight_size"
+                android:layout_height="@dimen/img_hight_size"
                 android:paddingTop="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
                 android:src="@drawable/icon_nongmo" />
 
             <TextView
@@ -159,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:text="农膜" />
+                android:text="@string/type_name_nongmo" />
         </LinearLayout>
     </LinearLayout>
 

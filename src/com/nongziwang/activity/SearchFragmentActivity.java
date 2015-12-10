@@ -2,10 +2,13 @@ package com.nongziwang.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.nongziwang.adapter.HotSearchAdapter;
 import com.nongziwang.adapter.SearchHistoryAdapter;
 import com.nongziwang.main.R;
+
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -95,7 +98,11 @@ public class SearchFragmentActivity extends BaseActivity {
 					return;
 
 				}
-
+				Intent intent = new Intent(SearchFragmentActivity.this,
+						SearchResultsFragmentActivity.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.bottom_open, 0);	
+				finish();
 			}
 		});
 		img_menu_back.setOnClickListener(new OnClickListener() {

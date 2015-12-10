@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:singleLine="true"
-            android:text="请输入想要查询的农产品"
+            android:text="@string/search_hint"
             android:textColor="@color/black_text_color"
             android:textSize="@dimen/text_mid_size" />
     </LinearLayout>

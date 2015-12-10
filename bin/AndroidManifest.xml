@@ -24,6 +24,7 @@
         </activity>
         <activity android:name="com.nongziwang.activity.SearchFragmentActivity"/>
         <activity android:name="com.nongziwang.activity.TypeSearchFragmentActivity"/>
+         <activity android:name="com.nongziwang.activity.SearchResultsFragmentActivity"/>
     </application>
 
 </manifest>

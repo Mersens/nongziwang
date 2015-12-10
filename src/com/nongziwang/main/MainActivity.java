@@ -1,10 +1,11 @@
 package com.nongziwang.main;
 
 import com.nongziwang.activity.BaseActivity;
-import com.nongziwang.fragment.Fragment1;
-import com.nongziwang.fragment.Fragment2;
-import com.nongziwang.fragment.Fragment3;
-import com.nongziwang.fragment.Fragment4;
+import com.nongziwang.fragment.HomeFragment;
+import com.nongziwang.fragment.ProductFragment;
+import com.nongziwang.fragment.InfoFragment;
+import com.nongziwang.fragment.UserCenterFragment;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,9 +14,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-
-public class MainActivity extends BaseActivity implements OnClickListener{
-	private Fragment f1,f2,f3,f4;
+public class MainActivity extends BaseActivity implements OnClickListener {
+	private Fragment f1, f2, f3, f4;
 	private Fragment[] fragments;
 
 	private ImageView img_home;
@@ -31,6 +31,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
 	private int index;
 	private int currentTabIndex;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,14 +39,13 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		initViews();
 		initEvents();
 	}
-	
+
 	private void initViews() {
-		f1 = new Fragment1();
-		f2 = new Fragment2();
-		f3 = new Fragment3();
-		f4 = new Fragment4();
-		fragments = new Fragment[] { f1, f2,f3,f4 };
-				
+		f1 = new HomeFragment();
+		f2 = new ProductFragment();
+		f3 = new InfoFragment();
+		f4 = new UserCenterFragment();
+		fragments = new Fragment[] { f1, f2, f3, f4 };
 
 		mTabs = new RelativeLayout[4];
 		layout_home = (RelativeLayout) findViewById(R.id.layout_home);
@@ -62,16 +62,16 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		mTabs[2] = layout_info;
 		mTabs[3] = layout_user;
 		getSupportFragmentManager().beginTransaction()
-		.add(R.id.fragment_container, fragments[0])
-		.show(fragments[0]).commit();
+				.add(R.id.fragment_container, fragments[0]).show(fragments[0])
+				.commit();
 	}
+
 	private void initEvents() {
 		layout_home.setOnClickListener(this);
 		layout_product.setOnClickListener(this);
 		layout_info.setOnClickListener(this);
 		layout_user.setOnClickListener(this);
 	}
-
 
 	@Override
 	public void onClick(View v) {
@@ -106,8 +106,9 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		mTabs[currentTabIndex].setSelected(false);
 		mTabs[index].setSelected(true);
 		currentTabIndex = index;
-		
+
 	}
+
 	private void setTab(int i) {
 		resetImgs();
 		switch (index) {
@@ -132,6 +133,5 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		img_info.setImageResource(R.drawable.icon_zixun_normal);
 		img_user.setImageResource(R.drawable.icon_geren_normal);
 	}
-
 
 }

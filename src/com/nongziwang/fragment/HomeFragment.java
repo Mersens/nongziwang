@@ -27,7 +27,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class Fragment1 extends BaseFragment implements OnClickListener {
+public class HomeFragment extends BaseFragment implements OnClickListener {
 	private View view;
 	private View bannersView;
 	private ListView listView;

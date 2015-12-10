@@ -14,7 +14,9 @@
     <color name="gray_text_color">#9e9e9e</color>
     <color name="black2">#ffeeeeee</color>
     <color name="black">#000000</color>
+    <color name="title_yellow_text_color">#FF6C00</color>
     <color name="black_text_color">#656565</color>
+      <color name="red_text_color">#E60012</color>
     <color name="activity_graybg">#f7f7f7</color>
     <!-- 覆盖颜色 -->
     <color name="bgColor_overlay">#60000000</color>

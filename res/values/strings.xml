@@ -4,5 +4,23 @@
     <string name="app_name">nongziwang</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="type_name_hufei">化肥</string>
+    <string name="type_name_zhongzi">种子</string>
+    <string name="type_name_nongyao">农药</string>
+    <string name="type_name_nongji">农机</string>
+    <string name="type_name_nongmo">农膜</string>
+    <string name="bottom_name_home">首页</string>
+    <string name="bottom_name_project">找产品</string>
+    <string name="bottom_name_info">行业资讯</string>
+    <string name="bottom_name_user">个人中心</string>
+    <string name="search_hint">请输入想要查询的农产品</string>
+    <string name="input_search_name">请输入产品名称</string>
+    <string name="btn_cancel">搜索</string>
+    <string name="search_result">搜索结果</string>
+    <string name="moren">默认</string>
+    <string name="pinpai">品牌</string>
+    <string name="yongtu">用途</string>
+    <string name="jinghanliang">净含量</string>
+    <string name="jiage">价格</string>
 
 </resources>

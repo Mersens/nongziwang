@@ -16,10 +16,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="6dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="4dp"
         android:layout_weight="4"
         android:background="@drawable/editbox_background_normal"
         android:baselineAligned="false"
@@ -48,7 +48,7 @@
                 android:layout_marginLeft="6dp"
                 android:background="@drawable/transparent_edittext_bg"
                 android:ems="10"
-                android:hint="请输入产品名称"
+                android:hint="@string/input_search_name"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLength="30"
@@ -74,9 +74,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="6dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="4dp"
         android:layout_marginTop="6dp"
         android:layout_weight="1"
-        android:text="确定" />
+        android:text="@string/btn_cancel" />
 
 </LinearLayout>
