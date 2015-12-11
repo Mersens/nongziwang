@@ -4,9 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     <ListView
-        android:id="@+id/productlistview"
+        android:id="@+id/listview_search_other"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content" 
+        android:divider="@null"
+        >
     </ListView>
 
 </LinearLayout>

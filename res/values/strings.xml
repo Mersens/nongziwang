@@ -22,5 +22,10 @@
     <string name="yongtu">用途</string>
     <string name="jinghanliang">净含量</string>
     <string name="jiage">价格</string>
+    <string name="tjpp">推荐品牌</string>
+    <string name="qb">全部</string>
+    <string name="qbyt">全部用途</string>
+    <string name="zonghe">综合</string>
+    <string name="nstnf">农商通年份</string>
 
 </resources>

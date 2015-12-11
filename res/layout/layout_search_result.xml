@@ -41,7 +41,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-           android:layout_gravity="center"
+            android:layout_gravity="center"
             android:layout_weight="1" >
 
             <ImageView
@@ -60,12 +60,13 @@
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="6dp"
                 android:layout_weight="1"
-                android:dropDownVerticalOffset="22dp"
-                android:background="@drawable/spinner_ab_default_holo_light_am" />
+                android:background="@drawable/spinner_ab_default_holo_light_am"
+                android:dropDownVerticalOffset="22dp" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout_product"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/white_color"
@@ -77,8 +78,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/title_yellow_text_color"
-            android:text="@string/moren" />
+            android:text="@string/moren"
+            android:textColor="@color/title_yellow_text_color" />
 
         <View
             android:layout_width="1dp"
@@ -94,8 +95,8 @@
             android:layout_weight="1"
             android:background="@drawable/spinner_ab_default_holo_light_am"
             android:gravity="center"
-            android:textColor="@color/gray_text_color"
-            android:text="@string/pinpai" />
+            android:text="@string/pinpai"
+            android:textColor="@color/gray_text_color" />
 
         <View
             android:layout_width="1dp"
@@ -111,8 +112,8 @@
             android:layout_weight="1"
             android:background="@drawable/spinner_ab_default_holo_light_am"
             android:gravity="center"
-            android:textColor="@color/gray_text_color"
-            android:text="@string/yongtu" />
+            android:text="@string/yongtu"
+            android:textColor="@color/gray_text_color" />
 
         <View
             android:layout_width="1dp"
@@ -128,8 +129,8 @@
             android:layout_weight="1"
             android:background="@drawable/spinner_ab_default_holo_light_am"
             android:gravity="center"
-            android:textColor="@color/gray_text_color"
-            android:text="@string/jinghanliang" />
+            android:text="@string/jinghanliang"
+            android:textColor="@color/gray_text_color" />
 
         <View
             android:layout_width="1dp"
@@ -142,10 +143,48 @@
             android:id="@+id/tv_jiage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:drawableRight="@drawable/icon_money_normal"
+            android:gravity="center"
+            android:text="@string/jiage"
+            android:textColor="@color/gray_text_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_company"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white_color"
+        android:gravity="center"
+        android:orientation="horizontal" 
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/tv_zh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/gray_text_color"
-            android:text="@string/jiage" />
+            android:text="@string/zonghe"
+            android:textColor="@color/title_yellow_text_color" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/black2" />
+
+        <TextView
+            android:id="@+id/tv_nstnf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/nstnf"
+            android:textColor="@color/gray_text_color" />
     </LinearLayout>
 
     <View
