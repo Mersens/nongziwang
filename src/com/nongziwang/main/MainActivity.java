@@ -1,14 +1,18 @@
 package com.nongziwang.main;
 
 import com.nongziwang.activity.BaseActivity;
+import com.nongziwang.application.CustomApplcation;
 import com.nongziwang.fragment.HomeFragment;
 import com.nongziwang.fragment.ProductFragment;
 import com.nongziwang.fragment.InfoFragment;
 import com.nongziwang.fragment.UserCenterFragment;
+import com.nongziwang.view.DialogTips;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -133,5 +137,28 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		img_info.setImageResource(R.drawable.icon_zixun_normal);
 		img_user.setImageResource(R.drawable.icon_geren_normal);
 	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+			this.confirmExit();
+			return false;
+		} else {
+			return super.onKeyDown(keyCode, event);
+		}
+	}
+	
+	public void confirmExit() {
 
+		DialogTips dialog = new DialogTips(MainActivity.this, "退出", "是否退出软件？",
+				"确定", true, true);
+		dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialogInterface, int userId) {
+				CustomApplcation.getInstance().exit();
+				finish();
+			}
+		});
+		dialog.show();
+		dialog = null;
+	}
 }

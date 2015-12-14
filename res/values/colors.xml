@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="actionbar_color">#00833D</color>
+    <color name="actionbar_white_color">#ffffff</color>
+    <color name="actionbar_blue_color">#008239</color>
     <color name="white_color">#ffffff</color>
     <color name="text_color">#888c97</color>
     <color name="gray_line_color">#cccccc</color>
@@ -13,10 +14,12 @@
     <color name="dialog_color_title">#cacaca</color>
     <color name="gray_text_color">#9e9e9e</color>
     <color name="black2">#ffeeeeee</color>
+    <color name="next_color">#DBDBDB</color>
+    <color name="login_btn_color">#FF6D00</color>
     <color name="black">#000000</color>
     <color name="title_yellow_text_color">#FF6C00</color>
     <color name="black_text_color">#656565</color>
-      <color name="red_text_color">#E60012</color>
+    <color name="red_text_color">#E60012</color>
     <color name="activity_graybg">#f7f7f7</color>
     <!-- 覆盖颜色 -->
     <color name="bgColor_overlay">#60000000</color>

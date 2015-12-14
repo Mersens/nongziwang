@@ -50,7 +50,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.layout_fragment1, container, false);
+		view = inflater.inflate(R.layout.layout_home, container, false);
 		handler = new Handler();
 		initViews();
 		setBanners();

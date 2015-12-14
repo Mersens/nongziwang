@@ -5,6 +5,7 @@ import com.nongziwang.main.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class UsesFragment extends BaseFragment{
 			fm.beginTransaction().remove(fragment).commit();
 		}
 		fragment = creatFragment(params);
-		fm.beginTransaction().add(R.id.fragmentUse, fragment).commit();
+		fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).add(R.id.fragmentUse, fragment).commit();
 
 	}
 	@Override

@@ -45,8 +45,6 @@ public abstract class BaseFragment extends Fragment {
 		activity=getActivity();
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
-
-
 	/**
 	 * @author Mersens
 	 * setDefaultViewMethod--默认显示左侧按钮，标题和右侧按钮

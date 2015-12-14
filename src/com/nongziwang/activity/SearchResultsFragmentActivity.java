@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,10 +51,6 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		initViews();
 		initEvent();
 		initDatas();
-	}
-
-	public enum Style {
-		MOREN, PINPAI, YONGTU, JINGHANLIANG, COMPANY,JIAGE;
 	}
 
 	private void initViews() {
@@ -131,7 +128,11 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		});
 		addFragment(Style.MOREN, params);
 	}
-
+	
+	public enum Style {
+		MOREN, PINPAI, YONGTU, JINGHANLIANG, COMPANY,JIAGE;
+	}
+	
 	public Fragment creatFragment(Style style, String params) {
 		Fragment fragment = null;
 
@@ -167,8 +168,7 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 			fm.beginTransaction().remove(fragment).commit();
 		}
 		fragment = creatFragment(style, params);
-		fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
-
+		fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).add(R.id.fragmentContainer, fragment).commit();
 	}
 
 	@SuppressWarnings("deprecation")

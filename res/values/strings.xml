@@ -19,6 +19,7 @@
     <string name="search_result">搜索结果</string>
     <string name="moren">默认</string>
     <string name="pinpai">品牌</string>
+    <string name="tips">提示</string>
     <string name="yongtu">用途</string>
     <string name="jinghanliang">净含量</string>
     <string name="jiage">价格</string>
@@ -27,5 +28,18 @@
     <string name="qbyt">全部用途</string>
     <string name="zonghe">综合</string>
     <string name="nstnf">农商通年份</string>
+    <string name="user_name_hint">用户名/手机号/邮箱</string>
+    <string name="user_psd_hint">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="forget_psd">忘记密码</string>
+    <string name="user_regist">用户注册</string>
+    <string name="hqyzm">获取验证码</string>
+    <string name="next">下一步</string>
+    <string name="input_tel_number">请输入手机号</string>
+    <string name="input_hqyzm">请输入验证码</string>
+    <string name="nick">昵称</string>
+    <string name="input_psd">请输入密码</string>
+    <string name="input_psd_again">请再次输入密码</string>
+    <string name="finish">完成</string>
 
 </resources>

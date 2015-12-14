@@ -13,10 +13,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 public class SearchFragmentActivity extends BaseActivity {
@@ -91,18 +94,7 @@ public class SearchFragmentActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String edit_value = search_edit.getText().toString();
-				if (TextUtils.isEmpty(edit_value)) {
-					Toast.makeText(SearchFragmentActivity.this, "搜索内容不能为空！",
-							Toast.LENGTH_SHORT).show();
-					return;
-
-				}
-				Intent intent = new Intent(SearchFragmentActivity.this,
-						SearchResultsFragmentActivity.class);
-				startActivity(intent);
-				overridePendingTransition(R.anim.bottom_open, 0);	
-				finish();
+				doSearch();
 			}
 		});
 		img_menu_back.setOnClickListener(new OnClickListener() {
@@ -140,8 +132,33 @@ public class SearchFragmentActivity extends BaseActivity {
 			}
 		});
 
+		search_edit.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                	doSearch();
+                }
+                return false;
+            }
+
+        });
 	}
 
+	public void doSearch(){
+		String edit_value = search_edit.getText().toString();
+		if (TextUtils.isEmpty(edit_value)) {
+			Toast.makeText(SearchFragmentActivity.this, "搜索内容不能为空！",
+					Toast.LENGTH_SHORT).show();
+			return;
+
+		}
+		Intent intent = new Intent(SearchFragmentActivity.this,
+				SearchResultsFragmentActivity.class);
+		startActivity(intent);
+		overridePendingTransition(R.anim.bottom_open, 0);	
+		finish();
+	}
+	
 	class MyArrayAdapter extends ArrayAdapter<String> {
 
 		public MyArrayAdapter(Context context, int resource, String[] objects) {

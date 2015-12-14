@@ -28,10 +28,10 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white_color"
+            android:textColor="@color/base_color_text_black"
             android:textSize="@dimen/common_text_size"
             android:visibility="gone"
-            android:text="TextView" />
+            />
 
     </LinearLayout>
     <LinearLayout

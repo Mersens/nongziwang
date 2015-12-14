@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/common_actionbar"
+        layout="@layout/layout_actionbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="42dp"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp" >
+
+            <EditText
+                android:id="@+id/et_tel_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/editbox_background_normal"
+                android:inputType="phone"
+                android:paddingLeft="15dip"
+                android:shadowDx="0.0"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:singleLine="true"
+                android:hint="@string/input_tel_number"
+                android:textColorHint="@color/gray_text_color"
+                android:textSize="@dimen/text_size"
+                 />
+
+            <requestFocus />
+
+            <Button
+                android:id="@+id/btn_getcode"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/btn_bg"
+                android:gravity="center"
+                android:text="@string/hqyzm"
+                android:textColor="@color/white_color"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp" >
+
+            <EditText
+                android:id="@+id/et_code"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/editbox_background_normal"
+                android:inputType="phone"
+                android:paddingLeft="15dip"
+                android:shadowDx="0.0"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:textSize="@dimen/text_size"
+                android:hint="@string/input_hqyzm"
+                android:textColorHint="@color/gray_text_color"
+                android:singleLine="true" />
+        </RelativeLayout>
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/btn_bg"
+            android:text="@string/next"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/common_text_size" />
+    </LinearLayout>
+
+</LinearLayout>

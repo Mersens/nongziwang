@@ -42,7 +42,6 @@ public class HeadView extends LinearLayout {
 	public HeadView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context);
-
 	}
 
 	@SuppressLint("InflateParams")
@@ -53,6 +52,13 @@ public class HeadView extends LinearLayout {
 		initViews();
 	}
 
+	public void setHeadViewBackground(int resid){
+		if(resid!=0){
+		  header.setBackgroundResource(resid);
+		}
+		
+	}
+	
 	/**
 	 * @author Mersens ³õÊ¼»¯¿Ø¼þ
 	 */

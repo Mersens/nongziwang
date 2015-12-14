@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/common_actionbar"
+        layout="@layout/layout_actionbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="42dp"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/edt_nick"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/editbox_background_normal"
+            android:ems="10"
+            android:hint="@string/nick"
+            android:paddingLeft="15dip"
+            android:shadowDx="0.0"
+            android:shadowDy="1.0"
+            android:shadowRadius="1.0"
+            android:singleLine="true"
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="@dimen/text_size" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/edt_psd"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/editbox_background_normal"
+            android:ems="10"
+            android:hint="@string/input_psd"
+            android:inputType="textPassword"
+            android:paddingLeft="15dip"
+            android:shadowDx="0.0"
+            android:shadowDy="1.0"
+            android:shadowRadius="1.0"
+            android:singleLine="true"
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="@dimen/text_size" />
+
+        <EditText
+            android:id="@+id/edt_psd_again"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/editbox_background_normal"
+            android:ems="10"
+            android:hint="@string/input_psd_again"
+            android:inputType="textPassword"
+            android:paddingLeft="15dip"
+            android:shadowDx="0.0"
+            android:shadowDy="1.0"
+            android:shadowRadius="1.0"
+            android:singleLine="true"
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="@dimen/text_size" />
+
+        <Button
+            android:id="@+id/btn_finish"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/btn_bg"
+            android:text="@string/finish"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/common_text_size" />
+    </LinearLayout>
+
+</LinearLayout>

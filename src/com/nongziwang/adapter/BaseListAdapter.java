@@ -22,24 +22,24 @@ public abstract class BaseListAdapter<E> extends BaseAdapter {
 	  mInflater=LayoutInflater.from(context);
   }
 
-  //添加元素
+
   public void add(E e){
 	  list.add(e);
 	  notifyDataSetChanged();
   }
   
-  //添加元素
+
   public void setList(List<E> list){
 	  this.list=list;
 	  notifyDataSetChanged();
   }
-  //添加集合
+
   public void addAll(List<E> list){
 	  this.list.addAll(list);
 	  notifyDataSetChanged();
   }
    
-  //移除元素
+
   public void remove(int position){
 	  this.list.remove(position);
 	  notifyDataSetChanged();
