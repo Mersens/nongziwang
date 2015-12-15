@@ -60,6 +60,13 @@ public abstract class BaseFragment extends Fragment {
 		mHeadView.setDefaultViewMethod(leftsrcid,title,rightsrcid,onleftclicklistener,onrightclicklistener);
 	}
 	
+	public  void setHeadViewBg(int resid){
+		mHeadView.setHeadViewBackground(resid);
+	}
+	
+	public  void setHeadViewTitleColor(int resid){
+		mHeadView.setHeadViewTitleColor(resid);
+	}
 	
 	/**
 	 * @author Mersens
@@ -95,6 +102,7 @@ public abstract class BaseFragment extends Fragment {
 	 */
 	public void setOnlyTileViewMethod(View v,String title) {
 		mHeadView=(HeadView) v.findViewById(R.id.common_actionbar);
+		mHeadView.setBackgroundResource(R.color.actionbar_blue_color);
 		mHeadView.init(HeaderStyle.ONLYTITLE);
 		mHeadView.setOnlyTileViewMethod(title);
 	}

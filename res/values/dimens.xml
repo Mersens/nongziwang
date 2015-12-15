@@ -9,6 +9,7 @@
     <dimen name="left_title_text_size">15dp</dimen>
     <dimen name="spot_size">6dp</dimen>
     <dimen name="title_margin">10dp</dimen>
+    <dimen name="msg_margin">15dp</dimen>
     <dimen name="progress_margin">22dp</dimen>
     <dimen name="progress_width">150dp</dimen>
     <dimen name="text_size">14dp</dimen>

@@ -24,7 +24,9 @@ public class UserCenterFragment extends BaseFragment{
 	}
 
 	private void initViews() {
-		setOnlyTileViewMethod(view,"用户中心");
+		setOnlyTileViewMethod(view,"个人中心");
+		setHeadViewBg(R.color.actionbar_blue_color);
+		setHeadViewTitleColor(getResources().getColor(R.color.white_color));
 		btn_login=(Button) view.findViewById(R.id.btn_login);
 		btn_login.setOnClickListener(new OnClickListener() {
 			

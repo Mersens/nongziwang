@@ -20,10 +20,10 @@ public class ProductFragment extends BaseFragment{
 	}
 
 	private void initViews() {
-		setOnlyTileViewMethod(view,"Fragment2");
+		setOnlyTileViewMethod(view,"ÕÒ²úÆ·");
+		setHeadViewBg(R.color.actionbar_blue_color);
+		setHeadViewTitleColor(getResources().getColor(R.color.white_color));
 	}
-
-
 
 	@Override
 	protected void lazyLoad() {

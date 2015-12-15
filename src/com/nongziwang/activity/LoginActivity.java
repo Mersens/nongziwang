@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nongziwang.main.R;
@@ -17,6 +18,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private Button btn_login;
 	private TextView tv_forget_psd, tv_user_regist;
 	private SpotsDialog spotsdialog;
+	private ImageView image_qq,image_weixin,image_sina;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -25,20 +27,25 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		setContentView(R.layout.activity_login);
 		initViews();
 		initEvent();
-
 	}
 
 	private void initViews() {
-		spotsdialog=new SpotsDialog(LoginActivity.this);
+		spotsdialog=new SpotsDialog(LoginActivity.this,"ÕýÔÚµÇÂ¼",null,true,true);
 		edt_name = (EditText) findViewById(R.id.edt_name);
 		edt_psd = (EditText) findViewById(R.id.edt_psd);
 		btn_login = (Button) findViewById(R.id.btn_login);
 		tv_forget_psd = (TextView) findViewById(R.id.tv_forget_psd);
 		tv_user_regist = (TextView) findViewById(R.id.tv_user_regist);
+		image_qq=(ImageView) findViewById(R.id.image_qq);
+		image_weixin=(ImageView) findViewById(R.id.image_weixin);
+		image_sina=(ImageView) findViewById(R.id.image_sina);
 
 	}
 
 	private void initEvent() {
+		image_qq.setOnClickListener(this);
+		image_weixin.setOnClickListener(this);
+		image_sina.setOnClickListener(this);
 		edt_name.setOnClickListener(this);
 		edt_psd.setOnClickListener(this);
 		btn_login.setOnClickListener(this);
@@ -65,10 +72,19 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			spotsdialog.show();
 			break;
 		case R.id.tv_forget_psd:
-
+			ShowToast("µã»÷Íü¼ÇÃÜÂë");
 			break;
 		case R.id.tv_user_regist:
 			intentAction(LoginActivity.this,RegisterActivity.class);
+			break;
+		case R.id.image_sina:
+            ShowToast("µã»÷ÐÂÀËµÇÂ¼");
+			break;
+		case R.id.image_weixin:
+			ShowToast("µã»÷Î¢ÐÅµÇÂ¼");
+			break;
+		case R.id.image_qq:
+			ShowToast("µã»÷QQµÇÂ¼");
 			break;
 		}
 	}

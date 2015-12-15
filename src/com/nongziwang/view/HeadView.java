@@ -59,6 +59,13 @@ public class HeadView extends LinearLayout {
 		
 	}
 	
+	public void setHeadViewTitleColor(int resid){
+		if(resid!=0){
+			tv_title.setTextColor(resid);
+		}
+		
+	}
+	
 	/**
 	 * @author Mersens ³õÊ¼»¯¿Ø¼þ
 	 */

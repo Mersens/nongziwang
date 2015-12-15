@@ -41,5 +41,6 @@
     <string name="input_psd">请输入密码</string>
     <string name="input_psd_again">请再次输入密码</string>
     <string name="finish">完成</string>
+    <string name="ljgm">立即购买</string>
 
 </resources>

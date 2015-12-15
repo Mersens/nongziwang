@@ -133,7 +133,7 @@
             android:orientation="horizontal" >
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/image_qq"
                 android:layout_width="@dimen/img_wight_size"
                 android:layout_height="@dimen/img_hight_size"
                 android:layout_margin="12dp"
@@ -141,7 +141,7 @@
                 android:src="@drawable/icon_qq" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/image_weixin"
                 android:layout_width="@dimen/img_wight_size"
                 android:layout_height="@dimen/img_hight_size"
                 android:layout_margin="12dp"
@@ -149,7 +149,7 @@
                 android:src="@drawable/icon_weixin" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/image_sina"
                 android:layout_width="@dimen/img_wight_size"
                 android:layout_height="@dimen/img_hight_size"
                 android:layout_margin="12dp"

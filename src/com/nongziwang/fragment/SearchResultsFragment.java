@@ -3,6 +3,7 @@ package com.nongziwang.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.nongziwang.activity.ProductDetailFragmentActivity;
 import com.nongziwang.adapter.SearchResultsAdapter;
 import com.nongziwang.main.R;
 
@@ -11,6 +12,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class SearchResultsFragment extends BaseFragment{
@@ -22,11 +25,25 @@ public class SearchResultsFragment extends BaseFragment{
 			Bundle savedInstanceState) {
 		view=inflater.inflate(R.layout.listview_search_results, container,false);
 		initView();
+		initEvent();
 		return view;
 	}
 
 
 	
+	private void initEvent() {
+		productlistview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				intentAction(getActivity(),ProductDetailFragmentActivity.class);
+			}
+		});		
+	}
+
+
+
 	private void initView() {
 		productlistview=(ListView) view.findViewById(R.id.productlistview);
 		List<String> list=new ArrayList<String>();
@@ -37,7 +54,7 @@ public class SearchResultsFragment extends BaseFragment{
 		productlistview.setAdapter(adapter);
 	}
 
-
+	
 	public static Fragment getInstance(String params) {
 		SearchResultsFragment fragment = new SearchResultsFragment();
 		Bundle bundle = new Bundle();

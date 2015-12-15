@@ -20,7 +20,9 @@ public class InfoFragment extends BaseFragment{
 	}
 
 	private void initViews() {
-		setOnlyTileViewMethod(view,"Fragment3");
+		setOnlyTileViewMethod(view,"ÐÐÒµ×ÉÑ¯");
+		setHeadViewBg(R.color.actionbar_blue_color);
+		setHeadViewTitleColor(getResources().getColor(R.color.white_color));
 	}
 	
 	@Override
