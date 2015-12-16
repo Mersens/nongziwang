@@ -62,17 +62,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.edt_name:
-
-			break;
-		case R.id.edt_psd:
-
-			break;
 		case R.id.btn_login:
 			spotsdialog.show();
 			break;
 		case R.id.tv_forget_psd:
-			ShowToast("µã»÷Íü¼ÇÃÜÂë");
+			intentAction(LoginActivity.this,ForgetPasswordActivity.class);
 			break;
 		case R.id.tv_user_regist:
 			intentAction(LoginActivity.this,RegisterActivity.class);

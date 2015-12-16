@@ -30,6 +30,9 @@
         <activity android:name="com.nongziwang.activity.RegisterActivity" />
         <activity android:name="com.nongziwang.activity.RegisterSetInfoActivity" />
         <activity android:name="com.nongziwang.activity.ProductDetailFragmentActivity" />
+        <activity android:name="com.nongziwang.activity.ForgetPasswordActivity" />
+        <activity android:name="com.nongziwang.activity.SettingPasswordActivity" />
+        <activity android:name="com.nongziwang.activity.IndustryInfoDetialActivity" />
 
         <service
             android:name="com.nongziwang.service.RegisterCodeTimerService"

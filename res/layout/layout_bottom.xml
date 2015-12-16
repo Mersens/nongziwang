@@ -44,11 +44,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                   android:layout_centerHorizontal="true"
-                    android:text="@string/bottom_name_home" />
-
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/bottom_name_home"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/text_mid_size" />
             </RelativeLayout>
-
         </RelativeLayout>
 
         <RelativeLayout
@@ -80,11 +80,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                     android:layout_centerHorizontal="true"
-                    android:text="@string/bottom_name_project" />
-
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/bottom_name_project"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/text_mid_size" />
             </RelativeLayout>
-
         </RelativeLayout>
 
         <RelativeLayout
@@ -116,11 +116,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                     android:layout_centerHorizontal="true"
-                    android:text="@string/bottom_name_info" />
-
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/bottom_name_info"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/text_mid_size" />
             </RelativeLayout>
-
         </RelativeLayout>
 
         <RelativeLayout
@@ -152,9 +152,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                     android:layout_centerHorizontal="true"
-                    android:text="@string/bottom_name_user" />
-
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/bottom_name_user"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/text_mid_size" />
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>

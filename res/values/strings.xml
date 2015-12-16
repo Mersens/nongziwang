@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">nongziwang</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -42,5 +41,17 @@
     <string name="input_psd_again">请再次输入密码</string>
     <string name="finish">完成</string>
     <string name="ljgm">立即购买</string>
-
+    <string name="forget_psd_hint">请输入手机号/邮箱</string>
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载&#8230;</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <string name="setting_new_psd">请设置新密码</string>
+    <string name="setting_new_psd_again">请再次输入新密码</string>
+    <string name="rmzt">热门专题</string>
+    <string name="hyxw">行业新闻</string>
+    <string name="cpjg">产品价格</string>
+    <string name="nzzs">农资知识</string>
 </resources>

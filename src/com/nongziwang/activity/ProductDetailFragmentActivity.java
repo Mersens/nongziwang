@@ -20,6 +20,7 @@ public class ProductDetailFragmentActivity extends BaseActivity implements OnCli
 	private Button btn_buy;
 	private  String params;
 	public static final int LOADING=0X01;
+	public static final int LOADINGBACK=0X10;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -35,6 +36,9 @@ public class ProductDetailFragmentActivity extends BaseActivity implements OnCli
 		 public void handleMessage(android.os.Message msg) {
 			 if(msg.arg1==LOADING){
 				 addFragment(Style.MOREPRUDUCTDETAI,params);
+			 }
+			 if(msg.arg1==LOADINGBACK){
+				 addFragment(Style.PRUDUCTDETAI,params);
 			 }
 		 };
 	 };

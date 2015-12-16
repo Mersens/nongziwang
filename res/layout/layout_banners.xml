@@ -59,8 +59,8 @@
                 android:id="@+id/imageView1"
                 android:layout_width="@dimen/img_wight_size"
                 android:layout_height="@dimen/img_hight_size"
-                android:scaleType="centerInside"
                 android:paddingTop="4dp"
+                android:scaleType="centerInside"
                 android:src="@drawable/icon_huafei" />
 
             <TextView
@@ -68,7 +68,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:text="@string/type_name_hufei" />
+                android:text="@string/type_name_hufei"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/text_mid_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,7 +94,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:text="@string/type_name_zhongzi" />
+                android:text="@string/type_name_zhongzi"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/text_mid_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -116,7 +120,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:text="@string/type_name_nongyao" />
+                android:text="@string/type_name_nongyao"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/text_mid_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -140,7 +146,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:text="@string/type_name_nongji" />
+                android:text="@string/type_name_nongji"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/text_mid_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -164,7 +172,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:text="@string/type_name_nongmo" />
+                android:text="@string/type_name_nongmo"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/text_mid_size" />
         </LinearLayout>
     </LinearLayout>
 

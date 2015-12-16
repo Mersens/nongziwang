@@ -75,7 +75,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
-                android:text="@string/forget_psd" />
+                android:text="@string/forget_psd"
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="@dimen/text_size" />
 
             <TextView
                 android:id="@+id/tv_user_regist"
@@ -84,7 +86,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="2dp"
-                android:text="@string/user_regist" />
+                android:text="@string/user_regist"
+                android:textColor="@color/base_color_text_gray"
+                android:textSize="@dimen/text_size" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -115,6 +119,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:textSize="@dimen/text_size"
                 android:text="或" />
 
             <View
@@ -128,8 +133,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="12dp"
+            android:gravity="center"
             android:orientation="horizontal" >
 
             <ImageView

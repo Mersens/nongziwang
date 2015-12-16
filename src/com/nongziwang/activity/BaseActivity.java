@@ -195,4 +195,12 @@ public class BaseActivity extends FragmentActivity{
 		overridePendingTransition(R.anim.right_in,
 				R.anim.right_out);
 	}
+	
+	public  void setHeadViewBg(int resid){
+		mHeadView.setHeadViewBackground(resid);
+	}
+	
+	public  void setHeadViewTitleColor(int resid){
+		mHeadView.setHeadViewTitleColor(resid);
+	}
 }
