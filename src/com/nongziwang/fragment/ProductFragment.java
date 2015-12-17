@@ -18,7 +18,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ProductFragment extends BaseFragment{
+public class ProductFragment extends BaseFragment {
 	private View view;
 	private ExpandableListView listView;
 	private List<String> grouplist;
@@ -34,66 +34,60 @@ public class ProductFragment extends BaseFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		view=inflater.inflate(R.layout.layout_find_product, container,false);
-		mInflater=LayoutInflater.from(getActivity());
+		view = inflater.inflate(R.layout.layout_find_product, container, false);
+		mInflater = LayoutInflater.from(getActivity());
 		initViews();
 		initEvent();
 		return view;
 	}
 
 	private void initViews() {
-		setLeftWithTitleViewMethod(view, R.drawable.ic_menu_back,"找产品", new OnLeftClickListener() {
-			
-			@Override
-			public void onClick() {
-				finishActivity();
-			}
-		});
+		
+		setOnlyTileViewMethod(view,"找产品");
 		setHeadViewBg(R.color.actionbar_blue_color);
 		setHeadViewTitleColor(getResources().getColor(R.color.white_color));
-		listView=(ExpandableListView) view.findViewById(R.id.listView);
+		listView = (ExpandableListView) view.findViewById(R.id.listView);
 		listView.setGroupIndicator(null);
 	}
 
-
 	private void initEvent() {
-		grouplist=new ArrayList<String>();
+		grouplist = new ArrayList<String>();
 		grouplist.add("种子");
 		grouplist.add("农药");
 		grouplist.add("化肥");
 		grouplist.add("农机");
 		grouplist.add("农膜");
-		map=new HashMap<String, List<String>>();
-		
-		List<String> list1=new ArrayList<String>();
+		map = new HashMap<String, List<String>>();
+
+		List<String> list1 = new ArrayList<String>();
 		list1.add("种子");
 		list1.add("农药");
 		list1.add("化肥");
 		list1.add("农机");
 		list1.add("农膜");
 		map.put(grouplist.get(0), list1);
-		List<String> list2=new ArrayList<String>();
+		List<String> list2 = new ArrayList<String>();
 		list2.add("种子");
 		list2.add("农药");
 		list2.add("化肥");
 		list2.add("农机");
 		list2.add("农膜");
 		map.put(grouplist.get(1), list2);
-		List<String> list3=new ArrayList<String>();
+		List<String> list3 = new ArrayList<String>();
 		list3.add("种子");
 		list3.add("农药");
 		list3.add("化肥");
 		list3.add("农机");
 		list3.add("农膜");
 		map.put(grouplist.get(2), list3);
-		List<String> list4=new ArrayList<String>();
+		List<String> list4 = new ArrayList<String>();
 		list4.add("种子");
 		list4.add("农药");
 		list4.add("化肥");
 		list4.add("农机");
 		list4.add("农膜");
 		map.put(grouplist.get(3), list4);
-		List<String> list5=new ArrayList<String>();
+		List<String> list5 = new ArrayList<String>();
 		list5.add("种子");
 		list5.add("农药");
 		list5.add("化肥");
@@ -101,11 +95,10 @@ public class ProductFragment extends BaseFragment{
 		list5.add("农膜");
 		map.put(grouplist.get(4), list4);
 		listView.setAdapter(adapter);
-		
+
 	}
 
-	
-	ExpandableListAdapter adapter = new BaseExpandableListAdapter(){
+	final ExpandableListAdapter adapter = new BaseExpandableListAdapter() {
 
 		@Override
 		public int getGroupCount() {
@@ -115,7 +108,7 @@ public class ProductFragment extends BaseFragment{
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			String key=grouplist.get(groupPosition);
+			String key = grouplist.get(groupPosition);
 			return map.get(key).size();
 		}
 
@@ -127,8 +120,8 @@ public class ProductFragment extends BaseFragment{
 
 		@Override
 		public Object getChild(int groupPosition, int childPosition) {
-			String key=grouplist.get(groupPosition);
-			
+			String key = grouplist.get(groupPosition);
+
 			return (map.get(key).get(childPosition));
 		}
 
@@ -153,37 +146,59 @@ public class ProductFragment extends BaseFragment{
 		@Override
 		public View getGroupView(int groupPosition, boolean isExpanded,
 				View convertView, ViewGroup parent) {
-			if(convertView==null){
-				convertView=mInflater.inflate(R.layout.find_product_group_item, parent,false);
+			GroupHolder holder = null;
+			if (convertView == null) {
+				holder = new GroupHolder();
+				convertView = mInflater.inflate(
+						R.layout.find_product_group_item, parent, false);
+				holder.tv_name = (TextView) convertView
+						.findViewById(R.id.tv_name);
+				holder.image_indicator = (ImageView) convertView
+						.findViewById(R.id.image_indicator);
+				holder.image_type = (ImageView) convertView
+						.findViewById(R.id.image_type);
+				convertView.setTag(holder);
+			} else {
+				holder = (GroupHolder) convertView.getTag();
 			}
-			String type=grouplist.get(groupPosition);
-			TextView tv_name=(TextView) convertView.findViewById(R.id.tv_name);
-			tv_name.setText(type);
-			ImageView image_indicator=(ImageView) convertView.findViewById(R.id.image_indicator);
+			String type = grouplist.get(groupPosition);
+			holder.tv_name.setText(type);
 			if (type.equals(HUAFEI)) {
-				image_indicator.setBackgroundResource(R.drawable.icon_huafei);
+				holder.image_type.setImageResource(R.drawable.icon_huafei);
 			} else if (type.equals(NONGYAO)) {
-				image_indicator.setBackgroundResource(R.drawable.icon_nongyao);
+				holder.image_type.setImageResource(R.drawable.icon_nongyao);
 			} else if (type.equals(ZHONGZI)) {
-				image_indicator.setBackgroundResource(R.drawable.icon_zhongzi);
+				holder.image_type.setImageResource(R.drawable.icon_zhongzi);
 			} else if (type.equals(NONGJI)) {
-				image_indicator.setBackgroundResource(R.drawable.icon_tuolaji);
+				holder.image_type.setImageResource(R.drawable.icon_tuolaji);
 			} else if (type.equals(NONGMO)) {
-				image_indicator.setBackgroundResource(R.drawable.icon_nongmo);
+				holder.image_type.setImageResource(R.drawable.icon_nongmo);
 			}
-			
+			if (isExpanded) {
+				holder.image_indicator.setImageResource(R.drawable.group_up);
+			} else {
+				holder.image_indicator.setImageResource(R.drawable.group_down);
+			}
 			return convertView;
 		}
 
 		@Override
 		public View getChildView(int groupPosition, int childPosition,
 				boolean isLastChild, View convertView, ViewGroup parent) {
-			if(convertView==null){
-				convertView=mInflater.inflate(R.layout.layout_search_history_item, parent,false);
+			ChildHolder holder = null;
+
+			if (convertView == null) {
+				holder = new ChildHolder();
+				convertView = mInflater.inflate(
+						R.layout.layout_search_history_item, parent, false);
+				holder.child_name = (TextView) convertView
+						.findViewById(R.id.search_history_name);
+				convertView.setTag(holder);
+			} else {
+				holder = (ChildHolder) convertView.getTag();
 			}
-			TextView search_history_name=(TextView) convertView.findViewById(R.id.search_history_name);
-			String key=grouplist.get(groupPosition);
-			search_history_name.setText(map.get(key).get(childPosition));
+			String key = grouplist.get(groupPosition);
+			holder.child_name.setText(map.get(key).get(childPosition));
 			return convertView;
 		}
 
@@ -192,12 +207,21 @@ public class ProductFragment extends BaseFragment{
 
 			return true;
 		}
-		
+
 	};
-	
+
+	class GroupHolder {
+		private ImageView image_type;
+		private TextView tv_name;
+		private ImageView image_indicator;
+	}
+
+	class ChildHolder {
+		TextView child_name;
+	}
+
 	@Override
 	protected void lazyLoad() {
 
-		
 	}
 }

@@ -4,6 +4,8 @@
     <color name="actionbar_white_color">#ffffff</color>
     <color name="actionbar_blue_color">#008239</color>
     <color name="actionbar_gray_color">#EFEFEF</color>
+    <color name="user_center_blue_color">#319A3E</color>
+     <color name="user_center_yellow_color">#FF8023</color>
     <color name="white_color">#ffffff</color>
     <color name="text_color">#888c97</color>
     <color name="gray_line_color">#cccccc</color>

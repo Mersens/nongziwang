@@ -51,14 +51,14 @@ public class InfoFragment extends BaseFragment{
 		unSelectedColor = getResources().getColor(
 				R.color.base_color_text_black);
 		setOnlyTileViewMethod(view,"行业资讯");
-		setHeadViewBg(R.color.actionbar_gray_color);
+		setHeadViewBg(R.color.actionbar_blue_color);
+		setHeadViewTitleColor(getResources().getColor(R.color.white_color));
 		viewPager=(ViewPager) view.findViewById(R.id.viewPager);
 		imageView=(ImageView) view.findViewById(R.id.imageView);
 		tv_rmzt=(TextView) view.findViewById(R.id.tab_1);
 		tv_hyxw=(TextView) view.findViewById(R.id.tab_2);
 		tv_cpjg =(TextView) view.findViewById(R.id.tab_3);
 		tv_nzzs=(TextView) view.findViewById(R.id.tab_4);
-		
 		tv_rmzt.setTextColor(selectedColor);
 		tv_hyxw.setTextColor(unSelectedColor);
 		tv_cpjg.setTextColor(unSelectedColor);

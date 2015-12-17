@@ -1,46 +1,105 @@
 package com.nongziwang.fragment;
 
-import com.nongziwang.activity.LoginActivity;
 import com.nongziwang.main.R;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-public class UserCenterFragment extends BaseFragment{
+public class UserCenterFragment extends BaseFragment {
 	private View view;
-	private Button btn_login;
+	private BroadcastReceiver mBroadcastReceiver;
+	public static final String BROADCAST_ACTION_BUY = "com.nongziwang.fragment.BuyerFragment";
+	public static final String BROADCAST_ACTION_SELL = "com.nongziwang.fragment.SellerFragment";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		view=inflater.inflate(R.layout.layout_usercenter, container,false);
-		initViews();
+		view = inflater.inflate(R.layout.layout_usercenter, container, false);
+		initEvent();
+		addFragment(Style.BUYER, null);
 		return view;
 	}
 
-	private void initViews() {
-		setOnlyTileViewMethod(view,"个人中心");
-		setHeadViewBg(R.color.actionbar_blue_color);
-		setHeadViewTitleColor(getResources().getColor(R.color.white_color));
-		btn_login=(Button) view.findViewById(R.id.btn_login);
-		btn_login.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				intentAction(getActivity(),LoginActivity.class);
-			}
-		});
+	private void initEvent() {
+		mBroadcastReceiver = new MyBroadcastReceiver();
+		IntentFilter intentFilter = new IntentFilter();
+	    intentFilter.addAction(BROADCAST_ACTION_BUY);
+	    intentFilter.addAction(BROADCAST_ACTION_SELL);
+		getActivity().registerReceiver(mBroadcastReceiver, intentFilter);
+	}
+
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		getActivity().unregisterReceiver(mBroadcastReceiver);
 	}
 	
+	public static Fragment getInstance(String params) {
+		UserCenterFragment fragment = new UserCenterFragment();
+		Bundle bundle = new Bundle();
+		bundle.putString("params", params);
+		fragment.setArguments(bundle);
+		return fragment;
+	}
+
+	public enum Style {
+		BUYER, SELLER;
+	}
+
+	public Fragment creatFragment(Style style, String params) {
+		Fragment fragment = null;
+		switch (style) {
+		case BUYER:
+			fragment = BuyerFragment.getInstance(params);
+			break;
+		case SELLER:
+			fragment = SellerFragment.getInstance(params);
+			break;
+		}
+
+		return fragment;
+	}
+
+	public void addFragment(Style style, String params) {
+
+		FragmentManager fm = getFragmentManager();
+		FragmentTransaction ft=fm.beginTransaction();
+		Fragment fragment = fm.findFragmentById(R.id.fragment_usercontainer);
+		if (fragment != null) {
+			ft.remove(fragment);
+		}
+		fragment = creatFragment(style, params);
+		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE); 
+		ft.add(R.id.fragment_usercontainer, fragment);
+		ft.commit();
+	}
+
+	class MyBroadcastReceiver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action=intent.getAction();
+			if(action.equals(BROADCAST_ACTION_BUY)){
+				addFragment(Style.BUYER, null);
+			}else if(action.equals(BROADCAST_ACTION_SELL)){
+				addFragment(Style.SELLER, null);
+			}
+		}
+	}
+
 	@Override
 	protected void lazyLoad() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

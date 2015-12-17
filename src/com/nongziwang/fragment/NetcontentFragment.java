@@ -30,7 +30,6 @@ public class NetcontentFragment extends BaseFragment {
 		bundle.putString("params", params);
 		fragment.setArguments(bundle);
 		return fragment;
-
 	}
 	public Fragment creatFragment(String params) {
 		return CommonSearchOtherResultsFragment.getInstance(params);
