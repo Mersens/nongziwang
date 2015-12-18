@@ -101,7 +101,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		if (currentTabIndex != index) {
 			FragmentTransaction trx = getSupportFragmentManager()
 					.beginTransaction();
-			trx.remove(fragments[currentTabIndex]);
+			trx.hide(fragments[currentTabIndex]);
 			if (!fragments[index].isAdded()) {
 				trx.add(R.id.fragment_container, fragments[index]);
 			}
@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	private void setTab(int i) {
 		resetImgs();
-		switch (index) {
+		switch (i) {
 		case 0:
 			img_home.setImageResource(R.drawable.icon_shouye_pressed);
 			break;

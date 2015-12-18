@@ -23,11 +23,12 @@
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/launcher" />
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_dqrdd" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -55,11 +56,12 @@
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/launcher" />
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_dfkdd" />
 
                 <TextView
                     android:id="@+id/textView6"
@@ -87,11 +89,12 @@
 
                 <ImageView
                     android:id="@+id/imageView5"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/launcher" />
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_dshdd" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -130,11 +133,12 @@
 
                 <ImageView
                     android:id="@+id/imageView7"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/launcher" />
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_jycg" />
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>

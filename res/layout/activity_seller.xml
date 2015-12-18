@@ -38,7 +38,7 @@
                         android:textSize="@dimen/text_mid_size" />
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/tv_my_dianpu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -56,7 +56,7 @@
                     android:layout_weight="1" >
 
                     <com.nongziwang.view.CircleImageView
-                        android:id="@+id/imageView1"
+                        android:id="@+id/image_user_head"
                         android:layout_width="72dp"
                         android:layout_height="72dp"
                         android:layout_centerInParent="true"
@@ -69,7 +69,7 @@
                     android:layout_weight="1" >
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/tv_login"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -123,7 +123,7 @@
                 android:layout_height="1dp"
                 android:background="@color/black2" />
 
-            <include layout="@layout/common_user_dingdan" />
+            <include layout="@layout/common_seller_dingdan" />
 
             <View
                 android:layout_width="match_parent"

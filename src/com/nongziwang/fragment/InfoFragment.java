@@ -27,7 +27,6 @@ public class InfoFragment extends BaseFragment{
 	private ViewPager viewPager;// 页卡内容
 	private ImageView imageView;// 动画图片
 	private TextView tv_rmzt, tv_hyxw, tv_cpjg ,tv_nzzs;// 选项名称
-	private List<Fragment> fragments;// Tab页面列表
 	private int offset = 0;// 动画图片偏移量
 	private int currIndex = 0;// 当前页卡编号
 	private int bmpW;// 动画图片宽度
@@ -43,7 +42,13 @@ public class InfoFragment extends BaseFragment{
 		initEvent();
 		return view;
 	}
-
+	public static Fragment getInstance(String params) {
+		InfoFragment fragment = new InfoFragment();
+		Bundle bundle = new Bundle();
+		bundle.putString("params", params);
+		fragment.setArguments(bundle);
+		return fragment;
+	}
 
 	private void initViews() {
 		selectedColor = getResources()
@@ -74,8 +79,6 @@ public class InfoFragment extends BaseFragment{
 		tv_cpjg.setOnClickListener(new MyOnClickListener(2));
 		tv_nzzs.setOnClickListener(new MyOnClickListener(3));
 		
-		
-		
 
 	}
 	private void InitImageView() {
@@ -91,11 +94,11 @@ public class InfoFragment extends BaseFragment{
 		matrix.postTranslate(offset, 0);
 		imageView.setImageMatrix(matrix);// 设置动画初始位置
 	}
-	@SuppressWarnings("deprecation")
+
 	private void initEvent() {
 		// TODO Auto-generated method stub
 		viewPager.setAdapter(new myPagerAdapter(getFragmentManager()));
-		viewPager.setCurrentItem(0);
+	    viewPager.setCurrentItem(0);
 		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
 	}
 	

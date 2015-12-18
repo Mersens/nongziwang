@@ -26,15 +26,15 @@ public class UserCenterFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		view = inflater.inflate(R.layout.layout_usercenter, container, false);
 		initEvent();
-		addFragment(Style.BUYER, null);
+		addFragment(Style.BUYER, null,false);
 		return view;
 	}
 
 	private void initEvent() {
 		mBroadcastReceiver = new MyBroadcastReceiver();
 		IntentFilter intentFilter = new IntentFilter();
-	    intentFilter.addAction(BROADCAST_ACTION_BUY);
-	    intentFilter.addAction(BROADCAST_ACTION_SELL);
+		intentFilter.addAction(BROADCAST_ACTION_BUY);
+		intentFilter.addAction(BROADCAST_ACTION_SELL);
 		getActivity().registerReceiver(mBroadcastReceiver, intentFilter);
 	}
 
@@ -44,7 +44,7 @@ public class UserCenterFragment extends BaseFragment {
 		super.onDestroyView();
 		getActivity().unregisterReceiver(mBroadcastReceiver);
 	}
-	
+
 	public static Fragment getInstance(String params) {
 		UserCenterFragment fragment = new UserCenterFragment();
 		Bundle bundle = new Bundle();
@@ -71,28 +71,31 @@ public class UserCenterFragment extends BaseFragment {
 		return fragment;
 	}
 
-	public void addFragment(Style style, String params) {
+	public void addFragment(Style style, String params,boolean isAnim) {
 
 		FragmentManager fm = getFragmentManager();
-		FragmentTransaction ft=fm.beginTransaction();
+		FragmentTransaction ft = fm.beginTransaction();
 		Fragment fragment = fm.findFragmentById(R.id.fragment_usercontainer);
 		if (fragment != null) {
 			ft.remove(fragment);
 		}
 		fragment = creatFragment(style, params);
-		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE); 
-		ft.add(R.id.fragment_usercontainer, fragment);
+		if(isAnim){
+			ft.setCustomAnimations(R.anim.left_in, R.anim.left_out);
+		}
+		ft.addToBackStack(null);
+		ft.replace(R.id.fragment_usercontainer, fragment);
 		ft.commit();
 	}
 
 	class MyBroadcastReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			String action=intent.getAction();
-			if(action.equals(BROADCAST_ACTION_BUY)){
-				addFragment(Style.BUYER, null);
-			}else if(action.equals(BROADCAST_ACTION_SELL)){
-				addFragment(Style.SELLER, null);
+			String action = intent.getAction();
+			if (action.equals(BROADCAST_ACTION_BUY)) {
+				addFragment(Style.BUYER, null,true);
+			} else if (action.equals(BROADCAST_ACTION_SELL)) {
+				addFragment(Style.SELLER, null,true);
 			}
 		}
 	}

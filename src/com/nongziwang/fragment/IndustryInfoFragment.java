@@ -1,5 +1,4 @@
 package com.nongziwang.fragment;
-
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
@@ -48,6 +47,7 @@ IXListViewListener, EventListener{
 	}
 
 	private void initEvent() {
+
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
