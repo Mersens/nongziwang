@@ -1,5 +1,6 @@
 package com.nongziwang.fragment;
 
+import com.nongziwang.activity.CommonOrderFragmentActivity;
 import com.nongziwang.activity.LoginActivity;
 import com.nongziwang.main.R;
 
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -23,6 +25,12 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 	private TextView tv_my_dianpu;
 	private ImageView image_user_head;
 	private TextView tv_login;
+	
+	private RelativeLayout layout_ymdcp;
+	private RelativeLayout layout_dqr;
+	private RelativeLayout layout_dfk;
+	private RelativeLayout layout_yfh;
+	private RelativeLayout layout_jycg;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -36,12 +44,22 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 		tv_my_dianpu=(TextView) view.findViewById(R.id.tv_my_dianpu);
 		image_user_head=(ImageView) view.findViewById(R.id.image_user_head);
 		tv_login=(TextView) view.findViewById(R.id.tv_login);
+		layout_ymdcp = (RelativeLayout) view.findViewById(R.id.layout_ymdcp);
+		layout_dqr = (RelativeLayout) view.findViewById(R.id.layout_dqr);
+		layout_dfk = (RelativeLayout) view.findViewById(R.id.layout_dfk);
+		layout_yfh = (RelativeLayout) view.findViewById(R.id.layout_yfh);
+		layout_jycg = (RelativeLayout) view.findViewById(R.id.layout_jycg);
 	}
 	private void initEvent() {
 		tv_seller_switch.setOnClickListener(this);
 		tv_my_dianpu.setOnClickListener(this);
 		image_user_head.setOnClickListener(this);
 		tv_login.setOnClickListener(this);
+		layout_ymdcp.setOnClickListener(this);
+		layout_dqr.setOnClickListener(this);
+		layout_dfk.setOnClickListener(this);
+		layout_yfh.setOnClickListener(this);
+		layout_jycg.setOnClickListener(this);
 
 	}
 
@@ -74,6 +92,28 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 		case R.id.tv_login:
 			intentAction(getActivity(), LoginActivity.class);
 			break;
+		case R.id.layout_ymdcp:
+			intentAction(getActivity(), CommonOrderFragmentActivity.class,
+					CommonOrderFragmentActivity.YMDCP);
+			break;
+		case R.id.layout_dqr:
+			intentAction(getActivity(), CommonOrderFragmentActivity.class,
+					CommonOrderFragmentActivity.DQR);
+			break;
+		case R.id.layout_dfk:
+			intentAction(getActivity(), CommonOrderFragmentActivity.class,
+					CommonOrderFragmentActivity.DFK);
+			break;
+		case R.id.layout_yfh:
+			intentAction(getActivity(), CommonOrderFragmentActivity.class,
+					CommonOrderFragmentActivity.YFH);
+			break;
+		case R.id.layout_jycg:
+			intentAction(getActivity(), CommonOrderFragmentActivity.class,
+					CommonOrderFragmentActivity.JYCG);
+			break;
+			
+			
 		}
 		
 	}

@@ -185,7 +185,7 @@ public class BaseActivity extends FragmentActivity{
 		context.overridePendingTransition(R.anim.left_in,
 				R.anim.left_out);
 	}
-	
+
 	/**
 	 * @author Mersens
 	 * finishActivity()

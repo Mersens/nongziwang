@@ -67,6 +67,7 @@
         </RelativeLayout>
     </LinearLayout>
     <RelativeLayout
+        android:id="@+id/layout_ymdcp"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:background="@color/white_color" >
@@ -85,7 +86,7 @@
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="12dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
