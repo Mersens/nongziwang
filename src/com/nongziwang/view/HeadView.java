@@ -52,6 +52,9 @@ public class HeadView extends LinearLayout {
 		initViews();
 	}
 
+	public int getHeadViewHeight(){
+		return header.getHeight();
+	}
 	public void setHeadViewBackground(int resid){
 		if(resid!=0){
 		  header.setBackgroundResource(resid);
@@ -227,7 +230,6 @@ public class HeadView extends LinearLayout {
 
 	public void setRightAndTitleMethod(String title, int rightsrcid,
 			OnRightClickListener onrightclicklistener) {
-		System.out.println("title===="+title+"----rightsrcid-----"+rightsrcid);
 		if (!TextUtils.isEmpty(title)) {
 			tv_title.setText(title);
 		}

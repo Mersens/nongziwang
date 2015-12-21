@@ -34,6 +34,7 @@
         <activity android:name="com.nongziwang.activity.SettingPasswordActivity" />
         <activity android:name="com.nongziwang.activity.IndustryInfoDetialActivity" />
         <activity android:name="com.nongziwang.activity.CommonOrderFragmentActivity" />
+        <activity android:name="com.nongziwang.activity.CartActivity" />
 
         <service
             android:name="com.nongziwang.service.RegisterCodeTimerService"

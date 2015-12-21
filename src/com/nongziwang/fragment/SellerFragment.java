@@ -94,7 +94,7 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 			break;
 		case R.id.layout_ymdcp:
 			intentAction(getActivity(), CommonOrderFragmentActivity.class,
-					CommonOrderFragmentActivity.YMDCP);
+					CommonOrderFragmentActivity.YMCCP);
 			break;
 		case R.id.layout_dqr:
 			intentAction(getActivity(), CommonOrderFragmentActivity.class,

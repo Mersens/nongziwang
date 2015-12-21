@@ -7,7 +7,8 @@
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,7 +34,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="12dp"
                         android:background="@drawable/tv_switch_sell_bg"
-                        android:text="切换为买家"
+                        android:text="@string/tv_switch_buyer"
                         android:textColor="@color/white_color"
                         android:textSize="@dimen/text_mid_size" />
 
@@ -45,7 +46,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="12dp"
                         android:background="@drawable/tv_switch_sell_bg"
-                        android:text="我的店铺"
+                        android:text="@string/tx_dp"
                         android:textColor="@color/white_color"
                         android:textSize="@dimen/text_mid_size" />
                 </RelativeLayout>
@@ -57,8 +58,8 @@
 
                     <com.nongziwang.view.CircleImageView
                         android:id="@+id/image_user_head"
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
                         android:layout_centerInParent="true"
                         android:src="@drawable/icon_user_img" />
                 </RelativeLayout>
@@ -75,7 +76,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:background="@drawable/tv_login_bg"
-                        android:text="马上登录"
+                        android:text="@string/tx_msdl"
                         android:textColor="@color/white_color"
                         android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                 </RelativeLayout>
@@ -94,7 +95,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:text="已卖出的产品"
+                    android:text="@string/tv_ymc"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
 
@@ -114,7 +115,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="4dp"
                     android:layout_toLeftOf="@+id/imageView2"
-                    android:text="全部订单"
+                    android:text="@string/tx_alldingdan"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/text_mid_size" />
             </RelativeLayout>
@@ -148,7 +149,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="18dp"
-                        android:src="@drawable/icon_huafei" />
+                        android:src="@drawable/icon_zw" />
 
                     <TextView
                         android:id="@+id/textView5"
@@ -157,7 +158,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/imageView3"
-                        android:text="交易账务"
+                        android:text="@string/tx_jyzw"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/text_size" />
                 </RelativeLayout>
@@ -179,7 +180,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="18dp"
-                        android:src="@drawable/icon_huafei" />
+                        android:src="@drawable/icon_tqck" />
 
                     <TextView
                         android:id="@+id/t1"
@@ -188,7 +189,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/imageView4"
-                        android:text="提取存款"
+                        android:text="@string/tx_tqck"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/text_size" />
                 </RelativeLayout>
@@ -210,7 +211,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="18dp"
-                        android:src="@drawable/icon_huafei" />
+                        android:src="@drawable/icon_fbcp" />
 
                     <TextView
                         android:id="@+id/te1"
@@ -219,7 +220,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/image1"
-                        android:text="发布产品"
+                        android:text="@string/tx_fbcp"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/text_size" />
                 </RelativeLayout>
@@ -241,7 +242,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="18dp"
-                        android:src="@drawable/icon_huafei" />
+                        android:src="@drawable/icon_cpgl" />
 
                     <TextView
                         android:id="@+id/te5"
@@ -250,7 +251,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/image3"
-                        android:text="产品管理"
+                        android:text="@string/tx_cpgl"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/text_size" />
                 </RelativeLayout>
@@ -272,7 +273,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="18dp"
-                        android:src="@drawable/icon_huafei" />
+                        android:src="@drawable/icon_ckdp" />
 
                     <TextView
                         android:id="@+id/te4"
@@ -281,7 +282,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/image4"
-                        android:text="查看店铺"
+                        android:text="@string/tx_ckdp"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/text_size" />
                 </RelativeLayout>
@@ -303,7 +304,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="18dp"
-                        android:src="@drawable/icon_huafei" />
+                        android:src="@drawable/icon_xpgl" />
 
                     <TextView
                         android:id="@+id/te6"
@@ -312,7 +313,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/image5"
-                        android:text="询盘管理"
+                        android:text="@string/tx_xpgl"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/text_size" />
                 </RelativeLayout>
@@ -334,7 +335,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="18dp"
-                        android:src="@drawable/icon_huafei" />
+                        android:src="@drawable/icon_zhgl" />
 
                     <TextView
                         android:id="@+id/te7"
@@ -343,7 +344,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/image7"
-                        android:text="账号管理"
+                        android:text="@string/tx_zhgl"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/text_size" />
                 </RelativeLayout>
@@ -365,7 +366,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="18dp"
-                        android:src="@drawable/icon_huafei" />
+                        android:src="@drawable/icon_setting" />
 
                     <TextView
                         android:id="@+id/te8"
@@ -374,7 +375,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/image8"
-                        android:text="设置"
+                        android:text="@string/tx_setting"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/text_size" />
                 </RelativeLayout>

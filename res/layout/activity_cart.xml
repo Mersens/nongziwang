@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_hight"
+        android:background="@color/white_color" >
+
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/ic_menu_back" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="购物车"
+            android:textColor="@color/base_color_text_black"
+            android:textSize="@dimen/common_text_size" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dp"
+            android:text="编辑"
+            android:textColor="@color/base_color_text_black"
+            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black2" />
+
+
+
+        <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+            <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+    </FrameLayout>
+    
+    
+    <RelativeLayout
+        android:id="@+id/layout_pay_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_hight"
+        android:background="@color/white_color" >
+
+        <CheckBox
+            android:id="@+id/btn_check_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="4dp"
+            android:button="@drawable/btn_check"
+            android:paddingLeft="8dp"
+            android:text="全选"
+            android:textColor="@color/base_color_text_black"
+            android:textSize="@dimen/text_size" />
+
+        <RelativeLayout
+            android:id="@+id/btn_pay"
+            android:layout_width="96dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/btn_add_to_cart"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/tv_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="去结算"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+            <TextView
+                android:id="@+id/tv_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_pay"
+                android:layout_toRightOf="@+id/tv_pay"
+                android:includeFontPadding="false"
+                android:text="(0)"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg"  />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:layout_toRightOf="@+id/btn_check_all"
+            android:text="合计:"
+            android:textColor="@color/base_color_text_black"
+            android:textSize="@dimen/text_size" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@+id/textView1"
+            android:text="¥0.0"
+            android:textColor="@color/red_text_color"
+            android:textSize="@dimen/text_size" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/btn_pay"
+            android:text="不含运费"
+            android:textColor="@color/base_color_text_black"
+            android:textSize="@dimen/text_mid_size" />
+    </RelativeLayout>
+
+</LinearLayout>

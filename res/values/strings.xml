@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">nongziwang</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -54,4 +55,27 @@
     <string name="hyxw">行业新闻</string>
     <string name="cpjg">产品价格</string>
     <string name="nzzs">农资知识</string>
+    <string name="tv_switch_seller">切换为卖家</string>
+    <string name="tx_msdl">马上登录</string>
+    <string name="tx_ymdcp">已买到的产品</string>
+    <string name="tx_alldingdan">全部订单</string>
+    <string name="tx_gouwuche">购物车</string>
+    <string name="tx_fbxjd">发布询价单</string>
+    <string name="tx_xjdgl">询价单管理</string>
+    <string name="tx_sc">我的收藏</string>
+    <string name="tx_wdzj">我的足迹</string>
+    <string name="tx_shdz">收货地址</string>
+    <string name="tx_zhgl">账号管理</string>
+    <string name="tx_setting">设置</string>
+    <string name="tv_switch_buyer">切换为买家</string>
+    <string name="tx_dp">我的店铺</string>
+    <string name="tv_ymc">已卖出的产品</string>
+    <string name="tx_jyzw">交易账务</string>
+    <string name="tx_tqck">提取存款</string>
+    <string name="tx_fbcp">发布产品</string>
+    <string name="tx_cpgl">产品管理</string>
+    <string name="tx_ckdp">查看店铺</string>
+    <string name="tx_xpgl">询盘管理</string>
+
+
 </resources>

@@ -1,5 +1,6 @@
 package com.nongziwang.fragment;
 
+import com.nongziwang.activity.CartActivity;
 import com.nongziwang.activity.CommonOrderFragmentActivity;
 import com.nongziwang.activity.LoginActivity;
 import com.nongziwang.main.R;
@@ -31,6 +32,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	private RelativeLayout layout_dfk;
 	private RelativeLayout layout_dsh;
 	private RelativeLayout layout_jycg;
+	private RelativeLayout layout_cart;
 
 	@SuppressLint("InflateParams")
 	@Override
@@ -51,6 +53,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		layout_dfk = (RelativeLayout) view.findViewById(R.id.layout_dfk);
 		layout_dsh = (RelativeLayout) view.findViewById(R.id.layout_dsh);
 		layout_jycg = (RelativeLayout) view.findViewById(R.id.layout_jycg);
+		layout_cart=(RelativeLayout) view.findViewById(R.id.layout_cart);
 	}
 
 	private void initEvent() {
@@ -62,6 +65,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		layout_dfk.setOnClickListener(this);
 		layout_dsh.setOnClickListener(this);
 		layout_jycg.setOnClickListener(this);
+		layout_cart.setOnClickListener(this);
 	}
 
 	public static Fragment getInstance(String params) {
@@ -111,6 +115,9 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		case R.id.layout_jycg:
 			intentAction(getActivity(), CommonOrderFragmentActivity.class,
 					CommonOrderFragmentActivity.JYCG);
+			break;
+		case R.id.layout_cart:
+			intentAction(getActivity(), CartActivity.class);
 			break;
 		}
 

@@ -37,7 +37,7 @@ public class BaseActivity extends FragmentActivity{
 		DisplayMetrics metrics=new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		mScreenHeight=metrics.heightPixels;
-		mScreenHeight=metrics.widthPixels;
+		mScreenWidth=metrics.widthPixels;
 	}
 
 	/**
@@ -174,6 +174,9 @@ public class BaseActivity extends FragmentActivity{
 		return mScreenHeight;
 	}
 	
+	public int getHeadViewHeight(){
+		return mHeadView.getHeadViewHeight();
+	}
 	/**
 	 * @author Mersens
 	 * @param context
