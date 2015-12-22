@@ -123,4 +123,9 @@
     <item name="android:windowEnterAnimation">@anim/popup_inputodown</item>  
     <item name="android:windowExitAnimation">@anim/popup_outdowntoup</item>  
 </style>  
+
+        <style name="GrowFromBottom">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
+    </style>
 </resources>

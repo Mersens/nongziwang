@@ -1,5 +1,6 @@
 package com.nongziwang.activity;
 
+import com.nongziwang.adapter.MyArrayAdapter;
 import com.nongziwang.fragment.BrandFragment;
 import com.nongziwang.fragment.NetcontentFragment;
 import com.nongziwang.fragment.SearchCompanyFragment;
@@ -291,23 +292,5 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		tv_jiage.setTextColor(getResources().getColor(R.color.gray_text_color));
 	}
 
-	class MyArrayAdapter extends ArrayAdapter<String> {
 
-		public MyArrayAdapter(Context context, int resource, String[] objects) {
-			super(context, resource, objects);
-
-		}
-
-		@SuppressLint("ViewHolder")
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = mInflater.inflate(R.layout.layout_spinner_item, parent,
-					false);
-			TextView spinner_name = (TextView) view
-					.findViewById(R.id.spinner_name);
-			spinner_name.setText(types[position]);
-			return view;
-		}
-
-	}
 }

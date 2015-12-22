@@ -2,6 +2,7 @@ package com.nongziwang.fragment;
 
 import com.nongziwang.activity.CartActivity;
 import com.nongziwang.activity.CommonOrderFragmentActivity;
+import com.nongziwang.activity.FbxjdActivity;
 import com.nongziwang.activity.LoginActivity;
 import com.nongziwang.main.R;
 
@@ -33,7 +34,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	private RelativeLayout layout_dsh;
 	private RelativeLayout layout_jycg;
 	private RelativeLayout layout_cart;
-
+	private RelativeLayout layout_fbxjd;
 	@SuppressLint("InflateParams")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,9 +55,11 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		layout_dsh = (RelativeLayout) view.findViewById(R.id.layout_dsh);
 		layout_jycg = (RelativeLayout) view.findViewById(R.id.layout_jycg);
 		layout_cart=(RelativeLayout) view.findViewById(R.id.layout_cart);
+		layout_fbxjd=(RelativeLayout) view.findViewById(R.id.layout_fbxjd);
 	}
 
 	private void initEvent() {
+		layout_fbxjd.setOnClickListener(this);
 		tv_buyer_switch.setOnClickListener(this);
 		image_user_head.setOnClickListener(this);
 		tv_login.setOnClickListener(this);
@@ -118,6 +121,9 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			break;
 		case R.id.layout_cart:
 			intentAction(getActivity(), CartActivity.class);
+			break;
+		case R.id.layout_fbxjd:
+			intentAction(getActivity(),FbxjdActivity.class);
 			break;
 		}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nongziwang.adapter.HotSearchAdapter;
+import com.nongziwang.adapter.MyArrayAdapter;
 import com.nongziwang.adapter.SearchHistoryAdapter;
 import com.nongziwang.main.R;
 
@@ -159,22 +160,5 @@ public class SearchFragmentActivity extends BaseActivity {
 		finish();
 	}
 	
-	class MyArrayAdapter extends ArrayAdapter<String> {
 
-		public MyArrayAdapter(Context context, int resource, String[] objects) {
-			super(context, resource, objects);
-
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = mInflater.inflate(R.layout.layout_spinner_item, parent,
-					false);
-			TextView spinner_name = (TextView) view
-					.findViewById(R.id.spinner_name);
-			spinner_name.setText(types[position]);
-			return view;
-		}
-
-	}
 }
