@@ -218,6 +218,7 @@
                     android:background="@color/black2" />
 
                 <RelativeLayout
+                    android:id="@+id/layout_mycollection"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@color/white_color" >
@@ -249,6 +250,7 @@
                     android:background="@color/black2" />
 
                 <RelativeLayout
+                    android:id="@+id/layout_myfootprint"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@color/white_color" >
@@ -280,6 +282,7 @@
                     android:background="@color/black2" />
 
                 <RelativeLayout
+                     android:id="@+id/layout_myaddress"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@color/white_color" >

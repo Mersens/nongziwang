@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_hight"
+        android:background="@color/white_color" >
+
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/ic_menu_back" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="我的足迹"
+            android:textColor="@color/base_color_text_black"
+            android:textSize="@dimen/common_text_size" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp" >
+
+            <ImageView
+                android:id="@+id/image_del"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_ljx" />
+
+            <TextView
+                android:id="@+id/tv_editor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="取消"
+                android:enabled="false"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg"
+                android:visibility="gone"
+                 />
+        </FrameLayout>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black2" />
+    <FrameLayout
+        android:id="@+id/fragment_mycollection_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_del"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_hight"
+        android:background="@color/user_center_yellow_color"
+        android:visibility="gone"
+         >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/common_text_size"
+            android:text="删除" />
+
+    </RelativeLayout>
+
+</LinearLayout>

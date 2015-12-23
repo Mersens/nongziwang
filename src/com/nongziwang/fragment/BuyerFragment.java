@@ -4,6 +4,9 @@ import com.nongziwang.activity.CartActivity;
 import com.nongziwang.activity.CommonOrderFragmentActivity;
 import com.nongziwang.activity.FbxjdActivity;
 import com.nongziwang.activity.LoginActivity;
+import com.nongziwang.activity.MyAddressFragmentActivity;
+import com.nongziwang.activity.MyCollectionFragmentActivity;
+import com.nongziwang.activity.MyFootprintActivity;
 import com.nongziwang.main.R;
 
 import android.annotation.SuppressLint;
@@ -35,6 +38,9 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	private RelativeLayout layout_jycg;
 	private RelativeLayout layout_cart;
 	private RelativeLayout layout_fbxjd;
+	private RelativeLayout layout_mycollection;
+	private RelativeLayout layout_myfootprint;
+	private RelativeLayout layout_myaddress;
 	@SuppressLint("InflateParams")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +52,9 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void initViews() {
+		layout_myaddress=(RelativeLayout) view.findViewById(R.id.layout_myaddress);
+		layout_myfootprint=(RelativeLayout) view.findViewById(R.id.layout_myfootprint);
+		layout_mycollection=(RelativeLayout) view.findViewById(R.id.layout_mycollection);
 		tv_buyer_switch = (TextView) view.findViewById(R.id.tv_buyer_switch);
 		image_user_head = (ImageView) view.findViewById(R.id.image_user_head);
 		tv_login = (TextView) view.findViewById(R.id.tv_login);
@@ -59,6 +68,9 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void initEvent() {
+		layout_myaddress.setOnClickListener(this);
+		layout_myfootprint.setOnClickListener(this);
+		layout_mycollection.setOnClickListener(this);
 		layout_fbxjd.setOnClickListener(this);
 		tv_buyer_switch.setOnClickListener(this);
 		image_user_head.setOnClickListener(this);
@@ -124,6 +136,15 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			break;
 		case R.id.layout_fbxjd:
 			intentAction(getActivity(),FbxjdActivity.class);
+			break;
+		case R.id.layout_mycollection:
+			intentAction(getActivity(),MyCollectionFragmentActivity.class);
+			break;
+		case R.id.layout_myfootprint:
+			intentAction(getActivity(),MyFootprintActivity.class);
+			break;
+		case R.id.layout_myaddress:
+			intentAction(getActivity(),MyAddressFragmentActivity.class);
 			break;
 		}
 

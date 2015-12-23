@@ -36,6 +36,9 @@
         <activity android:name="com.nongziwang.activity.CommonOrderFragmentActivity" />
         <activity android:name="com.nongziwang.activity.CartActivity" />
          <activity android:name="com.nongziwang.activity.FbxjdActivity" />
+         <activity android:name="com.nongziwang.activity.MyCollectionFragmentActivity" />
+         <activity android:name="com.nongziwang.activity.MyFootprintActivity" />
+         <activity android:name="com.nongziwang.activity.MyAddressFragmentActivity" />
 
         <service
             android:name="com.nongziwang.service.RegisterCodeTimerService"
