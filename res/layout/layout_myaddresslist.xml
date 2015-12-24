@@ -16,6 +16,7 @@
     </ListView>
 
     <RelativeLayout
+        android:id="@+id/layout_add_address"
         android:layout_width="match_parent"
         android:layout_height="@dimen/actionbar_hight"
         android:layout_margin="12dp"

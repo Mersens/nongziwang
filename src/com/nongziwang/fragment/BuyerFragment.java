@@ -4,9 +4,11 @@ import com.nongziwang.activity.CartActivity;
 import com.nongziwang.activity.CommonOrderFragmentActivity;
 import com.nongziwang.activity.FbxjdActivity;
 import com.nongziwang.activity.LoginActivity;
+import com.nongziwang.activity.MyAccountBuyerFragmentActivity;
 import com.nongziwang.activity.MyAddressFragmentActivity;
 import com.nongziwang.activity.MyCollectionFragmentActivity;
 import com.nongziwang.activity.MyFootprintActivity;
+import com.nongziwang.activity.SettingActivity;
 import com.nongziwang.main.R;
 
 import android.annotation.SuppressLint;
@@ -41,6 +43,8 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	private RelativeLayout layout_mycollection;
 	private RelativeLayout layout_myfootprint;
 	private RelativeLayout layout_myaddress;
+	private RelativeLayout layout_setting;
+	private RelativeLayout layout_myaccount;
 	@SuppressLint("InflateParams")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +56,8 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void initViews() {
+		layout_myaccount=(RelativeLayout) view.findViewById(R.id.layout_myaccount);
+		layout_setting=(RelativeLayout) view.findViewById(R.id.layout_setting);
 		layout_myaddress=(RelativeLayout) view.findViewById(R.id.layout_myaddress);
 		layout_myfootprint=(RelativeLayout) view.findViewById(R.id.layout_myfootprint);
 		layout_mycollection=(RelativeLayout) view.findViewById(R.id.layout_mycollection);
@@ -68,6 +74,8 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void initEvent() {
+		layout_myaccount.setOnClickListener(this);
+		layout_setting.setOnClickListener(this);
 		layout_myaddress.setOnClickListener(this);
 		layout_myfootprint.setOnClickListener(this);
 		layout_mycollection.setOnClickListener(this);
@@ -145,6 +153,12 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			break;
 		case R.id.layout_myaddress:
 			intentAction(getActivity(),MyAddressFragmentActivity.class);
+			break;
+		case R.id.layout_myaccount:
+			intentAction(getActivity(),MyAccountBuyerFragmentActivity.class);
+			break;
+		case R.id.layout_setting:
+			intentAction(getActivity(),SettingActivity.class);
 			break;
 		}
 

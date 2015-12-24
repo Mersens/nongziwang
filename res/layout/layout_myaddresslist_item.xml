@@ -33,7 +33,7 @@
                 android:layout_marginTop="8dp"
                 android:text="收货人:马新"
                 android:textColor="@color/base_color_text_black"
-                android:textSize="@dimen/common_text_size" />
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -45,7 +45,7 @@
                 android:singleLine="true"
                 android:text="河南郑州市金水区"
                 android:textColor="@color/base_color_text_black"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/text_mid_size" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -62,7 +62,7 @@
                 android:layout_marginTop="8dp"
                 android:text="15738800385"
                 android:textColor="@color/base_color_text_black"
-                android:textSize="@dimen/common_text_size" />
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -71,7 +71,7 @@
         android:layout_height="@dimen/actionbar_hight" >
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_editor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -80,7 +80,7 @@
             android:background="@drawable/tv_red_bg"
             android:text="编辑"
             android:textColor="@color/red_text_color"
-            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+            android:textSize="@dimen/text_mid_size" />
     </RelativeLayout>
 
     <View

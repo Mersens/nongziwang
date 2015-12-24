@@ -5,6 +5,10 @@ import com.nongziwang.fragment.MyAddressListFragment;
 import com.nongziwang.main.R;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +16,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 
 public class MyAddressFragmentActivity extends BaseActivity{
+	public static final String ACTION_LIST="action_list";
+	public static final String ACTION_ADD="action_add";
+	public static final String ACTION_EDITOR="action_editor";
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -69,7 +77,7 @@ public class MyAddressFragmentActivity extends BaseActivity{
 
 	}
 	private void initEvent() {
-		
+		registerBoradcastReceiver();
 	}
 	
 	@Override
@@ -80,4 +88,33 @@ public class MyAddressFragmentActivity extends BaseActivity{
 		} 
 		return false;
 	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		unregisterReceiver(mBroadcastReceiver);
+	}
+	
+	public void registerBoradcastReceiver(){  
+        IntentFilter myIntentFilter = new IntentFilter();  
+        myIntentFilter.addAction(ACTION_LIST);  
+        myIntentFilter.addAction(ACTION_ADD);  
+        myIntentFilter.addAction(ACTION_EDITOR);  
+        //×¢²á¹ã²¥        
+        registerReceiver(mBroadcastReceiver, myIntentFilter);  
+    } 
+	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){  
+        @Override  
+        public void onReceive(Context context, Intent intent) {  
+            String action = intent.getAction();  
+            if(action.equals(ACTION_LIST)){
+            	addFragment(Style.LIST, null,true);
+            }else if(action.equals(ACTION_ADD)){
+            	addFragment(Style.ADD, null,true);
+            }else if(action.equals(ACTION_EDITOR)){
+            	addFragment(Style.EDITOR, null,true);
+            }
+        }  
+    }; 
 }

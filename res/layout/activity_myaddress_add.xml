@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_hight"
+            android:layout_marginTop="12dp" >
+
+            <RelativeLayout
+                android:layout_width="86dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="收货人姓名:"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/editbox_background_normal"
+                android:ems="10"
+                android:textColor="@color/base_color_text_black"
+                android:textColorHint="@color/black_text_color"
+                android:textSize="@dimen/text_mid_size" >
+
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_hight"
+            android:layout_marginTop="6dp" >
+
+            <RelativeLayout
+                android:layout_width="86dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="手机号码:"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/editbox_background_normal"
+                android:ems="10"
+                android:textColor="@color/base_color_text_black"
+                android:textColorHint="@color/black_text_color"
+                android:textSize="@dimen/text_mid_size" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_hight"
+            android:layout_marginTop="12dp" >
+
+            <RelativeLayout
+                android:layout_width="86dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="邮政编码:"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/editbox_background_normal"
+                android:ems="10"
+                android:textColor="@color/base_color_text_black"
+                android:textColorHint="@color/black_text_color"
+                android:textSize="@dimen/text_mid_size" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_hight"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionbar_hight"
+                android:layout_marginBottom="8dp" >
+
+                <RelativeLayout
+                    android:layout_width="86dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" >
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="所在地区:"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:orientation="vertical" >
+
+                    <Spinner
+                        android:id="@+id/spinner_province"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/spinner_ab_default_holo_light_am"
+                        android:spinnerMode="dialog" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="2dp"
+                    android:text="省"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:orientation="vertical" >
+
+                    <Spinner
+                        android:id="@+id/spinner_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/spinner_ab_default_holo_light_am"
+                        android:spinnerMode="dialog" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView61"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="2dp"
+                    android:text="市"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="86dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" >
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="所在地区:"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/editText4"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/editbox_background_normal"
+                android:ems="10"
+                android:textColor="@color/base_color_text_black"
+                android:textColorHint="@color/black_text_color"
+                android:textSize="@dimen/text_mid_size" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_marginTop="12dp" >
+
+            <RelativeLayout
+                android:layout_width="86dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" >
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="详细地址:"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/editText5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/editbox_background_normal"
+                android:ems="10"
+                android:gravity="left|top"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:minLines="8"
+                android:textColor="@color/base_color_text_black"
+                android:textColorHint="@color/black_text_color"
+                android:textSize="@dimen/text_mid_size" >
+            </EditText>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_ok"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_hight"
+        android:layout_margin="12dp"
+        android:background="@drawable/add_address_bg" >
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="确定"
+            android:textColor="@color/red_text_color"
+            android:textSize="@dimen/common_text_size" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -314,6 +314,7 @@
                     android:background="@color/black2" />
 
                 <RelativeLayout
+                    android:id="@+id/layout_myaccount"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@color/white_color" >
@@ -345,6 +346,7 @@
                     android:background="@color/black2" />
 
                 <RelativeLayout
+                    android:id="@+id/layout_setting"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@color/white_color" >
@@ -369,6 +371,10 @@
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/text_size" />
                 </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black2" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
