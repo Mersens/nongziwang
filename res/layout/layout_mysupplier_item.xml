@@ -7,9 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_color" 
-        android:orientation="horizontal"
-        >
+        android:background="@color/white_color"
+        android:orientation="horizontal" >
 
         <ImageView
             android:id="@+id/imageView1"
@@ -22,9 +21,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginTop="2dp"
             android:layout_marginRight="4dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
             android:orientation="vertical" >
 
             <TextView
@@ -32,36 +31,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:textColor="@color/base_color_text_black"
-                android:textSize="@dimen/text_size"
                 android:singleLine="true"
-                android:text="山东农大肥业科技有限公司" />
+                android:text="山东农大肥业科技有限公司"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/text_size" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:layout_marginTop="4dp"
-                android:textSize="@dimen/text_mid_size"
-                android:text="主营：种子，农药，化肥，农机，农膜，各种复合肥" />
+                android:layout_weight="1"
+                android:text="主营：种子，农药，化肥，农机，农膜，各种复合肥"
+                android:textSize="@dimen/text_mid_size" />
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent" >
-            <CheckBox
-            android:id="@+id/btn_check_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/btn_check"
-            android:layout_centerInParent="true"
-            android:textColor="@color/base_color_text_black"
-           android:paddingLeft="4dp"
-           android:paddingRight="4dp"
-            android:textSize="@dimen/text_size" />
-        </RelativeLayout>
 
+            <CheckBox
+                android:id="@+id/btn_check_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:button="@drawable/collection_radio_check"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/text_size" />
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

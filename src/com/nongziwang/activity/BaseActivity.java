@@ -55,7 +55,6 @@ public class BaseActivity extends FragmentActivity{
 		mHeadView.setDefaultViewMethod(leftsrcid,title,rightsrcid,onleftclicklistener,onrightclicklistener);
 	}
 	
-	
 	/**
 	 * @author Mersens
 	 * setRightAndTitleMethod--显示右侧按钮和标题

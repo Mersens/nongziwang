@@ -168,7 +168,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/btn_bg"
-            android:text="@string/login"
+            android:text="确定"
             android:textColor="@color/white_color"
             android:textSize="@dimen/common_text_size" />
     </LinearLayout>

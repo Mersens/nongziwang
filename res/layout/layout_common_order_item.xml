@@ -9,13 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="24dp" >
 
-        <ImageView
-            android:id="@+id/imageView1"
+        <CheckBox
+            android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="4dp"
-            android:src="@drawable/checkbox_checked" />
+            android:checked="false"
+            android:button="@drawable/cart_radio_check"/>
 
         <ImageView
             android:id="@+id/imageView2"
@@ -23,7 +24,7 @@
             android:layout_height="18dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="2dp"
-            android:layout_toRightOf="@+id/imageView1"
+            android:layout_toRightOf="@+id/checkbox"
             android:scaleType="centerInside"
             android:src="@drawable/image_gongsi" />
 

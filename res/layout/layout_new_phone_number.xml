@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_hight"
+        android:layout_margin="8dp" >
+
+        <RelativeLayout
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+             >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="我的手机号:"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/editbox_background_normal"
+            android:ems="10"
+            android:textColor="@color/base_color_text_black"
+            android:textColorHint="@color/black_text_color"
+            android:textSize="@dimen/text_mid_size" >
+        </EditText>
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" >
+
+    <RelativeLayout
+        android:layout_width="128dp"
+        android:layout_height="match_parent" >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_bg"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:text="@string/hqyzm"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/text_mid_size" />
+
+    </RelativeLayout>
+
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_hight"
+        android:layout_margin="8dp" >
+        <RelativeLayout
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+             >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="请填写手机验证码:"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/editbox_background_normal"
+            android:ems="10"
+            android:textColor="@color/base_color_text_black"
+            android:textColorHint="@color/black_text_color"
+            android:textSize="@dimen/text_mid_size" >
+        </EditText>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_hight"
+        android:layout_margin="32dp"
+        android:background="@drawable/btn_bg"
+        android:text="提交"
+        android:textColor="@color/white_color"
+        android:textSize="@dimen/common_text_size" />
+
+</LinearLayout>

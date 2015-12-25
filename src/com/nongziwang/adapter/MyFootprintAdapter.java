@@ -20,5 +20,4 @@ public class MyFootprintAdapter extends BaseListAdapter<String> {
 		View view=mInflater.inflate(R.layout.activity_myfootprint_item, parent,false);
 		return view;
 	}
-
 }

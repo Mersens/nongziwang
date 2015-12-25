@@ -41,6 +41,8 @@
         <activity android:name="com.nongziwang.activity.MyAddressFragmentActivity" />
         <activity android:name="com.nongziwang.activity.MyAccountBuyerFragmentActivity" />
         <activity android:name="com.nongziwang.activity.SettingActivity" />
+        <activity android:name="com.nongziwang.activity.ResetPasswordFragmentActivity" />
+         <activity android:name="com.nongziwang.activity.ResetPhoneNumberFragmentActivity" />
 
         <service
             android:name="com.nongziwang.service.RegisterCodeTimerService"

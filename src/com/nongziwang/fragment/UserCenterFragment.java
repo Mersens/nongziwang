@@ -72,7 +72,6 @@ public class UserCenterFragment extends BaseFragment {
 	}
 
 	public void addFragment(Style style, String params,boolean isAnim) {
-
 		FragmentManager fm = getFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
 		Fragment fragment = fm.findFragmentById(R.id.fragment_usercontainer);
@@ -103,6 +102,5 @@ public class UserCenterFragment extends BaseFragment {
 	@Override
 	protected void lazyLoad() {
 		// TODO Auto-generated method stub
-
 	}
 }

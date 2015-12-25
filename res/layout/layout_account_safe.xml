@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView1"
-            android:layout_toLeftOf="@+id/button1"
+            android:layout_toLeftOf="@+id/btn_reset_password"
             android:text="互联网账号存在被盗分险,建议您定期更改密码以保证账户安全。"
             android:layout_marginLeft="4dp"
             android:singleLine="true"
@@ -44,7 +44,7 @@
             android:textSize="@dimen/text_small_size" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/btn_reset_password"
             android:layout_width="48dp"
             android:layout_height="25dp"
             android:layout_alignParentRight="true"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView2"
-            android:layout_toLeftOf="@+id/button2"
+            android:layout_toLeftOf="@+id/btn_reset_phonenumber"
             android:text="您验证的手机：157****0385若已丢失或停用，立即更换，避免账号被盗。"
             android:layout_marginLeft="4dp"
             android:singleLine="true"
@@ -97,7 +97,7 @@
             android:textSize="@dimen/text_small_size" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_reset_phonenumber"
             android:layout_width="48dp"
             android:layout_height="25dp"
             android:layout_alignParentRight="true"
@@ -107,7 +107,6 @@
             android:textColor="@color/white_color"
             android:textSize="@dimen/text_mid_size" 
             android:text="修改" />
-
     </RelativeLayout>
 
 </LinearLayout>

@@ -20,5 +20,4 @@ public class CartAdapter extends BaseListAdapter<String>{
 		View view=mInflater.inflate(R.layout.layout_cart_item, parent,false);
 		return view;
 	}
-
 }

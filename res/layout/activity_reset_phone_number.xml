@@ -14,7 +14,7 @@
          android:background="@color/base_color_text_gray" />
 
     <FrameLayout
-        android:id="@+id/fragment_accountcontainer"
+        android:id="@+id/fragment_reset_numcontainer"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1" >

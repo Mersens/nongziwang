@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_hight"
+            android:layout_marginBottom="12dp"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="已验证的手机:"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:text="157****385"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:gravity="center"
+                android:text="@string/hqyzm"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/text_mid_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_hight" >
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="请填写手机验证码:"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/editbox_background_normal"
+                android:ems="10"
+                android:textColor="@color/base_color_text_black"
+                android:textColorHint="@color/black_text_color"
+                android:textSize="@dimen/text_mid_size" >
+            </EditText>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_hight"
+        android:layout_margin="32dp"
+        android:background="@drawable/btn_bg"
+        android:text="提交"
+        android:textColor="@color/white_color"
+        android:textSize="@dimen/common_text_size" />
+
+</LinearLayout>

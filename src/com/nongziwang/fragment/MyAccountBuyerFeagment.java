@@ -94,7 +94,6 @@ public class MyAccountBuyerFeagment extends BaseFragment{
 		public MyOnClickListener(int i) {
 			index = i;
 		}
-
 		public void onClick(View v) {
 
 			switch (index) {
