@@ -98,7 +98,7 @@ public class FbxjdActivity extends BaseActivity {
 	private void showPop() {
 		DateFormat df = new SimpleDateFormat("yyyyMMdd");
 		popWindow = new DatePickerPopWindow(FbxjdActivity.this,
-				df.format(new Date()));
+				df.format(new Date()),0);
 		popWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
 		popWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
 		popWindow.setTouchable(true);

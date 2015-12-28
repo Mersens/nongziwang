@@ -1,7 +1,11 @@
 package com.nongziwang.fragment;
 
 import com.nongziwang.activity.CommonOrderFragmentActivity;
+import com.nongziwang.activity.JyzwActivity;
 import com.nongziwang.activity.LoginActivity;
+import com.nongziwang.activity.MyAccountSellerFragmentActivity;
+import com.nongziwang.activity.SettingActivity;
+import com.nongziwang.activity.TqhkActivity;
 import com.nongziwang.main.R;
 
 import android.content.Intent;
@@ -17,7 +21,7 @@ import android.widget.TextView;
 
 /**
  * 
- * @author Mersens Âò¼Ò
+ * @author Mersens Âô¼Ò
  */
 public class SellerFragment extends BaseFragment implements OnClickListener{
 	private View view;
@@ -31,6 +35,11 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 	private RelativeLayout layout_dfk;
 	private RelativeLayout layout_yfh;
 	private RelativeLayout layout_jycg;
+	private RelativeLayout layout_jyzw;
+	private RelativeLayout layout_tqck;
+	private RelativeLayout layout_myaccount;
+	private RelativeLayout layout_setting;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -40,6 +49,10 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 		return view;
 	}
 	private void initViews() {
+		layout_myaccount=(RelativeLayout) view.findViewById(R.id.layout_myaccount);
+		layout_setting=(RelativeLayout) view.findViewById(R.id.layout_setting);
+		layout_tqck=(RelativeLayout) view.findViewById(R.id.layout_tqck);
+		layout_jyzw=(RelativeLayout) view.findViewById(R.id.layout_jyzw);
 		tv_seller_switch=(TextView) view.findViewById(R.id.tv_seller_switch);
 		tv_my_dianpu=(TextView) view.findViewById(R.id.tv_my_dianpu);
 		image_user_head=(ImageView) view.findViewById(R.id.image_user_head);
@@ -51,6 +64,10 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 		layout_jycg = (RelativeLayout) view.findViewById(R.id.layout_jycg);
 	}
 	private void initEvent() {
+		layout_myaccount.setOnClickListener(this);
+		layout_setting.setOnClickListener(this);
+		layout_tqck.setOnClickListener(this);
+		layout_jyzw.setOnClickListener(this);
 		tv_seller_switch.setOnClickListener(this);
 		tv_my_dianpu.setOnClickListener(this);
 		image_user_head.setOnClickListener(this);
@@ -112,8 +129,18 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 			intentAction(getActivity(), CommonOrderFragmentActivity.class,
 					CommonOrderFragmentActivity.JYCG);
 			break;
-			
-			
+		case R.id.layout_tqck:
+			intentAction(getActivity(),TqhkActivity.class);
+			break;
+		case R.id.layout_jyzw:
+			intentAction(getActivity(),JyzwActivity.class);
+			break;
+		case R.id.layout_myaccount:
+			intentAction(getActivity(),MyAccountSellerFragmentActivity.class);
+			break;
+		case R.id.layout_setting:
+			intentAction(getActivity(),SettingActivity.class);
+			break;
 		}
 		
 	}

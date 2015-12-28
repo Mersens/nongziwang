@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/common_actionbar"
+        layout="@layout/layout_actionbar" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/base_color_text_gray" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionbar_hight" >
+
+                <RelativeLayout
+                    android:layout_width="96dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="添加收款账户"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:text="(请务必保证收款信息准确无误，否则可能导致无法顺利收到货款)"
+                    android:textColor="@color/red_text_color"
+                    android:textSize="@dimen/text_small_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/actionbar_hight" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/t1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="收款人姓名："
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/editText1"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:textColor="@color/base_color_text_black"
+                        android:textColorHint="@color/black_text_color"
+                        android:textSize="@dimen/text_mid_size" >
+                    </EditText>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/actionbar_hight" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/t3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="收款账号："
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/editText2"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:textColor="@color/base_color_text_black"
+                        android:textColorHint="@color/black_text_color"
+                        android:textSize="@dimen/text_mid_size" >
+                    </EditText>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/actionbar_hight" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/t4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="开户银行："
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/editText3"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:textColor="@color/base_color_text_black"
+                        android:textColorHint="@color/black_text_color"
+                        android:textSize="@dimen/text_mid_size" >
+                    </EditText>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/actionbar_hight" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/text1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="支行信息："
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/editText4"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:textColor="@color/base_color_text_black"
+                        android:textColorHint="@color/black_text_color"
+                        android:textSize="@dimen/text_mid_size" >
+                    </EditText>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/actionbar_hight" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/textVi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="提款金额："
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/editText5"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:textColor="@color/base_color_text_black"
+                        android:textColorHint="@color/black_text_color"
+                        android:textSize="@dimen/text_mid_size" >
+                    </EditText>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/actionbar_hight" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/text6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="提款密码："
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/editText6"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:textColor="@color/base_color_text_black"
+                        android:textColorHint="@color/black_text_color"
+                        android:textSize="@dimen/text_mid_size" >
+                    </EditText>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/actionbar_hight" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/textVi1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:text="确认密码："
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/editText7"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:textColor="@color/base_color_text_black"
+                        android:textColorHint="@color/black_text_color"
+                        android:textSize="@dimen/text_mid_size" >
+                    </EditText>
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="(可提取货款金额:0.00元)"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/text_size" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionbar_hight"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/btn_bg"
+                android:text="保存并提取货至此账户"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

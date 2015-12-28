@@ -138,6 +138,7 @@
                 android:orientation="vertical" >
 
                 <RelativeLayout
+                    android:id="@+id/layout_jyzw"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@color/white_color" >
@@ -169,6 +170,7 @@
                     android:background="@color/black2" />
 
                 <RelativeLayout
+                    android:id="@+id/layout_tqck"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@color/white_color" >
@@ -324,6 +326,7 @@
                     android:background="@color/black2" />
 
                 <RelativeLayout
+                    android:id="@+id/layout_myaccount"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@color/white_color" >
@@ -338,7 +341,6 @@
                         android:src="@drawable/icon_zhgl" />
 
                     <TextView
-                        android:id="@+id/te7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -355,6 +357,7 @@
                     android:background="@color/black2" />
 
                 <RelativeLayout
+                    android:id="@+id/layout_setting"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@color/white_color" >
@@ -369,7 +372,7 @@
                         android:src="@drawable/icon_setting" />
 
                     <TextView
-                        android:id="@+id/te8"
+                        
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

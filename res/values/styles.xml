@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -128,4 +128,9 @@
         <item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
         <item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
     </style>
+    
+        <style name="CommonTextAtyle">
+            <item name="android:textColor">@color/base_color_text_black</item>
+            <item name="android:textSize">@dimen/text_size</item>
+            </style>
 </resources>

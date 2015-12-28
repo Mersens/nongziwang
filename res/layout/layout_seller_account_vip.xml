@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="企业资料管理"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionbar_hight" >
+
+                <RelativeLayout
+                    android:layout_width="72dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        style="@style/CommonTextAtyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="公司名称：" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/editText1"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:textColor="@color/base_color_text_black"
+                    android:textColorHint="@color/black_text_color"
+                    android:textSize="@dimen/text_mid_size" >
+                </EditText>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="(公司名称不能修改)"
+                    android:textColor="@color/red_text_color"
+                    android:textSize="@dimen/text_small_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="84dp" >
+
+                <RelativeLayout
+                    android:layout_width="72dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/t1"
+                        style="@style/CommonTextAtyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="8dp"
+                        android:text="公司描述：" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/e1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:maxLines="10"
+                    android:minLines="8"
+                    android:textColor="@color/base_color_text_black"
+                    android:textColorHint="@color/black_text_color"
+                    android:textSize="@dimen/text_mid_size" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionbar_hight" >
+
+                <RelativeLayout
+                    android:layout_width="72dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/te1"
+                        style="@style/CommonTextAtyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="公司名称：" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:orientation="vertical" >
+
+                    <Spinner
+                        android:id="@+id/spinner_province"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/spinner_ab_default_holo_light_am"
+                        android:spinnerMode="dialog" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:orientation="vertical" >
+
+                    <Spinner
+                        android:id="@+id/spinner_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/spinner_ab_default_holo_light_am"
+                        android:spinnerMode="dialog" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:orientation="vertical" >
+
+                    <Spinner
+                        android:id="@+id/spinner_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/spinner_ab_default_holo_light_am"
+                        android:spinnerMode="dialog" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionbar_hight" >
+
+                <RelativeLayout
+                    android:layout_width="72dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/tex2"
+                        style="@style/CommonTextAtyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="详细地址：" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/ed"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:textColor="@color/base_color_text_black"
+                    android:textColorHint="@color/black_text_color"
+                    android:textSize="@dimen/text_mid_size" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionbar_hight" >
+
+                <RelativeLayout
+                    android:layout_width="72dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/tex3"
+                        style="@style/CommonTextAtyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="公司电话：" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/ed1"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:textColor="@color/base_color_text_black"
+                    android:textColorHint="@color/black_text_color"
+                    android:textSize="@dimen/text_mid_size" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionbar_hight" >
+
+                <RelativeLayout
+                    android:layout_width="72dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/te12"
+                        style="@style/CommonTextAtyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="公司传真：" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/ed23"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:textColor="@color/base_color_text_black"
+                    android:textColorHint="@color/black_text_color"
+                    android:textSize="@dimen/text_mid_size" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionbar_hight" >
+
+                <RelativeLayout
+                    android:layout_width="72dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/tex24"
+                        style="@style/CommonTextAtyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="联系人：" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/ed34"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:textColor="@color/base_color_text_black"
+                    android:textColorHint="@color/black_text_color"
+                    android:textSize="@dimen/text_mid_size" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionbar_hight" >
+
+                <RelativeLayout
+                    android:layout_width="72dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/tex25"
+                        style="@style/CommonTextAtyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="联系电话：" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/ed26"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:textColor="@color/base_color_text_black"
+                    android:textColorHint="@color/black_text_color"
+                    android:textSize="@dimen/text_mid_size" >
+                </EditText>
+                 
+            </LinearLayout>
+            <include layout="@layout/layout_seller_upload_image" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

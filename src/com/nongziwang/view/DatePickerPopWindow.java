@@ -32,9 +32,11 @@ public class DatePickerPopWindow extends PopupWindow{
 	private TextView tv_cancel,tv_ok;
 	private String selectTime=null;
 	private String defaultTime=null;
-	public DatePickerPopWindow(Context context,String startTime){
+	private int viewID=0;
+	public DatePickerPopWindow(Context context,String startTime,int viewID){
 		this.context=context;
 		this.startTime=startTime;
+		this.viewID=viewID;
 		setStartTime();
 		initWindow();
 	}
@@ -68,6 +70,7 @@ public class DatePickerPopWindow extends PopupWindow{
 				Intent intent=new Intent(FbxjdActivity.ACTION_OK);
 				String time=(String) (selectTime==null?defaultTime.toString():selectTime);
 				intent.putExtra("time", time);
+				intent.putExtra("viewID", viewID);
 				context.sendBroadcast(intent);  
 			}
 		});
