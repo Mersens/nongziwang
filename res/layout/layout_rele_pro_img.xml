@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="图片和详细说明"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/base_color_text_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/img_hight_size" >
+
+                <RelativeLayout
+                    android:layout_width="96dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/t521"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="商品图片："
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="您可以上传8张图片大小不超过5M，支持jpg,jpeg,gif,bmb格式"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="8sp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+        
+        
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" >
+                    
+                        <Button
+                        android:id="@+id/btn_select1"
+                        android:layout_width="72dp"
+                        android:layout_height="36dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:text="选择图片"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/text_mid_size" />
+                        <Button
+                        android:id="@+id/btn_select12"
+                        android:layout_width="50dp"
+                        android:layout_height="36dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/btn_select1"
+                        android:layout_marginLeft="8dp"
+                        android:text="上传"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/text_mid_size" />
+                        
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/t1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="4dp"
+                            android:text="商品描述："
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/e1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:gravity="top"
+                        android:hint="200字以内"
+                        android:maxLines="12"
+                        android:minLines="6"
+                        android:textColor="@color/base_color_text_black"
+                        android:textColorHint="@color/black_text_color"
+                        android:textSize="@dimen/text_mid_size" />
+                </LinearLayout>
+            </LinearLayout>
+        
+        
+    </LinearLayout>
+
+</LinearLayout>

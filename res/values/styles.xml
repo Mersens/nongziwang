@@ -2,13 +2,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -113,24 +113,31 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="SpotsDialogDefault" parent="android:Theme.DeviceDefault.Light.Dialog">
         <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
         <item name="DialogTitleText">正在登录…</item>
         <item name="DialogSpotCount">5</item>
     </style>
-    
-    <style name="AnimationFade">  
-    <item name="android:windowEnterAnimation">@anim/popup_inputodown</item>  
-    <item name="android:windowExitAnimation">@anim/popup_outdowntoup</item>  
-</style>  
 
-        <style name="GrowFromBottom">
+    <style name="AnimationFade">
+        <item name="android:windowEnterAnimation">@anim/popup_inputodown</item>
+        <item name="android:windowExitAnimation">@anim/popup_outdowntoup</item>
+    </style>
+
+    <style name="GrowFromBottom">
         <item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
         <item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
     </style>
-    
-        <style name="CommonTextAtyle">
-            <item name="android:textColor">@color/base_color_text_black</item>
-            <item name="android:textSize">@dimen/text_size</item>
-            </style>
+
+    <style name="GrowFromRight">
+        <item name="@android:windowEnterAnimation">@anim/left_in</item>
+        <item name="@android:windowExitAnimation">@anim/right_out</item>
+    </style>
+
+    <style name="CommonTextAtyle">
+        <item name="android:textColor">@color/base_color_text_black</item>
+        <item name="android:textSize">@dimen/text_size</item>
+    </style>
+
 </resources>

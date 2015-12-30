@@ -4,6 +4,8 @@ import com.nongziwang.activity.CommonOrderFragmentActivity;
 import com.nongziwang.activity.JyzwActivity;
 import com.nongziwang.activity.LoginActivity;
 import com.nongziwang.activity.MyAccountSellerFragmentActivity;
+import com.nongziwang.activity.ProductManagementFragmentActivity;
+import com.nongziwang.activity.ReleaseProductFragmentActivity;
 import com.nongziwang.activity.SettingActivity;
 import com.nongziwang.activity.TqhkActivity;
 import com.nongziwang.main.R;
@@ -39,7 +41,8 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 	private RelativeLayout layout_tqck;
 	private RelativeLayout layout_myaccount;
 	private RelativeLayout layout_setting;
-	
+	private RelativeLayout layout_pro;
+	private RelativeLayout layout_rele_pro;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 		return view;
 	}
 	private void initViews() {
+		layout_rele_pro=(RelativeLayout) view.findViewById(R.id.layout_rele_pro);
+		layout_pro=(RelativeLayout) view.findViewById(R.id.layout_pro);
 		layout_myaccount=(RelativeLayout) view.findViewById(R.id.layout_myaccount);
 		layout_setting=(RelativeLayout) view.findViewById(R.id.layout_setting);
 		layout_tqck=(RelativeLayout) view.findViewById(R.id.layout_tqck);
@@ -64,6 +69,8 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 		layout_jycg = (RelativeLayout) view.findViewById(R.id.layout_jycg);
 	}
 	private void initEvent() {
+		layout_rele_pro.setOnClickListener(this);
+		layout_pro.setOnClickListener(this);
 		layout_myaccount.setOnClickListener(this);
 		layout_setting.setOnClickListener(this);
 		layout_tqck.setOnClickListener(this);
@@ -140,6 +147,12 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 			break;
 		case R.id.layout_setting:
 			intentAction(getActivity(),SettingActivity.class);
+			break;
+		case R.id.layout_pro:
+			intentAction(getActivity(),ProductManagementFragmentActivity.class);
+			break;
+		case R.id.layout_rele_pro:
+			intentAction(getActivity(),ReleaseProductFragmentActivity.class);
 			break;
 		}
 		

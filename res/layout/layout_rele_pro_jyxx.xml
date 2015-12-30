@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="设置交易信息"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/base_color_text_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/img_hight_size" >
+
+                <RelativeLayout
+                    android:layout_width="142dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/tvi3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="是否支持网上交易："
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" >
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal" >
+
+                        <RadioButton
+                            android:id="@+id/radiobutton1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:button="@drawable/type_check"
+                            android:checked="true"
+                            android:paddingLeft="4dp"
+                            android:text="支持"
+                            android:textSize="@dimen/text_size" />
+
+                        <RadioButton
+                            android:id="@+id/radiobutton2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@drawable/type_check"
+                            android:paddingLeft="4dp"
+                            android:text="不支持"
+                            android:textSize="@dimen/text_size" />
+                    </RadioGroup>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/img_hight_size"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp" >
+
+            <RelativeLayout
+                android:layout_width="142dp"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/tvis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="计量单位："
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/editbox_background_normal"
+                android:orientation="vertical" >
+
+                <Spinner
+                    android:id="@+id/spinner_province"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/spinner_ab_default_holo_light_am"
+                    android:spinnerMode="dialog" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/img_hight_size" >
+
+                <RelativeLayout
+                    android:layout_width="142dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/tv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="报价方式："
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" >
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal" >
+
+                        <RadioButton
+                            android:id="@+id/radioGroup3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:button="@drawable/type_check"
+                            android:checked="true"
+                            android:paddingLeft="4dp"
+                            android:text="电话报价"
+                            android:textSize="@dimen/text_size" />
+
+                        <RadioButton
+                            android:id="@+id/radioGroup4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@drawable/type_check"
+                            android:paddingLeft="4dp"
+                            android:text="直接报价"
+                            android:textSize="@dimen/text_size" />
+                    </RadioGroup>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/img_hight_size" >
+
+                <RelativeLayout
+                    android:layout_width="142dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/tvi321"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="供应总量："
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/editT531"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:textColor="@color/base_color_text_black"
+                    android:textColorHint="@color/black_text_color"
+                    android:textSize="@dimen/text_mid_size" >
+                </EditText>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/img_hight_size" >
+
+                <RelativeLayout
+                    android:layout_width="142dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="最小起定量："
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/ed1"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:textColor="@color/base_color_text_black"
+                    android:textColorHint="@color/black_text_color"
+                    android:textSize="@dimen/text_mid_size" >
+                </EditText>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_hight"
+            android:layout_margin="32dp"
+            android:background="@drawable/btn_bg"
+            android:text="完成"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+    </LinearLayout>
+
+</LinearLayout>

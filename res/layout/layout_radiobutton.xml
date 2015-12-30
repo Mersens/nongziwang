@@ -3,6 +3,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:button="@drawable/type_check"
-    android:paddingRight="8dp"
+    android:paddingLeft="4dp"
     android:text="化肥"
     android:textSize="@dimen/textSize_svprogresshuddefault_msg" />

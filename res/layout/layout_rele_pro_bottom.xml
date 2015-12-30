@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="物流运费信息"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/base_color_text_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/img_hight_size" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/t3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="单位重量："
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/editText2"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:textColor="@color/base_color_text_black"
+                        android:textColorHint="@color/black_text_color"
+                        android:textSize="@dimen/text_mid_size" >
+                    </EditText>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            style="@style/CommonTextAtyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="4dp"
+                            android:text="公斤" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/img_hight_size" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/tvi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="发货日期："
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/edt_send_goods_time"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:textColor="@color/base_color_text_black"
+                        android:textColorHint="@color/black_text_color"
+                        android:textSize="@dimen/text_mid_size" >
+                    </EditText>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" >
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" >
+
+                <TextView
+                    android:id="@+id/textVie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="企业信息确认"
+                    android:textColor="@color/base_color_text_black"
+                    android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/base_color_text_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/img_hight_size" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/tvi3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="主营行业："
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/editT53"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:ems="10"
+                        android:textColor="@color/base_color_text_black"
+                        android:textColorHint="@color/black_text_color"
+                        android:textSize="@dimen/text_mid_size" >
+                    </EditText>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" >
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/img_hight_size" >
+
+                    <RelativeLayout
+                        android:layout_width="86dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/tvis"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="公司所在地:"
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:orientation="vertical" >
+
+                        <Spinner
+                            android:id="@+id/spinner_province"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:background="@drawable/spinner_ab_default_holo_light_am"
+                            android:spinnerMode="dialog" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        style="@style/CommonTextAtyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="省" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:orientation="vertical" >
+
+                        <Spinner
+                            android:id="@+id/spinner_city"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:background="@drawable/spinner_ab_default_holo_light_am"
+                            android:spinnerMode="dialog" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tex3"
+                        style="@style/CommonTextAtyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="市" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:orientation="vertical" >
+
+                        <Spinner
+                            android:id="@+id/spinner_area"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:background="@drawable/spinner_ab_default_holo_light_am"
+                            android:spinnerMode="dialog" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/te4"
+                        style="@style/CommonTextAtyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="区" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_hight"
+            android:layout_margin="32dp"
+            android:background="@drawable/btn_bg"
+            android:text="下一步"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+    </LinearLayout>
+
+</LinearLayout>

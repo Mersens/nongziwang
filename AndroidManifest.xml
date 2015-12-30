@@ -46,6 +46,8 @@
         <activity android:name="com.nongziwang.activity.JyzwActivity" />
         <activity android:name="com.nongziwang.activity.TqhkActivity" />
         <activity android:name="com.nongziwang.activity.MyAccountSellerFragmentActivity" />
+        <activity android:name="com.nongziwang.activity.ProductManagementFragmentActivity" />
+        <activity android:name="com.nongziwang.activity.ReleaseProductFragmentActivity" />
 
         <service
             android:name="com.nongziwang.service.RegisterCodeTimerService"

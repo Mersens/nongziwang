@@ -133,7 +133,6 @@ public class MyAccountBuyerFeagment extends BaseFragment{
 			case 0:
 				tv_vip.setTextColor(selectedColor);
 				tv_account.setTextColor(unSelectedColor);
-
 				break;
 			case 1:
 				tv_vip.setTextColor(unSelectedColor);
