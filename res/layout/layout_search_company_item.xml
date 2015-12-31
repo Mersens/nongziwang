@@ -31,7 +31,7 @@
                 android:layout_height="18dp"
                 android:scaleType="centerInside"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/ic_company" />
+                android:src="@drawable/icon_dianpu_pressed" />
         </LinearLayout>
 
         <LinearLayout

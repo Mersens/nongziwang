@@ -175,7 +175,7 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/editbox_background_normal"
-                        android:drawableLeft="@drawable/icon_dianpu"
+                        android:drawableLeft="@drawable/icon_dianpu_normal"
                         android:drawablePadding="8dp"
                         android:gravity="center"
                         android:padding="10dp"

@@ -4,6 +4,7 @@ import com.nongziwang.activity.CommonOrderFragmentActivity;
 import com.nongziwang.activity.JyzwActivity;
 import com.nongziwang.activity.LoginActivity;
 import com.nongziwang.activity.MyAccountSellerFragmentActivity;
+import com.nongziwang.activity.MyShopsFragmentActivity;
 import com.nongziwang.activity.ProductManagementFragmentActivity;
 import com.nongziwang.activity.ReleaseProductFragmentActivity;
 import com.nongziwang.activity.SettingActivity;
@@ -108,7 +109,7 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 			getActivity().sendBroadcast(intent);	
 			break;
 		case R.id.tv_my_dianpu:
-			
+			intentAction(getActivity(), MyShopsFragmentActivity.class);
 			break;
 		case R.id.image_user_head:
 			

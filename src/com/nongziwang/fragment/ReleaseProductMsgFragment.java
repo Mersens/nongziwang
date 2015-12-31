@@ -50,6 +50,7 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 	}
 
 	private void initEvent() {
+		edt_send_goods_time.setKeyListener(null);
 		edt_send_goods_time.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {

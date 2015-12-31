@@ -2,8 +2,6 @@ package com.nongziwang.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.nongziwang.activity.FbxjdActivity;
 import com.nongziwang.adapter.MyArrayAdapter;
 import com.nongziwang.main.R;
 

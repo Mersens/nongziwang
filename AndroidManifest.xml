@@ -8,6 +8,12 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name="com.nongziwang.application.CustomApplcation"
         android:allowBackup="true"
@@ -22,6 +28,32 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <!-- QQ授权登录 -->
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent22222" />
+            </intent-filter>
+        </activity>
+        <!-- 新浪微博授权登录 -->
+        <activity
+            android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity android:name="com.nongziwang.activity.SearchFragmentActivity" />
         <activity android:name="com.nongziwang.activity.TypeSearchFragmentActivity" />
@@ -48,6 +80,7 @@
         <activity android:name="com.nongziwang.activity.MyAccountSellerFragmentActivity" />
         <activity android:name="com.nongziwang.activity.ProductManagementFragmentActivity" />
         <activity android:name="com.nongziwang.activity.ReleaseProductFragmentActivity" />
+        <activity android:name="com.nongziwang.activity.MyShopsFragmentActivity" />
 
         <service
             android:name="com.nongziwang.service.RegisterCodeTimerService"
