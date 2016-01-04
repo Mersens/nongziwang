@@ -6,12 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.nongziwang.adapter.MyArrayAdapter;
-import com.nongziwang.main.R;
-import com.nongziwang.view.DatePickerPopWindow;
-import com.nongziwang.view.HeadView.OnLeftClickListener;
-
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -21,20 +15,35 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.PopupWindow.OnDismissListener;
+
+import com.nongziwang.adapter.MyArrayAdapter;
+import com.nongziwang.db.NongziDao;
+import com.nongziwang.db.NongziDaoImpl;
+import com.nongziwang.entity.MyRegion;
+import com.nongziwang.main.R;
+import com.nongziwang.view.DatePickerPopWindow;
+import com.nongziwang.view.HeadView.OnLeftClickListener;
 
 public class FbxjdActivity extends BaseActivity {
 	private Spinner spinner_dw, spinner_gys_province, spinner_gys_city,
 			spinner_address_province, spinner_address_city;
-	private List<String> list;
+	private List<MyRegion> provinces;
+	private List<MyRegion> address_citys;
+	private List<MyRegion> gys_citys;
 	private MyArrayAdapter adapter;
+	private MyArrayAdapter address_citys_adapter;
+	private MyArrayAdapter gys_citys_adapter;
 	private EditText edt_time;
 	public static final String ACTION_OK = "ok";
 	public static final String ACTION_CANCEL = "cancel";
@@ -42,6 +51,7 @@ public class FbxjdActivity extends BaseActivity {
 	private String[] types = { "种子", "农药", "化肥", "农机", "农膜" };
 	private HorizontalScrollView scrollView_type;
 	private RadioGroup radiogroup_type;
+	private NongziDao dao;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -49,6 +59,7 @@ public class FbxjdActivity extends BaseActivity {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_fbxjd);
 		registerBoradcastReceiver();
+		dao=new NongziDaoImpl(this);
 		initViews();
 		initEvents();
 		initType();
@@ -61,10 +72,10 @@ public class FbxjdActivity extends BaseActivity {
 					
 			rb.setId(i);
 			rb.setText(types[i]);
-			RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
-					RadioGroup.LayoutParams.WRAP_CONTENT,
-					RadioGroup.LayoutParams.WRAP_CONTENT);
-			radiogroup_type.addView(rb, params);
+			MarginLayoutParams lp = new MarginLayoutParams(new LayoutParams(
+					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+			lp.rightMargin = 4;
+			radiogroup_type.addView(rb, lp);
 		}
 	}
 
@@ -85,14 +96,7 @@ public class FbxjdActivity extends BaseActivity {
 					}
 				});
 		setHeadViewBg(R.color.white_color);
-		list = new ArrayList<String>();
-		list.add("请选择");
-		list.add("北京");
-		list.add("上海");
-		list.add("深圳");
-		list.add("广州");
-		list.add("南京");
-		list.add("郑州");
+		
 	}
 
 	private void showPop() {
@@ -110,6 +114,11 @@ public class FbxjdActivity extends BaseActivity {
 	}
 
 	private void initEvents() {
+		address_citys=new ArrayList<MyRegion>();
+		address_citys.add(new MyRegion("1", "请选择", ""));
+		gys_citys=new ArrayList<MyRegion>();
+		gys_citys.add(new MyRegion("1", "请选择", ""));
+		provinces=dao.findAllProvinces();
 		edt_time.setKeyListener(null);
 		edt_time.setOnClickListener(new OnClickListener() {
 			@Override
@@ -117,19 +126,67 @@ public class FbxjdActivity extends BaseActivity {
 				showPop();
 			}
 		});
+		
+		spinner_gys_province.setOnItemSelectedListener(new OnItemSelectedListener() {
 
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				if(position!=0){
+					String parintid=provinces.get(position).getId();
+					gys_citys.clear();
+					gys_citys=dao.findAllCitysByProvincesId(parintid);
+					gys_citys_adapter.clear();
+					gys_citys_adapter.addAll(gys_citys);
+					gys_citys_adapter.notifyDataSetChanged();
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+
+		
+		spinner_address_province.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				if(position!=0){
+					String parintid=provinces.get(position).getId();
+					address_citys.clear();
+					address_citys=dao.findAllCitysByProvincesId(parintid);
+					address_citys_adapter.clear();
+					address_citys_adapter.addAll(address_citys);
+					address_citys_adapter.notifyDataSetChanged();
+				}
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		adapter = new MyArrayAdapter(FbxjdActivity.this,
-				android.R.layout.simple_spinner_item, list);
+				android.R.layout.simple_spinner_item, provinces);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		address_citys_adapter=new MyArrayAdapter(FbxjdActivity.this,
+				android.R.layout.simple_spinner_item, address_citys);
+		address_citys_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		gys_citys_adapter=new MyArrayAdapter(FbxjdActivity.this,
+				android.R.layout.simple_spinner_item, gys_citys);
+		gys_citys_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_dw.setAdapter(adapter);
 		spinner_dw.setSelection(0, true);
 		spinner_gys_province.setAdapter(adapter);
-		spinner_gys_province.setSelection(0, true);
-		spinner_gys_city.setAdapter(adapter);
+		spinner_gys_city.setAdapter(gys_citys_adapter);
 		spinner_gys_city.setSelection(0, true);
 		spinner_address_province.setAdapter(adapter);
-		spinner_address_province.setSelection(0, true);
-		spinner_address_city.setAdapter(adapter);
+		spinner_address_city.setAdapter(address_citys_adapter);
 		spinner_address_city.setSelection(0, true);
 	}
 

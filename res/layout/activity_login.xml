@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:text="@string/forget_psd"
-                android:textColor="@color/base_color_text_gray"
+                android:textColor="@color/gray_text_color"
                 android:textSize="@dimen/text_size" />
 
             <TextView
@@ -87,7 +87,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="2dp"
                 android:text="@string/user_regist"
-                android:textColor="@color/base_color_text_gray"
+                android:textColor="@color/gray_text_color"
                 android:textSize="@dimen/text_size" />
         </RelativeLayout>
     </LinearLayout>
@@ -139,24 +139,24 @@
 
             <ImageView
                 android:id="@+id/image_qq"
-                android:layout_width="@dimen/img_wight_size"
-                android:layout_height="@dimen/img_hight_size"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_margin="12dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/icon_qq" />
 
             <ImageView
                 android:id="@+id/image_weixin"
-                android:layout_width="@dimen/img_wight_size"
-                android:layout_height="@dimen/img_hight_size"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_margin="12dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/icon_weixin" />
 
             <ImageView
                 android:id="@+id/image_sina"
-                android:layout_width="@dimen/img_wight_size"
-                android:layout_height="@dimen/img_hight_size"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_margin="12dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/icon_sina" />

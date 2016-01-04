@@ -4,7 +4,6 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.main.R;
@@ -38,8 +36,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private ImageView image_qq, image_weixin, image_sina;
 	public static Tencent mTencent;
 	private SsoHandler mSsoHandler;
-	 private AuthInfo mAuthInfo;
-	 private Oauth2AccessToken mAccessToken;
+	private AuthInfo mAuthInfo;
+	private Oauth2AccessToken mAccessToken;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -47,8 +45,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_login);
 		mTencent = Tencent.createInstance(AppConstants.APP_ID, this);
-        mAuthInfo = new AuthInfo(this, AppConstants.APP_KEY, AppConstants.REDIRECT_URL, AppConstants.SCOPE);
-        mSsoHandler = new SsoHandler(this, mAuthInfo);
+		mAuthInfo = new AuthInfo(this, AppConstants.APP_KEY,
+				AppConstants.REDIRECT_URL, AppConstants.SCOPE);
+		mSsoHandler = new SsoHandler(this, mAuthInfo);
 		initViews();
 		initEvent();
 	}
@@ -105,7 +104,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			ShowToast("点击微信登录");
 			break;
 		case R.id.image_qq:
-			//点击QQ登录
+			// 点击QQ登录
 			onClickQQLogin();
 			break;
 		}
@@ -117,42 +116,45 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
-	public void onClickSinaLogin(){
-		 mSsoHandler.authorizeClientSso(new AuthListener());
+	public void onClickSinaLogin() {
+		mSsoHandler.authorizeClientSso(new AuthListener());
 	}
-	
-	
-    class AuthListener implements WeiboAuthListener {
-        
-    	  @Override
-    	  public void onComplete(Bundle values) {
-    	  		mAccessToken = Oauth2AccessToken.parseAccessToken(values); // 从 Bundle 中解析 Token
-    	          if (mAccessToken.isSessionValid()) {
-  
-    	          } else {
-    	  		    // 当您注册的应用程序签名不正确时，就会收到错误Code，请确保签名正确
-    	              String code = values.getString("code", "");
-    	              ShowToast(code);
 
-    	          }
-    	  }
+	class AuthListener implements WeiboAuthListener {
+
+		@Override
+		public void onComplete(Bundle values) {
+			mAccessToken = Oauth2AccessToken.parseAccessToken(values); // 从
+																		// Bundle
+																		// 中解析
+																		// Token
+			if (mAccessToken.isSessionValid()) {
+
+			} else {
+				// 当您注册的应用程序签名不正确时，就会收到错误Code，请确保签名正确
+				String code = values.getString("code", "");
+				ShowToast(code);
+
+			}
+		}
 
 		@Override
 		public void onCancel() {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onWeiboException(WeiboException arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
-    }
-	
+	}
+
 	/**
 	 * qq授权登录
+	 * 
 	 * @param jsonObject
 	 */
 	public static void initOpenidAndToken(JSONObject jsonObject) {
@@ -178,6 +180,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 	/**
 	 * qq登录回调接口
+	 * 
 	 * @author Mersens
 	 *
 	 */
@@ -228,11 +231,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			Tencent.onActivityResultData(requestCode, resultCode, data,
 					loginListener);
 		}
-		
-        if (mSsoHandler != null) {
-            mSsoHandler.authorizeCallBack(requestCode, resultCode, data);
-        }
-		
+
+		if (mSsoHandler != null) {
+			mSsoHandler.authorizeCallBack(requestCode, resultCode, data);
+		}
+
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 }

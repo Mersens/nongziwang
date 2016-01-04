@@ -48,11 +48,9 @@ public class CommonOrderFragmentActivity extends BaseActivity {
 		fragment_ordercontainer = (FrameLayout) findViewById(R.id.fragment_ordercontainer);
 		setDefaultViewMethod(R.drawable.ic_menu_back, type,
 				R.drawable.icon_more, new OnLeftClickListener() {
-
 					@Override
 					public void onClick() {
 						finishActivity();
-
 					}
 				}, new OnRightClickListener() {
 
@@ -123,7 +121,6 @@ public class CommonOrderFragmentActivity extends BaseActivity {
 		popupwindow.setFocusable(true);
 		popupwindow.setOutsideTouchable(true);
 		popupwindow.setBackgroundDrawable(new BitmapDrawable());
-		// 动画效果 从底部弹起
 		popupwindow.setAnimationStyle(R.style.AnimationFade);
 		popupwindow.showAtLocation(fragment_ordercontainer, Gravity.TOP, 0, getHeadViewHeight()+statusBarHeight);
 	}

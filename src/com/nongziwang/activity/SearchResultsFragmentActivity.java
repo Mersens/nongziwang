@@ -129,7 +129,24 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		});
 		addFragment(Style.MOREN, params);
 	}
-	
+	 class MyArrayAdapter extends ArrayAdapter<String>{
+		 private String str[];
+
+		public MyArrayAdapter(Context context, int resource, String[] objects) {
+			super(context, resource, objects);
+			str=objects;
+		}
+		@SuppressLint("ViewHolder")
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View view = mInflater.inflate(R.layout.layout_spinner_item, parent,
+					false);
+			TextView spinner_name = (TextView) view
+					.findViewById(R.id.spinner_name);
+			spinner_name.setText(str[position]);
+			return view;
+		}
+	 }
 	public enum Style {
 		MOREN, PINPAI, YONGTU, JINGHANLIANG, COMPANY,JIAGE;
 	}

@@ -80,10 +80,12 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/btn_search"
+                android:id="@+id/img_barcode"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 android:src="@drawable/barcode_normal" />
         </LinearLayout>
@@ -250,7 +252,7 @@
         <RelativeLayout
             android:id="@+id/layout_more"
             android:layout_width="match_parent"
-            android:layout_height="28dp" 
+            android:layout_height="32dp" 
             android:layout_marginTop="4dp"
             android:background="@color/white_color"
             >

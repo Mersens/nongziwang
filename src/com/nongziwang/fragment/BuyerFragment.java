@@ -1,5 +1,8 @@
 package com.nongziwang.fragment;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.nongziwang.activity.CartActivity;
 import com.nongziwang.activity.CommonOrderFragmentActivity;
 import com.nongziwang.activity.FbxjdActivity;
@@ -9,30 +12,36 @@ import com.nongziwang.activity.MyAddressFragmentActivity;
 import com.nongziwang.activity.MyCollectionFragmentActivity;
 import com.nongziwang.activity.MyFootprintActivity;
 import com.nongziwang.activity.SettingActivity;
+import com.nongziwang.application.AppConstants;
 import com.nongziwang.main.R;
+import com.nongziwang.utils.PhotoUtil;
+import com.nongziwang.view.CircleImageView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
  * 
- * @author Mersens 买家
+ * @author Mersens 
+ * 买家
  */
 public class BuyerFragment extends BaseFragment implements OnClickListener {
 	private View view;
 	private TextView tv_buyer_switch;
-	private ImageView image_user_head;
 	private TextView tv_login;
-
+	private CircleImageView buyer_user_head;
 	private RelativeLayout layout_ymdcp;
 	private RelativeLayout layout_dqr;
 	private RelativeLayout layout_dfk;
@@ -45,6 +54,9 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	private RelativeLayout layout_myaddress;
 	private RelativeLayout layout_setting;
 	private RelativeLayout layout_myaccount;
+	public static final int FROM_XC=0X00;
+	public static final int FROM_CJ=0X01;
+	public 	String path;
 	@SuppressLint("InflateParams")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,13 +68,13 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void initViews() {
+		buyer_user_head=(CircleImageView) view.findViewById(R.id.buyer_user_head);
 		layout_myaccount=(RelativeLayout) view.findViewById(R.id.layout_myaccount);
 		layout_setting=(RelativeLayout) view.findViewById(R.id.layout_setting);
 		layout_myaddress=(RelativeLayout) view.findViewById(R.id.layout_myaddress);
 		layout_myfootprint=(RelativeLayout) view.findViewById(R.id.layout_myfootprint);
 		layout_mycollection=(RelativeLayout) view.findViewById(R.id.layout_mycollection);
 		tv_buyer_switch = (TextView) view.findViewById(R.id.tv_buyer_switch);
-		image_user_head = (ImageView) view.findViewById(R.id.image_user_head);
 		tv_login = (TextView) view.findViewById(R.id.tv_login);
 		layout_ymdcp = (RelativeLayout) view.findViewById(R.id.layout_ymdcp);
 		layout_dqr = (RelativeLayout) view.findViewById(R.id.layout_dqr);
@@ -74,6 +86,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void initEvent() {
+		buyer_user_head.setOnClickListener(this);
 		layout_myaccount.setOnClickListener(this);
 		layout_setting.setOnClickListener(this);
 		layout_myaddress.setOnClickListener(this);
@@ -81,7 +94,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		layout_mycollection.setOnClickListener(this);
 		layout_fbxjd.setOnClickListener(this);
 		tv_buyer_switch.setOnClickListener(this);
-		image_user_head.setOnClickListener(this);
 		tv_login.setOnClickListener(this);
 		layout_ymdcp.setOnClickListener(this);
 		layout_dqr.setOnClickListener(this);
@@ -113,8 +125,8 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			intent.setAction(UserCenterFragment.BROADCAST_ACTION_SELL);
 			getActivity().sendBroadcast(intent);
 			break;
-		case R.id.image_user_head:
-
+		case R.id.buyer_user_head:
+			showAvatarPop();
 			break;
 		case R.id.tv_login:
 			intentAction(getActivity(), LoginActivity.class);
@@ -163,5 +175,97 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		}
 
 	}
+	public void showAvatarPop(){
+		Intent intent = new Intent(Intent.ACTION_PICK, null);
+		intent.setDataAndType(
+				MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+		startActivityForResult(intent,FROM_XC);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+		case FROM_XC:
+			Uri uri = null;
+			if (data == null) {
+				return;
+			}
+			if (resultCode == getActivity().RESULT_OK) {
+				if (!Environment.getExternalStorageState().equals(
+						Environment.MEDIA_MOUNTED)) {
+					ShowToast("SD不可用");
+					return;
+				}
+				uri = data.getData();
+				startImageAction(uri, 200, 200,
+						FROM_CJ, true);
+			} else {
+				ShowToast("照片获取失败");
+			}
+			break;
+			case FROM_CJ:
+				if (data == null) {
+					return;
+				} else {
+					saveCropAvator(data);
+				}
+			break;
 
+		}
+	}
+	
+	private void startImageAction(Uri uri, int outputX, int outputY,
+			int requestCode, boolean isCrop) {
+		Intent intent = null;
+		if (isCrop) {
+			intent = new Intent("com.android.camera.action.CROP");
+		} else {
+			intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+		}
+		intent.setDataAndType(uri, "image/*");
+		intent.putExtra("crop", "true");
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+		intent.putExtra("outputX", outputX);
+		intent.putExtra("outputY", outputY);
+		intent.putExtra("scale", true);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+		intent.putExtra("return-data", true);
+		intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+		intent.putExtra("noFaceDetection", true); // no face detection
+		startActivityForResult(intent, requestCode);
+	}
+	
+	/**
+	 * 保存裁剪的头像
+	 * 
+	 * @param data
+	 */
+	@SuppressLint("SimpleDateFormat")
+	private void saveCropAvator(Intent data) {
+		Bundle extras = data.getExtras();
+		if (extras != null) {
+			Bitmap bitmap = extras.getParcelable("data");
+			if (bitmap != null) {
+				bitmap = PhotoUtil.toRoundCorner(bitmap, 10);
+				buyer_user_head.setImageBitmap(bitmap);
+				// 保存图片
+				String filename = new SimpleDateFormat("yyMMddHHmmss")
+						.format(new Date())+".png";
+				path = AppConstants.MyAvatarDir + filename;
+				PhotoUtil.saveBitmap(AppConstants.MyAvatarDir, filename,
+						bitmap, true);
+				// 上传头像
+				uploadAvatar(path);
+				if (bitmap != null && bitmap.isRecycled()) {
+					bitmap.recycle();
+				}
+			}
+		}
+	}
+	public void uploadAvatar(String path) {
+		//上传头像
+	}
+	
 }

@@ -12,7 +12,15 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 扫描二维码需要的权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application
         android:name="com.nongziwang.application.CustomApplcation"
@@ -81,6 +89,7 @@
         <activity android:name="com.nongziwang.activity.ProductManagementFragmentActivity" />
         <activity android:name="com.nongziwang.activity.ReleaseProductFragmentActivity" />
         <activity android:name="com.nongziwang.activity.MyShopsFragmentActivity" />
+        <activity android:name="com.nongziwang.activity.CaptureActivity" />
 
         <service
             android:name="com.nongziwang.service.RegisterCodeTimerService"

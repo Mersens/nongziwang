@@ -58,13 +58,13 @@ public class MyAddressEditorFragment extends BaseFragment {
                 getActivity().sendBroadcast(mIntent);  				
 			}
 		});
-		adapter = new MyArrayAdapter(getActivity(),
+/*		adapter = new MyArrayAdapter(getActivity(),
 				android.R.layout.simple_spinner_item, list);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_province.setAdapter(adapter);
 		spinner_province.setSelection(0, true);
 		spinner_city.setAdapter(adapter);
-		spinner_city.setSelection(0, true);
+		spinner_city.setSelection(0, true);*/
 	}
 
 

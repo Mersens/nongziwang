@@ -43,7 +43,7 @@ public class SellerAccountVipFragment extends BaseFragment {
 		list.add("广州");
 		list.add("南京");
 		list.add("郑州");
-		adapter = new MyArrayAdapter(getActivity(),
+/*		adapter = new MyArrayAdapter(getActivity(),
 				android.R.layout.simple_spinner_item, list);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_province.setAdapter(adapter);
@@ -51,7 +51,7 @@ public class SellerAccountVipFragment extends BaseFragment {
 		spinner_city.setAdapter(adapter);
 		spinner_city.setSelection(0, true);
 		spinner_area.setAdapter(adapter);
-		spinner_area.setSelection(0, true);
+		spinner_area.setSelection(0, true);*/
 		
 	}
 

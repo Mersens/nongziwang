@@ -8,6 +8,7 @@ import com.nongziwang.adapter.MyArrayAdapter;
 import com.nongziwang.adapter.SearchHistoryAdapter;
 import com.nongziwang.main.R;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -69,7 +70,6 @@ public class SearchFragmentActivity extends BaseActivity {
 		list.add("Å©»ú");
 		list.add("Å©Ä¤");
 		list.add("Ïõï§Ëá");
-
 		mGridView.setAdapter(new HotSearchAdapter(list,
 				SearchFragmentActivity.this));
 		search_history_listView.setAdapter(new SearchHistoryAdapter(list,
@@ -91,7 +91,6 @@ public class SearchFragmentActivity extends BaseActivity {
 		});
 
 		btn_search.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -159,6 +158,23 @@ public class SearchFragmentActivity extends BaseActivity {
 		overridePendingTransition(R.anim.bottom_open, 0);	
 		finish();
 	}
-	
+	 class MyArrayAdapter extends ArrayAdapter<String>{
+		 private String str[];
+
+		public MyArrayAdapter(Context context, int resource, String[] objects) {
+			super(context, resource, objects);
+			str=objects;
+		}
+		@SuppressLint("ViewHolder")
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View view = mInflater.inflate(R.layout.layout_spinner_item, parent,
+					false);
+			TextView spinner_name = (TextView) view
+					.findViewById(R.id.spinner_name);
+			spinner_name.setText(str[position]);
+			return view;
+		}
+	 }
 
 }

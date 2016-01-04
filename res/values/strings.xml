@@ -76,6 +76,7 @@
     <string name="tx_cpgl">产品管理</string>
     <string name="tx_ckdp">查看店铺</string>
     <string name="tx_xpgl">询盘管理</string>
+    <string name="scan_text">请将条码置于取景框内扫描</string>
 
 
 </resources>

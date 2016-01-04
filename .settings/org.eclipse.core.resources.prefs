@@ -1,5 +1,11 @@
 eclipse.preferences.version=1
 encoding//src/com/nongziwang/activity/BaseActivity.java=UTF-8
+encoding//src/com/nongziwang/activity/CaptureActivity.java=UTF-8
 encoding//src/com/nongziwang/fragment/BaseFragment.java=UTF-8
+encoding//src/com/nongziwang/utils/JsonUtils.java=UTF-8
+encoding//src/com/nongziwang/utils/PhotoUtil.java=UTF-8
+encoding//src/com/nongziwang/utils/SharePreferenceUtil.java=UTF-8
 encoding//src/com/nongziwang/view/DialogTips.java=UTF-8
 encoding//src/com/nongziwang/view/WheelView.java=UTF-8
+encoding//src/com/zxing/android/decoding/DecodeHandler.java=UTF-8
+encoding//src/com/zxing/android/view/ViewfinderView.java=UTF-8

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -17,7 +18,7 @@ import com.nongziwang.main.R;
 public class MyShopsFragmentActivity extends BaseActivity implements
 		OnClickListener {
 	private ImageView img_menu_back;
-
+    private ImageView img_barcode;
 	private LinearLayout layout_dianpu, layout_shangpin;
 	private ImageView image_shangpin, image_dianpu;
 	private TextView tv_shangpin, tv_dianpu;
@@ -35,6 +36,7 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 	}
 
 	private void initViews() {
+		img_barcode=(ImageView) findViewById(R.id.img_barcode);
 		layout_more=(RelativeLayout) findViewById(R.id.layout_more);
 		layout_dianpu = (LinearLayout) findViewById(R.id.layout_dianpu);
 		layout_shangpin = (LinearLayout) findViewById(R.id.layout_shangpin);
@@ -48,6 +50,7 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 	}
 
 	private void initEvent() {
+		img_barcode.setOnClickListener(this);
 		layout_dianpu.setOnClickListener(this);
 		layout_shangpin.setOnClickListener(this);
 		img_menu_back.setOnClickListener(new OnClickListener() {
@@ -92,7 +95,11 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 			setTabs(1);
 			addFragment(null, true);
 			break;
+		case R.id.img_barcode:
+			intentAction(MyShopsFragmentActivity.this, CaptureActivity.class);
+			break;
 		}
+		
 	}
 
 	public void setTabs(int i) {
@@ -125,4 +132,15 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 		view_shangpin.setVisibility(View.GONE);
 		view_dianpu.setVisibility(View.GONE);
 	}
+	
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+			finishActivity();
+			return true;
+		} 
+		return false;
+	}
+	
 }

@@ -2,149 +2,87 @@ package com.nongziwang.db;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.nongziwang.entity.MyRegion;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.nongziwang.entity.Area;
-import com.nongziwang.entity.City;
-import com.nongziwang.entity.Province;
 
 public class NongziDaoImpl implements NongziDao{
 	private DBHelper helper;
+	private Context  context;
 	public NongziDaoImpl(Context  context){
 		helper=DBHelper.getInstance(context);
+		this.context=context;
 	}
 
 	@Override
-	public List<Province> findAllProvinces() {
-		List<Province> list=new ArrayList<Province>();
-		SQLiteDatabase db = helper.getWritableDatabase();
+	public List<MyRegion> findAllProvinces() {
+		List<MyRegion> list=new ArrayList<MyRegion>();
+		list.add(new MyRegion("1", "«Î—°‘Ò", ""));
+		CityDBManager dbm = new CityDBManager(
+				context);
+		dbm.openDatabase();
+		SQLiteDatabase db = dbm.getDatabase();
 		Cursor cursor = db.rawQuery("select * from provincetb ", null);
-				
 		while (cursor.moveToNext()) {
-			Province bean=new Province();
-			bean.setProvinceid(cursor.getString(cursor.getColumnIndex("provinceid")));
+			MyRegion bean=new MyRegion();
+			bean.setId(cursor.getString(cursor.getColumnIndex("provinceid")));
 			bean.setName(cursor.getString(cursor.getColumnIndex("name")));
+			bean.setParentid("");
 			list.add(bean);
 		}
 		cursor.close();
 		db.close();
+		dbm.closeDatabase();
 		return list;
 	}
 
 	@Override
-	public List<City> findAllCitys() {
-		List<City> list=new ArrayList<City>();
-		SQLiteDatabase db = helper.getWritableDatabase();
-		Cursor cursor = db.rawQuery("select * from citytb ", null);
-				
-		while (cursor.moveToNext()) {
-			City bean=new City();
-			bean.setCityid(cursor.getString(cursor.getColumnIndex("cityid")));
-			bean.setProvinceid(cursor.getString(cursor.getColumnIndex("provinceid")));
-			bean.setName(cursor.getString(cursor.getColumnIndex("name")));
-			list.add(bean);
-		}
-		cursor.close();
-		db.close();
-		return list;
-	}
-
-	@Override
-	public List<City> findAllCitysByProvincesId(String provinceid) {
-		List<City> list=new ArrayList<City>();
-		SQLiteDatabase db = helper.getWritableDatabase();
-		Cursor cursor = db.rawQuery("select * from citytb where provinceid=? ", new String[]{provinceid});
-				
-		while (cursor.moveToNext()) {
-			City bean=new City();
-			bean.setCityid(cursor.getString(cursor.getColumnIndex("cityid")));
-			bean.setProvinceid(cursor.getString(cursor.getColumnIndex("provinceid")));
-			bean.setName(cursor.getString(cursor.getColumnIndex("name")));
-			list.add(bean);
-		}
-		cursor.close();
-		db.close();
-		return list;
-	}
-
-	@Override
-	public List<Area> findAllAreas() {
-		List<Area> list=new ArrayList<Area>();
-		SQLiteDatabase db = helper.getWritableDatabase();
-		Cursor cursor = db.rawQuery("select * from areatb ", null);
-				
-		while (cursor.moveToNext()) {
-			Area bean=new Area();
-			bean.setCityid(cursor.getString(cursor.getColumnIndex("cityid")));
-			bean.setAreaid(cursor.getString(cursor.getColumnIndex("areaid")));
-			bean.setName(cursor.getString(cursor.getColumnIndex("name")));
-			list.add(bean);
-		}
-		cursor.close();
-		db.close();
-		return list;
-	}
-
-	@Override
-	public List<Area> findAllAreasByCityId(String cityid) {
-		List<Area> list=new ArrayList<Area>();
-		SQLiteDatabase db = helper.getWritableDatabase();
-		Cursor cursor = db.rawQuery("select * from areatb where cityid=? ", new String[]{cityid});
-		while (cursor.moveToNext()) {
-			Area bean=new Area();
-			bean.setCityid(cursor.getString(cursor.getColumnIndex("cityid")));
-			bean.setAreaid(cursor.getString(cursor.getColumnIndex("areaid")));
-			bean.setName(cursor.getString(cursor.getColumnIndex("name")));
-			list.add(bean);
-		}
-		cursor.close();
-		db.close();
-		return list;
-	}
-
-	@Override
-	public void addAllProvinces(List<Province> list) {
-		if(list==null || list.size()==0){
-			return;
-		}
-		SQLiteDatabase db = helper.getWritableDatabase();
-		for(Province province:list){
-			db.execSQL("insert into provincetb(provinceid,name) values(?,?)",
-					 new Object[] {province.getProvinceid(),province.getName()});
-		}
-		db.close();
+	public List<MyRegion> findAllCitysByProvincesId(String provinceid) {
 		
+		List<MyRegion> list=new ArrayList<MyRegion>();
+		list.add(new MyRegion("1", "«Î—°‘Ò", ""));
+		CityDBManager dbm = new CityDBManager(
+				context);
+		dbm.openDatabase();
+		SQLiteDatabase db = dbm.getDatabase();
+		Cursor cursor = db.rawQuery("select * from citytb  where provinceid=?", new String[]{provinceid});
+		while (cursor.moveToNext()) {
+			MyRegion bean=new MyRegion();
+			bean.setId(cursor.getString(cursor.getColumnIndex("cityid")));
+			bean.setName(cursor.getString(cursor.getColumnIndex("name")));
+			bean.setParentid(cursor.getString(cursor.getColumnIndex("provinceid")));
+			list.add(bean);
+		}
+		cursor.close();
+		db.close();
+		dbm.closeDatabase();
+		return list;
 	}
 
 	@Override
-	public void addAllCitys(List<City> list) {
-		if(list==null || list.size()==0){
-			return;
+	public List<MyRegion> findAllAreasByCityId(String cityid) {
+		List<MyRegion> list=new ArrayList<MyRegion>();
+		list.add(new MyRegion("1", "«Î—°‘Ò", ""));
+		CityDBManager dbm = new CityDBManager(
+				context);
+		dbm.openDatabase();
+		SQLiteDatabase db = dbm.getDatabase();
+		Cursor cursor = db.rawQuery("select * from areatb  where cityid=?", new String[]{cityid});
+		while (cursor.moveToNext()) {
+			MyRegion bean=new MyRegion();
+			bean.setId(cursor.getString(cursor.getColumnIndex("areaid")));
+			bean.setName(cursor.getString(cursor.getColumnIndex("name")));
+			bean.setParentid(cursor.getString(cursor.getColumnIndex("cityid")));
+			list.add(bean);
 		}
-		SQLiteDatabase db = helper.getWritableDatabase();
-		for(City city:list){
-			db.execSQL("insert into citytb(cityid,name,provinceid) values(?,?,?)",
-					 new Object[] {city.getCityid(),city.getName(),city.getProvinceid()});
-		}
-		db.close();		
+		cursor.close();
+		db.close();
+		dbm.closeDatabase();
+		return list;
 	}
-
-	@Override
-	public void addAllAreas(List<Area> list) {
-		if(list==null || list.size()==0){
-			return;
-		}
-		SQLiteDatabase db = helper.getWritableDatabase();
-		for(Area area:list){
-			db.execSQL("insert into areatb(areaid,name,cityid) values(?,?,?)",
-					 new Object[] {area.getAreaid(),area.getName(),area.getCityid()});
-		}
-		db.close();				
-	}
-
 	@Override
 	public void addSearchHistory(String userid, String sname) {
 		// TODO Auto-generated method stub
@@ -176,5 +114,7 @@ public class NongziDaoImpl implements NongziDao{
 				 new Object[] {userid});
 		db.close();
 	}
+
+
 
 }

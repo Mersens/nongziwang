@@ -1,8 +1,6 @@
 package com.nongziwang.adapter;
-
-import java.util.Arrays;
 import java.util.List;
-
+import com.nongziwang.entity.MyRegion;
 import com.nongziwang.main.R;
 
 import android.annotation.SuppressLint;
@@ -13,16 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class MyArrayAdapter extends ArrayAdapter<String> {
+public class MyArrayAdapter extends ArrayAdapter<MyRegion> {
 	private LayoutInflater mInflater;
-	private List<String> list;
-	
-	public MyArrayAdapter(Context context, int resource, String[] objects) {
-		super(context, resource, objects);
-		mInflater=LayoutInflater.from(context);
-		this.list=Arrays.asList(objects);
-	}
-	public MyArrayAdapter(Context context, int resource, List<String> list) {
+	private List<MyRegion> list;
+
+	public MyArrayAdapter(Context context, int resource, List<MyRegion> list) {
 		super(context, resource, list);
 		mInflater=LayoutInflater.from(context);
 		this.list=list;
@@ -34,7 +27,7 @@ public class MyArrayAdapter extends ArrayAdapter<String> {
 				false);
 		TextView spinner_name = (TextView) view
 				.findViewById(R.id.spinner_name);
-		spinner_name.setText(list.get(position));
+		spinner_name.setText(list.get(position).getName());
 		return view;
 	}
 }

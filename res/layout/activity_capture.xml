@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <SurfaceView
+            android:id="@+id/surfaceview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </SurfaceView>
+
+        <com.zxing.android.view.ViewfinderView
+            android:id="@+id/viewfinderview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000" >
+        </com.zxing.android.view.ViewfinderView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_hight"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/top_bg" >
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="2dp"
+                android:src="@drawable/ic_menu_back" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="扫描二维码"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</FrameLayout>
