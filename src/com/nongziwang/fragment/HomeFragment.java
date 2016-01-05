@@ -2,12 +2,14 @@ package com.nongziwang.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.nongziwang.activity.SearchFragmentActivity;
 import com.nongziwang.activity.TypeSearchFragmentActivity;
+import com.nongziwang.adapter.MainListViewAdapter;
 import com.nongziwang.adapter.ViewPagerAdapter;
 import com.nongziwang.main.R;
+
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,16 +18,12 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 public class HomeFragment extends BaseFragment implements OnClickListener {
 	private View view;
@@ -86,6 +84,10 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 
 	@SuppressLint("ViewHolder")
 	private void initDatas() {
+		List<String> list=new ArrayList<String>();
+		for(int i=0;i<5;i++){
+			list.add(i+"");
+		}
 		layout_search.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -98,33 +100,8 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 
 			}
 		});
-		listView.setAdapter(new BaseAdapter() {
+		listView.setAdapter(new MainListViewAdapter(list, getActivity()));
 
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-
-				return mInflater.inflate(R.layout.listview_type_item, parent,
-						false);
-			}
-
-			@Override
-			public long getItemId(int position) {
-				// TODO Auto-generated method stub
-				return position;
-			}
-
-			@Override
-			public Object getItem(int position) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public int getCount() {
-				// TODO Auto-generated method stub
-				return 5;
-			}
-		});
 	}
 
 	public void setBanners() {

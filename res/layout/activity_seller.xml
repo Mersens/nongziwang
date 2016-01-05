@@ -266,6 +266,7 @@
                     android:background="@color/black2" />
 
                 <RelativeLayout
+                    android:id="@+id/layout_ckdp"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@color/white_color" >

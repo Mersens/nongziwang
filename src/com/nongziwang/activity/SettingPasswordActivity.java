@@ -4,6 +4,9 @@ import com.nongziwang.main.R;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -39,7 +42,30 @@ public class SettingPasswordActivity extends BaseActivity{
 				// TODO Auto-generated method stub
 				ShowToast("Íê³É");
 			}
-		});		
+		});	
+		
+		edt_psd_again.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				
+				String psd1=edt_psd.getText().toString();
+				String psd2=edt_psd_again.getText().toString();
+				if(!TextUtils.isEmpty(psd1) && !TextUtils.isEmpty(psd2)){
+					btn_finish.setEnabled(true);
+				}else{
+					btn_finish.setEnabled(false);
+				}
+			}
+		});
 	}
 
 }

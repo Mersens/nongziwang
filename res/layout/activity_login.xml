@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical" >
 
     <include
@@ -34,7 +36,6 @@
             android:textColorHint="@color/gray_text_color"
             android:textSize="@dimen/text_size" >
 
-            <requestFocus />
         </EditText>
 
         <EditText
@@ -60,7 +61,8 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="32dp"
-            android:background="@drawable/btn_bg"
+            android:background="@drawable/button_bg"
+            android:enabled="false"
             android:text="@string/login"
             android:textColor="@color/white_color"
             android:textSize="@dimen/common_text_size" />
@@ -119,8 +121,8 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:textSize="@dimen/text_size"
-                android:text="或" />
+                android:text="@string/tv_or"
+                android:textSize="@dimen/text_size" />
 
             <View
                 android:layout_width="0dp"

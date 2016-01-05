@@ -11,6 +11,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.GridView;
 public class MyShopsFragment extends BaseFragment{
 	private View view;
@@ -46,6 +48,20 @@ public class MyShopsFragment extends BaseFragment{
 		}
 		adapter=new MyShopsAdapter(list, getActivity());
 		gridView.setAdapter(adapter);
+		gridView.setOnScrollListener(new OnScrollListener() {
+			
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				System.out.println("scrollState---------->"+scrollState);
+				
+			}
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				System.out.println("firstVisibleItem==========>"+firstVisibleItem);
+
+			}
+		});
 	}
 	@Override
 	protected void lazyLoad() {

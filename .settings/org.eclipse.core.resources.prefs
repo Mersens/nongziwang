@@ -1,4 +1,12 @@
 eclipse.preferences.version=1
+encoding//src/cn/sharesdk/onekeyshare/FollowerListFakeActivity.java=UTF-8
+encoding//src/cn/sharesdk/onekeyshare/OnekeyShare.java=UTF-8
+encoding//src/cn/sharesdk/onekeyshare/PicViewer.java=UTF-8
+encoding//src/cn/sharesdk/onekeyshare/PlatformListFakeActivity.java=UTF-8
+encoding//src/cn/sharesdk/onekeyshare/Shake2Share.java=UTF-8
+encoding//src/cn/sharesdk/onekeyshare/theme/classic/FollowListPage.java=UTF-8
+encoding//src/cn/sharesdk/onekeyshare/theme/skyblue/EditPage.java=UTF-8
+encoding//src/cn/sharesdk/onekeyshare/theme/skyblue/FollowListPage.java=UTF-8
 encoding//src/com/nongziwang/activity/BaseActivity.java=UTF-8
 encoding//src/com/nongziwang/activity/CaptureActivity.java=UTF-8
 encoding//src/com/nongziwang/fragment/BaseFragment.java=UTF-8

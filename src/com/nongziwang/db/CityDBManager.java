@@ -12,7 +12,13 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
-
+/**
+ * 
+ * @title CityDBManager
+ * @description:加载数据库文件和关闭
+ * @author Mersens
+ * @time 2016年1月5日
+ */
 public class CityDBManager {
 	public static final String TAG="CityDBManager";
 	private final int BUFFER_SIZE = 1024;

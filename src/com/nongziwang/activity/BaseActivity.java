@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
+import cn.sharesdk.framework.ShareSDK;
 
 import com.nongziwang.application.CustomApplcation;
 import com.nongziwang.main.R;

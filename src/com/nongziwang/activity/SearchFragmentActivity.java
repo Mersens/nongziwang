@@ -3,11 +3,6 @@ package com.nongziwang.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nongziwang.adapter.HotSearchAdapter;
-import com.nongziwang.adapter.MyArrayAdapter;
-import com.nongziwang.adapter.SearchHistoryAdapter;
-import com.nongziwang.main.R;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -18,9 +13,11 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,12 +26,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
+
+import com.nongziwang.adapter.HotSearchAdapter;
+import com.nongziwang.adapter.SearchHistoryAdapter;
+import com.nongziwang.db.NongziDao;
+import com.nongziwang.db.NongziDaoImpl;
+import com.nongziwang.main.R;
 
 public class SearchFragmentActivity extends BaseActivity {
 	private GridView mGridView;
-	private List<String> list;
+	private List<String> hotsearchlist;
 	private Spinner spinner;
 	private static final String types[] = { "产品", "公司" };
 	private MyArrayAdapter adapter;
@@ -43,18 +44,25 @@ public class SearchFragmentActivity extends BaseActivity {
 	private ListView search_history_listView;
 	private EditText search_edit;
 	private ImageView img_clear;
+	private TextView tv_clear;
 	private Button btn_search;
+	private NongziDao dao;
+	private SearchHistoryAdapter shAdapter;
+	private List<String> search_history_list;
+	private boolean isFromHistory = false;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.layout_search);
 		mInflater = LayoutInflater.from(this);
+		dao = new NongziDaoImpl(this);
 		initViews();
 		initEvent();
 	}
 
 	private void initViews() {
+		tv_clear = (TextView) findViewById(R.id.tv_clear);
 		mGridView = (GridView) findViewById(R.id.gridView);
 		spinner = (Spinner) findViewById(R.id.spinner);
 		img_menu_back = (ImageView) findViewById(R.id.img_menu_back);
@@ -65,15 +73,23 @@ public class SearchFragmentActivity extends BaseActivity {
 	}
 
 	private void initEvent() {
-		list = new ArrayList<String>();
-		list.add("复合肥");
-		list.add("农机");
-		list.add("农膜");
-		list.add("硝铵酸");
-		mGridView.setAdapter(new HotSearchAdapter(list,
+		hotsearchlist = new ArrayList<String>();
+		hotsearchlist.add("复合肥");
+		hotsearchlist.add("农机");
+		hotsearchlist.add("农膜");
+		hotsearchlist.add("硝铵酸");
+		hotsearchlist.add("磷肥");
+		hotsearchlist.add("尿素");
+		mGridView.setAdapter(new HotSearchAdapter(hotsearchlist,
 				SearchFragmentActivity.this));
-		search_history_listView.setAdapter(new SearchHistoryAdapter(list,
-				SearchFragmentActivity.this));
+		search_history_list = dao.selectAllHistory("1");
+		if (search_history_list != null && search_history_list.size() > 0) {
+			shAdapter = new SearchHistoryAdapter(search_history_list,
+					SearchFragmentActivity.this);
+			search_history_listView.setAdapter(shAdapter);
+			tv_clear.setVisibility(View.VISIBLE);
+
+		}
 		adapter = new MyArrayAdapter(SearchFragmentActivity.this,
 				android.R.layout.simple_spinner_item, types);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -94,6 +110,7 @@ public class SearchFragmentActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				isFromHistory = false;
 				doSearch();
 			}
 		});
@@ -132,39 +149,78 @@ public class SearchFragmentActivity extends BaseActivity {
 			}
 		});
 
-		search_edit.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                	doSearch();
-                }
-                return false;
-            }
+		search_edit
+				.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+					@Override
+					public boolean onEditorAction(TextView v, int actionId,
+							KeyEvent event) {
+						if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+							isFromHistory = false;
+							doSearch();
+						}
+						return false;
+					}
 
-        });
+				});
+		mGridView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				ShowToast("点击了" + hotsearchlist.get(position));
+				search_edit.setText(hotsearchlist.get(position));
+				isFromHistory = false;
+				doSearch();
+
+			}
+		});
+
+		tv_clear.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dao.delAllHistory("1");
+				search_history_listView.setVisibility(View.GONE);
+				tv_clear.setVisibility(View.GONE);
+
+			}
+		});
+
+		search_history_listView
+				.setOnItemClickListener(new OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						search_edit.setText(search_history_list.get(position));
+						isFromHistory = true;
+						doSearch();
+					}
+				});
 	}
 
-	public void doSearch(){
+	public void doSearch() {
 		String edit_value = search_edit.getText().toString();
 		if (TextUtils.isEmpty(edit_value)) {
-			Toast.makeText(SearchFragmentActivity.this, "搜索内容不能为空！",
-					Toast.LENGTH_SHORT).show();
+			ShowToast("搜索内容不能为空！");
 			return;
 
+		}
+		if (!isFromHistory) {
+			dao.addSearchHistory("1", edit_value);
 		}
 		Intent intent = new Intent(SearchFragmentActivity.this,
 				SearchResultsFragmentActivity.class);
 		startActivity(intent);
-		overridePendingTransition(R.anim.bottom_open, 0);	
+		overridePendingTransition(R.anim.bottom_open, 0);
 		finish();
 	}
-	 class MyArrayAdapter extends ArrayAdapter<String>{
-		 private String str[];
+
+	class MyArrayAdapter extends ArrayAdapter<String> {
+		private String str[];
 
 		public MyArrayAdapter(Context context, int resource, String[] objects) {
 			super(context, resource, objects);
-			str=objects;
+			str = objects;
 		}
+
 		@SuppressLint("ViewHolder")
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -175,6 +231,6 @@ public class SearchFragmentActivity extends BaseActivity {
 			spinner_name.setText(str[position]);
 			return view;
 		}
-	 }
+	}
 
 }

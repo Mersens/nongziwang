@@ -45,7 +45,6 @@ public class CartAdapter extends BaseListAdapter<String> {
 			}
 		});
 		holder.btn_cart_reduce.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				int num = getNum(holder2.btn_cart_num_edit);
@@ -64,6 +63,7 @@ public class CartAdapter extends BaseListAdapter<String> {
 		String num = tvNum.getText().toString().trim();
 		return Integer.valueOf(num);
 	}
+	
 	
 	static class ViewHolder {
 		protected Button btn_cart_reduce;

@@ -2,13 +2,19 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="libs/universal-image-loader-1.9.2_sources.jar"/>
-	<classpathentry kind="lib" path="libs/mta-sdk-1.6.2.jar"/>
-	<classpathentry kind="lib" path="libs/open_sdk_r5509.jar"/>
-	<classpathentry kind="lib" path="libs/weiboSDKCore_3.1.2.jar"/>
-	<classpathentry kind="lib" path="libs/libammsdk.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/MobCommons.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/MobTools.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/ShareSDK-Core-2.6.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/ShareSDK-QQ-2.6.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/ShareSDK-QZone-2.6.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/ShareSDK-Renren-2.6.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/ShareSDK-TencentWeibo-2.6.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/ShareSDK-Wechat-2.6.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/ShareSDK-Wechat-Core-2.6.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/ShareSDK-Wechat-Favorite-2.6.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/ShareSDK-Wechat-Moments-2.6.6.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

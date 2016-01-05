@@ -4,7 +4,9 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.main.R;
+import com.nongziwang.utils.StringUtils;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
 import com.nongziwang.view.SpotsDialog;
 import com.sina.weibo.sdk.auth.AuthInfo;
@@ -38,7 +41,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private SsoHandler mSsoHandler;
 	private AuthInfo mAuthInfo;
 	private Oauth2AccessToken mAccessToken;
-
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -63,7 +66,13 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		image_qq = (ImageView) findViewById(R.id.image_qq);
 		image_weixin = (ImageView) findViewById(R.id.image_weixin);
 		image_sina = (ImageView) findViewById(R.id.image_sina);
-
+		setLeftWithTitleViewMethod(R.drawable.ic_menu_back, "用户登录",
+				new OnLeftClickListener() {
+					@Override
+					public void onClick() {
+						finishActivity();
+					}
+				});
 	}
 
 	private void initEvent() {
@@ -75,20 +84,36 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		btn_login.setOnClickListener(this);
 		tv_forget_psd.setOnClickListener(this);
 		tv_user_regist.setOnClickListener(this);
-		setLeftWithTitleViewMethod(R.drawable.ic_menu_back, "用户登录",
-				new OnLeftClickListener() {
-					@Override
-					public void onClick() {
-						finishActivity();
-					}
-				});
+
+		edt_psd.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				String name=edt_name.getText().toString();
+				String psd=edt_psd.getText().toString();
+				if(!TextUtils.isEmpty(psd) && !TextUtils.isEmpty(name)){
+					btn_login.setEnabled(true);
+				}else{
+					btn_login.setEnabled(false);
+				}
+			}
+		});
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_login:
-			spotsdialog.show();
+			//登录操作
+			doLogin();
 			break;
 		case R.id.tv_forget_psd:
 			intentAction(LoginActivity.this, ForgetPasswordActivity.class);
@@ -110,6 +135,44 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
+	
+	public void doLogin(){
+		String name=edt_name.getText().toString();
+		String psd=edt_psd.getText().toString();
+		if (TextUtils.isEmpty(name)) {
+			ShowToast("账号不能为空！");
+			return;
+		}
+		if (StringUtils.isContainsSpace(name)) {
+			ShowToast("账号包含非法字符！");
+			return;
+		}
+		if (TextUtils.isEmpty(psd)) {
+			ShowToast("密码不能为空！");
+			return;
+		}
+		if (StringUtils.isContainsSpace(psd)) {
+			ShowToast("密码包含非法字符！");
+			return;
+		}
+		if (!StringUtils.isLeanth(psd)) {
+			ShowToast("密码长度至少6位！");
+			return;
+		}
+		
+		if (!StringUtils.isLeanth(name)) {
+			ShowToast("账号长度至少6位！");
+			return;
+		}
+		if (!isNetworkAvailable()) {
+			ShowToast("没有可用网络，请检查网络设置!");
+			return;
+		}
+		spotsdialog.show();
+	}
+	
+	
+	
 	public void onClickQQLogin() {
 		if (!mTencent.isSessionValid()) {
 			mTencent.login(this, "all", loginListener);

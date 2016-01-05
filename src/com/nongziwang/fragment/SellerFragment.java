@@ -55,6 +55,7 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 	private RelativeLayout layout_setting;
 	private RelativeLayout layout_pro;
 	private RelativeLayout layout_rele_pro;
+	private RelativeLayout layout_ckdp;
 	public static final int FROM_XC=0X00;
 	public static final int FROM_CJ=0X01;
 	private String path;
@@ -67,6 +68,7 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 		return view;
 	}
 	private void initViews() {
+		layout_ckdp=(RelativeLayout) view.findViewById(R.id.layout_ckdp);
 		layout_rele_pro=(RelativeLayout) view.findViewById(R.id.layout_rele_pro);
 		layout_pro=(RelativeLayout) view.findViewById(R.id.layout_pro);
 		layout_myaccount=(RelativeLayout) view.findViewById(R.id.layout_myaccount);
@@ -84,6 +86,7 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 		layout_jycg = (RelativeLayout) view.findViewById(R.id.layout_jycg);
 	}
 	private void initEvent() {
+		layout_ckdp.setOnClickListener(this);
 		layout_rele_pro.setOnClickListener(this);
 		layout_pro.setOnClickListener(this);
 		layout_myaccount.setOnClickListener(this);
@@ -127,6 +130,9 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 			break;
 		case R.id.seller_user_head:
 			showAvatarPop();
+			break;
+		case R.id.layout_ckdp:
+			intentAction(getActivity(), MyShopsFragmentActivity.class);
 			break;
 		case R.id.tv_login:
 			intentAction(getActivity(), LoginActivity.class);
