@@ -73,7 +73,7 @@
                 android:id="@+id/layout_ymdcp"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:background="@color/white_color" >
+                android:background="@drawable/pressed_bg" >
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
@@ -126,7 +126,7 @@
                     android:id="@+id/layout_cart"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@color/white_color" >
+                    android:background="@drawable/pressed_bg"  >
 
                     <ImageView
                         android:id="@+id/imageView3"
@@ -158,7 +158,7 @@
                     android:id="@+id/layout_fbxjd"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@color/white_color" >
+                   android:background="@drawable/pressed_bg"  >
 
                     <ImageView
                         android:id="@+id/imageView4"
@@ -189,7 +189,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@color/white_color" >
+                    android:background="@drawable/pressed_bg"  >
 
                     <ImageView
                         android:id="@+id/image1"
@@ -221,7 +221,7 @@
                     android:id="@+id/layout_mycollection"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@color/white_color" >
+                    android:background="@drawable/pressed_bg"  >
 
                     <ImageView
                         android:id="@+id/image3"
@@ -253,7 +253,7 @@
                     android:id="@+id/layout_myfootprint"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@color/white_color" >
+                    android:background="@drawable/pressed_bg"  >
 
                     <ImageView
                         android:id="@+id/image4"
@@ -285,7 +285,7 @@
                      android:id="@+id/layout_myaddress"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@color/white_color" >
+                    android:background="@drawable/pressed_bg"  >
 
                     <ImageView
                         android:id="@+id/image5"
@@ -317,7 +317,7 @@
                     android:id="@+id/layout_myaccount"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@color/white_color" >
+                    android:background="@drawable/pressed_bg"  >
 
                     <ImageView
                         android:id="@+id/image7"
@@ -349,7 +349,7 @@
                     android:id="@+id/layout_setting"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@color/white_color" >
+                    android:background="@drawable/pressed_bg"  >
 
                     <ImageView
                         android:id="@+id/image8"

@@ -94,7 +94,6 @@ public class InfoFragment extends BaseFragment implements OnPageChangeListener {
 		viewPager.setAdapter(adapter);
 		viewPager.setCurrentItem(0);
 		setTab(0);
-		// viewPager.setOffscreenPageLimit(0);
 	}
 
 	private void initEvent() {

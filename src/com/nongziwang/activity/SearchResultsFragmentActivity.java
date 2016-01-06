@@ -1,6 +1,4 @@
 package com.nongziwang.activity;
-
-import com.nongziwang.adapter.MyArrayAdapter;
 import com.nongziwang.fragment.BrandFragment;
 import com.nongziwang.fragment.NetcontentFragment;
 import com.nongziwang.fragment.SearchCompanyFragment;
@@ -93,7 +91,6 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 					layout_company.setVisibility(View.VISIBLE);
 					addFragment(Style.COMPANY, params);
 				}
-				
 			}
 
 			@Override
@@ -104,7 +101,6 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 	}
 
 	private void initDatas() {
-
 		adapter = new MyArrayAdapter(SearchResultsFragmentActivity.this,
 				android.R.layout.simple_spinner_item, types);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

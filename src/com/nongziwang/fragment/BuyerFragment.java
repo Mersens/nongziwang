@@ -56,7 +56,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	private RelativeLayout layout_myaccount;
 	public static final int FROM_XC=0X00;
 	public static final int FROM_CJ=0X01;
-	public 	String path;
+	public String path;
 	@SuppressLint("InflateParams")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

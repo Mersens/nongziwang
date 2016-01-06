@@ -26,7 +26,7 @@ public class IndustryInfoDetialActivity extends BaseActivity{
 	}
 
 	private void initViews() {
-		setDefaultViewMethod(R.drawable.ic_menu_back, "行业资讯", R.drawable.icon_fenxiang, new OnLeftClickListener() {
+		setDefaultViewMethod(R.drawable.ic_menu_back, "行业资讯", R.drawable.icon_share_light, new OnLeftClickListener() {
 			
 			@Override
 			public void onClick() {

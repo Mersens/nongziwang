@@ -27,4 +27,7 @@ public interface NongziDao {
 
 	// 清除查询历史记录
 	public void delAllHistory(String userid);
+	
+	public boolean findHistoryIsExist(String name);
+
 }

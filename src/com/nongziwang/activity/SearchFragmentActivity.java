@@ -204,7 +204,9 @@ public class SearchFragmentActivity extends BaseActivity {
 
 		}
 		if (!isFromHistory) {
-			dao.addSearchHistory("1", edit_value);
+			if(!dao.findHistoryIsExist(edit_value)){
+				dao.addSearchHistory("1", edit_value);
+			}
 		}
 		Intent intent = new Intent(SearchFragmentActivity.this,
 				SearchResultsFragmentActivity.class);

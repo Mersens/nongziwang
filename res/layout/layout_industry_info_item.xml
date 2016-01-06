@@ -7,25 +7,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_color" >
+        android:background="@drawable/pressed_bg" >
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/info_image"
             android:layout_width="68dp"
             android:layout_height="68dp"
             android:layout_margin="4dp"
             android:scaleType="centerInside"
-            android:src="@drawable/image_yumi" />
+            android:src="@drawable/image_yumi"
+             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -36,7 +38,7 @@
                 android:text="全国玉米市场行情分析" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -51,13 +53,12 @@
                 android:layout_weight="1" >
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="4dp"
-                    android:textColor="@color/base_color_text_gray"
                     android:textSize="@dimen/text_small_size"
                     android:text="2015-12-16" />
 

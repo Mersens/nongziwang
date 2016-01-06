@@ -1,5 +1,9 @@
 package com.nongziwang.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,18 +28,23 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 	private TextView tv_shangpin, tv_dianpu;
 	private View view_shangpin, view_dianpu;
 	private RelativeLayout layout_more;
+	private LinearLayout layout_top;
+	public static final String ACTION_SHOW="show";
+	public static final String ACTION_HIDE="hide";
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_myshops_main);
+		registerBoradcastReceiver();
 		initViews();
 		initEvent();
 		addFragment(null, false);
 	}
 
 	private void initViews() {
+		layout_top=(LinearLayout) findViewById(R.id.layout_top);
 		img_barcode=(ImageView) findViewById(R.id.img_barcode);
 		layout_more=(RelativeLayout) findViewById(R.id.layout_more);
 		layout_dianpu = (LinearLayout) findViewById(R.id.layout_dianpu);
@@ -99,7 +108,6 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 			intentAction(MyShopsFragmentActivity.this, CaptureActivity.class);
 			break;
 		}
-		
 	}
 
 	public void setTabs(int i) {
@@ -132,8 +140,33 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 		view_shangpin.setVisibility(View.GONE);
 		view_dianpu.setVisibility(View.GONE);
 	}
-	
-	
+	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){  
+        @Override  
+        public void onReceive(Context context, Intent intent) {  
+            String action = intent.getAction();
+            if(action.equals(ACTION_SHOW)){  
+            	layout_top.setVisibility(View.VISIBLE);
+            } else if(action.equals(ACTION_HIDE)){  
+            	layout_top.setVisibility(View.GONE);
+            }
+            System.out.println("action----------"+action);
+        }  
+
+    }; 
+    public void registerBoradcastReceiver(){  
+        IntentFilter myIntentFilter = new IntentFilter();  
+        myIntentFilter.addAction(ACTION_SHOW);  
+        myIntentFilter.addAction(ACTION_HIDE);    
+        registerReceiver(mBroadcastReceiver, myIntentFilter);  
+    } 
+    
+    @Override
+    protected void onDestroy() {
+    	// TODO Auto-generated method stub
+    	super.onDestroy();
+    	unregisterReceiver(mBroadcastReceiver);
+    }
+    
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {

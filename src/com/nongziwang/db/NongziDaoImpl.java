@@ -2,6 +2,7 @@ package com.nongziwang.db;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.nongziwang.entity.MyRegion;
 
 import android.content.Context;
@@ -113,6 +114,19 @@ public class NongziDaoImpl implements NongziDao{
 		db.execSQL("delete from search_historytb where userid=?",
 				 new Object[] {userid});
 		db.close();
+	}
+
+	@Override
+	public boolean findHistoryIsExist(String name) {
+		boolean flag=false;
+		SQLiteDatabase db = helper.getWritableDatabase();
+		Cursor cursor = db.rawQuery("select * from search_historytb where name=? ",new String[]{name});
+		while (cursor.moveToNext()) {
+			flag=true;
+		}
+		cursor.close();
+		db.close();
+		return flag;
 	}
 
 

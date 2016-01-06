@@ -1,5 +1,6 @@
 package com.nongziwang.activity;
 
+import org.apache.http.Header;
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -15,8 +16,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.main.R;
+import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.StringUtils;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
 import com.nongziwang.view.SpotsDialog;
@@ -137,6 +144,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 	
 	public void doLogin(){
+
 		String name=edt_name.getText().toString();
 		String psd=edt_psd.getText().toString();
 		if (TextUtils.isEmpty(name)) {
@@ -169,6 +177,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			return;
 		}
 		spotsdialog.show();
+
+		
 	}
 	
 	
