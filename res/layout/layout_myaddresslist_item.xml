@@ -25,7 +25,7 @@
             android:layout_weight="1" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -36,12 +36,12 @@
                 android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/textView1"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="4dp"
+                android:layout_alignParentLeft="true"
                 android:singleLine="true"
                 android:text="河南郑州市金水区"
                 android:textColor="@color/base_color_text_black"
@@ -54,7 +54,7 @@
             android:layout_weight="1" >
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tv_tel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"

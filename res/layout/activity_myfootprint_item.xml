@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" >
             <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/img_pro"
             android:layout_width="78dp"
             android:layout_height="78dp"
             android:layout_margin="4dp"
@@ -23,7 +23,7 @@
             android:src="@drawable/android" />
 
             <CheckBox
-                android:id="@+id/btn_check_all"
+                android:id="@+id/checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/collection_radio_check"
@@ -44,7 +44,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/tv_company_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -54,7 +54,7 @@
                 android:textSize="@dimen/text_size" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
@@ -65,7 +65,7 @@
                 android:textSize="@dimen/text_mid_size" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tv_address"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"

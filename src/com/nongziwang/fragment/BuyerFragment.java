@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -56,6 +57,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	private RelativeLayout layout_myaccount;
 	public static final int FROM_XC=0X00;
 	public static final int FROM_CJ=0X01;
+	public static final String TAG="BuyerFragment";
 	public String path;
 	@SuppressLint("InflateParams")
 	@Override
@@ -194,14 +196,14 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			if (resultCode == getActivity().RESULT_OK) {
 				if (!Environment.getExternalStorageState().equals(
 						Environment.MEDIA_MOUNTED)) {
-					ShowToast("SD不可用");
+					Log.e(TAG, "SD不可用");
 					return;
 				}
 				uri = data.getData();
 				startImageAction(uri, 200, 200,
 						FROM_CJ, true);
 			} else {
-				ShowToast("照片获取失败");
+				Log.e(TAG, "照片获取失败");
 			}
 			break;
 			case FROM_CJ:

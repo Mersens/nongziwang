@@ -50,7 +50,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:background="@drawable/btn_bg"
+            android:background="@drawable/button_bg"
+            android:enabled="true"
             android:textColor="@color/white_color"
             android:textSize="@dimen/text_mid_size" 
             android:text="修改" />
@@ -103,7 +104,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:background="@drawable/btn_bg"
+            android:background="@drawable/button_bg"
+            android:enabled="true"
             android:textColor="@color/white_color"
             android:textSize="@dimen/text_mid_size" 
             android:text="修改" />

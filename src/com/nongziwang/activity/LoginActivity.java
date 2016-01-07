@@ -143,8 +143,14 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	}
 
 	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		HttpUtils.cancelRequest(this);
+	}
+	
 	public void doLogin(){
-
 		String name=edt_name.getText().toString();
 		String psd=edt_psd.getText().toString();
 		if (TextUtils.isEmpty(name)) {

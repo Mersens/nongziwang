@@ -6,40 +6,89 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+/**
+ * 
+ * @title HttpUtils
+ * @description:AsyncHttpClient工具类，执行post,get请求
+ * @author Mersens
+ * @time 2016年1月6日
+ */
 public class HttpUtils {
-	private static AsyncHttpClient client = new AsyncHttpClient(); 
+	private static AsyncHttpClient client = new AsyncHttpClient();
 	static {
-		client.setTimeout(11000); 
+		client.setTimeout(11000); // 设置请求超时
 	}
 
-	public static void doGet(String urlString, AsyncHttpResponseHandler res) 
-	{
-		client.get(urlString, res);
+	/**
+	 * 
+	 * @Title: doGet
+	 * @Description: 不带参数的get请求
+	 * @author Mersens
+	 * @param url
+	 * @param res
+	 * @throws
+	 */
+	public static void doGet(String url, AsyncHttpResponseHandler res) {
+		client.get(url, res);
 	}
 
-	public static void doGet(String urlString, RequestParams params,
-			AsyncHttpResponseHandler res) 
-	{
-		client.get(urlString, params, res);
+	/**
+	 * 
+	 * @Title: doGet
+	 * @Description: 带参数的get请求
+	 * @author Mersens
+	 * @param url
+	 * @param params
+	 * @param res
+	 * @throws
+	 */
+	public static void doGet(String url, RequestParams params,
+			AsyncHttpResponseHandler res) {
+		client.get(url, params, res);
 	}
 
-	
-	public static void doPost(String urlString, AsyncHttpResponseHandler res) 
-	{
-		client.post(urlString, res);
+	/**
+	 * 
+	 * @Title: doPost
+	 * @Description: 不带参数的post请求
+	 * @author Mersens
+	 * @param url
+	 * @param params
+	 * @param res
+	 * @throws
+	 */
+	public static void doPost(String url, AsyncHttpResponseHandler res) {
+		client.post(url, res);
 	}
 
-	public static void doPost(String urlString, RequestParams params,
-			AsyncHttpResponseHandler res) 
-	{
-		client.post(urlString, params, res);
+	/**
+	 * 
+	 * @Title: doPost
+	 * @Description: 带参数的post请求
+	 * @author Mersens
+	 * @param url
+	 * @param params
+	 * @param res
+	 * @throws
+	 */
+	public static void doPost(String url, RequestParams params,
+			AsyncHttpResponseHandler res) {
+		client.post(url, params, res);
 	}
-	
+
+	/**
+	 * 
+	 * @Title: cancelRequest
+	 * @Description: 取消请求
+	 * @author Mersens
+	 * @param context
+	 * @throws
+	 */
+	public static void cancelRequest(Context context) {
+		client.cancelRequests(context, true);
+	}
+
 	public static AsyncHttpClient getClient() {
 		return client;
-	}
-	
-	public static void cancelRequest(Context context){
-		client.cancelRequests(context, true);
 	}
 }

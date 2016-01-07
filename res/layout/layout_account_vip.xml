@@ -43,7 +43,7 @@
                 android:textSize="@dimen/text_size" />
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/img_user_head"
                 android:layout_width="86dp"
                 android:layout_height="86dp"
                 android:layout_margin="4dp"
@@ -66,7 +66,7 @@
                 android:textSize="@dimen/text_size" />
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/edt_name"
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
@@ -119,7 +119,7 @@
                     android:textSize="@dimen/text_mid_size" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/tv_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -147,7 +147,7 @@
                 android:textSize="@dimen/text_size" />
 
             <EditText
-                android:id="@+id/editText11"
+                android:id="@+id/edt_qq"
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
@@ -161,13 +161,14 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_ok"
             android:layout_width="match_parent"
             android:layout_height="@dimen/actionbar_hight"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="12dp"
-            android:background="@drawable/btn_bg"
+            android:background="@drawable/button_bg"
+            android:enabled="true"
             android:text="确定"
             android:textColor="@color/white_color"
             android:textSize="@dimen/common_text_size" />

@@ -265,7 +265,6 @@ public class ReleaseProductTypeFragment extends BaseFragment {
 		popupwindow1.showAtLocation(v.findViewById(R.id.layout_main),
 				Gravity.RIGHT | Gravity.TOP, 0, topHeight);
 		popupwindow1.setOnDismissListener(new OnDismissListener() {
-
 			@Override
 			public void onDismiss() {
 				popupwindow1 = null;

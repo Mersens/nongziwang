@@ -22,12 +22,29 @@ public class MyAddressListAdapter extends BaseListAdapter<String> {
 
 	@Override
 	public View getContentView(int position, View convertView, ViewGroup parent) {
-		View view=mInflater.inflate(R.layout.layout_myaddresslist_item, parent,false);
-		TextView tv_editor=(TextView) view.findViewById(R.id.tv_editor);
-		tv_editor.setOnClickListener(new MyEditorOnClick(position));
-		return view;
+		ViewHolder holder=null;
+		if(convertView==null){
+			holder=new ViewHolder();
+			convertView=mInflater.inflate(R.layout.layout_myaddresslist_item, parent,false);
+			holder.tv_address=(TextView) convertView.findViewById(R.id.tv_address);
+			holder.tv_name=(TextView) convertView.findViewById(R.id.tv_name);
+			holder.tv_tel=(TextView) convertView.findViewById(R.id.tv_tel);
+			holder.tv_editor=(TextView) convertView.findViewById(R.id.tv_editor);
+			convertView.setTag(holder);
+		}else{
+			holder=(ViewHolder) convertView.getTag();
+		}
+		holder.tv_editor.setOnClickListener(new MyEditorOnClick(position));
+		return convertView;
 	}
 
+	static class ViewHolder{
+		private TextView tv_name;
+		private TextView tv_tel;
+		private TextView tv_address;
+		private TextView tv_editor;
+	}
+	
 	class MyEditorOnClick implements OnClickListener{
 		private int pos;
 

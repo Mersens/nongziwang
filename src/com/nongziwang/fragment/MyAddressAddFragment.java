@@ -10,24 +10,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+
 import com.nongziwang.activity.MyAddressFragmentActivity;
 import com.nongziwang.adapter.MyArrayAdapter;
+import com.nongziwang.db.NongziDao;
+import com.nongziwang.db.NongziDaoImpl;
+import com.nongziwang.entity.MyRegion;
 import com.nongziwang.main.R;
 
 public class MyAddressAddFragment extends BaseFragment {
 	private View view;
 	private RelativeLayout layout_ok;
-	private MyArrayAdapter adapter;
+	private MyArrayAdapter provinces_adapter,citys_adapter;
 	private Spinner spinner_province,spinner_city;
-	private List<String>list;
+	private List<MyRegion> provinces;
+	private List<MyRegion> citys;
+	private NongziDao dao;
 	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view=inflater.inflate(R.layout.activity_myaddress_add,container,false);
+		dao=new NongziDaoImpl(getActivity());
 		initViews();
 		initEvent();
 		return view;
@@ -38,18 +47,15 @@ public class MyAddressAddFragment extends BaseFragment {
 		layout_ok=(RelativeLayout) view.findViewById(R.id.layout_ok);
 		spinner_province=(Spinner) view.findViewById(R.id.spinner_province);
 		spinner_city=(Spinner) view.findViewById(R.id.spinner_city);
-		list = new ArrayList<String>();
-		list.add("请选择");
-		list.add("北京");
-		list.add("上海");
-		list.add("深圳");
-		list.add("广州");
-		list.add("南京");
-		list.add("郑州");
+
+
 	}
 
 
 	private void initEvent() {
+		provinces=dao.findAllProvinces();
+		citys = new ArrayList<MyRegion>();
+		citys.add(new MyRegion("1", "请选择", ""));
 		layout_ok.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -58,14 +64,38 @@ public class MyAddressAddFragment extends BaseFragment {
                 getActivity().sendBroadcast(mIntent);  				
 			}
 		});
-/*		adapter = new MyArrayAdapter(getActivity(),
-				android.R.layout.simple_spinner_item, list);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_province.setAdapter(adapter);
+		provinces_adapter = new MyArrayAdapter(getActivity(),
+				android.R.layout.simple_spinner_item, provinces);
+		citys_adapter = new MyArrayAdapter(getActivity(),
+				android.R.layout.simple_spinner_item, citys);
+		citys_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		provinces_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner_province.setAdapter(provinces_adapter);
 		spinner_province.setSelection(0, true);
-		spinner_city.setAdapter(adapter);
-		spinner_city.setSelection(0, true);*/
+		spinner_city.setAdapter(citys_adapter);
+		spinner_city.setSelection(0, true);
 		
+		
+		spinner_province.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				if(position!=0){
+					String parintid=provinces.get(position).getId();
+					citys.clear();
+					citys=dao.findAllCitysByProvincesId(parintid);
+					citys_adapter.clear();
+					citys_adapter.addAll(citys);
+					citys_adapter.notifyDataSetChanged();
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 	}
 

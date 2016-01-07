@@ -119,34 +119,7 @@ public abstract class BaseFragment extends Fragment {
 		mHeadView.setLeftViewMethod( leftsrcid, onleftclicklistener);
 	}
 	
-	
-	/**
-	 * @author Mersens
-	 * Toast显示以字符串作为显示内容
-	 * @param text
-	 */
-	public void ShowToast(String text) {
-		if (mToast == null) {
-			mToast = Toast.makeText(activity, text, Toast.LENGTH_SHORT);
-		} else {
-			mToast.setText(text);
-		}
-		mToast.show();
-	}
-	
-	/**
-	 * @author Mersens
-	 * Toast显示参数为资源id作为显示内容
-	 * @param srcid
-	 */
-	public void ShowToast(int srcid) {
-		if (mToast == null) {
-			mToast = Toast.makeText(activity, srcid, Toast.LENGTH_SHORT);
-		} else {
-			mToast.setText(srcid);
-		}
-		mToast.show();
-	}
+
 	
 	
 	/**

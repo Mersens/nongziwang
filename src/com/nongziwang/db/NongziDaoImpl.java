@@ -71,7 +71,7 @@ public class NongziDaoImpl implements NongziDao{
 				context);
 		dbm.openDatabase();
 		SQLiteDatabase db = dbm.getDatabase();
-		Cursor cursor = db.rawQuery("select * from areatb  where cityid=?", new String[]{cityid});
+		Cursor cursor = db.rawQuery("select * from area  where cityid=?", new String[]{cityid});
 		while (cursor.moveToNext()) {
 			MyRegion bean=new MyRegion();
 			bean.setId(cursor.getString(cursor.getColumnIndex("areaid")));

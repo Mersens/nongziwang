@@ -25,11 +25,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -59,6 +59,7 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 	public static final int FROM_XC=0X00;
 	public static final int FROM_CJ=0X01;
 	private String path;
+	public static final String TAG="SellerFragment";
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -102,7 +103,6 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 		layout_dfk.setOnClickListener(this);
 		layout_yfh.setOnClickListener(this);
 		layout_jycg.setOnClickListener(this);
-
 	}
 
 	public static Fragment getInstance(String params) {
@@ -197,14 +197,14 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 			if (resultCode == getActivity().RESULT_OK) {
 				if (!Environment.getExternalStorageState().equals(
 						Environment.MEDIA_MOUNTED)) {
-					ShowToast("SD不可用");
+					Log.e(TAG, "SD不可用");
 					return;
 				}
 				uri = data.getData();
 				startImageAction(uri, 200, 200,
 						FROM_CJ, true);
 			} else {
-				ShowToast("照片获取失败");
+				Log.e(TAG, "照片获取失败");
 			}
 			break;
 			case FROM_CJ:

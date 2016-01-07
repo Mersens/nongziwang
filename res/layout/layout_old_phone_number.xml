@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -41,7 +43,8 @@
                 android:layout_height="32dp"
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_bg"
+                android:background="@drawable/button_bg"
+                android:enabled="true"
                 android:gravity="center"
                 android:text="@string/hqyzm"
                 android:textColor="@color/white_color"
@@ -82,7 +85,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/actionbar_hight"
         android:layout_margin="32dp"
-        android:background="@drawable/btn_bg"
+        android:background="@drawable/button_bg"
+        android:enabled="true"
         android:text="提交"
         android:textColor="@color/white_color"
         android:textSize="@dimen/common_text_size" />

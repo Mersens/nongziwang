@@ -3,16 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-<View
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:background="@color/black2" />
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:divider="@null"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:divider="@null" >
     </ListView>
 
     <RelativeLayout

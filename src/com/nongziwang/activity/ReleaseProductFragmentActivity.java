@@ -43,7 +43,6 @@ public class ReleaseProductFragmentActivity extends BaseActivity {
 	}
 
 	private void initEvent() {
-		// TODO Auto-generated method stub
 
 	}
 

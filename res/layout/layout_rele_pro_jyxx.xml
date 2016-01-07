@@ -283,7 +283,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/actionbar_hight"
             android:layout_margin="32dp"
-            android:background="@drawable/btn_bg"
+            android:background="@drawable/button_bg"
+            android:enabled="true"
             android:text="完成"
             android:textColor="@color/white_color"
             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
