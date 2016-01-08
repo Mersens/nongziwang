@@ -148,13 +148,13 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
 				
 			}
 		});
 		
 	}
 
+	
 	
 	private void showPop(int viewID) {
 		DateFormat df = new SimpleDateFormat("yyyyMMdd");

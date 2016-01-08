@@ -1,6 +1,5 @@
 package com.nongziwang.activity;
 
-import org.apache.http.Header;
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -15,12 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;

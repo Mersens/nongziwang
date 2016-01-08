@@ -18,7 +18,13 @@ import com.nongziwang.view.HeadView;
 import com.nongziwang.view.HeadView.HeaderStyle;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
 import com.nongziwang.view.HeadView.OnRightClickListener;
-
+/**
+ * 
+ * @title BaseActivity
+ * @description:BaseActivity
+ * @author Mersens
+ * @time 2016年1月8日
+ */
 public class BaseActivity extends FragmentActivity{
 	private int mScreenWidth;
 	private int mScreenHeight;
@@ -197,6 +203,7 @@ public class BaseActivity extends FragmentActivity{
 		overridePendingTransition(R.anim.right_in,
 				R.anim.right_out);
 	}
+	
 	
 	public  void setHeadViewBg(int resid){
 		mHeadView.setHeadViewBackground(resid);

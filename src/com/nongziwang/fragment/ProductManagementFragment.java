@@ -35,6 +35,7 @@ public class ProductManagementFragment extends BaseFragment {
 		list.add("a");
 		list.add("b");
 		list.add("c");
+		list.add("d");
 		listView.setAdapter(new MyProductAdapter(list, getActivity()));
 
 	}

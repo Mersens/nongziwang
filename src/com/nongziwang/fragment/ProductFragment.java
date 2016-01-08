@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.nongziwang.main.R;
-import com.nongziwang.view.HeadView.OnLeftClickListener;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,12 +42,25 @@ public class ProductFragment extends BaseFragment {
 	}
 
 	private void initViews() {
-		
-		setOnlyTileViewMethod(view,"找产品");
+
+		setOnlyTileViewMethod(view, "找产品");
 		setHeadViewBg(R.color.actionbar_blue_color);
 		setHeadViewTitleColor(getResources().getColor(R.color.white_color));
 		listView = (ExpandableListView) view.findViewById(R.id.listView);
 		listView.setGroupIndicator(null);
+		listView.setOnGroupExpandListener(new OnGroupExpandListener() {
+
+			@Override
+			public void onGroupExpand(int groupPosition) {
+				for (int i = 0, count = listView.getExpandableListAdapter()
+						.getGroupCount(); i < count; i++) {
+					if (groupPosition != i) {
+						// 关闭其他分组
+						listView.collapseGroup(i);
+					}
+				}
+			}
+		});
 	}
 
 	private void initEvent() {
@@ -219,6 +232,7 @@ public class ProductFragment extends BaseFragment {
 	class ChildHolder {
 		TextView child_name;
 	}
+
 
 	@Override
 	protected void lazyLoad() {

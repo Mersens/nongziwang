@@ -102,7 +102,6 @@
         <activity android:name="com.nongziwang.activity.ReleaseProductFragmentActivity" />
         <activity android:name="com.nongziwang.activity.MyShopsFragmentActivity" />
         <activity android:name="com.nongziwang.activity.CaptureActivity" />
-
         <service
             android:name="com.nongziwang.service.RegisterCodeTimerService"
             android:enabled="true" >

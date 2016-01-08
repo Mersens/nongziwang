@@ -5,8 +5,10 @@ import org.json.JSONObject;
 
 /**
  * 
- * @author
- *  Mersens 解析Json工具类
+ * @title JsonUtils
+ * @description:解析Json工具类
+ * @author Mersens
+ * @time 2016年1月8日
  */
 public class JsonUtils {
 	/**

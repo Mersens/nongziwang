@@ -40,7 +40,6 @@ public class CommonOrderAdapter extends BaseListAdapter<String>{
 		}
 		holder.tv_logistics.setOnClickListener(new MyOnClickListener(position));
 		holder.tv_del.setOnClickListener(new MyOnClickListener(position));
-		convertView=mInflater.inflate(R.layout.layout_common_order_item, parent,false);
 		return convertView;
 	}
 

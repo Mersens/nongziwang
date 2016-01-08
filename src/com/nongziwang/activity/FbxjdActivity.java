@@ -22,7 +22,6 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
-import android.widget.HorizontalScrollView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -49,7 +48,6 @@ public class FbxjdActivity extends BaseActivity {
 	public static final String ACTION_CANCEL = "cancel";
 	private DatePickerPopWindow popWindow = null;
 	private String[] types = { "种子", "农药", "化肥", "农机", "农膜" };
-	private HorizontalScrollView scrollView_type;
 	private RadioGroup radiogroup_type;
 	private NongziDao dao;
 
@@ -81,7 +79,6 @@ public class FbxjdActivity extends BaseActivity {
 
 	private void initViews() {
 		radiogroup_type = (RadioGroup) findViewById(R.id.radiogroup_type);
-		scrollView_type = (HorizontalScrollView) findViewById(R.id.scrollView_type);
 		edt_time = (EditText) findViewById(R.id.edt_time);
 		spinner_dw = (Spinner) findViewById(R.id.spinner_dw);
 		spinner_gys_province = (Spinner) findViewById(R.id.spinner_gys_province);

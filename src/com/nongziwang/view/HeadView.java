@@ -12,6 +12,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * 
+ * @title HeadView
+ * @description:自定义HeadView，显示左侧按钮，中间title和右侧按钮
+ * @author Mersens
+ * @time 2016年1月8日
+ */
 @SuppressLint("InflateParams")
 public class HeadView extends LinearLayout {
 	private LinearLayout header_leftview_container;
@@ -151,7 +158,10 @@ public class HeadView extends LinearLayout {
 		right_button = (ImageView) right_button_view
 				.findViewById(R.id.right_imageView);
 		// 初始化右侧按钮，并添加到右侧父布局内
-		header_layout_rightview_container.addView(right_button_view);
+		MarginLayoutParams lp = new MarginLayoutParams(new LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		lp.rightMargin=8;
+		header_layout_rightview_container.addView(right_button_view,lp);
 		left_button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

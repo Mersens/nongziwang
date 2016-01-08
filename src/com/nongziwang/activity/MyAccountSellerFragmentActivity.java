@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
-
-import com.nongziwang.fragment.MyAccountBuyerFeagment;
 import com.nongziwang.fragment.MyAccountSellerFeagment;
 import com.nongziwang.main.R;
 import com.nongziwang.view.HeadView.OnLeftClickListener;

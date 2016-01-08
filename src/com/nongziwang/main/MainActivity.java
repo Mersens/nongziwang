@@ -17,7 +17,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
+/**
+ * 
+ * @title MainActivity
+ * @description:TODO
+ * @author Mersens
+ * @time 2016Äê1ÔÂ8ÈÕ
+ */
 public class MainActivity extends BaseActivity implements OnClickListener {
 	private Fragment f1, f2, f3, f4;
 	private Fragment[] fragments;

@@ -9,8 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
-import android.widget.FrameLayout;
-
 import com.nongziwang.fragment.ReleaseProductJyxxFragment;
 import com.nongziwang.fragment.ReleaseProductMsgFragment;
 import com.nongziwang.fragment.ReleaseProductTypeFragment;
