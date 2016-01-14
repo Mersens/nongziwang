@@ -59,7 +59,6 @@
             android:layout_height="48dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/button_bg"
-            android:enabled="false"
             android:text="@string/finish"
             android:textColor="@color/white_color"
             android:textSize="@dimen/common_text_size" />

@@ -71,15 +71,13 @@ public abstract class DialogBase extends Dialog {
 		this.onBuilding();
 		// 设置标题和消息
 		LinearLayout dialog_top = (LinearLayout)findViewById(R.id.dialog_top);
-		View title_red_line = (View)findViewById(R.id.title_red_line);
 		btn_between_view=(View)findViewById(R.id.btn_between_view);
 		//是否有title
 		if(hasTitle){
 			dialog_top.setVisibility(View.VISIBLE);
-			title_red_line.setVisibility(View.VISIBLE);
 		}else{
 			dialog_top.setVisibility(View.GONE);
-			title_red_line.setVisibility(View.GONE);
+
 		}
 		TextView titleTextView = (TextView)findViewById(R.id.dialog_title);
 		titleTextView.setText(this.getTitle());

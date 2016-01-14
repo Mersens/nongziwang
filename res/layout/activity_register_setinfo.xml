@@ -76,7 +76,7 @@
             android:layout_marginTop="32dp"
             android:background="@drawable/button_bg"
             android:text="@string/finish"
-            android:enabled="false"
+            android:enabled="true"
             android:textColor="@color/white_color"
             android:textSize="@dimen/common_text_size" />
     </LinearLayout>

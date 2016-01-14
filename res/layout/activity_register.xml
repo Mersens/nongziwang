@@ -41,13 +41,13 @@
             <Button
                 android:id="@+id/btn_getcode"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
+                android:layout_height="34dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="4dp"
                 android:background="@drawable/button_bg"
                 android:gravity="center"
-                android:enabled="false"
+                android:enabled="true"
                 android:text="@string/hqyzm"
                 android:textColor="@color/white_color"
                 android:textSize="@dimen/text_small_size" />
@@ -81,7 +81,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/button_bg"
-            android:enabled="false"
+            android:enabled="true"
             android:text="@string/next"
             android:textColor="@color/white_color"
             android:textSize="@dimen/common_text_size" />

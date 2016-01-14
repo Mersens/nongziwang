@@ -1,6 +1,7 @@
 package com.nongziwang.activity;
 
 import com.nongziwang.main.R;
+import com.nongziwang.utils.StringUtils;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
 
 import android.os.Bundle;
@@ -44,7 +45,7 @@ public class RegisterSetInfoActivity extends BaseActivity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ShowToast("完成");
+				doFinish();
 			}
 		});
 		edt_psd_again.addTextChangedListener(new TextWatcher() {
@@ -70,4 +71,24 @@ public class RegisterSetInfoActivity extends BaseActivity{
 			}
 		});
 	}
+	public void doFinish(){
+		String nick=edt_nick.getText().toString().trim();
+		String psd=edt_psd.getText().toString().trim();
+		String psd_again=edt_psd_again.getText().toString().trim();
+		if(TextUtils.isEmpty(nick) || TextUtils.isEmpty(psd) || TextUtils.isEmpty(psd_again)){
+			ShowToast("信息填写不完善！");
+			return;
+		}
+		if(StringUtils.isContainsSpace(nick)|| StringUtils.isContainsSpace(psd)||StringUtils.isContainsSpace(psd_again)){
+			ShowToast("信息填写存在非法字符！");
+			return;
+		}
+		if(!psd.equals(psd_again)){
+			ShowToast("两次密码输入不一致！");
+			return;
+		}
+		
+
+	}
+	
 }

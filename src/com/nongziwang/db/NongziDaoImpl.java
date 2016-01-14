@@ -4,31 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nongziwang.entity.MyRegion;
+import com.nongziwang.entity.UserBean;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-
-public class NongziDaoImpl implements NongziDao{
+public class NongziDaoImpl implements NongziDao {
 	private DBHelper helper;
-	private Context  context;
-	public NongziDaoImpl(Context  context){
-		helper=DBHelper.getInstance(context);
-		this.context=context;
+	private Context context;
+
+	public NongziDaoImpl(Context context) {
+		helper = DBHelper.getInstance(context);
+		this.context = context;
 	}
 
 	@Override
 	public List<MyRegion> findAllProvinces() {
-		List<MyRegion> list=new ArrayList<MyRegion>();
+		List<MyRegion> list = new ArrayList<MyRegion>();
 		list.add(new MyRegion("1", "«Î—°‘Ò", ""));
-		CityDBManager dbm = new CityDBManager(
-				context);
+		CityDBManager dbm = new CityDBManager(context);
 		dbm.openDatabase();
 		SQLiteDatabase db = dbm.getDatabase();
 		Cursor cursor = db.rawQuery("select * from provincetb ", null);
 		while (cursor.moveToNext()) {
-			MyRegion bean=new MyRegion();
+			MyRegion bean = new MyRegion();
 			bean.setId(cursor.getString(cursor.getColumnIndex("provinceid")));
 			bean.setName(cursor.getString(cursor.getColumnIndex("name")));
 			bean.setParentid("");
@@ -42,19 +42,20 @@ public class NongziDaoImpl implements NongziDao{
 
 	@Override
 	public List<MyRegion> findAllCitysByProvincesId(String provinceid) {
-		
-		List<MyRegion> list=new ArrayList<MyRegion>();
+
+		List<MyRegion> list = new ArrayList<MyRegion>();
 		list.add(new MyRegion("1", "«Î—°‘Ò", ""));
-		CityDBManager dbm = new CityDBManager(
-				context);
+		CityDBManager dbm = new CityDBManager(context);
 		dbm.openDatabase();
 		SQLiteDatabase db = dbm.getDatabase();
-		Cursor cursor = db.rawQuery("select * from citytb  where provinceid=?", new String[]{provinceid});
+		Cursor cursor = db.rawQuery("select * from citytb  where provinceid=?",
+				new String[] { provinceid });
 		while (cursor.moveToNext()) {
-			MyRegion bean=new MyRegion();
+			MyRegion bean = new MyRegion();
 			bean.setId(cursor.getString(cursor.getColumnIndex("cityid")));
 			bean.setName(cursor.getString(cursor.getColumnIndex("name")));
-			bean.setParentid(cursor.getString(cursor.getColumnIndex("provinceid")));
+			bean.setParentid(cursor.getString(cursor
+					.getColumnIndex("provinceid")));
 			list.add(bean);
 		}
 		cursor.close();
@@ -65,15 +66,15 @@ public class NongziDaoImpl implements NongziDao{
 
 	@Override
 	public List<MyRegion> findAllAreasByCityId(String cityid) {
-		List<MyRegion> list=new ArrayList<MyRegion>();
+		List<MyRegion> list = new ArrayList<MyRegion>();
 		list.add(new MyRegion("1", "«Î—°‘Ò", ""));
-		CityDBManager dbm = new CityDBManager(
-				context);
+		CityDBManager dbm = new CityDBManager(context);
 		dbm.openDatabase();
 		SQLiteDatabase db = dbm.getDatabase();
-		Cursor cursor = db.rawQuery("select * from area  where cityid=?", new String[]{cityid});
+		Cursor cursor = db.rawQuery("select * from area  where cityid=?",
+				new String[] { cityid });
 		while (cursor.moveToNext()) {
-			MyRegion bean=new MyRegion();
+			MyRegion bean = new MyRegion();
 			bean.setId(cursor.getString(cursor.getColumnIndex("areaid")));
 			bean.setName(cursor.getString(cursor.getColumnIndex("name")));
 			bean.setParentid(cursor.getString(cursor.getColumnIndex("cityid")));
@@ -84,23 +85,25 @@ public class NongziDaoImpl implements NongziDao{
 		dbm.closeDatabase();
 		return list;
 	}
+
 	@Override
 	public void addSearchHistory(String userid, String sname) {
-		// TODO Auto-generated method stub
 		SQLiteDatabase db = helper.getWritableDatabase();
 		db.execSQL("insert into search_historytb(userid,name) values(?,?)",
-				 new Object[] {userid,sname});
+				new Object[] { userid, sname });
 		db.close();
 	}
 
 	@Override
 	public List<String> selectAllHistory(String userid) {
-		List<String> list=new ArrayList<String>();
+		List<String> list = new ArrayList<String>();
 		SQLiteDatabase db = helper.getWritableDatabase();
-		Cursor cursor = db.rawQuery("select * from search_historytb where userid=? ",new String[]{userid});
-				
+		Cursor cursor = db.rawQuery(
+				"select * from search_historytb where userid=? ",
+				new String[] { userid });
+
 		while (cursor.moveToNext()) {
-			String name=cursor.getString(cursor.getColumnIndex("name"));
+			String name = cursor.getString(cursor.getColumnIndex("name"));
 			list.add(name);
 		}
 		cursor.close();
@@ -112,23 +115,76 @@ public class NongziDaoImpl implements NongziDao{
 	public void delAllHistory(String userid) {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		db.execSQL("delete from search_historytb where userid=?",
-				 new Object[] {userid});
+				new Object[] { userid });
 		db.close();
 	}
 
 	@Override
 	public boolean findHistoryIsExist(String name) {
-		boolean flag=false;
+		boolean flag = false;
 		SQLiteDatabase db = helper.getWritableDatabase();
-		Cursor cursor = db.rawQuery("select * from search_historytb where name=? ",new String[]{name});
+		Cursor cursor = db.rawQuery(
+				"select * from search_historytb where name=? ",
+				new String[] { name });
 		while (cursor.moveToNext()) {
-			flag=true;
+			flag = true;
 		}
 		cursor.close();
 		db.close();
 		return flag;
 	}
 
+	@Override
+	public void addUserInfo(UserBean user) {
+		SQLiteDatabase db = helper.getWritableDatabase();
+		db.execSQL(
+				"insert into search_historytb(userid,username,userpwd,userphone,qq,xingming,addtime,companyid,htmlid,touxiang) values(?,?,?,?,?,?,?,?,?,?)",
+				new Object[] { user.getUserid(), user.getUsername(),
+						user.getUserpwd(), user.getUserphone(), user.getQq(),
+						user.getXingming(), user.getAddtime(),
+						user.getCompanyid(), user.getHtmlid(),
+						user.getTouxiang() });
+		db.close();
 
+	}
+
+	@Override
+	public UserBean findUserInfoById(String userid) {
+		List<UserBean> list=new ArrayList<UserBean>();
+		SQLiteDatabase db = helper.getWritableDatabase();
+		Cursor cursor = db.rawQuery(
+				"select * from usertb where userid=? ",
+				new String[] { userid });
+		while (cursor.moveToNext()) {
+			UserBean user=new UserBean();
+			String id = cursor.getString(cursor.getColumnIndex("userid"));
+			user.setUserid(id);
+			String username = cursor.getString(cursor.getColumnIndex("username"));
+			user.setUsername(username);
+			String userpwd = cursor.getString(cursor.getColumnIndex("userpwd"));
+			user.setUserpwd(userpwd);
+			String userphone = cursor.getString(cursor.getColumnIndex("userphone"));
+			user.setUserphone(userphone);
+			String qq = cursor.getString(cursor.getColumnIndex("qq"));
+			user.setQq(qq);
+			String xingming = cursor.getString(cursor.getColumnIndex("xingming"));
+			user.setXingming(xingming);
+			String addtime = cursor.getString(cursor.getColumnIndex("addtime"));
+			user.setAddtime(addtime);
+			String companyid = cursor.getString(cursor.getColumnIndex("companyid"));
+			user.setCompanyid(companyid);
+			String htmlid = cursor.getString(cursor.getColumnIndex("htmlid"));
+			user.setHtmlid(htmlid);
+			String touxiang = cursor.getString(cursor.getColumnIndex("touxiang"));
+			user.setTouxiang(touxiang);
+			list.add(user);
+		}
+		cursor.close();
+		db.close();
+		if(list.size()>0)
+			return list.get(0);
+		else
+		    return null;
+	}
 
 }

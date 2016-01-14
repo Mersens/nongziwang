@@ -12,8 +12,11 @@ public class SharePreferenceUtil {
 	private static SharePreferenceUtil sp;
 	private static SharedPreferences mSharedPreferences;
 	private static SharedPreferences.Editor editor;
-	public static final String PREFERENCE_NAME = "_sharedinfo";
-	
+	private static final String PREFERENCE_NAME = "_sharedinfo";
+	private static final String USER_ID="user_id";
+	private SharePreferenceUtil(){
+		
+	}
 	public static synchronized SharePreferenceUtil getInstance(Context context){
 		if(sp==null){
 		sp=new SharePreferenceUtil();
@@ -22,4 +25,14 @@ public class SharePreferenceUtil {
 		}
 		return sp;
 	}
+
+	//用户id
+	public String getUserId(){
+		return mSharedPreferences.getString(USER_ID, null);
+	}
+	public void setUserId(String userid){
+		editor.putString(USER_ID, userid);
+		editor.commit();
+	}
+	
 }

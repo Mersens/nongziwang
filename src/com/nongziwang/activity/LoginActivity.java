@@ -1,5 +1,5 @@
 package com.nongziwang.activity;
-
+import org.apache.http.Header;
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -14,6 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
@@ -41,6 +44,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private SsoHandler mSsoHandler;
 	private AuthInfo mAuthInfo;
 	private Oauth2AccessToken mAccessToken;
+	private static final String URL="";
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -85,27 +89,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		tv_forget_psd.setOnClickListener(this);
 		tv_user_regist.setOnClickListener(this);
 
-		edt_psd.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				String name=edt_name.getText().toString();
-				String psd=edt_psd.getText().toString();
-				if(!TextUtils.isEmpty(psd) && !TextUtils.isEmpty(name)){
-					btn_login.setEnabled(true);
-				}else{
-					btn_login.setEnabled(false);
-				}
-			}
-		});
 	}
 
 	@Override
@@ -135,7 +118,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
-	
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
@@ -175,7 +157,35 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			ShowToast("没有可用网络，请检查网络设置!");
 			return;
 		}
-		spotsdialog.show();
+		
+		RequestParams params=new RequestParams();
+		params.put("", name);
+		params.put("", psd);
+		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+			@Override
+			public void onStart() {
+				spotsdialog.show();
+				super.onStart();
+			}
+			
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				System.out.println("onSuccess---------------");
+				//保存用户信息
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				System.out.println("onFailure---------------");
+				
+			}
+		
+			@Override
+			public void onFinish() {
+				spotsdialog.dismiss();
+				super.onFinish();
+			}
+		});
 
 		
 	}

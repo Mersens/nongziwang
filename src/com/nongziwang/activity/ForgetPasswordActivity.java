@@ -1,16 +1,24 @@
 package com.nongziwang.activity;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.http.Header;
+
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.main.R;
 import com.nongziwang.service.RegisterCodeTimerService;
+import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.RegisterCodeTimer;
+import com.nongziwang.utils.StringUtils;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,6 +30,8 @@ public class ForgetPasswordActivity extends BaseActivity{
 	private Button btn_next;
 	private Button btn_getcode;
 	private Intent mIntent;
+	private Map<String,String> map=new HashMap<String,String>();
+	private static final String URL="";
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -51,8 +61,7 @@ public class ForgetPasswordActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				intentAction(ForgetPasswordActivity.this,SettingPasswordActivity.class);
+				doNext();
 				
 			}
 		});
@@ -60,54 +69,65 @@ public class ForgetPasswordActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-				startService(mIntent);
+				doGetCode();
+				
 			}
 		});
 		
-		et_tel_or_email.addTextChangedListener(new TextWatcher() {
+
+	}
+	public void doNext(){
+		String num=et_tel_or_email.getText().toString().trim();
+		String code=et_code.getText().toString().trim();
+		if(!num.equals(map.get("num"))){
+			ShowToast("电话号码不一致！");
+			return;
+		}
+		if(TextUtils.isEmpty(code)){
+			ShowToast("验证码不能为空！");
+			return;
+		}
+		if(!code.equals(map.get("code"))){
+			ShowToast("验证码输入有误！");
+			return;
+		}
+		intentAction(ForgetPasswordActivity.this,SettingPasswordActivity.class);
+	}
+	
+	
+	public void doGetCode(){
+		String tel_number=et_tel_or_email.getText().toString().trim();
+		if (TextUtils.isEmpty(tel_number)) {
+			ShowToast("电话号码或邮箱不能为空！");
+			return;
+		}
+		if(!StringUtils.isMobileNum(tel_number) || !StringUtils.isEmail(tel_number)){
+			ShowToast("电话号码或邮箱格式不正确！");
+			return;
+		}
+		if (!isNetworkAvailable()) {
+			ShowToast("没有可用网络，请检查网络设置!");
+			return;
+		}
+		map.put("num", tel_number);
+		startService(mIntent);
+		RequestParams params=new RequestParams();
+		params.put("", "");
+		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				// TODO Auto-generated method stub
+				
 			}
 			
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				String email=et_tel_or_email.getText().toString();
-				if(!TextUtils.isEmpty(email)){
-					btn_getcode.setEnabled(true);
-				}else{
-					btn_getcode.setEnabled(false);
-				}
-			}
-		});
-		
-		et_code.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				String email=et_tel_or_email.getText().toString();
-				String code=et_code.getText().toString();
-				if(!TextUtils.isEmpty(code) && !TextUtils.isEmpty(email)){
-					btn_next.setEnabled(true);
-				}else{
-					btn_next.setEnabled(false);
-				}
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 	}
-
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
