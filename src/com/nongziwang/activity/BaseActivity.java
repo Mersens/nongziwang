@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 
@@ -189,6 +190,15 @@ public class BaseActivity extends FragmentActivity{
 	 */
 	public <T> void intentAction(Activity context, Class<T> cls) {
 		Intent intent = new Intent(context, cls);
+		startActivity(intent);
+		context.overridePendingTransition(R.anim.left_in,
+				R.anim.left_out);
+	}
+	public <T> void intentAction(Activity context, Class<T> cls,String params) {
+		Intent intent = new Intent(context, cls);
+		if(!TextUtils.isEmpty(params)){
+			intent.putExtra("params", params);
+		}
 		startActivity(intent);
 		context.overridePendingTransition(R.anim.left_in,
 				R.anim.left_out);

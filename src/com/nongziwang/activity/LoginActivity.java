@@ -1,5 +1,7 @@
 package com.nongziwang.activity;
+
 import org.apache.http.Header;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -18,8 +20,14 @@ import android.widget.TextView;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.application.AppConstants;
+import com.nongziwang.db.NongziDao;
+import com.nongziwang.db.NongziDaoImpl;
+import com.nongziwang.entity.UserBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
+import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.utils.MD5Util;
+import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.utils.StringUtils;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
 import com.nongziwang.view.SpotsDialog;
@@ -44,8 +52,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private SsoHandler mSsoHandler;
 	private AuthInfo mAuthInfo;
 	private Oauth2AccessToken mAccessToken;
-	private static final String URL="";
-	
+	private static final String LOGIN_URL = AppConstants.SERVICE_ADDRESS+"login/gotoLogin";
+	private static final String USERINFO_URL = AppConstants.SERVICE_ADDRESS+"userinfo/getUserInfoById";
+	private static final String TAG = "LoginActivity";
+	private NongziDao dao;
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -55,6 +66,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		mAuthInfo = new AuthInfo(this, AppConstants.APP_KEY,
 				AppConstants.REDIRECT_URL, AppConstants.SCOPE);
 		mSsoHandler = new SsoHandler(this, mAuthInfo);
+		dao = new NongziDaoImpl(this);
 		initViews();
 		initEvent();
 	}
@@ -95,14 +107,16 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_login:
-			//登录操作
+			// 登录操作
 			doLogin();
 			break;
 		case R.id.tv_forget_psd:
 			intentAction(LoginActivity.this, ForgetPasswordActivity.class);
+			finish();
 			break;
 		case R.id.tv_user_regist:
 			intentAction(LoginActivity.this, RegisterActivity.class);
+			finish();
 			break;
 		case R.id.image_sina:
 			ShowToast("点击新浪登录");
@@ -124,10 +138,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		super.onDestroy();
 		HttpUtils.cancelRequest(this);
 	}
-	
-	public void doLogin(){
-		String name=edt_name.getText().toString();
-		String psd=edt_psd.getText().toString();
+
+	public void doLogin() {
+		final String name = edt_name.getText().toString();
+		final String psd = edt_psd.getText().toString();
 		if (TextUtils.isEmpty(name)) {
 			ShowToast("账号不能为空！");
 			return;
@@ -148,7 +162,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			ShowToast("密码长度至少6位！");
 			return;
 		}
-		
+
 		if (!StringUtils.isLeanth(name)) {
 			ShowToast("账号长度至少6位！");
 			return;
@@ -157,41 +171,95 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			ShowToast("没有可用网络，请检查网络设置!");
 			return;
 		}
-		
-		RequestParams params=new RequestParams();
-		params.put("", name);
-		params.put("", psd);
-		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+
+		RequestParams params = new RequestParams();
+		params.put("zhanghao", name);
+		params.put("userpwd", psd);
+		HttpUtils.doPost(LOGIN_URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onStart() {
 				spotsdialog.show();
 				super.onStart();
 			}
-			
+
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
-				System.out.println("onSuccess---------------");
-				//保存用户信息
+				String code = JsonUtils.getCode(arg2);
+				if (!TextUtils.isEmpty(code)) {
+					if ("0".equals(code)) {
+						ShowToast("账户或密码为空!");
+					} else if ("1".equals(code)) {
+						JSONObject jsonObject;
+						try {
+							jsonObject = new JSONObject(arg2);
+							String userid = jsonObject.getString("userid");
+							getUserInfo(userid,name,psd);
+							ShowToast("登录成功！");
+							finishActivity();
+						} catch (JSONException e) {
+							e.printStackTrace();
+							spotsdialog.dismiss();
+						}
+					} else if ("2".equals(code)) {
+						ShowToast("账户名不存在!");
+
+					} else if ("3".equals(code)) {
+						ShowToast("用户密码输入错误!");
+					}
+				}
 			}
-			
+
 			@Override
-			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				System.out.println("onFailure---------------");
-				
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+				Log.e(TAG, arg2);
+				spotsdialog.dismiss();
 			}
-		
+
+		});
+	}
+
+	public void getUserInfo(final String userid,final String name,final String psd) {
+		RequestParams params = new RequestParams();
+		params.put("userid", userid);
+		HttpUtils.doPost(USERINFO_URL, params, new TextHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code = JsonUtils.getCode(arg2);
+				if (!TextUtils.isEmpty(code)) {
+					if ("1".equals(code)) {
+						// 数据请求成功
+						try {
+							SharePreferenceUtil.getInstance(
+									getApplicationContext()).setUserId(userid);
+							SharePreferenceUtil.getInstance(
+									getApplicationContext()).setUserName(name);
+							SharePreferenceUtil.getInstance(
+									getApplicationContext()).setUserId(MD5Util.MD5(psd));
+							UserBean user = JsonUtils.getUserInfo(arg2);
+							user.setUserpwd(MD5Util.MD5(psd));
+							dao.addUserInfo(user);
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+				Log.e(TAG, arg2);
+			}
+
 			@Override
 			public void onFinish() {
 				spotsdialog.dismiss();
 				super.onFinish();
 			}
 		});
-
-		
 	}
-	
-	
-	
+
 	public void onClickQQLogin() {
 		if (!mTencent.isSessionValid()) {
 			mTencent.login(this, "all", loginListener);
@@ -206,10 +274,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onComplete(Bundle values) {
-			mAccessToken = Oauth2AccessToken.parseAccessToken(values); // 从
-																		// Bundle
-																		// 中解析
-																		// Token
+			mAccessToken = Oauth2AccessToken.parseAccessToken(values);
 			if (mAccessToken.isSessionValid()) {
 
 			} else {
@@ -294,7 +359,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public void onError(UiError arg0) {
-			// TODO Auto-generated method stub
 
 		}
 

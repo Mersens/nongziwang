@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
-	private static final int VERSION = 1;
+	private static final int VERSION = 2;
 	private static final String NAME = "nongzi.db";
 	private static final String SQL_SEARCH_HISTORY_CREAT = "create table search_historytb(_id integer primary key autoincrement,userid text ,name text)";
 	private static final String SQL_SEARCH_HISTORY_DROP = "drop table if exists search_historytb";

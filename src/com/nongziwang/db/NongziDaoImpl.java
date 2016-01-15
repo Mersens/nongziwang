@@ -138,7 +138,7 @@ public class NongziDaoImpl implements NongziDao {
 	public void addUserInfo(UserBean user) {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		db.execSQL(
-				"insert into search_historytb(userid,username,userpwd,userphone,qq,xingming,addtime,companyid,htmlid,touxiang) values(?,?,?,?,?,?,?,?,?,?)",
+				"insert into usertb(userid,username,userpwd,userphone,qq,xingming,addtime,companyid,htmlid,touxiang) values(?,?,?,?,?,?,?,?,?,?)",
 				new Object[] { user.getUserid(), user.getUsername(),
 						user.getUserpwd(), user.getUserphone(), user.getQq(),
 						user.getXingming(), user.getAddtime(),

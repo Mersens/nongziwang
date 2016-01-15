@@ -6,6 +6,7 @@ import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 
 import com.nongziwang.main.R;
+import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.view.DialogTips;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
 
@@ -42,14 +43,13 @@ public class SettingActivity extends BaseActivity {
 		});
 	}
 	
-	
 	public void confirmExit() {
-
 		DialogTips dialog = new DialogTips(SettingActivity.this, "退出", "是否退出登录？",
 				"确定", true, true);
 		dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialogInterface, int userId) {
-				finish();
+				SharePreferenceUtil.getInstance(getApplicationContext()).clearData();
+				finishActivity();
 			}
 		});
 		dialog.show();

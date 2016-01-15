@@ -13,8 +13,12 @@ import com.nongziwang.activity.MyCollectionFragmentActivity;
 import com.nongziwang.activity.MyFootprintActivity;
 import com.nongziwang.activity.SettingActivity;
 import com.nongziwang.application.AppConstants;
+import com.nongziwang.db.NongziDao;
+import com.nongziwang.db.NongziDaoImpl;
+import com.nongziwang.entity.UserBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.PhotoUtil;
+import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.view.CircleImageView;
 
 import android.annotation.SuppressLint;
@@ -25,6 +29,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,13 +40,12 @@ import android.widget.TextView;
 
 /**
  * 
- * @author Mersens 
- * 买家
+ * @author Mersens 买家
  */
 public class BuyerFragment extends BaseFragment implements OnClickListener {
 	private View view;
 	private TextView tv_buyer_switch;
-	private TextView tv_login;
+	private TextView tv_login, tv_name;
 	private CircleImageView buyer_user_head;
 	private RelativeLayout layout_ymdcp;
 	private RelativeLayout layout_dqr;
@@ -55,10 +59,13 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	private RelativeLayout layout_myaddress;
 	private RelativeLayout layout_setting;
 	private RelativeLayout layout_myaccount;
-	public static final int FROM_XC=0X00;
-	public static final int FROM_CJ=0X01;
-	public static final String TAG="BuyerFragment";
+	public static final int FROM_XC = 0X00;
+	public static final int FROM_CJ = 0X01;
+	public static final String TAG = "BuyerFragment";
 	public String path;
+	private NongziDao dao;
+	private String userid = null;
+
 	@SuppressLint("InflateParams")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,12 +77,19 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	}
 
 	private void initViews() {
-		buyer_user_head=(CircleImageView) view.findViewById(R.id.buyer_user_head);
-		layout_myaccount=(RelativeLayout) view.findViewById(R.id.layout_myaccount);
-		layout_setting=(RelativeLayout) view.findViewById(R.id.layout_setting);
-		layout_myaddress=(RelativeLayout) view.findViewById(R.id.layout_myaddress);
-		layout_myfootprint=(RelativeLayout) view.findViewById(R.id.layout_myfootprint);
-		layout_mycollection=(RelativeLayout) view.findViewById(R.id.layout_mycollection);
+		tv_name = (TextView) view.findViewById(R.id.tv_name);
+		buyer_user_head = (CircleImageView) view
+				.findViewById(R.id.buyer_user_head);
+		layout_myaccount = (RelativeLayout) view
+				.findViewById(R.id.layout_myaccount);
+		layout_setting = (RelativeLayout) view
+				.findViewById(R.id.layout_setting);
+		layout_myaddress = (RelativeLayout) view
+				.findViewById(R.id.layout_myaddress);
+		layout_myfootprint = (RelativeLayout) view
+				.findViewById(R.id.layout_myfootprint);
+		layout_mycollection = (RelativeLayout) view
+				.findViewById(R.id.layout_mycollection);
 		tv_buyer_switch = (TextView) view.findViewById(R.id.tv_buyer_switch);
 		tv_login = (TextView) view.findViewById(R.id.tv_login);
 		layout_ymdcp = (RelativeLayout) view.findViewById(R.id.layout_ymdcp);
@@ -83,8 +97,26 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		layout_dfk = (RelativeLayout) view.findViewById(R.id.layout_dfk);
 		layout_dsh = (RelativeLayout) view.findViewById(R.id.layout_dsh);
 		layout_jycg = (RelativeLayout) view.findViewById(R.id.layout_jycg);
-		layout_cart=(RelativeLayout) view.findViewById(R.id.layout_cart);
-		layout_fbxjd=(RelativeLayout) view.findViewById(R.id.layout_fbxjd);
+		layout_cart = (RelativeLayout) view.findViewById(R.id.layout_cart);
+		layout_fbxjd = (RelativeLayout) view.findViewById(R.id.layout_fbxjd);
+	}
+
+	public void initDatas() {
+		dao = new NongziDaoImpl(getActivity().getApplicationContext());
+		userid = SharePreferenceUtil.getInstance(
+				getActivity().getApplicationContext()).getUserId();
+		if (!TextUtils.isEmpty(userid)) {
+			UserBean user = dao.findUserInfoById(userid);
+			if (null != user) {
+				tv_name.setText(user.getUsername());
+				tv_name.setVisibility(View.VISIBLE);
+				tv_login.setVisibility(View.GONE);
+			}
+		} else {
+			tv_name.setVisibility(View.GONE);
+			tv_login.setVisibility(View.VISIBLE);
+		}
+
 	}
 
 	private void initEvent() {
@@ -157,33 +189,34 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			intentAction(getActivity(), CartActivity.class);
 			break;
 		case R.id.layout_fbxjd:
-			intentAction(getActivity(),FbxjdActivity.class);
+			intentAction(getActivity(), FbxjdActivity.class);
 			break;
 		case R.id.layout_mycollection:
-			intentAction(getActivity(),MyCollectionFragmentActivity.class);
+			intentAction(getActivity(), MyCollectionFragmentActivity.class);
 			break;
 		case R.id.layout_myfootprint:
-			intentAction(getActivity(),MyFootprintActivity.class);
+			intentAction(getActivity(), MyFootprintActivity.class);
 			break;
 		case R.id.layout_myaddress:
-			intentAction(getActivity(),MyAddressFragmentActivity.class);
+			intentAction(getActivity(), MyAddressFragmentActivity.class);
 			break;
 		case R.id.layout_myaccount:
-			intentAction(getActivity(),MyAccountBuyerFragmentActivity.class);
+			intentAction(getActivity(), MyAccountBuyerFragmentActivity.class);
 			break;
 		case R.id.layout_setting:
-			intentAction(getActivity(),SettingActivity.class);
+			intentAction(getActivity(), SettingActivity.class);
 			break;
 		}
 
 	}
-	public void showAvatarPop(){
+
+	public void showAvatarPop() {
 		Intent intent = new Intent(Intent.ACTION_PICK, null);
-		intent.setDataAndType(
-				MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-		startActivityForResult(intent,FROM_XC);
+		intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+				"image/*");
+		startActivityForResult(intent, FROM_XC);
 	}
-	
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -200,23 +233,22 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 					return;
 				}
 				uri = data.getData();
-				startImageAction(uri, 200, 200,
-						FROM_CJ, true);
+				startImageAction(uri, 200, 200, FROM_CJ, true);
 			} else {
 				Log.e(TAG, "照片获取失败");
 			}
 			break;
-			case FROM_CJ:
-				if (data == null) {
-					return;
-				} else {
-					saveCropAvator(data);
-				}
+		case FROM_CJ:
+			if (data == null) {
+				return;
+			} else {
+				saveCropAvator(data);
+			}
 			break;
 
 		}
 	}
-	
+
 	private void startImageAction(Uri uri, int outputX, int outputY,
 			int requestCode, boolean isCrop) {
 		Intent intent = null;
@@ -238,7 +270,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		intent.putExtra("noFaceDetection", true); // no face detection
 		startActivityForResult(intent, requestCode);
 	}
-	
+
 	/**
 	 * 保存裁剪的头像
 	 * 
@@ -254,7 +286,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 				buyer_user_head.setImageBitmap(bitmap);
 				// 保存图片
 				String filename = new SimpleDateFormat("yyMMddHHmmss")
-						.format(new Date())+".png";
+						.format(new Date()) + ".png";
 				path = AppConstants.MyAvatarDir + filename;
 				PhotoUtil.saveBitmap(AppConstants.MyAvatarDir, filename,
 						bitmap, true);
@@ -266,8 +298,14 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			}
 		}
 	}
+
 	public void uploadAvatar(String path) {
-		//上传头像
+		// 上传头像
 	}
-	
+
+	@Override
+	public void onStart() {
+		initDatas();
+		super.onStart();
+	}
 }

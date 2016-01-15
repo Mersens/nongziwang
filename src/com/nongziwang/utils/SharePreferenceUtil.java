@@ -14,6 +14,8 @@ public class SharePreferenceUtil {
 	private static SharedPreferences.Editor editor;
 	private static final String PREFERENCE_NAME = "_sharedinfo";
 	private static final String USER_ID="user_id";
+	private static final String USER_NAME="user_name";
+	private static final String USER_PSD="user_psd";
 	private SharePreferenceUtil(){
 		
 	}
@@ -34,5 +36,23 @@ public class SharePreferenceUtil {
 		editor.putString(USER_ID, userid);
 		editor.commit();
 	}
-	
+	//用户名
+	public String getUserName(){
+		return mSharedPreferences.getString(USER_NAME, null);
+	}
+	public void setUserName(String username){
+		editor.putString(USER_NAME, username);
+		editor.commit();
+	}
+	//密码
+	public String getUserPsd(){
+		return mSharedPreferences.getString(USER_PSD, null);
+	}
+	public void setUserPsd(String psd){
+		editor.putString(USER_PSD, psd);
+		editor.commit();
+	}
+	public void clearData(){
+		editor.clear().commit();
+	}
 }

@@ -4,14 +4,14 @@ import org.apache.http.Header;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.nongziwang.application.AppConstants;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
+import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
 
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -20,7 +20,8 @@ import android.widget.EditText;
 public class SettingPasswordActivity extends BaseActivity {
 	private EditText edt_psd, edt_psd_again;
 	private Button btn_finish;
-	private static final String URL="";
+	private static final String URL = AppConstants.SERVICE_ADDRESS
+			+ "findpwd/gotoUpdatePassword";
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -56,31 +57,39 @@ public class SettingPasswordActivity extends BaseActivity {
 	}
 
 	public void doFinish() {
-		String psd=edt_psd.getText().toString().trim();
-		String psd_again=edt_psd_again.getText().toString().trim();
-		if(TextUtils.isEmpty(psd) || TextUtils.isEmpty(psd_again)){
+		String psd = edt_psd.getText().toString().trim();
+		String psd_again = edt_psd_again.getText().toString().trim();
+		if (TextUtils.isEmpty(psd)) {
 			ShowToast("密码不能为空！");
 			return;
 		}
-		if(!psd.equals(psd_again)){
+		if (!psd.equals(psd_again)) {
 			ShowToast("两次密码不一致！");
 			return;
 		}
-		RequestParams params=new RequestParams();
-		params.put("", "");
+		RequestParams params = new RequestParams();
+		params.put("userpwd", psd);
 		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
-			
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
-				
+				String code = JsonUtils.getCode(arg2);
+				if (!TextUtils.isEmpty(code)) {
+					if ("0".equals(code)) {
+						ShowToast("密码输入不正确!");
+					} else if ("1".equals(code)) {
+						ShowToast("新密码设置成功!");
+						finishActivity();
+					}
+				}
 			}
-			
+
 			@Override
-			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+
 			}
 		});
-		
+
 	}
 
 }

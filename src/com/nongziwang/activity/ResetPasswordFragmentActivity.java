@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 
 public class ResetPasswordFragmentActivity extends BaseActivity{
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);

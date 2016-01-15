@@ -3,6 +3,7 @@ package com.nongziwang.application;
 import android.annotation.SuppressLint;
 
 public class AppConstants {
+	public static final String SERVICE_ADDRESS="http://appservice.nz101.com/";
 	public static final String APP_ID = "222222";
 	@SuppressLint("SdCardPath")
 	public static final String MyAvatarDir = "/sdcard/ssdimg/avatar/";
