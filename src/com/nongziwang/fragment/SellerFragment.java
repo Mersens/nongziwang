@@ -112,9 +112,9 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 		fragment.setArguments(bundle);
 		return fragment;
 	}
+	
 	@Override
 	protected void lazyLoad() {
-		// TODO Auto-generated method stub
 
 	}
 	@Override

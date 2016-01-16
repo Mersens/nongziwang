@@ -35,7 +35,6 @@ public class ResetPasswordFragmentActivity extends BaseActivity{
 
 	}
 
-
 	public Fragment creatFragment( String params) {
 		return ResetPasswordFragment.getInstance(params);
 	}

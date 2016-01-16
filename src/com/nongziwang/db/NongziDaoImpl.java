@@ -187,4 +187,12 @@ public class NongziDaoImpl implements NongziDao {
 		    return null;
 	}
 
+	@Override
+	public void delUserInfoById(String userid) {
+		SQLiteDatabase db = helper.getWritableDatabase();
+		db.execSQL("delete from usertb where userid=?",
+				new Object[] { userid });
+		db.close();		
+	}
+
 }

@@ -71,7 +71,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_alignParentTop="true"
                             android:layout_marginTop="4dp"
-                            android:text="信息标题："
+                            android:text="商品标题："
                             android:textColor="@color/base_color_text_black"
                             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                     </RelativeLayout>
@@ -99,6 +99,53 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/img_hight_size" >
+
+                    <RelativeLayout
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/t5234"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="关键字："
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/editTe555"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/actionbar_hight"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/editbox_background_normal"
+                        android:ems="10"
+                                                android:gravity="top"
+                        android:hint="30字以内"
+                        android:maxLines="3"
+                        android:minLines="5"
+                        android:textColor="@color/base_color_text_black"
+                        android:textColorHint="@color/black_text_color"
+                        android:textSize="@dimen/text_mid_size" >
+                    </EditText>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -123,11 +170,15 @@
                     <EditText
                         android:id="@+id/editText2"
                         android:layout_width="0dp"
-                        android:layout_height="36dp"
+                        android:layout_height="@dimen/actionbar_hight"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@drawable/editbox_background_normal"
                         android:ems="10"
+                                                android:gravity="top"
+                        android:hint="30字以内"
+                        android:maxLines="3"
+                        android:minLines="5"
                         android:textColor="@color/base_color_text_black"
                         android:textColorHint="@color/black_text_color"
                         android:textSize="@dimen/text_mid_size" >
@@ -140,252 +191,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/img_hight_size" >
-
-                    <RelativeLayout
-                        android:layout_width="96dp"
-                        android:layout_height="match_parent" >
-
-                        <TextView
-                            android:id="@+id/t4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:text="质量指标："
-                            android:textColor="@color/base_color_text_black"
-                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
-                    </RelativeLayout>
-
-                    <EditText
-                        android:id="@+id/edi"
-                        android:layout_width="0dp"
-                        android:layout_height="36dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@drawable/editbox_background_normal"
-                        android:ems="10"
-                        android:textColor="@color/base_color_text_black"
-                        android:textColorHint="@color/black_text_color"
-                        android:textSize="@dimen/text_mid_size" >
-                    </EditText>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/img_hight_size" >
-
-                    <RelativeLayout
-                        android:layout_width="96dp"
-                        android:layout_height="match_parent" >
-
-                        <TextView
-                            android:id="@+id/t41"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:text="性质："
-                            android:textColor="@color/base_color_text_black"
-                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
-                    </RelativeLayout>
-
-                    <EditText
-                        android:id="@+id/editTex"
-                        android:layout_width="0dp"
-                        android:layout_height="36dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@drawable/editbox_background_normal"
-                        android:ems="10"
-                        android:textColor="@color/base_color_text_black"
-                        android:textColorHint="@color/black_text_color"
-                        android:textSize="@dimen/text_mid_size" >
-                    </EditText>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/img_hight_size" >
-
-                    <RelativeLayout
-                        android:layout_width="96dp"
-                        android:layout_height="match_parent" >
-
-                        <TextView
-                            android:id="@+id/t5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:text="产地："
-                            android:textColor="@color/base_color_text_black"
-                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
-                    </RelativeLayout>
-
-                    <EditText
-                        android:id="@+id/edit1"
-                        android:layout_width="0dp"
-                        android:layout_height="36dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@drawable/editbox_background_normal"
-                        android:ems="10"
-                        android:textColor="@color/base_color_text_black"
-                        android:textColorHint="@color/black_text_color"
-                        android:textSize="@dimen/text_mid_size" >
-                    </EditText>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/img_hight_size" >
-
-                    <RelativeLayout
-                        android:layout_width="96dp"
-                        android:layout_height="match_parent" >
-
-                        <TextView
-                            android:id="@+id/t33"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:text="型号："
-                            android:textColor="@color/base_color_text_black"
-                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
-                    </RelativeLayout>
-
-                    <EditText
-                        android:id="@+id/editTextw2"
-                        android:layout_width="0dp"
-                        android:layout_height="36dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@drawable/editbox_background_normal"
-                        android:ems="10"
-                        android:textColor="@color/base_color_text_black"
-                        android:textColorHint="@color/black_text_color"
-                        android:textSize="@dimen/text_mid_size" >
-                    </EditText>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/img_hight_size" >
-
-                    <RelativeLayout
-                        android:layout_width="96dp"
-                        android:layout_height="match_parent" >
-
-                        <TextView
-                            android:id="@+id/we"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:text="生产厂家："
-                            android:textColor="@color/base_color_text_black"
-                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
-                    </RelativeLayout>
-
-                    <EditText
-                        android:id="@+id/editTe3"
-                        android:layout_width="0dp"
-                        android:layout_height="36dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@drawable/editbox_background_normal"
-                        android:ems="10"
-                        android:textColor="@color/base_color_text_black"
-                        android:textColorHint="@color/black_text_color"
-                        android:textSize="@dimen/text_mid_size" >
-                    </EditText>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/img_hight_size" >
-
-                    <RelativeLayout
-                        android:layout_width="96dp"
-                        android:layout_height="match_parent" >
-
-                        <TextView
-                            android:id="@+id/ter3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:text="用量："
-                            android:textColor="@color/base_color_text_black"
-                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
-                    </RelativeLayout>
-
-                    <EditText
-                        android:id="@+id/editT2"
-                        android:layout_width="0dp"
-                        android:layout_height="36dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@drawable/editbox_background_normal"
-                        android:ems="10"
-                        android:textColor="@color/base_color_text_black"
-                        android:textColorHint="@color/black_text_color"
-                        android:textSize="@dimen/text_mid_size" >
-                    </EditText>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -410,11 +216,15 @@
                     <EditText
                         android:id="@+id/editTe5"
                         android:layout_width="0dp"
-                        android:layout_height="36dp"
+                        android:layout_height="@dimen/actionbar_hight"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@drawable/editbox_background_normal"
                         android:ems="10"
+                                                android:gravity="top"
+                        android:hint="30字以内"
+                        android:maxLines="3"
+                        android:minLines="5"
                         android:textColor="@color/base_color_text_black"
                         android:textColorHint="@color/black_text_color"
                         android:textSize="@dimen/text_mid_size" >
@@ -427,6 +237,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -451,69 +262,15 @@
                     <EditText
                         android:id="@+id/editTe51"
                         android:layout_width="0dp"
-                        android:layout_height="36dp"
+                        android:layout_height="@dimen/actionbar_hight"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@drawable/editbox_background_normal"
                         android:ems="10"
-                        android:textColor="@color/base_color_text_black"
-                        android:textColorHint="@color/black_text_color"
-                        android:textSize="@dimen/text_mid_size" >
-                    </EditText>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/img_hight_size" >
-
-                    <RelativeLayout
-                        android:layout_width="96dp"
-                        android:layout_height="match_parent" >
-
-                        <TextView
-                            android:id="@+id/t5p"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:text="自定义属性："
-                            android:textColor="@color/base_color_text_black"
-                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
-                    </RelativeLayout>
-
-                    <EditText
-                        android:id="@+id/edit6"
-                        android:layout_width="0dp"
-                        android:layout_height="36dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="2dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/editbox_background_normal"
-                        android:ems="10"
-                        android:hint="属性"
-                        android:textColor="@color/base_color_text_black"
-                        android:textColorHint="@color/black_text_color"
-                        android:textSize="@dimen/text_mid_size" >
-                    </EditText>
-
-                    <EditText
-                        android:id="@+id/edit62"
-                        android:layout_width="0dp"
-                        android:layout_height="36dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="2dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/editbox_background_normal"
-                        android:ems="10"
-                        android:hint="属性值"
+                        android:maxLines="3"
+                        android:minLines="5"
+                                                android:gravity="top"
+                        android:hint="30字以内"
                         android:textColor="@color/base_color_text_black"
                         android:textColorHint="@color/black_text_color"
                         android:textSize="@dimen/text_mid_size" >
@@ -523,7 +280,16 @@
 
             <include layout="@layout/layout_rele_pro_img" />
 
-            <include layout="@layout/layout_rele_pro_bottom" />
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_margin="25dp"
+                android:background="@drawable/button_bg"
+                android:enabled="true"
+                android:text="下一步设置交易信息"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
         </LinearLayout>
     </ScrollView>
 

@@ -23,9 +23,10 @@ public class CustomApplcation extends Application {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
+		CrashHandler.getInstance().init(getApplicationContext());
 		initImageLoader(getApplicationContext());
 	}
-	
+	//单例模式，双重校验锁
 	public static CustomApplcation getInstance() {
 		if(mInstance==null){
 			synchronized (CustomApplcation.class) {

@@ -27,7 +27,7 @@
         </RelativeLayout>
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/edt_new_tel"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_gravity="center"
@@ -36,6 +36,7 @@
             android:layout_weight="1"
             android:background="@drawable/editbox_background_normal"
             android:ems="10"
+            android:hint="请输入新手机号"
             android:textColor="@color/base_color_text_black"
             android:textColorHint="@color/black_text_color"
             android:textSize="@dimen/text_mid_size" >
@@ -59,9 +60,9 @@
             android:layout_weight="1" >
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/btn_getcode"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
+                android:layout_height="34dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
@@ -95,7 +96,7 @@
         </RelativeLayout>
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/edt_code"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_gravity="center"

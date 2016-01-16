@@ -29,7 +29,6 @@ public class AccountSafeFragment extends BaseFragment {
 				.findViewById(R.id.btn_reset_password);
 		btn_reset_phonenumber = (Button) view
 				.findViewById(R.id.btn_reset_phonenumber);
-
 	}
 
 	private void initEvent() {
@@ -58,7 +57,6 @@ public class AccountSafeFragment extends BaseFragment {
 
 	@Override
 	protected void lazyLoad() {
-		// TODO Auto-generated method stub
 
 	}
 }

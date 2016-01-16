@@ -1,7 +1,13 @@
 package com.nongziwang.application;
 
 import android.annotation.SuppressLint;
-
+/**
+ * 
+ * @title AppConstants
+ * @description:常量类
+ * @author Mersens
+ * @time 2016年1月16日
+ */
 public class AppConstants {
 	public static final String SERVICE_ADDRESS="http://appservice.nz101.com/";
 	public static final String APP_ID = "222222";

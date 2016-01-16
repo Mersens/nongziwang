@@ -88,6 +88,14 @@ public class HttpUtils {
 		client.cancelRequests(context, true);
 	}
 
+	/**
+	 * 
+	 * @Title: getClient 
+	 * @Description: »ñÈ¡AsyncHttpClientÊµÀý
+	 * @author Mersens
+	 * @return client
+	 * @throws
+	 */
 	public static AsyncHttpClient getClient() {
 		return client;
 	}

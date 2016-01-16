@@ -39,5 +39,8 @@ public interface NongziDao {
 	
 	// 查询用户的信息
 	public UserBean findUserInfoById(String userid);
+	
+	//删除用户信息
+	public void delUserInfoById(String userid);
 
 }

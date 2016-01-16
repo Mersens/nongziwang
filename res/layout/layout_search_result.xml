@@ -122,22 +122,6 @@
             android:layout_marginTop="10dp"
             android:background="@color/black2" />
 
-        <TextView
-            android:id="@+id/tv_jinghanliang"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/spinner_ab_default_holo_light_am"
-            android:gravity="center"
-            android:text="@string/jinghanliang"
-            android:textColor="@color/gray_text_color" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/black2" />
 
         <TextView
             android:id="@+id/tv_jiage"

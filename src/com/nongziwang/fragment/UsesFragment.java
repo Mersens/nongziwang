@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 /**
  * 
  * @author Administrator
- * ”√Õæ
+ *
  */
 public class UsesFragment extends BaseFragment{
 	private View view;

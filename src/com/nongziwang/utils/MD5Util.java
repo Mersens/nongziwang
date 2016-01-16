@@ -1,7 +1,13 @@
 package com.nongziwang.utils;
 
 import java.security.MessageDigest;
-
+/**
+ * 
+ * @title MD5Util
+ * @description:MD5加密密码
+ * @author Mersens
+ * @time 2016年1月16日
+ */
 public class MD5Util {
 	public static String MD5(String str){
 		byte[] bt=str.getBytes();

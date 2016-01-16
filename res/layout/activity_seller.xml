@@ -81,12 +81,12 @@
                         android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                 </RelativeLayout>
             </LinearLayout>
-
             <RelativeLayout
                 android:id="@+id/layout_ymdcp"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:background="@drawable/pressed_bg" >
+                android:background="@drawable/pressed_bg"
+                android:visibility="gone" >
 
                 <TextView
                     android:id="@+id/textV"
@@ -125,11 +125,13 @@
                 android:layout_height="1dp"
                 android:background="@color/black2" />
 
-            <include layout="@layout/common_seller_dingdan" />
+            <include
+                layout="@layout/common_seller_dingdan"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="4dp"
+                android:layout_height="1dp"
                 android:background="@color/black2" />
 
             <LinearLayout
@@ -375,7 +377,6 @@
                         android:src="@drawable/icon_setting" />
 
                     <TextView
-                        
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

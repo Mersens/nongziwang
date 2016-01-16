@@ -31,7 +31,7 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 	private String params;
 	private ImageView image_back, image_search;
 	private Spinner spinner;
-	private TextView tv_moren, tv_pinpai, tv_yongtu, tv_jinghanliang, tv_jiage,tv_zh,tv_nstnf;
+	private TextView tv_moren, tv_pinpai, tv_yongtu, tv_jiage,tv_zh,tv_nstnf;
 	private static final String types[] = { "产品", "公司" };
 	private LayoutInflater mInflater;
 	private MyArrayAdapter adapter;
@@ -59,7 +59,6 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		tv_moren = (TextView) findViewById(R.id.tv_moren);
 		tv_pinpai = (TextView) findViewById(R.id.tv_pinpai);
 		tv_yongtu = (TextView) findViewById(R.id.tv_yongtu);
-		tv_jinghanliang = (TextView) findViewById(R.id.tv_jinghanliang);
 		tv_jiage = (TextView) findViewById(R.id.tv_jiage);
 		layout_product=(LinearLayout) findViewById(R.id.layout_product);
 		layout_company=(LinearLayout) findViewById(R.id.layout_company);
@@ -73,7 +72,6 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		tv_moren.setOnClickListener(this);
 		tv_pinpai.setOnClickListener(this);
 		tv_yongtu.setOnClickListener(this);
-		tv_jinghanliang.setOnClickListener(this);
 		tv_jiage.setOnClickListener(this);
 		tv_zh.setOnClickListener(this);
 		tv_nstnf.setOnClickListener(this);
@@ -205,11 +203,6 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 			addFragment(Style.YONGTU, params);
 
 			break;
-		case R.id.tv_jinghanliang:
-			index = 0;
-			setColor(3);
-			addFragment(Style.JINGHANLIANG, params);
-			break;
 		case R.id.tv_jiage:
 			index = index + 1;
 			setColor(4);
@@ -267,11 +260,6 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 					R.color.title_yellow_text_color));
 			tv_yongtu.setBackgroundResource(R.drawable.spinner_ab_default_holo_yello_am);
 			break;
-		case 3:
-			tv_jinghanliang.setTextColor(getResources().getColor(
-					R.color.title_yellow_text_color));
-			tv_jinghanliang.setBackgroundResource(R.drawable.spinner_ab_default_holo_yello_am);
-			break;
 		case 4:
 			tv_jiage.setTextColor(getResources().getColor(
 					R.color.title_yellow_text_color));
@@ -299,9 +287,6 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		tv_yongtu
 				.setTextColor(getResources().getColor(R.color.gray_text_color));
 		tv_yongtu.setBackgroundResource(R.drawable.spinner_ab_default_holo_light_am);
-		tv_jinghanliang.setTextColor(getResources().getColor(
-				R.color.gray_text_color));
-		tv_jinghanliang.setBackgroundResource(R.drawable.spinner_ab_default_holo_light_am);
 		tv_jiage.setTextColor(getResources().getColor(R.color.gray_text_color));
 	}
 

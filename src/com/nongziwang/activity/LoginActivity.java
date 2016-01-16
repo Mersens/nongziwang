@@ -52,8 +52,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private SsoHandler mSsoHandler;
 	private AuthInfo mAuthInfo;
 	private Oauth2AccessToken mAccessToken;
-	private static final String LOGIN_URL = AppConstants.SERVICE_ADDRESS+"login/gotoLogin";
-	private static final String USERINFO_URL = AppConstants.SERVICE_ADDRESS+"userinfo/getUserInfoById";
+	private static final String LOGIN_URL = AppConstants.SERVICE_ADDRESS
+			+ "login/gotoLogin";
+	private static final String USERINFO_URL = AppConstants.SERVICE_ADDRESS
+			+ "userinfo/getUserInfoById";
 	private static final String TAG = "LoginActivity";
 	private NongziDao dao;
 
@@ -72,8 +74,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void initViews() {
-		spotsdialog = new SpotsDialog(LoginActivity.this, "正在登录", null, true,
-				true);
 		edt_name = (EditText) findViewById(R.id.edt_name);
 		edt_psd = (EditText) findViewById(R.id.edt_psd);
 		btn_login = (Button) findViewById(R.id.btn_login);
@@ -178,6 +178,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		HttpUtils.doPost(LOGIN_URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onStart() {
+				spotsdialog = new SpotsDialog(LoginActivity.this, "正在登录", null,
+						true, true);
 				spotsdialog.show();
 				super.onStart();
 			}
@@ -193,7 +195,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 						try {
 							jsonObject = new JSONObject(arg2);
 							String userid = jsonObject.getString("userid");
-							getUserInfo(userid,name,psd);
+							getUserInfo(userid, name, psd);
 							ShowToast("登录成功！");
 							finishActivity();
 						} catch (JSONException e) {
@@ -202,7 +204,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 						}
 					} else if ("2".equals(code)) {
 						ShowToast("账户名不存在!");
-
 					} else if ("3".equals(code)) {
 						ShowToast("用户密码输入错误!");
 					}
@@ -212,14 +213,20 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Log.e(TAG, arg2);
-				spotsdialog.dismiss();
+				    Log.e(TAG, arg2 == null ? "" : arg2);
+				    ShowToast("登录失败！");
 			}
 
+			@Override
+			public void onFinish() {
+				dialogDismiss();
+				super.onFinish();
+			}
 		});
 	}
 
-	public void getUserInfo(final String userid,final String name,final String psd) {
+	public void getUserInfo(final String userid, final String name,
+			final String psd) {
 		RequestParams params = new RequestParams();
 		params.put("userid", userid);
 		HttpUtils.doPost(USERINFO_URL, params, new TextHttpResponseHandler() {
@@ -235,7 +242,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 							SharePreferenceUtil.getInstance(
 									getApplicationContext()).setUserName(name);
 							SharePreferenceUtil.getInstance(
-									getApplicationContext()).setUserId(MD5Util.MD5(psd));
+									getApplicationContext()).setUserPsd(
+									MD5Util.MD5(psd));
 							UserBean user = JsonUtils.getUserInfo(arg2);
 							user.setUserpwd(MD5Util.MD5(psd));
 							dao.addUserInfo(user);
@@ -249,15 +257,16 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Log.e(TAG, arg2);
+				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
 
-			@Override
-			public void onFinish() {
-				spotsdialog.dismiss();
-				super.onFinish();
-			}
 		});
+	}
+
+	public void dialogDismiss() {
+		if (spotsdialog != null && spotsdialog.isShowing()) {
+			spotsdialog.dismiss();
+		}
 	}
 
 	public void onClickQQLogin() {

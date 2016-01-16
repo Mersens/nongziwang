@@ -32,6 +32,7 @@ import com.nongziwang.adapter.SearchHistoryAdapter;
 import com.nongziwang.db.NongziDao;
 import com.nongziwang.db.NongziDaoImpl;
 import com.nongziwang.main.R;
+import com.nongziwang.utils.SharePreferenceUtil;
 
 public class SearchFragmentActivity extends BaseActivity {
 	private GridView mGridView;
@@ -50,12 +51,14 @@ public class SearchFragmentActivity extends BaseActivity {
 	private SearchHistoryAdapter shAdapter;
 	private List<String> search_history_list;
 	private boolean isFromHistory = false;
+	private String userid=null;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.layout_search);
 		mInflater = LayoutInflater.from(this);
+
 		dao = new NongziDaoImpl(this);
 		initViews();
 		initEvent();
@@ -82,7 +85,12 @@ public class SearchFragmentActivity extends BaseActivity {
 		hotsearchlist.add("尿素");
 		mGridView.setAdapter(new HotSearchAdapter(hotsearchlist,
 				SearchFragmentActivity.this));
-		search_history_list = dao.selectAllHistory("1");
+		userid=SharePreferenceUtil.getInstance(getApplicationContext()).getUserId();
+		if(TextUtils.isEmpty(userid)){
+			search_history_list = dao.selectAllHistory("1");
+		}else{
+			search_history_list = dao.selectAllHistory(userid);
+		}
 		if (search_history_list != null && search_history_list.size() > 0) {
 			shAdapter = new SearchHistoryAdapter(search_history_list,
 					SearchFragmentActivity.this);
@@ -160,7 +168,6 @@ public class SearchFragmentActivity extends BaseActivity {
 						}
 						return false;
 					}
-
 				});
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -201,11 +208,15 @@ public class SearchFragmentActivity extends BaseActivity {
 		if (TextUtils.isEmpty(edit_value)) {
 			ShowToast("搜索内容不能为空！");
 			return;
-
 		}
 		if (!isFromHistory) {
 			if(!dao.findHistoryIsExist(edit_value)){
-				dao.addSearchHistory("1", edit_value);
+				if(TextUtils.isEmpty(userid)){
+					dao.addSearchHistory("1", edit_value);
+				}else{
+					dao.addSearchHistory(userid, edit_value);
+				}
+				
 			}
 		}
 		Intent intent = new Intent(SearchFragmentActivity.this,

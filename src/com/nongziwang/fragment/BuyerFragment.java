@@ -116,7 +116,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			tv_name.setVisibility(View.GONE);
 			tv_login.setVisibility(View.VISIBLE);
 		}
-
 	}
 
 	private void initEvent() {
@@ -147,7 +146,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	protected void lazyLoad() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -305,7 +303,8 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void onStart() {
-		initDatas();
 		super.onStart();
+		initDatas();
 	}
+	
 }
