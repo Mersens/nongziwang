@@ -6,9 +6,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +21,7 @@ import com.nongziwang.application.AppConstants;
 import com.nongziwang.db.NongziDao;
 import com.nongziwang.db.NongziDaoImpl;
 import com.nongziwang.entity.UserBean;
+import com.nongziwang.fragment.BuyerFragment;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
@@ -196,7 +195,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 							jsonObject = new JSONObject(arg2);
 							String userid = jsonObject.getString("userid");
 							getUserInfo(userid, name, psd);
-							ShowToast("登录成功！");
+							ShowToast("登录成功！"); 
 							finishActivity();
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -290,7 +289,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				// 当您注册的应用程序签名不正确时，就会收到错误Code，请确保签名正确
 				String code = values.getString("code", "");
 				ShowToast(code);
-
 			}
 		}
 

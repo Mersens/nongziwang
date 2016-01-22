@@ -2,12 +2,22 @@ package com.nongziwang.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.http.Header;
+import org.json.JSONException;
+
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.SearchFragmentActivity;
 import com.nongziwang.activity.TypeSearchFragmentActivity;
 import com.nongziwang.adapter.MainListViewAdapter;
 import com.nongziwang.adapter.ViewPagerAdapter;
+import com.nongziwang.application.AppConstants;
 import com.nongziwang.main.R;
+import com.nongziwang.utils.HttpUtils;
+import com.nongziwang.utils.ImageLoadOptions;
+import com.nongziwang.utils.JsonUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -31,9 +41,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 	private ListView listView;
 	private LayoutInflater mInflater;
 	private ViewPager viewpager;
-	private int[] pics = { R.drawable.banner, R.drawable.banner,
-			R.drawable.banner };
-
 	private Runnable viewpagerRunnable;
 	private static Handler handler;
 	private RadioGroup dotLayout;
@@ -44,6 +51,10 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 	private LinearLayout layout_nongyao;
 	private LinearLayout layout_nongji;
 	private LinearLayout layout_nongmo;
+	private Map<String,List<String>> mapdatas;
+	private MainListViewAdapter adapter;
+	private static final String BANNER_URL = AppConstants.SERVICE_ADDRESS
+			+ "index/getIndexImg";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +62,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		view = inflater.inflate(R.layout.layout_home, container, false);
 		handler = new Handler();
 		initViews();
-		setBanners();
 		initDatas();
 		return view;
 	}
@@ -84,10 +94,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 
 	@SuppressLint("ViewHolder")
 	private void initDatas() {
-		List<String> list=new ArrayList<String>();
-		for(int i=0;i<5;i++){
-			list.add(i+"");
-		}
+
 		layout_search.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -100,13 +107,40 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 
 			}
 		});
-		listView.setAdapter(new MainListViewAdapter(list, getActivity()));
+
+
+		HttpUtils.doPost(BANNER_URL, new TextHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				try {
+					mapdatas=JsonUtils.getIndexImg(arg2);
+					List<List<String>> list=new ArrayList<List<String>>();
+					list.add(mapdatas.get("huafei"));
+					list.add(mapdatas.get("nongyao"));
+					list.add(mapdatas.get("zhongzi"));
+					setBanners();
+					adapter=new MainListViewAdapter(list, getActivity());
+					listView.setAdapter(adapter);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 
 	}
 
 	public void setBanners() {
 		initListener();
-		int len = pics.length;
+		List<String> list=mapdatas.get("banner");
+		int len = list.size();
 		View view = null;
 		ImageView imageview;
 		LayoutInflater mInflater = LayoutInflater.from(getActivity());
@@ -114,7 +148,8 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		for (int i = 0; i < len; i++) {
 			view = mInflater.inflate(R.layout.imageview_layout, null);
 			imageview = (ImageView) view.findViewById(R.id.viewpager_imageview);
-			imageview.setBackgroundResource(pics[i]);
+			ImageLoader.getInstance().displayImage(list.get(i), imageview,
+					ImageLoadOptions.getOptions());
 			lists.add(view);
 		}
 		viewpager.setAdapter(new ViewPagerAdapter(getActivity(), lists));

@@ -195,4 +195,28 @@ public class NongziDaoImpl implements NongziDao {
 		db.close();		
 	}
 
+	@Override
+	public void updateUserHeadById(String userid, String touxiang) {
+		SQLiteDatabase db = helper.getWritableDatabase();
+		db.execSQL("UPDATE usertb SET touxiang=? where userid=?",
+				new Object[] {touxiang, userid });
+		db.close();		
+	}
+
+	@Override
+	public void updateNameAndQq(String userid, String name, String qq) {
+		SQLiteDatabase db = helper.getWritableDatabase();
+		db.execSQL("UPDATE usertb SET xingming=?, qq=? where userid=?",
+				new Object[] {name,qq, userid });
+		db.close();			
+	}
+
+	@Override
+	public void updateCompanyId(String userid,String companyid) {
+		SQLiteDatabase db = helper.getWritableDatabase();
+		db.execSQL("UPDATE usertb SET companyid=? where userid=?",
+				new Object[] {companyid, userid });
+		db.close();	
+	}
+
 }

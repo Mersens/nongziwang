@@ -13,24 +13,25 @@
             android:id="@+id/pro_img"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:layout_margin="8dp"
+            android:layout_margin="5dp"
             android:src="@drawable/android" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="8dp"
+            android:layout_marginLeft="4dp"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:text="顶收——花生、薯类等多用型药肥"
                 android:textColor="@color/base_color_text_black"
-                android:textSize="@dimen/text_size" />
+                android:textSize="16sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -52,14 +53,14 @@
                         android:layout_marginBottom="4dp"
                         android:text="¥100起"
                         android:textColor="@color/red_text_color"
-                        android:textSize="@dimen/text_mid_size" />
+                        android:textSize="@dimen/text_size" />
 
                     <TextView
                         android:id="@+id/tv_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="河南省 郑州市"
-                        android:textSize="@dimen/text_mid_size" />
+                        android:textSize="@dimen/text_size" />
                 </LinearLayout>
 
                 <ImageView
@@ -70,7 +71,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="4dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/gouwuche" />
+                    android:src="@drawable/gouwuche"
+                    android:visibility="gone"
+                     />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

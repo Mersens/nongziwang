@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.TextView;
 
 public class SpotsDialog extends AlertDialog {
-
 	private static final int DELAY = 150;
 	private static final int DURATION = 1500;
 	private View view;

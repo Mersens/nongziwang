@@ -2,6 +2,7 @@ package com.nongziwang.activity;
 import com.nongziwang.fragment.BrandFragment;
 import com.nongziwang.fragment.NetcontentFragment;
 import com.nongziwang.fragment.SearchCompanyFragment;
+import com.nongziwang.fragment.SearchResultsByJiaGeFragment;
 import com.nongziwang.fragment.SearchResultsFragment;
 import com.nongziwang.fragment.UsesFragment;
 import com.nongziwang.main.R;
@@ -31,14 +32,13 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 	private String params;
 	private ImageView image_back, image_search;
 	private Spinner spinner;
-	private TextView tv_moren, tv_pinpai, tv_yongtu, tv_jiage,tv_zh,tv_nstnf;
+	private TextView tv_moren, tv_pinpai, tv_yongtu, tv_jiage;
 	private static final String types[] = { "产品", "公司" };
 	private LayoutInflater mInflater;
 	private MyArrayAdapter adapter;
 	private int index = 0;
-	
 	private LinearLayout layout_product;
-	private LinearLayout layout_company;
+	private int sp_pos=0;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -46,6 +46,7 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		super.onCreate(arg0);
 		setContentView(R.layout.layout_search_result);
 		params = getIntent().getStringExtra("params");
+		sp_pos=getIntent().getIntExtra("sp_pos",0);
 		mInflater = LayoutInflater.from(this);
 		initViews();
 		initEvent();
@@ -61,9 +62,7 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		tv_yongtu = (TextView) findViewById(R.id.tv_yongtu);
 		tv_jiage = (TextView) findViewById(R.id.tv_jiage);
 		layout_product=(LinearLayout) findViewById(R.id.layout_product);
-		layout_company=(LinearLayout) findViewById(R.id.layout_company);
-		tv_zh=(TextView) findViewById(R.id.tv_zh);
-		tv_nstnf=(TextView) findViewById(R.id.tv_nstnf);
+
 	}
 
 	private void initEvent() {
@@ -73,8 +72,6 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		tv_pinpai.setOnClickListener(this);
 		tv_yongtu.setOnClickListener(this);
 		tv_jiage.setOnClickListener(this);
-		tv_zh.setOnClickListener(this);
-		tv_nstnf.setOnClickListener(this);
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
@@ -82,11 +79,9 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 					int position, long id) {
 				if(position==0){
 					layout_product.setVisibility(View.VISIBLE);
-					layout_company.setVisibility(View.GONE);
 					addFragment(Style.MOREN, params);
 				} else if(position==1){
 					layout_product.setVisibility(View.GONE);
-					layout_company.setVisibility(View.VISIBLE);
 					addFragment(Style.COMPANY, params);
 				}
 			}
@@ -103,7 +98,7 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 				android.R.layout.simple_spinner_item, types);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
-		spinner.setSelection(0, true);
+		spinner.setSelection(sp_pos, true);
 		image_back.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -121,7 +116,7 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 				finish();
 			}
 		});
-		addFragment(Style.MOREN, params);
+
 	}
 	 class MyArrayAdapter extends ArrayAdapter<String>{
 		 private String str[];
@@ -147,7 +142,6 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 	
 	public Fragment creatFragment(Style style, String params) {
 		Fragment fragment = null;
-
 		switch (style) {
 		case MOREN:
 			fragment = SearchResultsFragment.getInstance(params);
@@ -162,7 +156,13 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 			fragment = NetcontentFragment.getInstance(params);
 			break;
 		case JIAGE:
-			fragment = SearchResultsFragment.getInstance(params);
+			int sorttype=0;
+			if(index % 2 == 0){
+				sorttype=1;
+			}else{
+				sorttype=0;
+			}
+			fragment = SearchResultsByJiaGeFragment.getInstance(params,sorttype);
 			break;
 		case COMPANY:
 			fragment=SearchCompanyFragment.getInstance(params);
@@ -183,7 +183,6 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).add(R.id.fragmentContainer, fragment).commit();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -207,18 +206,8 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 			index = index + 1;
 			setColor(4);
 			addFragment(Style.JIAGE, params);
-			
 			break;
-		case R.id.tv_zh:
-			setColor(5);
-			addFragment(Style.COMPANY, params);
-			break;
-			
-		case R.id.tv_nstnf:
-			setColor(6);
-			addFragment(Style.COMPANY, params);
-			break;
-			
+
 		}
 
 		if (index == 0) {
@@ -264,22 +253,12 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 			tv_jiage.setTextColor(getResources().getColor(
 					R.color.title_yellow_text_color));
 			break;
-		case 5:
-			tv_zh.setTextColor(getResources().getColor(
-					R.color.title_yellow_text_color));
-			break;
-		case 6:
-			tv_nstnf.setTextColor(getResources().getColor(
-					R.color.title_yellow_text_color));
-			break;
+
 		}
 	}
 
 	public void resetColor(int i) {
-		if(i==5 || i==6){
-			tv_zh.setTextColor(getResources().getColor(R.color.gray_text_color));
-			tv_nstnf.setTextColor(getResources().getColor(R.color.gray_text_color));
-		}
+
 		tv_moren.setTextColor(getResources().getColor(R.color.gray_text_color));
 		tv_pinpai
 				.setTextColor(getResources().getColor(R.color.gray_text_color));

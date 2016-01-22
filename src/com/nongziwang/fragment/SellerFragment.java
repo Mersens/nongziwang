@@ -137,26 +137,7 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 		case R.id.tv_login:
 			intentAction(getActivity(), LoginActivity.class);
 			break;
-		case R.id.layout_ymdcp:
-			intentAction(getActivity(), CommonOrderFragmentActivity.class,
-					CommonOrderFragmentActivity.YMCCP);
-			break;
-		case R.id.layout_dqr:
-			intentAction(getActivity(), CommonOrderFragmentActivity.class,
-					CommonOrderFragmentActivity.DQR);
-			break;
-		case R.id.layout_dfk:
-			intentAction(getActivity(), CommonOrderFragmentActivity.class,
-					CommonOrderFragmentActivity.DFK);
-			break;
-		case R.id.layout_yfh:
-			intentAction(getActivity(), CommonOrderFragmentActivity.class,
-					CommonOrderFragmentActivity.YFH);
-			break;
-		case R.id.layout_jycg:
-			intentAction(getActivity(), CommonOrderFragmentActivity.class,
-					CommonOrderFragmentActivity.JYCG);
-			break;
+
 		case R.id.layout_tqck:
 			intentAction(getActivity(),TqhkActivity.class);
 			break;

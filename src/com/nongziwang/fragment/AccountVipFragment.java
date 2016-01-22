@@ -1,22 +1,29 @@
 package com.nongziwang.fragment;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.ResetPhoneNumberFragmentActivity;
 import com.nongziwang.application.AppConstants;
+import com.nongziwang.db.NongziDao;
+import com.nongziwang.db.NongziDaoImpl;
+import com.nongziwang.entity.UserBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
+import com.nongziwang.utils.ImageLoadOptions;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.PhotoUtil;
 import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.utils.StringUtils;
-
+import com.nostra13.universalimageloader.core.ImageLoader;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -41,7 +48,7 @@ public class AccountVipFragment extends BaseFragment {
 	private View view;
 	private ImageView img_user_head;
 	private EditText edt_name, edt_qq;
-	private TextView tv_update;
+	private TextView tv_update,tv_tel;
 	private Button btn_ok;
 	private String path;
 	public static final int FROM_XC = 0X00;
@@ -51,11 +58,17 @@ public class AccountVipFragment extends BaseFragment {
 			+ "userinfo/gotoUpdateUserInfo";
 	private static final String HEADURL = AppConstants.SERVICE_ADDRESS
 			+ "userinfo/gotoUpHeadImg";
+	private NongziDao dao;
+	private String userid;
+	private UserBean user;
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.layout_account_vip, container, false);
+		dao=new NongziDaoImpl(getActivity().getApplicationContext());
+		userid=SharePreferenceUtil.getInstance(getActivity().getApplicationContext()).getUserId();
 		initViews();
 		initEvent();
 		return view;
@@ -63,9 +76,19 @@ public class AccountVipFragment extends BaseFragment {
 
 	private void initViews() {
 		img_user_head = (ImageView) view.findViewById(R.id.img_user_head);
+		if(!TextUtils.isEmpty(userid)){
+			user= dao.findUserInfoById(userid);
+			ImageLoader.getInstance().displayImage(user.getTouxiang(), img_user_head,
+					ImageLoadOptions.getOptionsLoading());
+		}
+
 		edt_name = (EditText) view.findViewById(R.id.edt_name);
+		edt_name.setText(user.getXingming()==null?"":user.getXingming());
 		edt_qq = (EditText) view.findViewById(R.id.edt_qq);
+		edt_qq.setText(user.getQq()==null?"":user.getQq());
 		tv_update = (TextView) view.findViewById(R.id.tv_update);
+		tv_tel=(TextView) view.findViewById(R.id.tv_tel);
+		tv_tel.setText(StringUtils.getFormatTelNum(user.getUserphone()));
 		btn_ok = (Button) view.findViewById(R.id.btn_ok);
 	}
 
@@ -97,8 +120,8 @@ public class AccountVipFragment extends BaseFragment {
 	}
 
 	public void doSave(){
-		String name=edt_name.getText().toString().trim();
-		String qq =edt_qq.getText().toString().trim();
+		final String name=edt_name.getText().toString().trim();
+		final String qq =edt_qq.getText().toString().trim();
 		if(TextUtils.isEmpty(name)){
 			Toast.makeText(getActivity(), "姓名为空！", Toast.LENGTH_LONG).show();
 			return;
@@ -123,6 +146,7 @@ public class AccountVipFragment extends BaseFragment {
 				if("0".equals(code)){
 					Toast.makeText(getActivity(), "用户id,姓名,或qq号码为空！", Toast.LENGTH_LONG).show();
 				}else if("1".equals(code)){
+					dao.updateNameAndQq(userid, name, qq);
 					Toast.makeText(getActivity(), "用户信息修改成功！", Toast.LENGTH_LONG).show();
 				}else if("2".equals(code)){
 					Toast.makeText(getActivity(), "用户信息不存在！", Toast.LENGTH_LONG).show();
@@ -241,12 +265,45 @@ public class AccountVipFragment extends BaseFragment {
 	}
 
 	public void uploadAvatar(String path) {
-/*		File file=new File(path);
+		File file=new File(path);
 		String id= SharePreferenceUtil.getInstance(getActivity().getApplicationContext()).getUserId();
 		RequestParams params = new RequestParams();
 		params.put("userid", id);
-		params.put("xingming", name);
-		HttpUtils.doPost(url, params res);*/
+		try {
+			params.put("touxiang", file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		HttpUtils.doPost(HEADURL, params,new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code =JsonUtils.getCode(arg2);
+				if("0".equals(code)){
+					Toast.makeText(getActivity(), "用户不存在！", Toast.LENGTH_LONG).show();
+				}else if("1".equals(code)){
+					try {
+						JSONObject jsonObject = new JSONObject(arg2);
+						String path = jsonObject.getString("touxiang");
+						dao.updateUserHeadById(userid, path);
+						Toast.makeText(getActivity(), "上传成功！", Toast.LENGTH_LONG).show();
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else if("2".equals(code)){
+					Toast.makeText(getActivity(), "资源太大！", Toast.LENGTH_LONG).show();
+				}else if("3".equals(code)){
+					Toast.makeText(getActivity(), "文件为空！", Toast.LENGTH_LONG).show();
+				}
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				Log.e(TAG, arg2==null?"":arg2);
+				Toast.makeText(getActivity(), "图片上传失败！", Toast.LENGTH_LONG).show();
+			}
+		});
 		// 上传头像
 	}
 

@@ -1,28 +1,51 @@
 package com.nongziwang.adapter;
 
 import java.util.List;
+import java.util.Map;
 
 import com.nongziwang.main.R;
+import com.nongziwang.utils.ImageLoadOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class MainListViewAdapter extends BaseListAdapter<String> {
-	private List<String> list;
+public class MainListViewAdapter extends BaseAdapter {
+	private List<List<String>> list;
 	private Context context;
+	public LayoutInflater mInflater;
 
-	public MainListViewAdapter(List<String> list, Context context) {
-		super(list, context);
+	public MainListViewAdapter(List<List<String>> list, Context context) {
 		this.list = list;
 		this.context = context;
+		mInflater = LayoutInflater.from(context);
+
 	}
 
 	@Override
-	public View getContentView(int position, View convertView, ViewGroup parent) {
+	public int getCount() {
+		return list.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return list.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+
+		return position;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 		if (convertView == null) {
 			holder = new ViewHolder();
@@ -40,10 +63,20 @@ public class MainListViewAdapter extends BaseListAdapter<String> {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
+
+		List<String> imglist = list.get(position);
+		ImageLoader.getInstance().displayImage(imglist.get(0), holder.img_left,
+				ImageLoadOptions.getOptions());
+		ImageLoader.getInstance().displayImage(imglist.get(1),
+				holder.img_right_top, ImageLoadOptions.getOptions());
+		ImageLoader.getInstance().displayImage(imglist.get(2),
+				holder.img_right_bottom_left, ImageLoadOptions.getOptions());
+		ImageLoader.getInstance().displayImage(imglist.get(3),
+				holder.img_right_bottom_right, ImageLoadOptions.getOptions());
 		holder.img_left.setOnClickListener(new MyOnClickListener(position,
 				Type.LEFT));
-		holder.img_right_top.setOnClickListener(new MyOnClickListener(
-				position, Type.RIGHT_TOP));
+		holder.img_right_top.setOnClickListener(new MyOnClickListener(position,
+				Type.RIGHT_TOP));
 		holder.img_right_bottom_left.setOnClickListener(new MyOnClickListener(
 				position, Type.RIGHT_BOTTOM_LEFT));
 		holder.img_right_bottom_right.setOnClickListener(new MyOnClickListener(
@@ -75,22 +108,16 @@ public class MainListViewAdapter extends BaseListAdapter<String> {
 		public void onClick(View v) {
 			switch (type) {
 			case LEFT:
-				Toast.makeText(context, "pos是" + pos + "-------->LEFT",
-						Toast.LENGTH_SHORT).show();
+
 				break;
 			case RIGHT_TOP:
-				Toast.makeText(context, "pos是" + pos + "-------->RIGHT_TOP",
-						Toast.LENGTH_SHORT).show();
+
 				break;
 			case RIGHT_BOTTOM_LEFT:
-				Toast.makeText(context,
-						"pos是" + pos + "-------->RIGHT_BOTTOM_LEFT",
-						Toast.LENGTH_SHORT).show();
+
 				break;
 			case RIGHT_BOTTOM_RIGHT:
-				Toast.makeText(context,
-						"pos是" + pos + "-------->RIGHT_BOTTOM_RIGHT",
-						Toast.LENGTH_SHORT).show();
+				
 				break;
 
 			}
@@ -98,4 +125,5 @@ public class MainListViewAdapter extends BaseListAdapter<String> {
 		}
 
 	}
+
 }

@@ -108,7 +108,7 @@ public class InfoFragment extends BaseFragment implements OnPageChangeListener {
 
 		@Override
 		public Fragment getItem(int idx) {
-			return IndustryInfoFragment.getInstance(null);
+			return IndustryInfoFragment.getInstance(idx+"");
 		}
 
 		@Override

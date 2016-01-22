@@ -2,7 +2,10 @@ package com.nongziwang.adapter;
 
 import java.util.List;
 
+import com.nongziwang.entity.ProductBean;
 import com.nongziwang.main.R;
+import com.nongziwang.utils.ImageLoadOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.content.Context;
 import android.view.View;
@@ -11,10 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SearchResultsAdapter extends BaseListAdapter<String> {
+public class SearchResultsAdapter extends BaseListAdapter<ProductBean> {
 
-	public SearchResultsAdapter(List<String> list, Context context) {
+	private List<ProductBean> list;
+	public SearchResultsAdapter(List<ProductBean> list, Context context) {
 		super(list, context);
+		this.list= list;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -38,6 +43,12 @@ public class SearchResultsAdapter extends BaseListAdapter<String> {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
+		ProductBean bean=list.get(position);
+		ImageLoader.getInstance().displayImage(bean.getChanpinimg(), holder.pro_img,
+				ImageLoadOptions.getOptions());
+		holder.tv_title.setText(bean.getTitle());
+		holder.tv_money.setText("¥"+bean.getJiage());
+		holder.tv_address.setText(bean.getProvince()+" "+bean.getCityname());
 		holder.img_cart.setOnClickListener(new MyOnClickListener(position));
 		return convertView;
 	}

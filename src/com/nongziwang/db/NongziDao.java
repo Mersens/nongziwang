@@ -42,5 +42,16 @@ public interface NongziDao {
 	
 	//删除用户信息
 	public void delUserInfoById(String userid);
+	
+	//修改用户头像
+	public void updateUserHeadById(String userid,String touxiang);
+	
+	//修改真实姓名和QQ
+	public void updateNameAndQq(String userid,String name,String qq);
+	
+	//修改用户的公司id
+	public void updateCompanyId(String userid,String companyid);
+		
+	
 
 }

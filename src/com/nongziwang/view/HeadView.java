@@ -31,14 +31,7 @@ public class HeadView extends LinearLayout {
 	private OnLeftClickListener onleftclicklistener;
 	private OnRightClickListener onrightclicklistener;
 
-	/**
-	 * 
-	 * @author Mersens 枚举类型的标题栏显示类型 DEFAULT--默认显示左侧图标，右侧图标和标题 ONLYTITLE--只显示标题
-	 *         LEFT--只显示左侧图标 LEFTANDTITLE--只显示左侧图标和标题
-	 */
-	public enum HeaderStyle {
-		DEFAULT, ONLYTITLE, LEFT, LEFTANDTITLE, RIGHTANDTITLE;
-	}
+
 
 	public HeadView(Context context) {
 		super(context);
@@ -50,7 +43,19 @@ public class HeadView extends LinearLayout {
 		super(context, attrs);
 		init(context);
 	}
-
+	
+	/**
+	 * 
+	 * @title HeaderStyle
+	 * @description:枚举类型的标题栏显示类型 DEFAULT--默认显示左侧图标，右侧图标和标题 ONLYTITLE--只显示标题
+	 * LEFT--只显示左侧图标 LEFTANDTITLE--只显示左侧图标和标题
+	 * @author Mersens
+	 * @time 2016年1月12日
+	 */
+	public enum HeaderStyle {
+		DEFAULT, ONLYTITLE, LEFT, LEFTANDTITLE, RIGHTANDTITLE;
+	}
+	
 	@SuppressLint("InflateParams")
 	private void init(Context context) {
 		mInflater = LayoutInflater.from(context);
@@ -86,7 +91,6 @@ public class HeadView extends LinearLayout {
 				.findViewById(R.id.header_layout_rightview_container);
 		tv_title = (TextView) header.findViewById(R.id.tv_title);
 	}
-
 	/**
 	 * @author Mersens 根据类型进行初始化,可以通过addView()方法动态添加控件,然后设置其控件的显示
 	 * @param style

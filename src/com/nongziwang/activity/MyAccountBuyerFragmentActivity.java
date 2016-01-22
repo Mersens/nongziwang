@@ -23,7 +23,7 @@ public class MyAccountBuyerFragmentActivity extends BaseActivity {
 	}
 
 	private void initViews() {
-		setLeftWithTitleViewMethod(R.drawable.ic_menu_back, "账号管理",
+		setLeftWithTitleViewMethod(R.drawable.ic_menu_back, "个人中心",
 				new OnLeftClickListener() {
 					@Override
 					public void onClick() {

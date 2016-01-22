@@ -40,7 +40,7 @@ public class UsesFragment extends BaseFragment{
 
 	}
 	public Fragment creatFragment(String params) {
-		return CommonSearchOtherResultsFragment.getInstance(params);
+		return UsesResultsFragment.getInstance(params);
 
 	}
 

@@ -15,7 +15,7 @@
     <View
         android:layout_width="1dp"
         android:layout_height="fill_parent"
-        android:background="@color/black2" />
+        android:background="@color/base_color_text_gray" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -35,7 +35,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="@color/black2" />
+            android:background="@color/base_color_text_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="fill_parent"
-                android:background="@color/black2" />
+                android:background="@color/base_color_text_gray" />
 
             <ImageView
                 android:id="@+id/img_right_bottom_right"

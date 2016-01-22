@@ -33,7 +33,7 @@
                 android:layout_weight="1"
                 android:layout_marginTop="6dp"
                 android:textColor="@color/base_color_text_black"
-                android:textSize="@dimen/text_size"
+                android:textSize="16sp"
                 android:singleLine="true"
                 android:text="全国玉米市场行情分析" />
 
@@ -43,7 +43,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_marginTop="4dp"
-                android:textSize="@dimen/text_mid_size"
+                android:textSize="@dimen/text_size"
                 android:singleLine="true"
                 android:text="目前全国新季玉米供应充足，国储陈粮库存巨大" />
 

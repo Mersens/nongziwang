@@ -65,7 +65,7 @@
     <string name="tx_sc">我的收藏</string>
     <string name="tx_wdzj">我的足迹</string>
     <string name="tx_shdz">收货地址</string>
-    <string name="tx_zhgl">账号管理</string>
+    <string name="tx_zhgl">个人中心</string>
     <string name="tx_setting">设置</string>
     <string name="tv_switch_buyer">切换为买家</string>
     <string name="tx_dp">我的店铺</string>
@@ -76,6 +76,7 @@
     <string name="tx_cpgl">产品管理</string>
     <string name="tx_ckdp">查看店铺</string>
     <string name="tx_xpgl">询盘管理</string>
+    <string name="tx_gsgl">公司管理</string>
     <string name="scan_text">请将条码置于取景框内扫描</string>
      <string name="tv_or">或</string>
 

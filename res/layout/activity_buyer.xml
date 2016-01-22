@@ -17,7 +17,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="160dp"
                 android:background="@color/user_center_blue_color"
                 android:orientation="vertical" >
 
@@ -26,28 +26,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" >
 
-                    <TextView
-                        android:id="@+id/tv_buyer_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="12dp"
-                        android:background="@drawable/tv_switch_buy_bg"
-                        android:text="@string/tv_switch_seller"
-                        android:textColor="@color/white_color"
-                        android:textSize="@dimen/text_mid_size" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" >
-
                     <com.nongziwang.view.CircleImageView
                         android:id="@+id/buyer_user_head"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
                         android:layout_centerInParent="true"
                         android:src="@drawable/icon_user_img" />
                 </RelativeLayout>
@@ -66,6 +48,7 @@
                         android:background="@drawable/tv_login_bg"
                         android:text="@string/tx_msdl"
                         android:textColor="@color/white_color"
+                        android:layout_marginTop="5dp"
                         android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
 
                     <TextView
@@ -76,6 +59,7 @@
                         android:layout_centerHorizontal="true"
                         android:background="@drawable/tv_login_bg_normal"
                         android:textColor="@color/white_color"
+                        android:layout_marginTop="5dp"
                         android:textSize="@dimen/common_text_size"
                         android:visibility="gone" />
                 </RelativeLayout>
@@ -138,38 +122,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
-
-                <RelativeLayout
-                    android:id="@+id/layout_cart"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/pressed_bg" >
-
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
-                        android:src="@drawable/icon_gouwuche" />
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="8dp"
-                        android:layout_toRightOf="@+id/imageView3"
-                        android:text="@string/tx_gouwuche"
-                        android:textColor="@color/base_color_text_black"
-                        android:textSize="@dimen/text_size" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/black2" />
 
                 <RelativeLayout
                     android:id="@+id/layout_fbxjd"
@@ -235,7 +187,39 @@
                     android:background="@color/black2" />
 
                 <RelativeLayout
-                    android:id="@+id/layout_mycollection"
+                    android:id="@+id/layout_rele_pro"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/pressed_bg" >
+
+                    <ImageView
+                        android:id="@+id/image12"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="18dp"
+                        android:src="@drawable/icon_fbcp" />
+
+                    <TextView
+                        android:id="@+id/te11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/image12"
+                        android:text="@string/tx_fbcp"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/text_size" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black2" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_pro"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/pressed_bg" >
@@ -247,7 +231,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="18dp"
-                        android:src="@drawable/icon_wdsc" />
+                        android:src="@drawable/icon_cpgl" />
 
                     <TextView
                         android:id="@+id/te5"
@@ -256,7 +240,39 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/image3"
-                        android:text="@string/tx_sc"
+                        android:text="@string/tx_cpgl"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/text_size" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black2" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_ckdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/pressed_bg" >
+
+                    <ImageView
+                        android:id="@+id/image4"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="18dp"
+                        android:src="@drawable/icon_ckdp" />
+
+                    <TextView
+                        android:id="@+id/te4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/image4"
+                        android:text="@string/tx_ckdp"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/text_size" />
                 </RelativeLayout>
@@ -273,7 +289,7 @@
                     android:background="@drawable/pressed_bg" >
 
                     <ImageView
-                        android:id="@+id/image4"
+                        android:id="@+id/image41"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_alignParentLeft="true"
@@ -282,12 +298,12 @@
                         android:src="@drawable/icon_wdzj" />
 
                     <TextView
-                        android:id="@+id/te4"
+                        android:id="@+id/te41"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="8dp"
-                        android:layout_toRightOf="@+id/image4"
+                        android:layout_toRightOf="@+id/image41"
                         android:text="@string/tx_wdzj"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/text_size" />
@@ -299,7 +315,7 @@
                     android:background="@color/black2" />
 
                 <RelativeLayout
-                    android:id="@+id/layout_myaddress"
+                    android:id="@+id/layout_gsgl"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/pressed_bg" >
@@ -311,7 +327,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="18dp"
-                        android:src="@drawable/icon_shdz" />
+                        android:src="@drawable/icon_xpgl" />
 
                     <TextView
                         android:id="@+id/te6"
@@ -320,7 +336,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/image5"
-                        android:text="@string/tx_shdz"
+                        android:text="@string/tx_gsgl"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/text_size" />
                 </RelativeLayout>

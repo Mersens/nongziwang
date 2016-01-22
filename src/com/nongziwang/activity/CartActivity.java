@@ -73,7 +73,5 @@ public class CartActivity extends BaseActivity implements OnClickListener {
 			layout_del_bar.setVisibility(View.GONE);
 		}
 		count++;
-
 	}
-
 }

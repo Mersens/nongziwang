@@ -11,7 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
+        android:textSize="@dimen/text_size"
         android:layout_marginLeft="32dp"
+        android:textColor="@color/black_text_color"
         />
     <View
         android:layout_width="match_parent"
@@ -19,4 +21,14 @@
         android:background="@color/black2" 
         android:layout_alignParentBottom="true"
         />
+    <ImageView
+            android:id="@+id/image_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/group_down" 
+            android:visibility="gone"
+            />
 </RelativeLayout>

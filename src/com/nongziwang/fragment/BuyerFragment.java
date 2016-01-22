@@ -1,27 +1,17 @@
 package com.nongziwang.fragment;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.nongziwang.activity.CartActivity;
-import com.nongziwang.activity.CommonOrderFragmentActivity;
-import com.nongziwang.activity.FbxjdActivity;
-import com.nongziwang.activity.LoginActivity;
-import com.nongziwang.activity.MyAccountBuyerFragmentActivity;
-import com.nongziwang.activity.MyAddressFragmentActivity;
-import com.nongziwang.activity.MyCollectionFragmentActivity;
-import com.nongziwang.activity.MyFootprintActivity;
-import com.nongziwang.activity.SettingActivity;
-import com.nongziwang.application.AppConstants;
-import com.nongziwang.db.NongziDao;
-import com.nongziwang.db.NongziDaoImpl;
-import com.nongziwang.entity.UserBean;
-import com.nongziwang.main.R;
-import com.nongziwang.utils.PhotoUtil;
-import com.nongziwang.utils.SharePreferenceUtil;
-import com.nongziwang.view.CircleImageView;
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -37,32 +27,57 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.nongziwang.activity.FbxjdActivity;
+import com.nongziwang.activity.GongsiFragmentActivity;
+import com.nongziwang.activity.LoginActivity;
+import com.nongziwang.activity.MyAccountBuyerFragmentActivity;
+import com.nongziwang.activity.MyFootprintActivity;
+import com.nongziwang.activity.MyShopsFragmentActivity;
+import com.nongziwang.activity.ProductManagementFragmentActivity;
+import com.nongziwang.activity.ReleaseProductFragmentActivity;
+import com.nongziwang.activity.SettingActivity;
+import com.nongziwang.application.AppConstants;
+import com.nongziwang.db.NongziDao;
+import com.nongziwang.db.NongziDaoImpl;
+import com.nongziwang.entity.UserBean;
+import com.nongziwang.main.R;
+import com.nongziwang.utils.HttpUtils;
+import com.nongziwang.utils.ImageLoadOptions;
+import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.utils.PhotoUtil;
+import com.nongziwang.utils.SharePreferenceUtil;
+import com.nongziwang.view.CircleImageView;
+import com.nongziwang.view.DialogTips;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
- * @author Mersens 买家
+ * @title BuyerFragment
+ * @description:Mersens
+ * @author Mersens
+ * @time 2016年1月22日
  */
 public class BuyerFragment extends BaseFragment implements OnClickListener {
 	private View view;
-	private TextView tv_buyer_switch;
 	private TextView tv_login, tv_name;
 	private CircleImageView buyer_user_head;
-	private RelativeLayout layout_ymdcp;
-	private RelativeLayout layout_dqr;
-	private RelativeLayout layout_dfk;
-	private RelativeLayout layout_dsh;
-	private RelativeLayout layout_jycg;
-	private RelativeLayout layout_cart;
 	private RelativeLayout layout_fbxjd;
-	private RelativeLayout layout_mycollection;
 	private RelativeLayout layout_myfootprint;
-	private RelativeLayout layout_myaddress;
 	private RelativeLayout layout_setting;
 	private RelativeLayout layout_myaccount;
+	private RelativeLayout layout_rele_pro;
+	private RelativeLayout layout_pro;
+	private RelativeLayout layout_ckdp;
+	private RelativeLayout layout_gsgl;
 	public static final int FROM_XC = 0X00;
 	public static final int FROM_CJ = 0X01;
 	public static final String TAG = "BuyerFragment";
 	public String path;
+	private static final String HEADURL = AppConstants.SERVICE_ADDRESS
+			+ "userinfo/gotoUpHeadImg";
 	private NongziDao dao;
 	private String userid = null;
 
@@ -71,6 +86,10 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.activity_buyer, null);
+		dao = new NongziDaoImpl(getActivity().getApplicationContext());
+		userid = SharePreferenceUtil.getInstance(
+				getActivity().getApplicationContext()).getUserId();
+
 		initViews();
 		initEvent();
 		return view;
@@ -80,29 +99,28 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		tv_name = (TextView) view.findViewById(R.id.tv_name);
 		buyer_user_head = (CircleImageView) view
 				.findViewById(R.id.buyer_user_head);
+		if (!TextUtils.isEmpty(userid)) {
+			UserBean user = dao.findUserInfoById(userid);
+			ImageLoader.getInstance().displayImage(user.getTouxiang(),
+					buyer_user_head, ImageLoadOptions.getOptionsLoading());
+		}
 		layout_myaccount = (RelativeLayout) view
 				.findViewById(R.id.layout_myaccount);
 		layout_setting = (RelativeLayout) view
 				.findViewById(R.id.layout_setting);
-		layout_myaddress = (RelativeLayout) view
-				.findViewById(R.id.layout_myaddress);
+
 		layout_myfootprint = (RelativeLayout) view
 				.findViewById(R.id.layout_myfootprint);
-		layout_mycollection = (RelativeLayout) view
-				.findViewById(R.id.layout_mycollection);
-		tv_buyer_switch = (TextView) view.findViewById(R.id.tv_buyer_switch);
 		tv_login = (TextView) view.findViewById(R.id.tv_login);
-		layout_ymdcp = (RelativeLayout) view.findViewById(R.id.layout_ymdcp);
-		layout_dqr = (RelativeLayout) view.findViewById(R.id.layout_dqr);
-		layout_dfk = (RelativeLayout) view.findViewById(R.id.layout_dfk);
-		layout_dsh = (RelativeLayout) view.findViewById(R.id.layout_dsh);
-		layout_jycg = (RelativeLayout) view.findViewById(R.id.layout_jycg);
-		layout_cart = (RelativeLayout) view.findViewById(R.id.layout_cart);
 		layout_fbxjd = (RelativeLayout) view.findViewById(R.id.layout_fbxjd);
+		layout_rele_pro = (RelativeLayout) view
+				.findViewById(R.id.layout_rele_pro);
+		layout_pro = (RelativeLayout) view.findViewById(R.id.layout_pro);
+		layout_ckdp = (RelativeLayout) view.findViewById(R.id.layout_ckdp);
+		layout_gsgl = (RelativeLayout) view.findViewById(R.id.layout_gsgl);
 	}
 
 	public void initDatas() {
-		dao = new NongziDaoImpl(getActivity().getApplicationContext());
 		userid = SharePreferenceUtil.getInstance(
 				getActivity().getApplicationContext()).getUserId();
 		if (!TextUtils.isEmpty(userid)) {
@@ -122,18 +140,19 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		buyer_user_head.setOnClickListener(this);
 		layout_myaccount.setOnClickListener(this);
 		layout_setting.setOnClickListener(this);
-		layout_myaddress.setOnClickListener(this);
 		layout_myfootprint.setOnClickListener(this);
-		layout_mycollection.setOnClickListener(this);
 		layout_fbxjd.setOnClickListener(this);
-		tv_buyer_switch.setOnClickListener(this);
-		tv_login.setOnClickListener(this);
-		layout_ymdcp.setOnClickListener(this);
-		layout_dqr.setOnClickListener(this);
-		layout_dfk.setOnClickListener(this);
-		layout_dsh.setOnClickListener(this);
-		layout_jycg.setOnClickListener(this);
-		layout_cart.setOnClickListener(this);
+		tv_login.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				intentAction(getActivity(), LoginActivity.class);
+			}
+		});
+		layout_rele_pro.setOnClickListener(this);
+		layout_pro.setOnClickListener(this);
+		layout_ckdp.setOnClickListener(this);
+		layout_gsgl.setOnClickListener(this);
+
 	}
 
 	public static Fragment getInstance(String params) {
@@ -150,53 +169,64 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		if (TextUtils.isEmpty(userid)) {
+			DialogTips dialog = new DialogTips(getActivity(), "温馨提示",
+					"您未登录,是否选择登录?", "确定", true, true);
+			dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialogInterface, int userId) {
+					intentAction(getActivity(), LoginActivity.class);
+				}
+			});
+			dialog.show();
+			dialog = null;
+		} else {
+			doSelect(v.getId());
+		}
 
-		switch (v.getId()) {
-		case R.id.tv_buyer_switch:
-			Intent intent = new Intent();
-			intent.setAction(UserCenterFragment.BROADCAST_ACTION_SELL);
-			getActivity().sendBroadcast(intent);
-			break;
+	}
+
+	public void doSelect(int id) {
+		switch (id) {
 		case R.id.buyer_user_head:
 			showAvatarPop();
 			break;
-		case R.id.tv_login:
-			intentAction(getActivity(), LoginActivity.class);
-			break;
-		case R.id.layout_ymdcp:
-			intentAction(getActivity(), CommonOrderFragmentActivity.class,
-					CommonOrderFragmentActivity.YMDCP);
-			break;
-		case R.id.layout_dqr:
-			intentAction(getActivity(), CommonOrderFragmentActivity.class,
-					CommonOrderFragmentActivity.DQR);
-			break;
-		case R.id.layout_dfk:
-			intentAction(getActivity(), CommonOrderFragmentActivity.class,
-					CommonOrderFragmentActivity.DFK);
-			break;
-		case R.id.layout_dsh:
-			intentAction(getActivity(), CommonOrderFragmentActivity.class,
-					CommonOrderFragmentActivity.DSH);
-			break;
-		case R.id.layout_jycg:
-			intentAction(getActivity(), CommonOrderFragmentActivity.class,
-					CommonOrderFragmentActivity.JYCG);
-			break;
-		case R.id.layout_cart:
-			intentAction(getActivity(), CartActivity.class);
+		case R.id.layout_gsgl:
+			intentAction(getActivity(), GongsiFragmentActivity.class);
 			break;
 		case R.id.layout_fbxjd:
 			intentAction(getActivity(), FbxjdActivity.class);
 			break;
-		case R.id.layout_mycollection:
-			intentAction(getActivity(), MyCollectionFragmentActivity.class);
+		case R.id.layout_rele_pro:
+			UserBean user = dao.findUserInfoById(userid);
+			if (null != user) {
+				if (!TextUtils.isEmpty(user.getCompanyid())) {
+					intentAction(getActivity(),
+							ReleaseProductFragmentActivity.class);
+				} else {
+					DialogTips dialog = new DialogTips(getActivity(), "温馨提示",
+							"您未开通公司,是否选择开通?", "确定", true, true);
+					dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialogInterface,
+								int userId) {
+							intentAction(getActivity(),
+									GongsiFragmentActivity.class);
+						}
+					});
+					dialog.show();
+					dialog = null;
+				}
+
+			}
+
+			break;
+		case R.id.layout_pro:
+			intentAction(getActivity(), ProductManagementFragmentActivity.class);
+			break;
+		case R.id.layout_ckdp:
+			intentAction(getActivity(), MyShopsFragmentActivity.class);
 			break;
 		case R.id.layout_myfootprint:
 			intentAction(getActivity(), MyFootprintActivity.class);
-			break;
-		case R.id.layout_myaddress:
-			intentAction(getActivity(), MyAddressFragmentActivity.class);
 			break;
 		case R.id.layout_myaccount:
 			intentAction(getActivity(), MyAccountBuyerFragmentActivity.class);
@@ -205,7 +235,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			intentAction(getActivity(), SettingActivity.class);
 			break;
 		}
-
 	}
 
 	public void showAvatarPop() {
@@ -298,13 +327,59 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	}
 
 	public void uploadAvatar(String path) {
-		// 上传头像
+		File file = new File(path);
+		String id = SharePreferenceUtil.getInstance(
+				getActivity().getApplicationContext()).getUserId();
+		RequestParams params = new RequestParams();
+		params.put("userid", id);
+		try {
+			params.put("touxiang", file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		HttpUtils.doPost(HEADURL, params, new TextHttpResponseHandler() {
+
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code = JsonUtils.getCode(arg2);
+				if ("0".equals(code)) {
+					Toast.makeText(getActivity(), "用户不存在！", Toast.LENGTH_LONG)
+							.show();
+				} else if ("1".equals(code)) {
+					try {
+						JSONObject jsonObject = new JSONObject(arg2);
+						String path = jsonObject.getString("touxiang");
+						dao.updateUserHeadById(userid, path);
+
+						Toast.makeText(getActivity(), "上传成功！",
+								Toast.LENGTH_LONG).show();
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else if ("2".equals(code)) {
+					Toast.makeText(getActivity(), "资源太大！", Toast.LENGTH_LONG)
+							.show();
+				} else if ("3".equals(code)) {
+					Toast.makeText(getActivity(), "文件为空！", Toast.LENGTH_LONG)
+							.show();
+				}
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+				Log.e(TAG, arg2 == null ? "" : arg2);
+				Toast.makeText(getActivity(), "图片上传失败！", Toast.LENGTH_LONG)
+						.show();
+			}
+		});
 	}
 
 	@Override
 	public void onStart() {
-		super.onStart();
 		initDatas();
+		super.onStart();
 	}
-	
+
 }

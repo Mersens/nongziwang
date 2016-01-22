@@ -2,7 +2,11 @@ package com.nongziwang.adapter;
 
 import java.util.List;
 
+import com.nongziwang.entity.NewsBean;
 import com.nongziwang.main.R;
+import com.nongziwang.utils.DateUtil;
+import com.nongziwang.utils.ImageLoadOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.content.Context;
 import android.view.View;
@@ -10,12 +14,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class IndustryInfoAdapter extends BaseListAdapter<String>{
+public class IndustryInfoAdapter extends BaseListAdapter<NewsBean>{
+	private List<NewsBean> list;
 
-	public IndustryInfoAdapter(List<String> list, Context context) {
+	public IndustryInfoAdapter(List<NewsBean> list, Context context) {
 		super(list, context);
+		this.list=list;
 	}
 
+	
 	@Override
 	public View getContentView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder=null;
@@ -30,7 +37,12 @@ public class IndustryInfoAdapter extends BaseListAdapter<String>{
 		}else{
 			holder=(ViewHolder) convertView.getTag();
 		}
-
+		NewsBean bean=list.get(position);
+		ImageLoader.getInstance().displayImage(bean.getImgsrc(), holder.info_image,
+				ImageLoadOptions.getOptions());
+		holder.tv_title.setText(bean.getTitle());
+		holder.tv_msg.setText(bean.getCenter().trim());
+		holder.tv_time.setText(DateUtil.getStamp2Time(bean.getAddtime()));
 		return convertView;
 	}
 

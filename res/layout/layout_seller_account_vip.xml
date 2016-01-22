@@ -31,7 +31,7 @@
                 android:layout_height="@dimen/actionbar_hight" >
 
                 <RelativeLayout
-                    android:layout_width="72dp"
+                    android:layout_width="78dp"
                     android:layout_height="match_parent" >
 
                     <TextView
@@ -71,7 +71,7 @@
                 android:layout_height="84dp" >
 
                 <RelativeLayout
-                    android:layout_width="72dp"
+                    android:layout_width="78dp"
                     android:layout_height="match_parent" >
 
                     <TextView
@@ -106,7 +106,7 @@
                 android:layout_height="@dimen/actionbar_hight" >
 
                 <RelativeLayout
-                    android:layout_width="72dp"
+                    android:layout_width="78dp"
                     android:layout_height="match_parent" >
 
                     <TextView
@@ -178,7 +178,7 @@
                 android:layout_height="@dimen/actionbar_hight" >
 
                 <RelativeLayout
-                    android:layout_width="72dp"
+                    android:layout_width="78dp"
                     android:layout_height="match_parent" >
 
                     <TextView
@@ -209,7 +209,7 @@
                 android:layout_height="@dimen/actionbar_hight" >
 
                 <RelativeLayout
-                    android:layout_width="72dp"
+                    android:layout_width="78dp"
                     android:layout_height="match_parent" >
 
                     <TextView
@@ -240,7 +240,7 @@
                 android:layout_height="@dimen/actionbar_hight" >
 
                 <RelativeLayout
-                    android:layout_width="72dp"
+                    android:layout_width="78dp"
                     android:layout_height="match_parent" >
 
                     <TextView
@@ -271,7 +271,7 @@
                 android:layout_height="@dimen/actionbar_hight" >
 
                 <RelativeLayout
-                    android:layout_width="72dp"
+                    android:layout_width="78dp"
                     android:layout_height="match_parent" >
 
                     <TextView
@@ -303,7 +303,7 @@
                 android:layout_height="@dimen/actionbar_hight" >
 
                 <RelativeLayout
-                    android:layout_width="72dp"
+                    android:layout_width="78dp"
                     android:layout_height="match_parent" >
 
                     <TextView
@@ -327,7 +327,6 @@
                     android:textColorHint="@color/black_text_color"
                     android:textSize="@dimen/text_mid_size" >
                 </EditText>
-                 
             </LinearLayout>
             <include layout="@layout/layout_seller_upload_image" />
         </LinearLayout>

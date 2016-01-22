@@ -2,6 +2,7 @@ package com.nongziwang.main;
 
 import com.nongziwang.activity.BaseActivity;
 import com.nongziwang.application.CustomApplcation;
+import com.nongziwang.fragment.BuyerFragment;
 import com.nongziwang.fragment.HomeFragment;
 import com.nongziwang.fragment.ProductFragment;
 import com.nongziwang.fragment.InfoFragment;
@@ -9,6 +10,7 @@ import com.nongziwang.fragment.UserCenterFragment;
 import com.nongziwang.view.DialogTips;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -102,7 +104,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			index = 3;
 			setTab(3);
 			break;
-
 		}
 		if (currentTabIndex != index) {
 			FragmentTransaction trx = getSupportFragmentManager()
@@ -164,7 +165,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				finish();
 			}
 		});
+
 		dialog.show();
 		dialog = null;
 	}
+	
+
 }

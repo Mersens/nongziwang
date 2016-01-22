@@ -22,15 +22,20 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * 
+ * @title RegisterActivity
+ * @description:用户注册
+ * @author Mersens
+ * @time 2016年1月18日
+ */
 public class RegisterActivity extends BaseActivity {
 	private EditText et_tel_number;
 	private EditText et_code;
@@ -88,7 +93,6 @@ public class RegisterActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				doNext();
-
 			}
 		});
 		btn_getcode.setOnClickListener(new OnClickListener() {
@@ -96,10 +100,8 @@ public class RegisterActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				doGetCode();
-
 			}
 		});
-
 	}
 
 	public void doNext() {
@@ -142,7 +144,6 @@ public class RegisterActivity extends BaseActivity {
 		params.put("userphone", tel_number);
 		params.put("msgflag", "1");
 		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
-
 			@SuppressWarnings("deprecation")
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
@@ -170,7 +171,7 @@ public class RegisterActivity extends BaseActivity {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				    Log.e(TAG, arg2);
+				    Log.e(TAG, arg2==null?"":arg2);
 			}
 
 		});

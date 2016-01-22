@@ -1,11 +1,14 @@
 package com.nongziwang.activity;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.Header;
+import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -14,6 +17,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
@@ -27,15 +32,19 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.nongziwang.adapter.HotSearchAdapter;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.adapter.SearchHistoryAdapter;
+import com.nongziwang.application.AppConstants;
 import com.nongziwang.db.NongziDao;
 import com.nongziwang.db.NongziDaoImpl;
 import com.nongziwang.main.R;
+import com.nongziwang.utils.HttpUtils;
+import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.SharePreferenceUtil;
+import com.nongziwang.view.FlowLayout;
 
 public class SearchFragmentActivity extends BaseActivity {
-	private GridView mGridView;
+	private FlowLayout flowlayout;
 	private List<String> hotsearchlist;
 	private Spinner spinner;
 	private static final String types[] = { "产品", "公司" };
@@ -51,22 +60,72 @@ public class SearchFragmentActivity extends BaseActivity {
 	private SearchHistoryAdapter shAdapter;
 	private List<String> search_history_list;
 	private boolean isFromHistory = false;
-	private String userid=null;
+	private String userid = null;
+	private static final String HOTSEARCH_URL = AppConstants.SERVICE_ADDRESS
+			+ "chanpinsousuo/getSousuoKeywords";
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.layout_search);
 		mInflater = LayoutInflater.from(this);
-
 		dao = new NongziDaoImpl(this);
 		initViews();
 		initEvent();
+		initDatas();
 	}
 
+	private void initDatas() {
+		HttpUtils.doPost(HOTSEARCH_URL, new TextHttpResponseHandler() {
+			@SuppressLint("NewApi")
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				try {
+					MarginLayoutParams lp = new MarginLayoutParams(new LayoutParams(
+							LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+					lp.bottomMargin = 8;
+					lp.leftMargin = 8;
+					lp.rightMargin = 8;
+					lp.topMargin = 8;
+					hotsearchlist = JsonUtils.getKeyWordInfo(arg2);
+					for (int i = 0; i < hotsearchlist.size(); i++) {
+						TextView tv = new TextView(SearchFragmentActivity.this);
+						tv.setText(hotsearchlist.get(i));
+						tv.setId(i);
+						tv.setOnClickListener(toolsItemListener);
+						tv.setBackground(getResources().getDrawable(R.drawable.tv_hotsearch_bg));
+						tv.setTextColor(getResources().getColor(R.color.black_text_color));
+						tv.setTextSize(14);
+						flowlayout.addView(tv,lp);
+					}
+
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+				// TODO Auto-generated method stub
+			}
+
+		});
+
+	}
+	
+	private View.OnClickListener toolsItemListener =new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			search_edit.setText(hotsearchlist.get(v.getId()));
+			isFromHistory = false;
+			doSearch();
+		}
+	};
 	private void initViews() {
+		flowlayout = (FlowLayout) findViewById(R.id.flowlayout);
 		tv_clear = (TextView) findViewById(R.id.tv_clear);
-		mGridView = (GridView) findViewById(R.id.gridView);
 		spinner = (Spinner) findViewById(R.id.spinner);
 		img_menu_back = (ImageView) findViewById(R.id.img_menu_back);
 		search_history_listView = (ListView) findViewById(R.id.search_history_listView);
@@ -76,19 +135,12 @@ public class SearchFragmentActivity extends BaseActivity {
 	}
 
 	private void initEvent() {
-		hotsearchlist = new ArrayList<String>();
-		hotsearchlist.add("复合肥");
-		hotsearchlist.add("农机");
-		hotsearchlist.add("农膜");
-		hotsearchlist.add("硝铵酸");
-		hotsearchlist.add("磷肥");
-		hotsearchlist.add("尿素");
-		mGridView.setAdapter(new HotSearchAdapter(hotsearchlist,
-				SearchFragmentActivity.this));
-		userid=SharePreferenceUtil.getInstance(getApplicationContext()).getUserId();
-		if(TextUtils.isEmpty(userid)){
+
+		userid = SharePreferenceUtil.getInstance(getApplicationContext())
+				.getUserId();
+		if (TextUtils.isEmpty(userid)) {
 			search_history_list = dao.selectAllHistory("1");
-		}else{
+		} else {
 			search_history_list = dao.selectAllHistory(userid);
 		}
 		if (search_history_list != null && search_history_list.size() > 0) {
@@ -104,13 +156,11 @@ public class SearchFragmentActivity extends BaseActivity {
 		spinner.setAdapter(adapter);
 		spinner.setSelection(0, true);
 		img_clear.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				search_edit.setText("");
 				img_clear.setVisibility(View.INVISIBLE);
-
 			}
 		});
 
@@ -169,22 +219,17 @@ public class SearchFragmentActivity extends BaseActivity {
 						return false;
 					}
 				});
-		mGridView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				ShowToast("点击了" + hotsearchlist.get(position));
-				search_edit.setText(hotsearchlist.get(position));
-				isFromHistory = false;
-				doSearch();
+		
 
-			}
-		});
 
 		tv_clear.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dao.delAllHistory("1");
+				if (TextUtils.isEmpty(userid)) {
+					dao.delAllHistory("1");
+				} else {
+					dao.delAllHistory(userid);
+				}
 				search_history_listView.setVisibility(View.GONE);
 				tv_clear.setVisibility(View.GONE);
 
@@ -210,17 +255,21 @@ public class SearchFragmentActivity extends BaseActivity {
 			return;
 		}
 		if (!isFromHistory) {
-			if(!dao.findHistoryIsExist(edit_value)){
-				if(TextUtils.isEmpty(userid)){
+			if (!dao.findHistoryIsExist(edit_value)) {
+				if (TextUtils.isEmpty(userid)) {
 					dao.addSearchHistory("1", edit_value);
-				}else{
+				} else {
 					dao.addSearchHistory(userid, edit_value);
 				}
-				
+
 			}
 		}
+
+		int sp_pos = spinner.getSelectedItemPosition();
 		Intent intent = new Intent(SearchFragmentActivity.this,
 				SearchResultsFragmentActivity.class);
+		intent.putExtra("params", edit_value);
+		intent.putExtra("sp_pos", sp_pos);
 		startActivity(intent);
 		overridePendingTransition(R.anim.bottom_open, 0);
 		finish();
