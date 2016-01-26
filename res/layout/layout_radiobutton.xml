@@ -4,6 +4,5 @@
     android:layout_height="wrap_content"
     android:button="@drawable/type_check"
     android:paddingLeft="2dp"
-    android:paddingRight="5dp"
-    android:text="化肥"
+    android:paddingRight="6dp"
     android:textSize="@dimen/textSize_svprogresshuddefault_msg" />

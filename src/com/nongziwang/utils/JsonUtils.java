@@ -9,7 +9,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.nongziwang.entity.ChanPinBean;
 import com.nongziwang.entity.CompanyBean;
+import com.nongziwang.entity.GongsiBean;
 import com.nongziwang.entity.LeiMuBean;
 import com.nongziwang.entity.NewsBean;
 import com.nongziwang.entity.NewsDatialBean;
@@ -303,14 +305,15 @@ public class JsonUtils {
 		}
 		return list;
 	}
-	
-	public static List<CompanyBean> getCompanyInfo(String str) throws JSONException{
+
+	public static List<CompanyBean> getCompanyInfo(String str)
+			throws JSONException {
 		List<CompanyBean> list = new ArrayList<CompanyBean>();
 		JSONObject jsonObject = new JSONObject(str);
 		JSONArray array = new JSONArray(jsonObject.getString("gongsilist"));
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject obj = (JSONObject) array.get(i);
-			CompanyBean bean=new CompanyBean();
+			CompanyBean bean = new CompanyBean();
 			bean.setChanpinsum(obj.getString("chanpinsum"));
 			bean.setDianpuid(obj.getString("dianpuid"));
 			bean.setDianputype(obj.getString("dianputype"));
@@ -319,9 +322,64 @@ public class JsonUtils {
 			bean.setZhuyingchanpin(obj.getString("zhuyingchanpin"));
 			list.add(bean);
 		}
+
+		return list;
+
+	}
+
+	public static GongsiBean getGongsiInfo(String str) throws JSONException {
+		GongsiBean bean = new GongsiBean();
+		JSONObject jsonObject = new JSONObject(str);
+		bean.setAreaid(jsonObject.getString("area"));
+		bean.setChuanzhen(jsonObject.getString("chuanzhen"));
+		bean.setCity(jsonObject.getString("cityname"));
+		bean.setDianhua(jsonObject.getString("dianhua"));
+		bean.setDizhi(jsonObject.getString("dizhi"));
+		bean.setGongsiid(jsonObject.getString("gongsiid"));
+		bean.setGongsiname(jsonObject.getString("gongsiname"));
+		bean.setJiancheng(jsonObject.getString("jiancheng"));
+		bean.setLianxidianhua(jsonObject.getString("lianxirendianhua"));
+		bean.setLianxiren(jsonObject.getString("lianxiren"));
+		bean.setMiaoshu(jsonObject.getString("miaoshu"));
+		bean.setProvince(jsonObject.getString("province"));
+		bean.setShuiwudengjizheng(jsonObject.getString("shuiwudengji"));
+		bean.setYingyezhizhao(jsonObject.getString("yingyezhizhao"));
+		bean.setZuzhijigoudaimazheng(jsonObject
+				.getString("jigoudaima"));
+
+		return bean;
+
+	}
+	
+	public static List<ChanPinBean> getChanPinInfo(String str) throws JSONException{
+		List<ChanPinBean> list=new ArrayList<ChanPinBean>();
+		JSONObject jsonObject = new JSONObject(str);
+		JSONArray array = new JSONArray(jsonObject.getString("chanpinlist"));
+		for (int i = 0; i < array.length(); i++) {
+			JSONObject obj = (JSONObject) array.get(i);
+			ChanPinBean bean= new ChanPinBean();
+			bean.setAddtime(obj.getString("addtime"));
+			bean.setCanRemove(true);
+			bean.setChanpinid(obj.getString("chanpinid"));
+			bean.setChanpinimg(obj.getString("chanpinimg"));
+			bean.setDetail(obj.getString("detail"));
+			bean.setDianpuid(obj.getString("dianpuid"));
+			bean.setGongsiid(obj.getString("gongsiid"));
+			bean.setHtmlid(obj.getString("htmlid"));
+			bean.setIshot(obj.getString("ishot"));
+			bean.setJiage(obj.getString("jiage"));
+			bean.setKeyword(obj.getString("keyword"));
+			bean.setMiaoshu(obj.getString("miaoshu"));
+			bean.setPinpai(obj.getString("pinpai"));
+			bean.setTitle(obj.getString("title"));
+			bean.setUserid(obj.getString("userid"));
+			bean.setUnit(obj.getString("unit"));
+			bean.setXinxiststic(obj.getString("xinxiststic"));
+			list.add(bean);
+		}
+		
 		
 		return list;
 		
 	}
-	
 }

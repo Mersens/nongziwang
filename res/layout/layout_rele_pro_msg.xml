@@ -40,7 +40,7 @@
                     android:layout_toRightOf="@+id/textView1"
                     android:text="(填错商品属性讲可能导致商品下架或搜索不到，请准确填写商品属性！)"
                     android:textColor="@color/base_color_text_black"
-                    android:textSize="8sp" />
+                    android:textSize="10sp" />
             </RelativeLayout>
 
             <View
@@ -77,7 +77,7 @@
                     </RelativeLayout>
 
                     <EditText
-                        android:id="@+id/e1"
+                        android:id="@+id/edt_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="4dp"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -122,14 +122,14 @@
                     </RelativeLayout>
 
                     <EditText
-                        android:id="@+id/editTe555"
+                        android:id="@+id/edt_gjz"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/actionbar_hight"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@drawable/editbox_background_normal"
                         android:ems="10"
-                                                android:gravity="top"
+                        android:gravity="top"
                         android:hint="30字以内"
                         android:maxLines="3"
                         android:minLines="5"
@@ -168,14 +168,14 @@
                     </RelativeLayout>
 
                     <EditText
-                        android:id="@+id/editText2"
+                        android:id="@+id/edt_yt"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/actionbar_hight"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@drawable/editbox_background_normal"
                         android:ems="10"
-                                                android:gravity="top"
+                        android:gravity="top"
                         android:hint="30字以内"
                         android:maxLines="3"
                         android:minLines="5"
@@ -214,14 +214,14 @@
                     </RelativeLayout>
 
                     <EditText
-                        android:id="@+id/editTe5"
+                        android:id="@+id/edt_cf"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/actionbar_hight"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@drawable/editbox_background_normal"
                         android:ems="10"
-                                                android:gravity="top"
+                        android:gravity="top"
                         android:hint="30字以内"
                         android:maxLines="3"
                         android:minLines="5"
@@ -260,17 +260,17 @@
                     </RelativeLayout>
 
                     <EditText
-                        android:id="@+id/editTe51"
+                        android:id="@+id/edt_pp"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/actionbar_hight"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@drawable/editbox_background_normal"
                         android:ems="10"
+                        android:gravity="top"
+                        android:hint="30字以内"
                         android:maxLines="3"
                         android:minLines="5"
-                                                android:gravity="top"
-                        android:hint="30字以内"
                         android:textColor="@color/base_color_text_black"
                         android:textColorHint="@color/black_text_color"
                         android:textSize="@dimen/text_mid_size" >
@@ -287,7 +287,7 @@
                 android:layout_margin="25dp"
                 android:background="@drawable/button_bg"
                 android:enabled="true"
-                android:text="下一步设置交易信息"
+                android:text="完成"
                 android:textColor="@color/white_color"
                 android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
         </LinearLayout>

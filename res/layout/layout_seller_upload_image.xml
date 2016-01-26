@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="营业执照"
+                    android:text="@string/tv_yyzz"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/text_mid_size" />
 
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="税务登记证"
+                    android:text="@string/tv_swdj"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/text_mid_size" />
 
@@ -57,7 +57,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:text="组织机构代码证"
+                    android:text="@string/tv_zzjg"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/text_mid_size" />
             </LinearLayout>
@@ -79,7 +79,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="8dp"
-                    android:text="公司描述：" />
+                    android:text="@string/tv_sczj" />
             </RelativeLayout>
 
             <LinearLayout
@@ -88,7 +88,7 @@
                 android:layout_weight="1" >
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/image_yyzz"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -97,7 +97,7 @@
                     android:src="@drawable/android" />
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/image_swdj"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -106,7 +106,7 @@
                     android:src="@drawable/android" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/image_zzjg"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -133,7 +133,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/tv_tips_bg"
-                    android:text="提示：请上传扫描件或复印件，需以图片形式上传每个文件小于2M"
+                    android:text="@string/tv_img_tips"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/text_small_size" />
             </LinearLayout>
@@ -146,7 +146,7 @@
             android:layout_margin="24dp"
             android:background="@drawable/button_bg"
             android:enabled="true"
-            android:text="提交"
+            android:text="@string/tv_tj"
             android:textColor="@color/white_color"
             android:textSize="@dimen/common_text_size" />
     </LinearLayout>

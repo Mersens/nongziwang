@@ -96,8 +96,9 @@ public class ReleaseProductFragmentActivity extends BaseActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
+			String ids=intent.getStringExtra("ids");
 			if (action.equals(ACTION_PRODUCT_MSG)) {
-				addFragment(Style.PRODUCT_MSG, null, true);
+				addFragment(Style.PRODUCT_MSG, ids, true);
 			} else if (action.equals(ACTION_PRODUCT_JYXX)) {
 				addFragment(Style.PRODUCT_JYXX, null, true);
 			}

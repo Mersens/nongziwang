@@ -1,99 +1,212 @@
 package com.nongziwang.fragment;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import android.annotation.SuppressLint;
-import android.content.BroadcastReceiver;
-import android.content.Context;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutCompat.LayoutParams;
 import android.text.TextUtils;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import com.nongziwang.activity.ReleaseProductFragmentActivity;
-import com.nongziwang.adapter.MyArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.Toast;
+
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.nongziwang.activity.FbxjdActivity;
+import com.nongziwang.activity.ProductManagementFragmentActivity;
+import com.nongziwang.application.AppConstants;
+import com.nongziwang.application.CustomApplcation;
 import com.nongziwang.db.NongziDao;
 import com.nongziwang.db.NongziDaoImpl;
-import com.nongziwang.entity.MyRegion;
+import com.nongziwang.entity.UserBean;
 import com.nongziwang.main.R;
-import com.nongziwang.view.DatePickerPopWindow;
+import com.nongziwang.utils.BitmapUtils;
+import com.nongziwang.utils.HttpUtils;
+import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.utils.SharePreferenceUtil;
+import com.nongziwang.view.DialogTips;
+import com.nongziwang.view.FlowLayout;
+import com.nongziwang.view.SpotsDialog;
 
 public class ReleaseProductMsgFragment extends BaseFragment {
 	private View view;
 	private Button btn_next;
-	private EditText edt_send_goods_time;
-	private DatePickerPopWindow popWindow = null;
-	private LayoutInflater mInflater;
-	public static final String ACTION_OK = "ok";
-	public static final String ACTION_CANCEL = "cancel";
+	private String param;
+	private EditText edt_title, edt_gjz, edt_yt, edt_cf, edt_pp, edt_ms,
+			edt_xq;
+	private FlowLayout flowlayout;
+	private MarginLayoutParams lp;
+	private int index = 0;
+	public static final String UPLAODE_URL = AppConstants.SERVICE_ADDRESS
+			+ "chanpin/gotoUpChanpinImg";
+	public static final String URL = AppConstants.SERVICE_ADDRESS
+			+ "chanpin/gotoAddChanpinData";
+	private Map<String, String> map = new HashMap<String, String>();
+	public static final String TAG = "ReleaseProductMsgFragment";
+	private String userid;
+	private StringBuffer sbf;
+	private UserBean user;
 	private NongziDao dao;
-	@SuppressLint("InflateParams")
+	private SpotsDialog dialog;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.layout_rele_pro_msg, null);
-		dao=new NongziDaoImpl(getActivity());
-		registerBoradcastReceiver();
+		param = getArguments().getString("params");
+		dao = new NongziDaoImpl(getActivity());
 		initViews();
 		initEvent();
+
 		return view;
 	}
 
 	private void initViews() {
-		mInflater=LayoutInflater.from(getActivity());
+		edt_xq = (EditText) view.findViewById(R.id.edt_xq);
+		flowlayout = (FlowLayout) view.findViewById(R.id.flowlayout);
+		edt_title = (EditText) view.findViewById(R.id.edt_title);
+		edt_gjz = (EditText) view.findViewById(R.id.edt_gjz);
+		edt_yt = (EditText) view.findViewById(R.id.edt_yt);
+		edt_cf = (EditText) view.findViewById(R.id.edt_cf);
+		edt_pp = (EditText) view.findViewById(R.id.edt_pp);
+		edt_ms = (EditText) view.findViewById(R.id.edt_ms);
 		btn_next = (Button) view.findViewById(R.id.btn_next);
-
+		lp = new MarginLayoutParams(new LayoutParams(160, 160));
+		lp.bottomMargin = 5;
+		lp.leftMargin = 10;
+		lp.rightMargin = 10;
+		lp.topMargin = 5;
+		ImageView imageview = new ImageView(getActivity());
+		imageview.setImageResource(R.drawable.jy_drltsz_btn_addperson);
+		flowlayout.addView(imageview, lp);
+		imageview.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (index > 7) {
+					return;
+				}
+				Intent intent = new Intent(Intent.ACTION_PICK, null);
+				intent.setDataAndType(
+						MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+				startActivityForResult(intent, 1);
+			}
+		});
+		dialog=new SpotsDialog(getActivity(),R.style.SpotsDialogWaiting);
+		dialog.setCanceledOnTouchOutside(false);
 	}
 
 	private void initEvent() {
-		edt_send_goods_time.setKeyListener(null);
-		edt_send_goods_time.setOnClickListener(new OnClickListener() {			
-			@Override
-			public void onClick(View v) {
-				showPop(v.getId());
-			}
-		});
+		userid = SharePreferenceUtil.getInstance(
+				getActivity().getApplicationContext()).getUserId();
+		user = dao.findUserInfoById(userid);
+		sbf = new StringBuffer();
 		btn_next.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent mIntent = new Intent(
-						ReleaseProductFragmentActivity.ACTION_PRODUCT_JYXX);
-				getActivity().sendBroadcast(mIntent);
+				doFinish();
 			}
+		});
+		
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 1 && data != null) {
+			Cursor cursor = getActivity().getContentResolver().query(
+					data.getData(), null, null, null, null);
+			cursor.moveToFirst();
+			int dex = cursor
+					.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+			String path = cursor.getString(dex);
+			Bitmap bitmap = BitmapUtils.getBitMap(path);
+			cursor.close();
+			upLoadeImag(path);
+			setImage(bitmap);
+		}
+
+	}
+
+	private void upLoadeImag(String path) {
+		RequestParams params = new RequestParams();
+		File file = new File(path);
+		if (file != null) {
+			try {
+				params.put("chanpinimg", file);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		HttpUtils.doPost(UPLAODE_URL, params, new TextHttpResponseHandler() {
+
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code = JsonUtils.getCode(arg2);
+				if ("1".equals(code)) {
+					try {
+						JSONObject jsonObject = new JSONObject(arg2);
+						String url = jsonObject.getString("chanpinimg");
+						map.put(url, url);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				} else if ("2".equals(code)) {
+					Toast.makeText(getActivity(), "图片资源太大 !",
+							Toast.LENGTH_SHORT).show();
+
+				} else if ("3".equals(code)) {
+					Toast.makeText(getActivity(), "文件为空 !", Toast.LENGTH_SHORT)
+							.show();
+				}
+
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+				Toast.makeText(getActivity(), "上传失败!", Toast.LENGTH_SHORT)
+						.show();
+				Log.e(TAG, arg2 == null ? "" : arg2);
+			}
+
 		});
 	}
 
-	
-	
-	private void showPop(int viewID) {
-		DateFormat df = new SimpleDateFormat("yyyyMMdd");
-		popWindow = new DatePickerPopWindow(getActivity(),
-				df.format(new Date()),viewID);
-		popWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-		popWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-		popWindow.setTouchable(true);
-		popWindow.setFocusable(true);
-		popWindow.setOutsideTouchable(false);
-		popWindow.setAnimationStyle(R.style.GrowFromBottom);
-		View v=mInflater.inflate(R.layout.layout_rele_pro_msg, null);
-		popWindow.showAtLocation(v,Gravity.BOTTOM, 0, 0);
-				
+	private void setImage(Bitmap bitmap) {
+		if (bitmap != null) {
+			ImageView imageview = new ImageView(getActivity());
+			imageview.setScaleType(ScaleType.FIT_XY);
+			imageview.setImageBitmap(bitmap);
+			flowlayout.addView(imageview, lp);
+			index++;
+		}
 	}
-	
+
 	public static Fragment getInstance(String params) {
 		ReleaseProductMsgFragment fragment = new ReleaseProductMsgFragment();
 		Bundle bundle = new Bundle();
@@ -102,40 +215,126 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 		return fragment;
 	}
 
+	public void doFinish() {
+		String xq =edt_xq.getText().toString().trim();
+		String title = edt_title.getText().toString().trim();
+		String gjz = edt_gjz.getText().toString().trim();
+		String yt = edt_yt.getText().toString().trim();
+		String cf = edt_cf.getText().toString().trim();
+		String pp = edt_pp.getText().toString().trim();
+		String ms = edt_ms.getText().toString().trim();
+		if (TextUtils.isEmpty(title) || TextUtils.isEmpty(gjz)
+				|| TextUtils.isEmpty(yt) || TextUtils.isEmpty(cf)
+				|| TextUtils.isEmpty(pp) || TextUtils.isEmpty(ms)||TextUtils.isEmpty(xq)) {
+			Toast.makeText(getActivity(), "请完善信息!", Toast.LENGTH_SHORT)
+			.show();
+			return;
+
+		}
+		if(map.size()==0){
+			Toast.makeText(getActivity(), "请上传图片!", Toast.LENGTH_SHORT)
+			.show();
+			return;
+		}
+		if(TextUtils.isEmpty(param)){
+			Toast.makeText(getActivity(), "类目ID为空!", Toast.LENGTH_SHORT)
+			.show();
+			return;
+		}
+		for(Map.Entry<String, String> entry:map.entrySet()){
+			sbf.append(entry.getValue()+",");
+		}
+		String ids[]=param.split(":");
+
+
+		
+		RequestParams params=new RequestParams();
+		params.put("userid",userid );
+		params.put("gongsiid", user.getCompanyid());
+		params.put("title",title );
+		if(ids.length==2){
+			params.put("chanpinleimu2",ids[0] );
+			params.put("chanpinleimu3", ids[1]);
+		}else {
+			params.put("chanpinleimu2",ids[0] );
+			params.put("chanpinleimu3", "");
+		}
+
+		params.put("keyword",gjz );
+		params.put("yongtuname", yt);
+		params.put("chengfenname", cf);
+		params.put("miaoshu", ms);
+		params.put("pinpainame", pp);
+		params.put("offerDetail", xq);
+		params.put("chanpinimgs", sbf.toString());
+		doCompleat(params);
+
+	}
+
+	private void doCompleat(RequestParams params) {
+		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				super.onStart();
+				dialog.show();
+			}
+
+			
+			
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code =JsonUtils.getCode(arg2);
+				if("0".equals(code)){
+					Toast.makeText(getActivity(), "用户id为空！", Toast.LENGTH_SHORT).show();
+				}else if("1".equals(code)){
+					DialogTips dialog = new DialogTips(getActivity(),
+							"发布成功？", "确定");
+					dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialogInterface, int userId) {
+							intentAction(getActivity(), ProductManagementFragmentActivity.class);
+							getActivity().finish();
+						}
+					});
+					dialog.show();
+					dialog = null;
+				}else if("2".equals(code)){
+					Toast.makeText(getActivity(), "用户信息不存在！", Toast.LENGTH_SHORT).show();
+				}else if("3".equals(code)){
+					Toast.makeText(getActivity(), "公司id为空！", Toast.LENGTH_SHORT).show();
+				}else if("4".equals(code)){
+					Toast.makeText(getActivity(), "公司信息不存在！", Toast.LENGTH_SHORT).show();
+				}else if("5".equals(code)){
+					Toast.makeText(getActivity(), "产品信息填写不完整！", Toast.LENGTH_SHORT).show();
+				}else if("6".equals(code)){
+					Toast.makeText(getActivity(), "产品分类选择不正确！", Toast.LENGTH_SHORT).show();
+				}else if("7".equals(code)){
+					Toast.makeText(getActivity(), "产品分类不存在！", Toast.LENGTH_SHORT).show();
+				}
+				
+				
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				Log.e(TAG, arg2==null?"":arg2);
+				Toast.makeText(getActivity(), "添加失败！", Toast.LENGTH_SHORT).show();
+			}
+			
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+				dialog.dismiss();
+			}
+		});
+		
+	}
+
 	@Override
 	protected void lazyLoad() {
-		// TODO Auto-generated method stub
 
 	}
 
-	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			String action = intent.getAction();
-			if (action.equals(ACTION_OK)) {
-				String time = intent.getStringExtra("time");
-				if (!TextUtils.isEmpty(time)) {
-					edt_send_goods_time.setText(time);
-				}
-				popWindow.dismiss();
-			} else if (action.equals(ACTION_CANCEL)) {
-				popWindow.dismiss();
-			}
-		}
-	};
-
-	public void registerBoradcastReceiver() {
-		IntentFilter myIntentFilter = new IntentFilter();
-		myIntentFilter.addAction(ACTION_OK);
-		myIntentFilter.addAction(ACTION_CANCEL);
-		getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
-	}
-
-	@Override
-	public void onDestroyView() {
-		// TODO Auto-generated method stub
-		super.onDestroyView();
-		getActivity().unregisterReceiver(mBroadcastReceiver);
-	}
-	
 }

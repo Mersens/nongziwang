@@ -78,7 +78,35 @@
     <string name="tx_xpgl">询盘管理</string>
     <string name="tx_gsgl">公司管理</string>
     <string name="scan_text">请将条码置于取景框内扫描</string>
-     <string name="tv_or">或</string>
-
+    <string name="tv_or">或</string>
+    <string name="tv_xjbt">询价标题:</string>
+    <string name="tv_xjbt_hint">例：农大复合肥</string>
+    <string name="tv_xjbt_type">类别:</string>
+    <string name="tv_xjbt_num">数量:</string>
+    <string name="tv_num">数量</string>
+    <string name="tv_province">省</string>
+    <string name="tv_city">市</string>
+    <string name="tv_gys">供应商:</string>
+    <string name="tv_shdz">收获地址:</string>
+    <string name="tv_cgrq">采购截止日期:</string>
+    <string name="tv_select_time">请选择日期</string>
+    <string name="tv_fu">发布</string>
+    <string name="tv_qyzlgl">企业资料管理</string>
+    <string name="tv_gongsiname">公司名称：</string>
+    <string name="tv_name_not_change">(公司名称不能修改)</string>
+    <string name="tv_gsms">公司描述：</string>
+    <string name="tv_ssqy">所属区域：</string>
+    <string name="tv_xxdz">详细地址：</string>
+    <string name="tv_gsjc">公司简称：</string>
+    <string name="tv_gsdh">公司电话：</string>
+    <string name="tv_gscz">公司传真：</string>
+    <string name="tv_lxr">联系人：</string>
+    <string name="tv_lxdh">联系电话：</string>
+    <string name="tv_yyzz">营业执照</string>
+    <string name="tv_swdj">税务登记证</string>
+    <string name="tv_zzjg">组织机构代码证</string>
+    <string name="tv_sczj">上传证件：</string>
+    <string name="tv_img_tips">提示：请上传扫描件或复印件，需以图片形式上传每个文件小于2M</string>
+    <string name="tv_tj">提交</string>
 
 </resources>

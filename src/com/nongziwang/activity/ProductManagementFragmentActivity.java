@@ -126,7 +126,8 @@ public class ProductManagementFragmentActivity extends BaseActivity{
 		}
 		@Override
 		public Fragment getItem(int arg0) {
-			return ProductManagementFragment.getInstance(null);
+
+			return ProductManagementFragment.getInstance(arg0+"");
 		}
 		@Override
 		public CharSequence getPageTitle(int position) {

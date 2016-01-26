@@ -22,7 +22,7 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="企业资料管理"
+                android:text="@string/tv_qyzlgl"
                 android:textColor="@color/base_color_text_black"
                 android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
 
@@ -40,11 +40,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="公司名称：" />
+                        android:text="@string/tv_gongsiname" />
                 </RelativeLayout>
 
                 <EditText
-                    android:id="@+id/editText1"
+                    android:id="@+id/edt_gongsiname"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
@@ -61,11 +61,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="(公司名称不能修改)"
+                    android:text="@string/tv_name_not_change"
                     android:textColor="@color/red_text_color"
                     android:textSize="@dimen/text_small_size" />
             </LinearLayout>
 
+                        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionbar_hight" >
+
+                <RelativeLayout
+                    android:layout_width="78dp"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/tex21"
+                        style="@style/CommonTextAtyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/tv_xxdz" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/edt_gsjc"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:textColor="@color/base_color_text_black"
+                    android:textColorHint="@color/black_text_color"
+                    android:textSize="@dimen/text_mid_size" >
+                </EditText>
+            </LinearLayout>
+            
+            
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="84dp" >
@@ -82,11 +114,11 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="8dp"
-                        android:text="公司描述：" />
+                        android:text="@string/tv_gsms" />
                 </RelativeLayout>
 
                 <EditText
-                    android:id="@+id/e1"
+                    android:id="@+id/edt_gongsimiaoshu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -115,7 +147,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="所属区域：" />
+                        android:text="@string/tv_ssqy" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -187,11 +219,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="详细地址：" />
+                        android:text="@string/tv_xxdz" />
                 </RelativeLayout>
 
                 <EditText
-                    android:id="@+id/ed"
+                    android:id="@+id/edt_xxdz"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
@@ -218,11 +250,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="公司电话：" />
+                        android:text="@string/tv_gsdh" />
                 </RelativeLayout>
 
                 <EditText
-                    android:id="@+id/ed1"
+                    android:id="@+id/edt_gsdh"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
@@ -249,11 +281,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="公司传真：" />
+                        android:text="@string/tv_gscz" />
                 </RelativeLayout>
 
                 <EditText
-                    android:id="@+id/ed23"
+                    android:id="@+id/edt_gscz"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
@@ -281,11 +313,11 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="联系人：" />
+                        android:text="@string/tv_lxr" />
                 </RelativeLayout>
 
                 <EditText
-                    android:id="@+id/ed34"
+                    android:id="@+id/edt_lxr"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
@@ -312,11 +344,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="联系电话：" />
+                        android:text="@string/tv_lxdh" />
                 </RelativeLayout>
 
                 <EditText
-                    android:id="@+id/ed26"
+                    android:id="@+id/edt_lxdh"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"

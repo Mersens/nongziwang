@@ -3,22 +3,33 @@ package com.nongziwang.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.Header;
+import org.json.JSONException;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.ReleaseProductFragmentActivity;
+import com.nongziwang.application.AppConstants;
+import com.nongziwang.entity.LeiMuBean;
 import com.nongziwang.main.R;
+import com.nongziwang.utils.HttpUtils;
+import com.nongziwang.utils.JsonUtils;
 
 public class ReleaseProductTypeFragment extends BaseFragment {
 	private View view;
@@ -33,12 +44,17 @@ public class ReleaseProductTypeFragment extends BaseFragment {
 	private List<View> viewlist_menu_1;
 	private List<TextView> tvlist_menu_2;
 	private List<View> viewlist_menu_2;
-	private List<String> list;
-	private List<String> list1;
-	private List<String> list2;
+	private List<LeiMuBean> list;
+	private List<LeiMuBean> list1;
+	private List<LeiMuBean> list2;
 	private PopupWindow popupwindow;
 	private PopupWindow popupwindow1;
 	private ReleaseProductFragmentActivity activity;
+	private static final String URL = AppConstants.SERVICE_ADDRESS
+			+ "leimu/getLeimuByParentId";
+	private static final String TAG="ReleaseProductTypeFragment";
+	private StringBuffer sbf;
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,33 +83,22 @@ public class ReleaseProductTypeFragment extends BaseFragment {
 	}
 
 	private void initEvent() {
-		list = new ArrayList<String>();
-		list1 = new ArrayList<String>();
-		list2 = new ArrayList<String>();
-		list.add("化肥");
-		list.add("种子");
-		list.add("农药");
-		list.add("农机");
-		list.add("农膜");
+		sbf=new StringBuffer();
+		list = new ArrayList<LeiMuBean>();
+		list1 = new ArrayList<LeiMuBean>();
+		list2 = new ArrayList<LeiMuBean>();
+		list.add(new LeiMuBean("1", "肥料", "0"));
+		list.add(new LeiMuBean("2", "农药", "0"));
+		list.add(new LeiMuBean("3", "种子", "0"));
+		list.add(new LeiMuBean("4", "农机", "0"));
+		list.add(new LeiMuBean("5", "农膜", "0"));
 
-		list1.add("化肥");
-		list1.add("种子");
-		list1.add("农药");
-		list1.add("农机");
-		list1.add("农膜");
-
-		list2.add("化肥");
-		list2.add("种子");
-		list2.add("农药");
-		list2.add("农机");
-		list2.add("农膜");
 		for (int i = 0; i < list.size(); i++) {
 			View view = mInflater
 					.inflate(R.layout.listview_rele_pro_item, null);
 			view.setId(i);
-
 			TextView type_name = (TextView) view.findViewById(R.id.type_name);
-			type_name.setText(list.get(i));
+			type_name.setText(list.get(i).getName());
 			tvlist_menu_0.add(type_name);
 			View bottom_view = view.findViewById(R.id.bottom_view);
 			viewlist_menu_0.add(bottom_view);
@@ -131,7 +136,8 @@ public class ReleaseProductTypeFragment extends BaseFragment {
 		}
 		tvlist_menu_0.get(n).setTextColor(selectColor);
 		viewlist_menu_0.get(n).setBackgroundColor(selectColor);
-		showPopMenu1();
+		doSearchMenu1(list.get(n).getLeimuid());
+		//showPopMenu1();
 	}
 
 	public void setTabs1(int n) {
@@ -143,7 +149,9 @@ public class ReleaseProductTypeFragment extends BaseFragment {
 		}
 		tvlist_menu_1.get(n).setTextColor(selectColor);
 		viewlist_menu_1.get(n).setBackgroundColor(selectColor);
-		showPopMenu2();
+		String id=list1.get(n).getLeimuid();
+		sbf.append(id+":");
+		doSearchMenu2(id);
 
 	}
 
@@ -156,7 +164,13 @@ public class ReleaseProductTypeFragment extends BaseFragment {
 		}
 		tvlist_menu_2.get(n).setTextColor(selectColor);
 		viewlist_menu_2.get(n).setBackgroundColor(selectColor);
-		
+		String id=list2.get(n).getLeimuid();
+		sbf.append(id);
+		doComplate();
+
+	}
+
+	public void doComplate(){
 		/**
 		 * 发送广播，更新UI
 		 */
@@ -166,11 +180,85 @@ public class ReleaseProductTypeFragment extends BaseFragment {
 		if(popupwindow !=null && popupwindow.isShowing()){
 			popupwindow.dismiss();
 		}
-        Intent mIntent = new Intent(ReleaseProductFragmentActivity.ACTION_PRODUCT_MSG);   
+        Intent mIntent = new Intent(ReleaseProductFragmentActivity.ACTION_PRODUCT_MSG);
+        mIntent.putExtra("ids", sbf.toString());
         activity.sendBroadcast(mIntent); 
-
 	}
-
+	
+	
+	public void doSearchMenu1(final String id){
+		RequestParams params = new RequestParams();
+		params.put("parentid",id);
+		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code = JsonUtils.getCode(arg2);
+				if (!TextUtils.isEmpty(code)) {
+					if ("0".equals(code)) {
+						doComplate();
+					} else if ("1".equals(code)) {
+						try {
+							list1 = JsonUtils.getLeiMuByInfo(arg2);
+							if(list1.size()>0){
+								showPopMenu1();
+							}else{
+								doComplate();
+							}
+							
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				
+			}
+		});
+		
+		
+	}
+	
+	public void doSearchMenu2(final String id){
+		RequestParams params = new RequestParams();
+		params.put("parentid",id);
+		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code = JsonUtils.getCode(arg2);
+				if (!TextUtils.isEmpty(code)) {
+					if ("0".equals(code)) {
+						doComplate();
+					} else if ("1".equals(code)) {
+						try {
+							list2 = JsonUtils.getLeiMuByInfo(arg2);
+							if(list2.size()>0){
+								showPopMenu2();
+							}else{
+								doComplate();
+							}
+							
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+				
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				
+			}
+		});
+		
+	}
+	
+	
 	/**
 	 * 一级目录
 	 */
@@ -190,7 +278,7 @@ public class ReleaseProductTypeFragment extends BaseFragment {
 					.inflate(R.layout.listview_rele_pro_item, null);
 			view.setId(i);
 			TextView type_name = (TextView) view.findViewById(R.id.type_name);
-			type_name.setText(list1.get(i));
+			type_name.setText(list1.get(i).getName());
 			tvlist_menu_1.add(type_name);
 			View bottom_view = view.findViewById(R.id.bottom_view);
 			viewlist_menu_1.add(bottom_view);
@@ -243,7 +331,7 @@ public class ReleaseProductTypeFragment extends BaseFragment {
 					.inflate(R.layout.listview_rele_pro_item, null);
 			view.setId(i);
 			TextView type_name = (TextView) view.findViewById(R.id.type_name);
-			type_name.setText(list2.get(i));
+			type_name.setText(list2.get(i).getName());
 			tvlist_menu_2.add(type_name);
 			View bottom_view = view.findViewById(R.id.bottom_view);
 			viewlist_menu_2.add(bottom_view);
