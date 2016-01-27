@@ -378,7 +378,13 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void onStart() {
-		initDatas();
+		getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				initDatas();				
+			}
+		});
+		
 		super.onStart();
 	}
 

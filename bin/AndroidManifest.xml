@@ -104,6 +104,7 @@
         <activity android:name="com.nongziwang.activity.MyShopsFragmentActivity" />
         <activity android:name="com.nongziwang.activity.CaptureActivity" />
         <activity android:name="com.nongziwang.activity.GongsiFragmentActivity" />
+        <activity android:name="com.nongziwang.activity.WebViewActivity" />
         
         <!-- 验证码倒计时服务 -->
         <service

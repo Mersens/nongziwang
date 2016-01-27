@@ -45,7 +45,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 	private static Handler handler;
 	private RadioGroup dotLayout;
 	private LinearLayout layout_search;
-
 	private LinearLayout layout_huafei;
 	private LinearLayout layout_zhongzi;
 	private LinearLayout layout_nongyao;

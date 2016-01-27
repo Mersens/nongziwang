@@ -179,38 +179,8 @@ public class CaptureActivity extends BaseActivity implements Callback,
 	}
 
 	private void showResult(final Result rawResult, Bitmap barcode) {
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-		Drawable drawable = new BitmapDrawable(barcode);
-		builder.setIcon(drawable);
-
-		builder.setTitle("类型:" + rawResult.getBarcodeFormat() + "\n 结果：" + rawResult.getText());
-		builder.setPositiveButton("确定", new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				Intent intent = new Intent(CaptureActivity.this,null);
-				intent.putExtra("path", rawResult.getText().toString());
-				startActivity(intent);
-				finish();
-			}
-		});
-		builder.setNegativeButton("重新扫描", new OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				restartPreviewAfterDelay(0L);
-			}
-		});
-		builder.setCancelable(false);
-		builder.show();
-
-		// Intent intent = new Intent();
-		// intent.putExtra(QR_RESULT, rawResult.getText());
-		// setResult(RESULT_OK, intent);
-		// finish();
+		intentAction(CaptureActivity.this,WebViewActivity.class,rawResult.getText().toString());
+		finish();
 	}
 
 	public void restartPreviewAfterDelay(long delayMS) {

@@ -8,32 +8,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white_color"
+        android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal" >
 
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" >
+
             <ImageView
-            android:id="@+id/img_pro"
-            android:layout_width="78dp"
-            android:layout_height="78dp"
-            android:layout_margin="4dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/android" />
+                android:id="@+id/img_pro"
+                android:layout_width="78dp"
+                android:layout_height="78dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/android" />
 
             <CheckBox
                 android:id="@+id/checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/collection_radio_check"
                 android:layout_margin="6dp"
+                android:button="@drawable/collection_radio_check"
                 android:textColor="@color/base_color_text_black"
                 android:textSize="@dimen/text_size" />
-
         </FrameLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"

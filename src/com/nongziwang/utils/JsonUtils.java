@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.nongziwang.entity.ChanPinBean;
 import com.nongziwang.entity.CompanyBean;
+import com.nongziwang.entity.FootprintBean;
 import com.nongziwang.entity.GongsiBean;
 import com.nongziwang.entity.LeiMuBean;
 import com.nongziwang.entity.NewsBean;
@@ -377,9 +378,27 @@ public class JsonUtils {
 			bean.setXinxiststic(obj.getString("xinxiststic"));
 			list.add(bean);
 		}
-		
-		
 		return list;
 		
 	}
+	
+	public static List<FootprintBean> getFootprintInfo(String str) throws JSONException{
+		List<FootprintBean> list=new ArrayList<FootprintBean>();
+		JSONObject jsonObject = new JSONObject(str);
+		JSONArray array = new JSONArray(jsonObject.getString("chanpinlist"));
+		for (int i = 0; i < array.length(); i++) {
+			JSONObject obj = (JSONObject) array.get(i);
+			FootprintBean bean=new FootprintBean();
+			bean.setChanpinid(obj.getString("chanpinid"));
+			bean.setChanpinimg(obj.getString("chanpinimg"));
+			bean.setCityname(obj.getString("cityname"));
+			bean.setJiage(obj.getString("jiage"));
+			bean.setProvince(obj.getString("province"));
+			bean.setTitle(obj.getString("title"));
+			list.add(bean);
+		}
+		
+		return list;
+	}
+	
 }

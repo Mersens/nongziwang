@@ -111,15 +111,7 @@
                     android:layout_marginTop="8dp"
                     android:src="@drawable/icon_fenxiang" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_toLeftOf="@+id/imageView1"
-                    android:src="@drawable/icon_shoucang" />
+                
             </RelativeLayout>
 
             <RelativeLayout

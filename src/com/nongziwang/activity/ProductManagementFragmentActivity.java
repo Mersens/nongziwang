@@ -18,7 +18,13 @@ import android.widget.TextView;
 import com.nongziwang.fragment.ProductManagementFragment;
 import com.nongziwang.main.R;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
-
+/**
+ * 
+ * @title ProductManagementFragmentActivity
+ * @description:ProductManagementFragmentActivity
+ * @author Mersens
+ * @time 2016Äê1ÔÂ27ÈÕ
+ */
 public class ProductManagementFragmentActivity extends BaseActivity{
 	private ViewPager viewPager;
 	private ImageView imageView;

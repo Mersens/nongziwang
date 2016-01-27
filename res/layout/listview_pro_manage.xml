@@ -37,7 +37,7 @@
             android:textSize="@dimen/text_size" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/tv_plxj"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -49,12 +49,12 @@
             android:textSize="@dimen/text_size" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_del"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/textView1"
+            android:layout_toRightOf="@+id/tv_plxj"
             android:background="@drawable/pro_tv_bg"
             android:text="删除"
             android:textColor="@color/base_color_text_black"
@@ -139,12 +139,12 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <ListView
+        <com.nongziwang.view.XListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none" >
-        </ListView>
+        </com.nongziwang.view.XListView>
     </LinearLayout>
 
 </LinearLayout>

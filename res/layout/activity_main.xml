@@ -12,7 +12,11 @@
         android:layout_height="0dip"
         android:layout_weight="1" >
     </FrameLayout>
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1.5px"
+    android:background="@color/black2"
+    />
     <include layout="@layout/layout_bottom" />
 
 </LinearLayout>

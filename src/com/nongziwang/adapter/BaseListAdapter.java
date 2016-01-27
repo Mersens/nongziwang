@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 /**
  * 
+ * @title BaseListAdapter
+ * @description:BaseListAdapter
  * @author Mersens
- * @param <E>
+ * @time 2016Äê1ÔÂ12ÈÕ
  */
 public abstract class BaseListAdapter<E> extends BaseAdapter {
   public List<E> list;

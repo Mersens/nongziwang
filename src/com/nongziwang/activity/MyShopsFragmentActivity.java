@@ -149,9 +149,7 @@ public class MyShopsFragmentActivity extends BaseActivity implements
             } else if(action.equals(ACTION_HIDE)){  
             	layout_top.setVisibility(View.GONE);
             }
-            System.out.println("action----------"+action);
         }  
-
     }; 
     public void registerBoradcastReceiver(){  
         IntentFilter myIntentFilter = new IntentFilter();  

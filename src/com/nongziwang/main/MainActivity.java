@@ -2,15 +2,12 @@ package com.nongziwang.main;
 
 import com.nongziwang.activity.BaseActivity;
 import com.nongziwang.application.CustomApplcation;
-import com.nongziwang.fragment.BuyerFragment;
 import com.nongziwang.fragment.HomeFragment;
 import com.nongziwang.fragment.ProductFragment;
 import com.nongziwang.fragment.InfoFragment;
 import com.nongziwang.fragment.UserCenterFragment;
 import com.nongziwang.view.DialogTips;
-
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
