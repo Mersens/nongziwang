@@ -32,10 +32,8 @@ import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
-import com.nongziwang.activity.FbxjdActivity;
 import com.nongziwang.activity.ProductManagementFragmentActivity;
 import com.nongziwang.application.AppConstants;
-import com.nongziwang.application.CustomApplcation;
 import com.nongziwang.db.NongziDao;
 import com.nongziwang.db.NongziDaoImpl;
 import com.nongziwang.entity.UserBean;
@@ -45,8 +43,9 @@ import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.view.DialogTips;
+import com.nongziwang.view.DialogWaiting;
 import com.nongziwang.view.FlowLayout;
-import com.nongziwang.view.SpotsDialog;
+
 
 public class ReleaseProductMsgFragment extends BaseFragment {
 	private View view;
@@ -67,7 +66,7 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 	private StringBuffer sbf;
 	private UserBean user;
 	private NongziDao dao;
-	private SpotsDialog dialog;
+	private DialogWaiting dialog;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -111,8 +110,7 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 				startActivityForResult(intent, 1);
 			}
 		});
-		dialog=new SpotsDialog(getActivity(),R.style.SpotsDialogWaiting);
-		dialog.setCanceledOnTouchOutside(false);
+
 	}
 
 	private void initEvent() {
@@ -278,7 +276,15 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 			public void onStart() {
 				// TODO Auto-generated method stub
 				super.onStart();
-				dialog.show();
+				getActivity().runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						dialog=new DialogWaiting(getActivity());
+						dialog.show();
+					}
+				});
+
 			}
 
 			

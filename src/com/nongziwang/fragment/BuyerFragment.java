@@ -10,13 +10,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -28,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.FbxjdActivity;
@@ -95,6 +97,14 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		return view;
 	}
 
+	Handler handler=new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			if(msg.arg1==200){
+				initDatas();
+			}
+		};
+	};
+	
 	private void initViews() {
 		tv_name = (TextView) view.findViewById(R.id.tv_name);
 		buyer_user_head = (CircleImageView) view
@@ -378,14 +388,12 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void onStart() {
-		getActivity().runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				initDatas();				
-			}
-		});
-		
+		Message msg=new Message();
+		msg.arg1=200;
+		handler.sendMessage(msg);
 		super.onStart();
+		
+	
 	}
 
 }

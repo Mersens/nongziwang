@@ -31,7 +31,7 @@ import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.view.DialogTips;
-import com.nongziwang.view.SpotsDialog;
+import com.nongziwang.view.DialogWaiting;
 import com.nongziwang.view.XListView;
 import com.nongziwang.view.XListView.IXListViewListener;
 
@@ -60,7 +60,7 @@ public class MyFootprintActivity extends BaseActivity implements
 	private String userid;
 	private int currpage = 1;
 	private StringBuffer sbf;
-	private SpotsDialog spotsdialog;
+	private DialogWaiting dialog;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -205,9 +205,9 @@ public class MyFootprintActivity extends BaseActivity implements
 				MyFootprintActivity.this.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						spotsdialog = new SpotsDialog(MyFootprintActivity.this,
-								R.style.SpotsDialogWaiting);
-						spotsdialog.show();
+						dialog = new DialogWaiting(MyFootprintActivity.this);
+								
+						dialog.show();
 					}
 				});
 
@@ -251,8 +251,8 @@ public class MyFootprintActivity extends BaseActivity implements
 			public void onFinish() {
 				// TODO Auto-generated method stub
 				super.onFinish();
-				if (spotsdialog != null && spotsdialog.isShowing()) {
-					spotsdialog.dismiss();
+				if (dialog != null && dialog.isShowing()) {
+					dialog.dismiss();
 				}
 			}
 		});

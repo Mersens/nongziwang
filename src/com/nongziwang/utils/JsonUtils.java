@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.nongziwang.entity.ChanPinBean;
 import com.nongziwang.entity.CompanyBean;
+import com.nongziwang.entity.DianPuBean;
 import com.nongziwang.entity.FootprintBean;
 import com.nongziwang.entity.GongsiBean;
 import com.nongziwang.entity.LeiMuBean;
@@ -91,6 +92,7 @@ public class JsonUtils {
 		bean.setUsername(jsonObject.getString("username"));
 		bean.setUserphone(jsonObject.getString("userphone"));
 		bean.setTouxiang(jsonObject.getString("touxiang"));
+		bean.setDianpuid(jsonObject.getString("dianpuid"));
 		bean.setUserpwd("");
 		if (jsonObject.has("qq"))
 			bean.setQq(jsonObject.getString("qq"));
@@ -345,20 +347,20 @@ public class JsonUtils {
 		bean.setProvince(jsonObject.getString("province"));
 		bean.setShuiwudengjizheng(jsonObject.getString("shuiwudengji"));
 		bean.setYingyezhizhao(jsonObject.getString("yingyezhizhao"));
-		bean.setZuzhijigoudaimazheng(jsonObject
-				.getString("jigoudaima"));
+		bean.setZuzhijigoudaimazheng(jsonObject.getString("jigoudaima"));
 
 		return bean;
 
 	}
-	
-	public static List<ChanPinBean> getChanPinInfo(String str) throws JSONException{
-		List<ChanPinBean> list=new ArrayList<ChanPinBean>();
+
+	public static List<ChanPinBean> getChanPinInfo(String str)
+			throws JSONException {
+		List<ChanPinBean> list = new ArrayList<ChanPinBean>();
 		JSONObject jsonObject = new JSONObject(str);
 		JSONArray array = new JSONArray(jsonObject.getString("chanpinlist"));
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject obj = (JSONObject) array.get(i);
-			ChanPinBean bean= new ChanPinBean();
+			ChanPinBean bean = new ChanPinBean();
 			bean.setAddtime(obj.getString("addtime"));
 			bean.setCanRemove(true);
 			bean.setChanpinid(obj.getString("chanpinid"));
@@ -379,16 +381,17 @@ public class JsonUtils {
 			list.add(bean);
 		}
 		return list;
-		
+
 	}
-	
-	public static List<FootprintBean> getFootprintInfo(String str) throws JSONException{
-		List<FootprintBean> list=new ArrayList<FootprintBean>();
+
+	public static List<FootprintBean> getFootprintInfo(String str)
+			throws JSONException {
+		List<FootprintBean> list = new ArrayList<FootprintBean>();
 		JSONObject jsonObject = new JSONObject(str);
 		JSONArray array = new JSONArray(jsonObject.getString("chanpinlist"));
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject obj = (JSONObject) array.get(i);
-			FootprintBean bean=new FootprintBean();
+			FootprintBean bean = new FootprintBean();
 			bean.setChanpinid(obj.getString("chanpinid"));
 			bean.setChanpinimg(obj.getString("chanpinimg"));
 			bean.setCityname(obj.getString("cityname"));
@@ -397,8 +400,42 @@ public class JsonUtils {
 			bean.setTitle(obj.getString("title"));
 			list.add(bean);
 		}
-		
+
 		return list;
 	}
-	
+
+	public static DianPuBean getDianPuInfo(String str) throws JSONException {
+		DianPuBean dianpubean = new DianPuBean();
+		JSONObject jsonObject = new JSONObject(str);
+		List<ChanPinBean> list = new ArrayList<ChanPinBean>();
+		if (jsonObject.has("dianpuid"))
+			dianpubean.setDianpuid(jsonObject.getString("dianpuid"));
+		else
+			dianpubean.setDianpuid("");
+
+		if (jsonObject.has("dianpulogo"))
+			dianpubean.setDianpulogo(jsonObject.getString("dianpulogo"));
+		else
+			dianpubean.setDianpulogo("");
+
+		if (jsonObject.has("dianpuname"))
+			dianpubean.setDianpuname(jsonObject.getString("dianpuname"));
+		else
+			dianpubean.setDianpuname("");
+		JSONArray array = new JSONArray(jsonObject.getString("chanpinlist"));
+		for (int i = 0; i < array.length(); i++) {
+			JSONObject obj = (JSONObject) array.get(i);
+			ChanPinBean bean = new ChanPinBean();
+			bean.setChanpinid(obj.getString("chanpinid"));
+			bean.setChanpinimg(obj.getString("chanpinimg"));
+			bean.setTitle(obj.getString("title"));
+			bean.setJiage(obj.getString("jiage"));
+			list.add(bean);
+
+		}
+		dianpubean.setChanpinlist(list);
+		return dianpubean;
+
+	}
+
 }

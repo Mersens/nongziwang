@@ -36,7 +36,7 @@ import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.view.DialogTips;
-import com.nongziwang.view.SpotsDialog;
+import com.nongziwang.view.DialogWaiting;
 import com.nongziwang.view.XListView;
 import com.nongziwang.view.XListView.IXListViewListener;
 /**
@@ -68,7 +68,7 @@ public class ProductManagementFragment extends BaseFragment implements
 	private CheckBox btn_check_all;
 	private TextView tv_plxj, tv_del;
 	private StringBuffer sbf;
-	private SpotsDialog spotsdialog;
+	private DialogWaiting dialog;
 	private boolean isShangjia = false;
 
 	@Override
@@ -199,9 +199,9 @@ public class ProductManagementFragment extends BaseFragment implements
 				getActivity().runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						spotsdialog = new SpotsDialog(getActivity(),
-								R.style.SpotsDialogWaiting);
-						spotsdialog.show();
+						dialog = new DialogWaiting(getActivity()
+								);
+						dialog.show();
 					}
 				});
 
@@ -242,8 +242,8 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onFinish() {
 				// TODO Auto-generated method stub
 				super.onFinish();
-				if (spotsdialog != null && spotsdialog.isShowing()) {
-					spotsdialog.dismiss();
+				if (dialog != null && dialog.isShowing()) {
+					dialog.dismiss();
 				}
 			}
 		});
@@ -279,9 +279,9 @@ public class ProductManagementFragment extends BaseFragment implements
 				getActivity().runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						spotsdialog = new SpotsDialog(getActivity(),
-								R.style.SpotsDialogWaiting);
-						spotsdialog.show();
+						dialog = new DialogWaiting(getActivity()
+								);
+						dialog.show();
 					}
 				});
 
@@ -323,8 +323,8 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onFinish() {
 				// TODO Auto-generated method stub
 				super.onFinish();
-				if (spotsdialog != null && spotsdialog.isShowing()) {
-					spotsdialog.dismiss();
+				if (dialog != null && dialog.isShowing()) {
+					dialog.dismiss();
 				}
 			}
 		});
@@ -360,9 +360,8 @@ public class ProductManagementFragment extends BaseFragment implements
 				getActivity().runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						spotsdialog = new SpotsDialog(getActivity(),
-								R.style.SpotsDialogWaiting);
-						spotsdialog.show();
+						dialog = new DialogWaiting(getActivity());
+						dialog.show();
 					}
 				});
 
@@ -403,8 +402,8 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onFinish() {
 				// TODO Auto-generated method stub
 				super.onFinish();
-				if (spotsdialog != null && spotsdialog.isShowing()) {
-					spotsdialog.dismiss();
+				if (dialog != null && dialog.isShowing()) {
+					dialog.dismiss();
 				}
 			}
 		});

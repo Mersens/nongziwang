@@ -24,12 +24,10 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 
 import com.loopj.android.http.RequestParams;
@@ -38,9 +36,7 @@ import com.nongziwang.adapter.MyArrayAdapter;
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.db.NongziDao;
 import com.nongziwang.db.NongziDaoImpl;
-import com.nongziwang.entity.LeiMuBean;
 import com.nongziwang.entity.MyRegion;
-import com.nongziwang.main.MainActivity;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
@@ -48,8 +44,8 @@ import com.nongziwang.utils.ListUtils;
 import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.view.DatePickerPopWindow;
 import com.nongziwang.view.DialogTips;
+import com.nongziwang.view.DialogWaiting;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
-import com.nongziwang.view.SpotsDialog;
 
 public class FbxjdActivity extends BaseActivity {
 	private Spinner spinner_dw, spinner_gys_province, spinner_gys_city,
@@ -70,7 +66,7 @@ public class FbxjdActivity extends BaseActivity {
 	private Button btn_fabu;
 	private List<MyRegion> dws;
 	private String userid;
-	private SpotsDialog dialog;
+	private DialogWaiting dialog;
 
 	private static final String TAG = "FbxjdActivity";
 	private static final String URL = AppConstants.SERVICE_ADDRESS
@@ -127,8 +123,7 @@ public class FbxjdActivity extends BaseActivity {
 					}
 				});
 		setHeadViewBg(R.color.white_color);
-		dialog=new SpotsDialog(FbxjdActivity.this,R.style.SpotsDialogWaiting);
-		dialog.setCanceledOnTouchOutside(false);
+		dialog=new DialogWaiting(FbxjdActivity.this);
 
 	}
 

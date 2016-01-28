@@ -138,12 +138,12 @@ public class NongziDaoImpl implements NongziDao {
 	public void addUserInfo(UserBean user) {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		db.execSQL(
-				"insert into usertb(userid,username,userpwd,userphone,qq,xingming,addtime,companyid,htmlid,touxiang) values(?,?,?,?,?,?,?,?,?,?)",
+				"insert into usertb(userid,username,userpwd,userphone,qq,xingming,addtime,companyid,htmlid,touxiang,dianpuid) values(?,?,?,?,?,?,?,?,?,?,?)",
 				new Object[] { user.getUserid(), user.getUsername(),
 						user.getUserpwd(), user.getUserphone(), user.getQq(),
 						user.getXingming(), user.getAddtime(),
 						user.getCompanyid(), user.getHtmlid(),
-						user.getTouxiang() });
+						user.getTouxiang(),user.getDianpuid() });
 		db.close();
 
 	}
@@ -177,6 +177,8 @@ public class NongziDaoImpl implements NongziDao {
 			user.setHtmlid(htmlid);
 			String touxiang = cursor.getString(cursor.getColumnIndex("touxiang"));
 			user.setTouxiang(touxiang);
+			String dianpuid = cursor.getString(cursor.getColumnIndex("dianpuid"));
+			user.setDianpuid(dianpuid);
 			list.add(user);
 		}
 		cursor.close();

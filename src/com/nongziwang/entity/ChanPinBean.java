@@ -129,13 +129,6 @@ public class ChanPinBean {
 	
 	@Override
 	public String toString() {
-		return "ChanPinBean [chanpinid=" + chanpinid + ", pinpai=" + pinpai
-				+ ", title=" + title + ", keyword=" + keyword + ", miaoshu="
-				+ miaoshu + ", detail=" + detail + ", jiage=" + jiage
-				+ ", ishot=" + ishot + ", unit=" + unit + ", dianpuid="
-				+ dianpuid + ", gongsiid=" + gongsiid + ", userid=" + userid
-				+ ", xinxiststic=" + xinxiststic + ", htmlid=" + htmlid
-				+ ", addtime=" + addtime + ", chanpinimg=" + chanpinimg
-				+ ", canRemove=" + canRemove + "]";
+		return title;
 	}
 }

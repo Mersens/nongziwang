@@ -11,11 +11,20 @@ public class UserBean {
 	private String companyid;
 	private String htmlid;
 	private String touxiang;
+	private String dianpuid;
+
 
 	public UserBean(){
 		
 	}
-	
+
+	public String getDianpuid() {
+		return dianpuid;
+	}
+
+	public void setDianpuid(String dianpuid) {
+		this.dianpuid = dianpuid;
+	}
 	public String getUserid() {
 		return userid;
 	}

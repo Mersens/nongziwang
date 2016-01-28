@@ -21,15 +21,14 @@ import com.nongziwang.application.AppConstants;
 import com.nongziwang.db.NongziDao;
 import com.nongziwang.db.NongziDaoImpl;
 import com.nongziwang.entity.UserBean;
-import com.nongziwang.fragment.BuyerFragment;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.MD5Util;
 import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.utils.StringUtils;
+import com.nongziwang.view.DialogWaiting;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
-import com.nongziwang.view.SpotsDialog;
 import com.sina.weibo.sdk.auth.AuthInfo;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
@@ -45,7 +44,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private EditText edt_psd;
 	private Button btn_login;
 	private TextView tv_forget_psd, tv_user_regist;
-	private SpotsDialog spotsdialog;
+	private DialogWaiting dialog;
 	private ImageView image_qq, image_weixin, image_sina;
 	public static Tencent mTencent;
 	private SsoHandler mSsoHandler;
@@ -177,9 +176,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		HttpUtils.doPost(LOGIN_URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onStart() {
-				spotsdialog = new SpotsDialog(LoginActivity.this, "正在登录", null,
-						true, true);
-				spotsdialog.show();
+				dialog =new DialogWaiting(LoginActivity.this);
+				dialog.show();
 				super.onStart();
 			}
 
@@ -199,7 +197,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 							finishActivity();
 						} catch (JSONException e) {
 							e.printStackTrace();
-							spotsdialog.dismiss();
+							dialog.dismiss();
 						}
 					} else if ("2".equals(code)) {
 						ShowToast("账户名不存在!");
@@ -231,6 +229,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		HttpUtils.doPost(USERINFO_URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				System.out.println(arg2);
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("1".equals(code)) {
@@ -263,8 +262,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	}
 
 	public void dialogDismiss() {
-		if (spotsdialog != null && spotsdialog.isShowing()) {
-			spotsdialog.dismiss();
+		if (dialog != null && dialog.isShowing()) {
+			dialog.dismiss();
 		}
 	}
 

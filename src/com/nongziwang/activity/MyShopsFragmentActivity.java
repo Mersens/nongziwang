@@ -11,26 +11,35 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nongziwang.application.AppConstants;
 import com.nongziwang.fragment.MyShopsFragment;
 import com.nongziwang.main.R;
+import com.nongziwang.view.CircleImageView;
 
 public class MyShopsFragmentActivity extends BaseActivity implements
 		OnClickListener {
 	private ImageView img_menu_back;
     private ImageView img_barcode;
+    public static ImageView image_share;
+    public static CircleImageView image_dp_logo;
+    public static TextView tv_dp_name;
+    public static RelativeLayout layout_loading;
+    public static EditText search_edit;
 	private LinearLayout layout_dianpu, layout_shangpin;
 	private ImageView image_shangpin, image_dianpu;
 	private TextView tv_shangpin, tv_dianpu;
 	private View view_shangpin, view_dianpu;
-	private RelativeLayout layout_more;
 	private LinearLayout layout_top;
 	public static final String ACTION_SHOW="show";
 	public static final String ACTION_HIDE="hide";
+	private static final String URL=AppConstants.SERVICE_ADDRESS+"dianpu/gotoDianpuIndex";
+	private static final String ALL_URL=AppConstants.SERVICE_ADDRESS+"dianpu/getAllDianpuChanpin";
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -40,13 +49,17 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 		registerBoradcastReceiver();
 		initViews();
 		initEvent();
-		addFragment(null, false);
+		addFragment(URL, false);
 	}
 
 	private void initViews() {
+		search_edit=(EditText) findViewById(R.id.search_edit);
+		layout_loading=(RelativeLayout) findViewById(R.id.layout_loading);
+		tv_dp_name=(TextView) findViewById(R.id.tv_dp_name);
+		image_dp_logo=(CircleImageView) findViewById(R.id.image_dp_logo);
+		image_share=(ImageView) findViewById(R.id.image_share);
 		layout_top=(LinearLayout) findViewById(R.id.layout_top);
 		img_barcode=(ImageView) findViewById(R.id.img_barcode);
-		layout_more=(RelativeLayout) findViewById(R.id.layout_more);
 		layout_dianpu = (LinearLayout) findViewById(R.id.layout_dianpu);
 		layout_shangpin = (LinearLayout) findViewById(R.id.layout_shangpin);
 		image_shangpin = (ImageView) findViewById(R.id.image_shangpin);
@@ -72,11 +85,10 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 	}
 
 	public Fragment creatFragment(String params) {
-		return MyShopsFragment.getInstance(null);
+		return MyShopsFragment.getInstance(params);
 	}
 
 	public void addFragment(String params, boolean isAnim) {
-
 		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
 		Fragment fragment = fm.findFragmentById(R.id.fragment_container);
@@ -98,11 +110,11 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 		switch (v.getId()) {
 		case R.id.layout_dianpu:
 			setTabs(0);
-			addFragment(null, true);
+			addFragment(URL, true);
 			break;
 		case R.id.layout_shangpin:
 			setTabs(1);
-			addFragment(null, true);
+			addFragment(ALL_URL, true);
 			break;
 		case R.id.img_barcode:
 			intentAction(MyShopsFragmentActivity.this, CaptureActivity.class);
@@ -118,14 +130,14 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 			tv_dianpu.setTextColor(getResources().getColor(
 					R.color.title_yellow_text_color));
 			view_dianpu.setVisibility(View.VISIBLE);
-			layout_more.setVisibility(View.VISIBLE);
+
 			break;
 		case 1:
 			image_shangpin.setImageResource(R.drawable.icon_shangpin_pressed);
 			tv_shangpin.setTextColor(getResources().getColor(
 					R.color.title_yellow_text_color));
 			view_shangpin.setVisibility(View.VISIBLE);
-			layout_more.setVisibility(View.GONE);
+
 			break;
 		}
 	}
