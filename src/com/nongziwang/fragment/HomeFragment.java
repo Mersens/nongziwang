@@ -17,6 +17,7 @@ import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.ImageLoadOptions;
 import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.view.DialogWaiting;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.annotation.SuppressLint;
@@ -25,6 +26,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,6 +36,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class HomeFragment extends BaseFragment implements OnClickListener {
 	private View view;
@@ -52,8 +55,10 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 	private LinearLayout layout_nongmo;
 	private Map<String,List<String>> mapdatas;
 	private MainListViewAdapter adapter;
+	private DialogWaiting dialog;
 	private static final String BANNER_URL = AppConstants.SERVICE_ADDRESS
 			+ "index/getIndexImg";
+	private static final String TAG="HomeFragment";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -110,6 +115,13 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 
 		HttpUtils.doPost(BANNER_URL, new TextHttpResponseHandler() {
 			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				super.onStart();
+				dialog=new DialogWaiting(getActivity());
+				dialog.show();
+			}
+			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				try {
 					mapdatas=JsonUtils.getIndexImg(arg2);
@@ -129,8 +141,18 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				// TODO Auto-generated method stub
+				Toast.makeText(getActivity(), " ˝æ›º”‘ÿ ß∞‹£°", Toast.LENGTH_SHORT).show();
+				Log.e(TAG, arg2==null?"":arg2);
 
+			}
+			
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+				if(dialog!=null && dialog.isShowing()){
+					dialog.dismiss();
+				}
 			}
 		});
 

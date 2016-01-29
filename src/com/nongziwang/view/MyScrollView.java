@@ -24,9 +24,7 @@ public class MyScrollView extends ScrollView{
 	            onScrollToBottom.onScrollBottomListener(clampedY);  
 	        }  
 	    }  
-	      
-	    
-	    
+
 	    public void setOnScrollToBottomLintener(OnScrollToBottomListener listener){  
 	        onScrollToBottom = listener;  
 	    }  

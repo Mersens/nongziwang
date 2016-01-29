@@ -10,9 +10,9 @@ import org.json.JSONException;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.ProductDetailFragmentActivity;
+import com.nongziwang.activity.SearchResultsFragmentActivity;
 import com.nongziwang.adapter.SearchResultsAdapter;
 import com.nongziwang.application.AppConstants;
-import com.nongziwang.entity.NewsBean;
 import com.nongziwang.entity.ProductBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
@@ -23,6 +23,7 @@ import com.nongziwang.view.XListView.IXListViewListener;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,22 +40,22 @@ public class SearchResultsFragment extends BaseFragment implements
 	private SearchResultsAdapter adapter;
 	private RelativeLayout layout_loading;
 	private String param;
-	private List<ProductBean> lists=new ArrayList<ProductBean>();
+	private List<ProductBean> lists = new ArrayList<ProductBean>();
 	private static final String URL = AppConstants.SERVICE_ADDRESS
 			+ "chanpinsousuo/getChanpinSousuoByKeywords";
 	private static final String TAG = "SearchResultsFragment";
 	private int currpage = 1;
 	private Context context;
+	private String pinpaiid = null;
+	private String yongtuid = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.listview_search_results, container,
 				false);
-		context=view.getContext();
-		
+		context = view.getContext();
 		param = getArguments().getString("params");
-
 		initView();
 		initEvent();
 		initDatas();
@@ -65,9 +66,7 @@ public class SearchResultsFragment extends BaseFragment implements
 		layout_loading = (RelativeLayout) view
 				.findViewById(R.id.layout_loading);
 		productlistview = (XListView) view.findViewById(R.id.productlistview);
-		// 不允许上拉加载
 		productlistview.setPullLoadEnable(true);
-		// 允许下拉
 		productlistview.setPullRefreshEnable(true);
 		productlistview.setXListViewListener(this);
 	}
@@ -75,28 +74,39 @@ public class SearchResultsFragment extends BaseFragment implements
 	private void initEvent() {
 
 		productlistview.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				intentAction(getActivity(), ProductDetailFragmentActivity.class);
+				ProductBean bean = lists.get(position - 1);
+				intentAction(getActivity(),
+						ProductDetailFragmentActivity.class,
+						bean.getChanpinid());
 			}
 		});
 	}
 
 	private void initDatas() {
+		pinpaiid = SearchResultsFragmentActivity.pinpaiid;
+		yongtuid = SearchResultsFragmentActivity.yongtuid;
+		System.out.println("pinpaiid-------------"+pinpaiid);
+		System.out.println("yongtuid-------------"+yongtuid);
 		RequestParams params = new RequestParams();
-	
 		params.put("currpage", currpage + "");
 		params.put("keywords", param);
+		if (!TextUtils.isEmpty(pinpaiid)) {
+			params.put("pinpaiid", pinpaiid);
+		}
+		if (!TextUtils.isEmpty(yongtuid)) {
+			params.put("yongtuid", yongtuid);
+		}
 		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
-	
+
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(context, " 当前页码输入不正确!",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, " 当前页码输入不正确!", Toast.LENGTH_SHORT)
+							.show();
 				} else if ("1".equals(code)) {
 					try {
 						List<ProductBean> list = JsonUtils.getProductInfo(arg2);
@@ -109,8 +119,8 @@ public class SearchResultsFragment extends BaseFragment implements
 					}
 
 				} else if ("2".equals(code)) {
-					Toast.makeText(context, " 没有符合的产品信息!",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, " 没有符合的产品信息!", Toast.LENGTH_SHORT)
+							.show();
 				}
 			}
 
@@ -118,8 +128,7 @@ public class SearchResultsFragment extends BaseFragment implements
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT).show();
 
 			}
 
@@ -154,17 +163,24 @@ public class SearchResultsFragment extends BaseFragment implements
 		RequestParams params = new RequestParams();
 		params.put("currpage", currpage + "");
 		params.put("keywords", param);
+		if (!TextUtils.isEmpty(pinpaiid)) {
+			params.put("pinpaiid", pinpaiid);
+		}
+		if (!TextUtils.isEmpty(yongtuid)) {
+			params.put("yongtuid", yongtuid);
+		}
 		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(context, " 当前页码输入不正确!",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, " 当前页码输入不正确!", Toast.LENGTH_SHORT)
+							.show();
 				} else if ("1".equals(code)) {
 					try {
 						lists.clear();
-						List<ProductBean> list1 = JsonUtils.getProductInfo(arg2);
+						List<ProductBean> list1 = JsonUtils
+								.getProductInfo(arg2);
 						lists.addAll(list1);
 						adapter.setList(list1);
 						adapter.notifyDataSetChanged();
@@ -173,8 +189,8 @@ public class SearchResultsFragment extends BaseFragment implements
 						e.printStackTrace();
 					}
 				} else if ("2".equals(code)) {
-					Toast.makeText(context, " 没有符合的产品信息!",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, " 没有符合的产品信息!", Toast.LENGTH_SHORT)
+							.show();
 				}
 			}
 
@@ -182,8 +198,7 @@ public class SearchResultsFragment extends BaseFragment implements
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -195,17 +210,24 @@ public class SearchResultsFragment extends BaseFragment implements
 		RequestParams params = new RequestParams();
 		params.put("currpage", currpage + "");
 		params.put("keywords", param);
+		if (!TextUtils.isEmpty(pinpaiid)) {
+			params.put("pinpaiid", pinpaiid);
+		}
+		if (!TextUtils.isEmpty(yongtuid)) {
+			params.put("yongtuid", yongtuid);
+		}
 		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(context, " 当前页码输入不正确!",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, " 当前页码输入不正确!", Toast.LENGTH_SHORT)
+							.show();
 				} else if ("1".equals(code)) {
 					try {
 
-						List<ProductBean> list2 = JsonUtils.getProductInfo(arg2);
+						List<ProductBean> list2 = JsonUtils
+								.getProductInfo(arg2);
 						if (list2.size() < 10) {
 							productlistview.setPullLoadEnable(false);
 						}
@@ -217,8 +239,8 @@ public class SearchResultsFragment extends BaseFragment implements
 						e.printStackTrace();
 					}
 				} else if ("2".equals(code)) {
-					Toast.makeText(context, " 没有符合的产品信息!",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, " 没有符合的产品信息!", Toast.LENGTH_SHORT)
+							.show();
 				}
 			}
 
@@ -226,8 +248,7 @@ public class SearchResultsFragment extends BaseFragment implements
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT).show();
 			}
 
 		});

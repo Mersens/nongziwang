@@ -37,7 +37,7 @@ public class SearchCompanyAdapter extends BaseListAdapter<CompanyBean> {
 		holder.tv_company.setText(bean.getGongsiname());
 		holder.tv_jyms.setText(bean.getDianputype());
 		holder.tv_zycp.setText(bean.getZhuyingchanpin());
-		holder.tv_msg.setText(bean.getChanpinsum());
+		holder.tv_msg.setText(bean.getChanpinsum()+" ¼ş²úÆ·");
 		return convertView;
 	}
 	

@@ -84,7 +84,6 @@ IXListViewListener, EventListener{
 					Toast.makeText(context, "没有查询到符合的公司信息!", Toast.LENGTH_SHORT)
 					.show();
 				}
-				
 			}
 			
 			@Override

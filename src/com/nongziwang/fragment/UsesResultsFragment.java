@@ -8,9 +8,11 @@ import org.apache.http.Header;
 import org.json.JSONException;
 
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.nongziwang.activity.SearchResultsFragmentActivity;
 import com.nongziwang.adapter.CommonSearchResultsAdapter;
 import com.nongziwang.adapter.UseshResultsAdapter;
 import com.nongziwang.application.AppConstants;
+import com.nongziwang.entity.PinPaiBean;
 import com.nongziwang.entity.UsesBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
@@ -19,15 +21,18 @@ import com.nongziwang.view.XListView;
 import com.nongziwang.view.XListView.IXListViewListener;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class UsesResultsFragment extends BaseFragment implements
 IXListViewListener, EventListener {
@@ -55,6 +60,16 @@ IXListViewListener, EventListener {
 		listview_search_other.setPullLoadEnable(false);
 		listview_search_other.setPullRefreshEnable(false);
 		listview_search_other.setXListViewListener(this);
+		listview_search_other.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				UsesBean bean=lists.get(position);
+				Intent intent=new Intent(SearchResultsFragmentActivity.ACTION_YONGTUID);
+				intent.putExtra("yongtuid",bean.getUsesid() );
+				context.sendBroadcast(intent);
+			}
+		});
 	}
 	
 	public void initDatas(){

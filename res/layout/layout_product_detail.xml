@@ -2,222 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_color"
     android:orientation="vertical" >
 
-    <com.nongziwang.view.MyScrollView
-        android:id="@+id/scrollView"
+    <RelativeLayout
+        android:id="@+id/layout_loading"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent"
+        android:background="@color/white_color"
+        android:orientation="vertical"
+         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <FrameLayout
-                android:id="@+id/fragmentContainer"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/white_color" >
-
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_margin="24dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/img_huafei" />
-            </FrameLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:orientation="vertical" >
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/actionbar_hight"
-                    android:background="@color/white_color" >
-
-                    <TextView
-                        android:id="@+id/textView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="24dp"
-                        android:singleLine="true"
-                        android:text="中农化复合肥"
-                        android:textColor="@color/base_color_text_black"
-                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
-
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="18dp"
-                        android:src="@drawable/gouwuche" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/black2" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/actionbar_hight"
-                    android:background="@color/white_color" >
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="24dp"
-                        android:singleLine="true"
-                        android:text="价格面议"
-                        android:textColor="@color/red_text_color"
-                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/black2" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/img_hight_size"
-                    android:background="@color/white_color" >
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="24dp"
-                        android:text="运费待议"
-                        android:textSize="@dimen/text_mid_size" />
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="18dp"
-                        android:text="发货 河南郑州"
-                        android:textSize="@dimen/text_mid_size" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@color/white_color" 
-                    >
-
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="@dimen/img_wight_size"
-                        android:layout_height="@dimen/img_hight_size"
-                        android:layout_marginBottom="4dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/icon_gongsi_bg"
-                        android:src="@drawable/launcher" />
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/imageView3"
-                        android:singleLine="true"
-                        android:text="山东农大肥业科技有限公司"
-                        android:textColor="@color/base_color_text_black"
-                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white_color" >
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/editbox_background_normal"
-                        android:drawableLeft="@drawable/icon_quanbu"
-                        android:drawablePadding="8dp"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="全部商品"
-                        android:textSize="@dimen/common_text_size" />
-
-                    <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/editbox_background_normal"
-                        android:drawableLeft="@drawable/icon_dianpu_normal"
-                        android:drawablePadding="8dp"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="进入店铺"
-                        android:textSize="@dimen/common_text_size" />
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:id="@+id/layout_tips"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/img_hight_size"
-                   >
-
-                    <ImageView
-                        android:id="@+id/image_up"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/textView8"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="4dp"
-                        android:src="@drawable/icon_shangla" />
-
-                    <TextView
-                        android:id="@+id/tv_tips"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:layout_margin="4dp"
-                        android:text="上拉查看图文详情" />
-
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_centerVertical="true"
-                        android:layout_toLeftOf="@+id/tv_tips"
-                        android:visibility="gone"
-                         />
-                </RelativeLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </com.nongziwang.view.MyScrollView>
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center" />
+    </RelativeLayout>
+    <com.nongziwang.view.XListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_color"
+         >
+    </com.nongziwang.view.XListView>
 
 </LinearLayout>

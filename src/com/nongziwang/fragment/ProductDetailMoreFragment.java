@@ -4,9 +4,18 @@ import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
 
+import org.apache.http.Header;
+import org.json.JSONException;
+
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.ProductDetailFragmentActivity;
 import com.nongziwang.adapter.ProductDetailAdapter;
+import com.nongziwang.application.AppConstants;
+import com.nongziwang.entity.ChanPinBean;
 import com.nongziwang.main.R;
+import com.nongziwang.utils.HttpUtils;
+import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.view.XListView;
 import com.nongziwang.view.XListView.IXListViewListener;
 
@@ -14,9 +23,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class ProductDetailMoreFragment extends BaseFragment implements
 		IXListViewListener, EventListener {
@@ -24,7 +36,12 @@ public class ProductDetailMoreFragment extends BaseFragment implements
 	private XListView listView;
 	private List<String> list;
 	private Handler handler;
-
+	private static final String URL=AppConstants.SERVICE_ADDRESS+"chanpinsousuo/gotoChanpinXiangqing";
+	private static final String TAG="ProductDetailMoreFragment";
+	private String id;
+	private RelativeLayout layout_loading;
+	private ChanPinBean bean;
+	private ProductDetailAdapter adapter;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -32,12 +49,14 @@ public class ProductDetailMoreFragment extends BaseFragment implements
 				false);
 		ProductDetailFragmentActivity activity = (ProductDetailFragmentActivity) getActivity();
 		handler = activity.handler;
+		id=getArguments().getString("params");
 		initViews();
-		initEvent();
+		initDatas();
 		return view;
 	}
 
 	private void initViews() {
+		layout_loading=(RelativeLayout) view.findViewById(R.id.layout_loading);
 		listView = (XListView) view.findViewById(R.id.listView);
 		//不允许上拉加载
 		listView.setPullLoadEnable(false);
@@ -46,15 +65,49 @@ public class ProductDetailMoreFragment extends BaseFragment implements
 		listView.setXListViewListener(this);
 	}
 
-	private void initEvent() {
-		list = new ArrayList<String>();
-		for (int i = 0; i < 6; i++) {
-			list.add(i + "");
-		}
-		listView.setAdapter(new ProductDetailAdapter(list, getActivity()));
-
+	public void initDatas(){
+		RequestParams params=new RequestParams();
+		params.put("chanpinid", id);
+		
+		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code =JsonUtils.getCode(arg2);
+				if("0".equals(code)){
+					Toast.makeText(view.getContext(), "产品id 为空!", Toast.LENGTH_SHORT).show();
+				}else if("1".equals(code)){
+					try {
+						 bean=JsonUtils.getChanPinDetailInfo(arg2);
+						 setDatas();
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}else if("2".equals(code)){
+					Toast.makeText(view.getContext(), " 找不到该产品信息!", Toast.LENGTH_SHORT).show();
+				}
+			}
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				Toast.makeText(view.getContext(), "数据获取失败！", Toast.LENGTH_SHORT).show();
+				Log.e(TAG, arg2==null?"":arg2);
+			}
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				layout_loading.setVisibility(View.GONE);
+			}
+		});
 	}
-
+	
+	
+	private void setDatas() {
+		list=new ArrayList<String>();
+		list.add(bean.getDetail());
+		adapter=new ProductDetailAdapter(list, getActivity());
+		listView.setAdapter(adapter);
+	}
 	@Override
 	protected void lazyLoad() {
 
@@ -77,7 +130,6 @@ public class ProductDetailMoreFragment extends BaseFragment implements
 
 	@Override
 	public void onLoadMore() {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -229,7 +229,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		HttpUtils.doPost(USERINFO_URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
-				System.out.println(arg2);
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("1".equals(code)) {
@@ -251,7 +250,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 					}
 				}
 			}
-
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {

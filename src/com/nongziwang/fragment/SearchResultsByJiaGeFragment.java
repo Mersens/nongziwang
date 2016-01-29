@@ -10,6 +10,7 @@ import org.json.JSONException;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.ProductDetailFragmentActivity;
+import com.nongziwang.activity.SearchResultsFragmentActivity;
 import com.nongziwang.adapter.SearchResultsAdapter;
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.entity.NewsBean;
@@ -23,6 +24,7 @@ import com.nongziwang.view.XListView.IXListViewListener;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +48,8 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 	private int currpage = 1;
 	private  int jiagepaixu=0;
 	private Context context;
+	private String pinpaiid = null;
+	private String yongtuid = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,9 +69,7 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 		layout_loading = (RelativeLayout) view
 				.findViewById(R.id.layout_loading);
 		productlistview = (XListView) view.findViewById(R.id.productlistview);
-		// 不允许上拉加载
 		productlistview.setPullLoadEnable(true);
-		// 允许下拉
 		productlistview.setPullRefreshEnable(true);
 		productlistview.setXListViewListener(this);
 	}
@@ -79,16 +81,25 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				intentAction(getActivity(), ProductDetailFragmentActivity.class);
+				ProductBean bean=lists.get(position-1);
+				intentAction(getActivity(), ProductDetailFragmentActivity.class,bean.getChanpinid());
 			}
 		});
 	}
 
 	private void initDatas() {
+		pinpaiid = SearchResultsFragmentActivity.pinpaiid;
+		yongtuid = SearchResultsFragmentActivity.yongtuid;
 		RequestParams params = new RequestParams();
 		params.put("currpage", currpage + "");
 		params.put("keywords", param);
 		params.put("jiagepaixu", jiagepaixu+"");
+		if (!TextUtils.isEmpty(pinpaiid)) {
+			params.put("pinpaiid", pinpaiid);
+		}
+		if (!TextUtils.isEmpty(yongtuid)) {
+			params.put("yongtuid", yongtuid);
+		}
 		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
@@ -155,6 +166,12 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 		params.put("currpage", currpage + "");
 		params.put("keywords", param);
 		params.put("jiagepaixu", jiagepaixu+"");
+		if (!TextUtils.isEmpty(pinpaiid)) {
+			params.put("pinpaiid", pinpaiid);
+		}
+		if (!TextUtils.isEmpty(yongtuid)) {
+			params.put("yongtuid", yongtuid);
+		}
 		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
@@ -197,6 +214,12 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 		params.put("currpage", currpage + "");
 		params.put("keywords", param);
 		params.put("jiagepaixu", jiagepaixu+"");
+		if (!TextUtils.isEmpty(pinpaiid)) {
+			params.put("pinpaiid", pinpaiid);
+		}
+		if (!TextUtils.isEmpty(yongtuid)) {
+			params.put("yongtuid", yongtuid);
+		}
 		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {

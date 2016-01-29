@@ -80,8 +80,11 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	public String path;
 	private static final String HEADURL = AppConstants.SERVICE_ADDRESS
 			+ "userinfo/gotoUpHeadImg";
+	private static final String USERINFO_URL = AppConstants.SERVICE_ADDRESS
+			+ "userinfo/getUserInfoById";
 	private NongziDao dao;
 	private String userid = null;
+	private UserBean user;
 
 	@SuppressLint("InflateParams")
 	@Override
@@ -91,7 +94,9 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		dao = new NongziDaoImpl(getActivity().getApplicationContext());
 		userid = SharePreferenceUtil.getInstance(
 				getActivity().getApplicationContext()).getUserId();
-
+		if(!TextUtils.isEmpty(userid)){
+			getUserInfo();
+		}
 		initViews();
 		initEvent();
 		return view;
@@ -145,7 +150,32 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			tv_login.setVisibility(View.VISIBLE);
 		}
 	}
+	public void getUserInfo(){
+		RequestParams params = new RequestParams();
+		params.put("userid", userid);
+		HttpUtils.doPost(USERINFO_URL, params, new TextHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code = JsonUtils.getCode(arg2);
+				if (!TextUtils.isEmpty(code)) {
+					if ("1".equals(code)) {
+						try {
+							UserBean user = JsonUtils.getUserInfo(arg2);
+							dao.updateUserInfo(user, userid);
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+				   Log.e(TAG, arg2 == null ? "" : arg2);
+			}
 
+		});
+	}
 	private void initEvent() {
 		buyer_user_head.setOnClickListener(this);
 		layout_myaccount.setOnClickListener(this);
@@ -207,7 +237,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			intentAction(getActivity(), FbxjdActivity.class);
 			break;
 		case R.id.layout_rele_pro:
-			UserBean user = dao.findUserInfoById(userid);
+			user= dao.findUserInfoById(userid);
 			if (null != user) {
 				if (!TextUtils.isEmpty(user.getCompanyid())) {
 					intentAction(getActivity(),
@@ -233,7 +263,17 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			intentAction(getActivity(), ProductManagementFragmentActivity.class);
 			break;
 		case R.id.layout_ckdp:
-			intentAction(getActivity(), MyShopsFragmentActivity.class);
+			user = dao.findUserInfoById(userid);
+			if(user!=null){
+				if(!TextUtils.isEmpty(user.getDianpuid())){
+					intentAction(getActivity(), MyShopsFragmentActivity.class);
+				}else{
+					DialogTips dialog = new DialogTips(getActivity(), "您未开通店铺！", "确定");
+					dialog.show();
+					dialog = null;
+				}
+			}
+			
 			break;
 		case R.id.layout_myfootprint:
 			intentAction(getActivity(), MyFootprintActivity.class);
@@ -390,10 +430,8 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	public void onStart() {
 		Message msg=new Message();
 		msg.arg1=200;
-		handler.sendMessage(msg);
+		handler.sendMessageDelayed(msg,500);
 		super.onStart();
-		
-	
 	}
 
 }

@@ -264,15 +264,16 @@ public class JsonUtils {
 			bean.setChanpinimg(obj.getString("chanpinimg"));
 			bean.setCityname(obj.getString("cityname"));
 			bean.setJiage(obj.getString("jiage"));
-			bean.setProvince(obj.getString("province"));
+			if(obj.has("province")){
+				bean.setProvince(obj.getString("province"));
+			}else{
+				bean.setProvince("暂无");
+			}
+			
 			list.add(bean);
+
 		}
-		JSONArray array1 = new JSONArray(
-				jsonObject.getString("tuijianpinpailist"));
-		for (int i = 0; i < array1.length(); i++) {
-			JSONObject obj = (JSONObject) array1.get(i);
-			System.out.println(obj.getString("pinpainame"));
-		}
+
 		return list;
 	}
 
@@ -282,10 +283,14 @@ public class JsonUtils {
 		JSONArray array = new JSONArray(jsonObject.getString("yongtulist"));
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject obj = (JSONObject) array.get(i);
-			UsesBean bean = new UsesBean();
-			bean.setUsesid(obj.getString("yongtuid"));
-			bean.setUsesname(obj.getString("yongtuname"));
-			list.add(bean);
+			if(obj.has("yongtuid") && obj.has("yongtuname")){
+				UsesBean bean = new UsesBean();
+				bean.setUsesid(obj.getString("yongtuid"));
+				bean.setUsesname(obj.getString("yongtuname"));
+				list.add(bean);
+			}
+
+			
 
 		}
 
@@ -308,7 +313,24 @@ public class JsonUtils {
 		}
 		return list;
 	}
+	public static List<PinPaiBean> getTjPinPaiInfo(String str)
+			throws JSONException {
+		List<PinPaiBean> list = new ArrayList<PinPaiBean>();
+		JSONObject jsonObject = new JSONObject(str);
+		JSONArray array = new JSONArray(jsonObject.getString("tuijianpinpailist"));
+		for (int i = 0; i < array.length(); i++) {
+			JSONObject obj = (JSONObject) array.get(i);
+			if(obj.has("pinpaiid") && obj.has("pinpainame")){
+				PinPaiBean bean = new PinPaiBean();
+				bean.setPinpaiid(obj.getString("pinpaiid"));
+				bean.setPinpainame(obj.getString("pinpainame"));
+				list.add(bean);
+			}
 
+
+		}
+		return list;
+	}
 	public static List<CompanyBean> getCompanyInfo(String str)
 			throws JSONException {
 		List<CompanyBean> list = new ArrayList<CompanyBean>();
@@ -438,4 +460,18 @@ public class JsonUtils {
 
 	}
 
+	public static ChanPinBean getChanPinDetailInfo(String str) throws JSONException{
+		ChanPinBean bean=new ChanPinBean();
+		JSONObject jsonObject = new JSONObject(str);
+		bean.setChanpinid(jsonObject.getString("chanpinid"));
+		bean.setTitle(jsonObject.getString("title"));
+		bean.setDianpuid(jsonObject.getString("dianpuid"));
+		bean.setProvince(jsonObject.getString("province"));
+		bean.setCityname(jsonObject.getString("cityname"));
+		bean.setDetail(jsonObject.getString("detail"));
+		bean.setDianpuname(jsonObject.getString("dianpuname"));
+		bean.setChanpinimg(jsonObject.getString("chanpinimg"));
+		return bean;
+	}
+	
 }

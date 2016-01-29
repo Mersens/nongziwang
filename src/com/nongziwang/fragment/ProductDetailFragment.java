@@ -1,92 +1,129 @@
 package com.nongziwang.fragment;
 
-import com.nongziwang.activity.ProductDetailFragmentActivity;
-import com.nongziwang.main.R;
-import com.nongziwang.view.MyScrollView;
-import com.nongziwang.view.MyScrollView.OnScrollToBottomListener;
+import java.util.ArrayList;
+import java.util.EventListener;
+import java.util.List;
+
+import org.apache.http.Header;
+import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.nongziwang.activity.ProductDetailFragmentActivity;
+import com.nongziwang.adapter.MyProductDetailAdapter;
+import com.nongziwang.application.AppConstants;
+import com.nongziwang.entity.ChanPinBean;
+import com.nongziwang.main.R;
+import com.nongziwang.utils.HttpUtils;
+import com.nongziwang.utils.ImageLoadOptions;
+import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.view.MyScrollView;
+import com.nongziwang.view.XListView;
+import com.nongziwang.view.MyScrollView.OnScrollToBottomListener;
+import com.nongziwang.view.XListView.IXListViewListener;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 @SuppressLint("ClickableViewAccessibility")
-public class ProductDetailFragment extends BaseFragment {
+public class ProductDetailFragment extends BaseFragment implements
+IXListViewListener, EventListener{
 	private View view;
-	private MyScrollView scrollView;
-	private boolean isBottom = false;
-	private float y1 = 0;
-	private float y2 = 0;
-	private ImageView image_up;
-	private TextView tv_tips;
-	private ProgressBar progressBar;
+	private String id;
+	private static final String URL=AppConstants.SERVICE_ADDRESS+"chanpinsousuo/gotoChanpinXiangqing";
+	private static final String TAG="ProductDetailFragment";
+	private ChanPinBean bean;
+	private RelativeLayout layout_loading;
+	private XListView listView;
+	private List<ChanPinBean> list;
+	private MyProductDetailAdapter adapter;
 	private Handler handler;
+
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.layout_product_detail, container,
 				false);
-		//handler=ProductDetailFragmentActivity.handler;
-		ProductDetailFragmentActivity activity=(ProductDetailFragmentActivity) getActivity();
-		handler=activity.handler;
+		ProductDetailFragmentActivity activity = (ProductDetailFragmentActivity) getActivity();
+		handler = activity.handler;
+		id=getArguments().getString("params");
 		initViews();
-		initEvent();
+		initDatas();
 		return view;
 	}
 
 	private void initViews() {
-		scrollView = (MyScrollView) view.findViewById(R.id.scrollView);
-		image_up = (ImageView) view.findViewById(R.id.image_up);
-		tv_tips = (TextView) view.findViewById(R.id.tv_tips);
-		progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+		layout_loading=(RelativeLayout) view.findViewById(R.id.layout_loading);
+		listView = (XListView) view.findViewById(R.id.listView);
+		listView.setPullLoadEnable(true);
+		listView.setPullRefreshEnable(false);
+		listView.setXListViewListener(this);
+
 	}
 
-	private void initEvent() {
-		scrollView.setOnScrollToBottomLintener(new OnScrollToBottomListener() {
+	
+	
+	public void initDatas(){
+		RequestParams params=new RequestParams();
+		params.put("chanpinid", id);
+		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
 			@Override
-			public void onScrollBottomListener(boolean isBtom) {
-				isBottom = isBtom;
-			}
-		});
-		scrollView.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_DOWN) {
-					// 当手指按下的时候
-					y1 = event.getY();
-				}
-				if (event.getAction() == MotionEvent.ACTION_UP) {
-					// 当手指离开的时候
-					y2 = event.getY();
-					if (y1 - y2 > 45 && isBottom) {
-						image_up.setVisibility(View.GONE);
-						tv_tips.setText("正在加载");
-						progressBar.setVisibility(View.VISIBLE);
-						Message msg=new Message();
-						msg.arg1=ProductDetailFragmentActivity.LOADING;
-						handler.sendMessageDelayed(msg, 1000);
-
-					} else if (y2 - y1 > 45 && !isBottom) {
-						image_up.setVisibility(View.VISIBLE);
-						tv_tips.setText("上拉查看图文详情");
-						progressBar.setVisibility(View.GONE);
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code =JsonUtils.getCode(arg2);
+				if("0".equals(code)){
+					Toast.makeText(view.getContext(), "产品id 为空!", Toast.LENGTH_SHORT).show();
+				}else if("1".equals(code)){
+					try {
+						 bean=JsonUtils.getChanPinDetailInfo(arg2);
+						 setDatas();
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
+					
+				}else if("2".equals(code)){
+					Toast.makeText(view.getContext(), " 找不到该产品信息!", Toast.LENGTH_SHORT).show();
 				}
-				return false;
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				Toast.makeText(view.getContext(), "数据获取失败！", Toast.LENGTH_SHORT).show();
+				Log.e(TAG, arg2==null?"":arg2);
+			}
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				layout_loading.setVisibility(View.GONE);
 			}
 		});
-
+	}
+	
+	
+	
+	public void setDatas(){
+		list=new ArrayList<ChanPinBean>();
+		list.add(bean);
+		adapter=new MyProductDetailAdapter(list, getActivity());
+		listView.setAdapter(adapter);
 	}
 
 	@Override
@@ -102,6 +139,18 @@ public class ProductDetailFragment extends BaseFragment {
 		fragment.setArguments(bundle);
 		return fragment;
 
+	}
+
+	@Override
+	public void onRefresh() {
+		
+	}
+
+	@Override
+	public void onLoadMore() {
+		Message msg = new Message();
+		msg.arg1 = ProductDetailFragmentActivity.LOADING;
+		handler.sendMessageDelayed(msg, 1000);
 	}
 
 }

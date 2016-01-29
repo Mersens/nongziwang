@@ -18,12 +18,38 @@ public class ChanPinBean {
 	private String addtime ;//产品添加时间
 	private String chanpinimg ;//产品图片
 	private boolean canRemove = true;//标示是否可以删除
-
+	private String province;// 省份名称
+	private String cityname;// 城市名称
+	private String dianpuname;// 店铺名称
 
 	public ChanPinBean(){
 		
 	}
 	
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCityname() {
+		return cityname;
+	}
+
+	public void setCityname(String cityname) {
+		this.cityname = cityname;
+	}
+
+	public String getDianpuname() {
+		return dianpuname;
+	}
+
+	public void setDianpuname(String dianpuname) {
+		this.dianpuname = dianpuname;
+	}
+
 	public String getChanpinid() {
 		return chanpinid;
 	}

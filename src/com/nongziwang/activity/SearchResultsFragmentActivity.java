@@ -1,15 +1,10 @@
 package com.nongziwang.activity;
-import com.nongziwang.fragment.BrandFragment;
-import com.nongziwang.fragment.NetcontentFragment;
-import com.nongziwang.fragment.SearchCompanyFragment;
-import com.nongziwang.fragment.SearchResultsByJiaGeFragment;
-import com.nongziwang.fragment.SearchResultsFragment;
-import com.nongziwang.fragment.UsesFragment;
-import com.nongziwang.main.R;
-
+import junit.framework.Test;
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,8 +12,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -26,6 +21,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.nongziwang.fragment.BrandFragment;
+import com.nongziwang.fragment.NetcontentFragment;
+import com.nongziwang.fragment.SearchCompanyFragment;
+import com.nongziwang.fragment.SearchResultsByJiaGeFragment;
+import com.nongziwang.fragment.SearchResultsFragment;
+import com.nongziwang.fragment.UsesFragment;
+import com.nongziwang.main.R;
 
 public class SearchResultsFragmentActivity extends BaseActivity implements
 		OnClickListener {
@@ -39,12 +42,17 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 	private int index = 0;
 	private LinearLayout layout_product;
 	private int sp_pos=0;
-
+	public static String pinpaiid=null;
+	public static String yongtuid=null;
+	public static final String ACTION_PINPAIID="action_pinpaiid";
+	public static final String ACTION_YONGTUID="action_yongtuid";
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentView(R.layout.layout_search_result);
+		registerBoradcastReceiver();
 		params = getIntent().getStringExtra("params");
 		sp_pos=getIntent().getIntExtra("sp_pos",0);
 		mInflater = LayoutInflater.from(this);
@@ -200,14 +208,12 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 			index = 0;
 			setColor(2);
 			addFragment(Style.YONGTU, params);
-
 			break;
 		case R.id.tv_jiage:
 			index = index + 1;
 			setColor(4);
 			addFragment(Style.JIAGE, params);
 			break;
-
 		}
 
 		if (index == 0) {
@@ -268,6 +274,35 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		tv_yongtu.setBackgroundResource(R.drawable.spinner_ab_default_holo_light_am);
 		tv_jiage.setTextColor(getResources().getColor(R.color.gray_text_color));
 	}
-
-
+	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){  
+        @Override  
+        public void onReceive(Context context, Intent intent) {  
+            String action = intent.getAction();  
+            if(action.equals(ACTION_PINPAIID)){  
+            	pinpaiid=intent.getStringExtra("pinpaiid");
+            	yongtuid=null;
+            	addFragment(Style.MOREN, params);
+            } 
+            if(action.equals(ACTION_YONGTUID)){
+            	yongtuid=intent.getStringExtra("yongtuid");
+            	pinpaiid=null;
+            	addFragment(Style.MOREN, params);
+            }
+        }  
+          
+    };  
+    public void registerBoradcastReceiver(){  
+        IntentFilter myIntentFilter = new IntentFilter();  
+        myIntentFilter.addAction(ACTION_PINPAIID);  
+        myIntentFilter.addAction(ACTION_YONGTUID);       
+        registerReceiver(mBroadcastReceiver, myIntentFilter);  
+    }  
+    
+    
+    @Override
+    protected void onDestroy() {
+    	// TODO Auto-generated method stub
+    	super.onDestroy();
+    	unregisterReceiver(mBroadcastReceiver);
+    }
 }

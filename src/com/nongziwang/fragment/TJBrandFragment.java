@@ -7,44 +7,49 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONException;
 
-import com.loopj.android.http.TextHttpResponseHandler;
-import com.nongziwang.adapter.CommonSearchResultsAdapter;
-import com.nongziwang.adapter.UseshResultsAdapter;
-import com.nongziwang.application.AppConstants;
-import com.nongziwang.entity.UsesBean;
-import com.nongziwang.main.R;
-import com.nongziwang.utils.HttpUtils;
-import com.nongziwang.utils.JsonUtils;
-import com.nongziwang.view.XListView;
-import com.nongziwang.view.XListView.IXListViewListener;
-
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.nongziwang.activity.SearchResultsFragmentActivity;
+import com.nongziwang.adapter.PinPaiResultsAdapter;
+import com.nongziwang.application.AppConstants;
+import com.nongziwang.entity.PinPaiBean;
+import com.nongziwang.main.R;
+import com.nongziwang.utils.HttpUtils;
+import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.view.XListView;
+import com.nongziwang.view.XListView.IXListViewListener;
 
 public class TJBrandFragment extends BaseFragment implements
 IXListViewListener, EventListener {
 	private View view;
 	private XListView listview_search_other;
-	private List<UsesBean> lists =new ArrayList<UsesBean>();
-	private UseshResultsAdapter adapter;
+	private List<PinPaiBean> lists =new ArrayList<PinPaiBean>();
+	private PinPaiResultsAdapter adapter;
 	private RelativeLayout layout_loading;
 	private Context context;
-	private static final String URL=AppConstants.SERVICE_ADDRESS+"chanpinsousuo/getChanpinYongtu";
-	private static final String TAG = "UsesResultsFragment";
+	private static final String URL=AppConstants.SERVICE_ADDRESS+"chanpinsousuo/getChanpinSousuoByKeywords";
+	private static final String TAG = "TJBrandFragment";
+	private String param;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view=inflater.inflate(R.layout.listview_search_results_others, container,false);
 		context=view.getContext();
+		param=getArguments().getString("params");
 		initViews();
 		initDatas();
 		return view;
@@ -56,10 +61,24 @@ IXListViewListener, EventListener {
 		listview_search_other.setPullLoadEnable(false);
 		listview_search_other.setPullRefreshEnable(false);
 		listview_search_other.setXListViewListener(this);
+		listview_search_other.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				PinPaiBean bean=lists.get(position);
+				Intent intent=new Intent(SearchResultsFragmentActivity.ACTION_PINPAIID);
+				intent.putExtra("pinpaiid",bean.getPinpaiid() );
+				context.sendBroadcast(intent);
+			}
+		});
 	}
 	
 	public void initDatas(){
-		HttpUtils.doPost(URL, new TextHttpResponseHandler() {
+		RequestParams params = new RequestParams();
+		params.put("currpage","1");
+		params.put("keywords", param);
+		HttpUtils.doPost(URL, params,new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 
@@ -69,9 +88,9 @@ IXListViewListener, EventListener {
 							Toast.LENGTH_SHORT).show();
 				}else if("1".equals(code)){
 					try {
-						List<UsesBean> list=JsonUtils.getUsesInfo(arg2);
+						List<PinPaiBean> list=JsonUtils.getTjPinPaiInfo(arg2);
 						lists.addAll(list);
-						adapter=new UseshResultsAdapter(list, context);
+						adapter=new PinPaiResultsAdapter(list, context);
 						listview_search_other.setAdapter(adapter);
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block

@@ -21,12 +21,10 @@ import com.nongziwang.main.R;
 
 @SuppressLint("HandlerLeak")
 public class ProductDetailFragmentActivity extends BaseActivity implements OnClickListener {
-	private ImageView image_back,image_shoucang,image_fenxiang;
-	private Button btn_buy;
+	private ImageView image_back,image_fenxiang;
 	private  String params;
 	public static final int LOADING=0X01;
 	public static final int LOADINGBACK=0X10;
-
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -52,16 +50,12 @@ public class ProductDetailFragmentActivity extends BaseActivity implements OnCli
 	
 	private void initViews() {
 		image_back=(ImageView) findViewById(R.id.image_back);
-		image_shoucang=(ImageView) findViewById(R.id.image_shoucang);
 		image_fenxiang=(ImageView) findViewById(R.id.image_fenxiang);
-		btn_buy=(Button) findViewById(R.id.btn_buy);
 	}
 	
 	private void initEvent() {
 		image_back.setOnClickListener(this);
-		image_shoucang.setOnClickListener(this);
 		image_fenxiang.setOnClickListener(this);
-		btn_buy.setOnClickListener(this);
 
 	}
 
@@ -102,18 +96,10 @@ public class ProductDetailFragmentActivity extends BaseActivity implements OnCli
 		case R.id.image_back:
 			finishActivity();
 			break;
-		case R.id.image_shoucang:
-			ShowToast("点击了收藏");
-			break;
 		case R.id.image_fenxiang:
 			ShowToast("点击了分享");
 			showShare(ProductDetailFragmentActivity.this, null, true);
 			break;
-		case R.id.btn_buy:
-			ShowToast("点击了购买");
-			break;
-
-
 		}
 		
 	}

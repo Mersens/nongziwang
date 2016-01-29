@@ -143,82 +143,98 @@ public class NongziDaoImpl implements NongziDao {
 						user.getUserpwd(), user.getUserphone(), user.getQq(),
 						user.getXingming(), user.getAddtime(),
 						user.getCompanyid(), user.getHtmlid(),
-						user.getTouxiang(),user.getDianpuid() });
+						user.getTouxiang(), user.getDianpuid() });
 		db.close();
 
 	}
 
 	@Override
 	public UserBean findUserInfoById(String userid) {
-		List<UserBean> list=new ArrayList<UserBean>();
+		List<UserBean> list = new ArrayList<UserBean>();
 		SQLiteDatabase db = helper.getWritableDatabase();
-		Cursor cursor = db.rawQuery(
-				"select * from usertb where userid=? ",
+		Cursor cursor = db.rawQuery("select * from usertb where userid=? ",
 				new String[] { userid });
 		while (cursor.moveToNext()) {
-			UserBean user=new UserBean();
+			UserBean user = new UserBean();
 			String id = cursor.getString(cursor.getColumnIndex("userid"));
 			user.setUserid(id);
-			String username = cursor.getString(cursor.getColumnIndex("username"));
+			String username = cursor.getString(cursor
+					.getColumnIndex("username"));
 			user.setUsername(username);
 			String userpwd = cursor.getString(cursor.getColumnIndex("userpwd"));
 			user.setUserpwd(userpwd);
-			String userphone = cursor.getString(cursor.getColumnIndex("userphone"));
+			String userphone = cursor.getString(cursor
+					.getColumnIndex("userphone"));
 			user.setUserphone(userphone);
 			String qq = cursor.getString(cursor.getColumnIndex("qq"));
 			user.setQq(qq);
-			String xingming = cursor.getString(cursor.getColumnIndex("xingming"));
+			String xingming = cursor.getString(cursor
+					.getColumnIndex("xingming"));
 			user.setXingming(xingming);
 			String addtime = cursor.getString(cursor.getColumnIndex("addtime"));
 			user.setAddtime(addtime);
-			String companyid = cursor.getString(cursor.getColumnIndex("companyid"));
+			String companyid = cursor.getString(cursor
+					.getColumnIndex("companyid"));
 			user.setCompanyid(companyid);
 			String htmlid = cursor.getString(cursor.getColumnIndex("htmlid"));
 			user.setHtmlid(htmlid);
-			String touxiang = cursor.getString(cursor.getColumnIndex("touxiang"));
+			String touxiang = cursor.getString(cursor
+					.getColumnIndex("touxiang"));
 			user.setTouxiang(touxiang);
-			String dianpuid = cursor.getString(cursor.getColumnIndex("dianpuid"));
+			String dianpuid = cursor.getString(cursor
+					.getColumnIndex("dianpuid"));
 			user.setDianpuid(dianpuid);
 			list.add(user);
 		}
 		cursor.close();
 		db.close();
-		if(list.size()>0)
+		if (list.size() > 0)
 			return list.get(0);
 		else
-		    return null;
+			return null;
 	}
 
 	@Override
 	public void delUserInfoById(String userid) {
 		SQLiteDatabase db = helper.getWritableDatabase();
-		db.execSQL("delete from usertb where userid=?",
-				new Object[] { userid });
-		db.close();		
+		db.execSQL("delete from usertb where userid=?", new Object[] { userid });
+		db.close();
 	}
 
 	@Override
 	public void updateUserHeadById(String userid, String touxiang) {
 		SQLiteDatabase db = helper.getWritableDatabase();
-		db.execSQL("UPDATE usertb SET touxiang=? where userid=?",
-				new Object[] {touxiang, userid });
-		db.close();		
+		db.execSQL("UPDATE usertb SET touxiang=? where userid=?", new Object[] {
+				touxiang, userid });
+		db.close();
 	}
 
 	@Override
 	public void updateNameAndQq(String userid, String name, String qq) {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		db.execSQL("UPDATE usertb SET xingming=?, qq=? where userid=?",
-				new Object[] {name,qq, userid });
-		db.close();			
+				new Object[] { name, qq, userid });
+		db.close();
 	}
 
 	@Override
-	public void updateCompanyId(String userid,String companyid) {
+	public void updateCompanyId(String userid, String companyid) {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		db.execSQL("UPDATE usertb SET companyid=? where userid=?",
-				new Object[] {companyid, userid });
-		db.close();	
+				new Object[] { companyid, userid });
+		db.close();
+	}
+
+	@Override
+	public void updateUserInfo(UserBean user, String userid) {
+		SQLiteDatabase db = helper.getWritableDatabase();
+		db.execSQL(
+				"UPDATE usertb SET username=?, userphone=?,qq=?,xingming=?,addtime=?,companyid=?,htmlid=?,touxiang=?,dianpuid=? where userid=?",
+				new Object[] { user.getUsername(), user.getUserphone(),
+						user.getQq(), user.getXingming(), user.getAddtime(),
+						user.getCompanyid(), user.getHtmlid(),
+						user.getTouxiang(), user.getDianpuid(), userid });
+		db.close();
 	}
 
 }

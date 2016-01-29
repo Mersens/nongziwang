@@ -37,6 +37,9 @@ public interface NongziDao {
 	// 添加用户信息
 	public void addUserInfo(UserBean user);
 	
+	//更新用户信息
+	public void updateUserInfo(UserBean user,String userid);
+	
 	// 查询用户的信息
 	public UserBean findUserInfoById(String userid);
 	

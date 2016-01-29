@@ -36,16 +36,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1" >
-
-            <ImageView
-                android:id="@+id/image_shoucang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="8dp"
-                android:layout_toLeftOf="@+id/image_fenxiang"
-                android:src="@drawable/icon_shoucang" />
-
             <ImageView
                 android:id="@+id/image_fenxiang"
                 android:layout_width="wrap_content"
