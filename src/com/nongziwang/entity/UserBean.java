@@ -12,12 +12,23 @@ public class UserBean {
 	private String htmlid;
 	private String touxiang;
 	private String dianpuid;
+	private String gsstatic;
 
 
 	public UserBean(){
 		
 	}
 
+
+
+	public String getGsstatic() {
+		return gsstatic;
+	}
+
+	public void setGsstatic(String gsstatic) {
+		this.gsstatic = gsstatic;
+	}
+	
 	public String getDianpuid() {
 		return dianpuid;
 	}

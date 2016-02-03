@@ -7,36 +7,26 @@ import org.json.JSONException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.MyShopsFragmentActivity;
 import com.nongziwang.adapter.MyShopsAdapter;
-import com.nongziwang.db.NongziDao;
-import com.nongziwang.db.NongziDaoImpl;
 import com.nongziwang.entity.ChanPinBean;
 import com.nongziwang.entity.DianPuBean;
-import com.nongziwang.entity.UserBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.ImageLoadOptions;
 import com.nongziwang.utils.JsonUtils;
-import com.nongziwang.utils.SharePreferenceUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class MyShopsFragment extends BaseFragment {
@@ -48,18 +38,18 @@ public class MyShopsFragment extends BaseFragment {
 	private DianPuBean dianpubean;
 	private List<ChanPinBean> list;
 	private static final String TAG = "MyShopsFragment";
-	private String userid;
-	private NongziDao dao;
+
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		if(view!=null){
+			return view;
+		}
 		view = inflater.inflate(R.layout.layout_myproduct, container, false);
 		url = getArguments().getString("params");
-		userid=SharePreferenceUtil.getInstance(getActivity().getApplicationContext()).getUserId();
-		dao=new NongziDaoImpl(getActivity());
-		UserBean user=dao.findUserInfoById(userid);
-		dianpuid=user.getDianpuid();
+		dianpuid=getArguments().getString("id");
 		initViews();
 		initEvent();
 		initDatas();
@@ -175,10 +165,11 @@ public class MyShopsFragment extends BaseFragment {
 
 	}
 
-	public static Fragment getInstance(String params) {
+	public static Fragment getInstance(String params,String id) {
 		MyShopsFragment fragment = new MyShopsFragment();
 		Bundle bundle = new Bundle();
 		bundle.putString("params", params);
+		bundle.putString("id", id);
 		fragment.setArguments(bundle);
 		return fragment;
 	}

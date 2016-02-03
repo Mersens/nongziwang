@@ -1,13 +1,6 @@
 package com.nongziwang.main;
-
-import com.nongziwang.activity.BaseActivity;
-import com.nongziwang.application.CustomApplcation;
-import com.nongziwang.fragment.HomeFragment;
-import com.nongziwang.fragment.ProductFragment;
-import com.nongziwang.fragment.InfoFragment;
-import com.nongziwang.fragment.UserCenterFragment;
-import com.nongziwang.view.DialogTips;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +9,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import com.nongziwang.activity.BaseActivity;
+import com.nongziwang.application.CustomApplcation;
+import com.nongziwang.fragment.BuyerFragment;
+import com.nongziwang.fragment.HomeFragment;
+import com.nongziwang.fragment.InfoFragment;
+import com.nongziwang.fragment.ProductFragment;
+import com.nongziwang.fragment.UserCenterFragment;
+import com.nongziwang.view.DialogTips;
 /**
  * 
  * @title MainActivity
@@ -40,6 +42,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	private int index;
 	private int currentTabIndex;
+	public static boolean isConnected=false;
+	public static final String ACTION_NETWORK_TRUE="action_network_true"; 
+	public static final String ACTION_NETWORK_FALSE="action_network_false"; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +119,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		mTabs[currentTabIndex].setSelected(false);
 		mTabs[index].setSelected(true);
 		currentTabIndex = index;
-
 	}
 
 	private void setTab(int i) {
@@ -141,7 +145,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		img_info.setImageResource(R.drawable.icon_zixun_normal);
 		img_user.setImageResource(R.drawable.icon_geren_normal);
 	}
-	
+
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
@@ -153,7 +158,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	public void confirmExit() {
-
 		DialogTips dialog = new DialogTips(MainActivity.this, "退出", "是否退出软件？",
 				"确定", true, true);
 		dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
@@ -162,10 +166,15 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				finish();
 			}
 		});
-
 		dialog.show();
 		dialog = null;
 	}
-	
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+		Intent mIntent = new Intent(BuyerFragment.ACTION_UPDATE);  
+        sendBroadcast(mIntent);  
+	}
+	
 }

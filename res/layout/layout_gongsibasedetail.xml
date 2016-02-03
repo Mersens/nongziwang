@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_color"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/layout_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_color"
+        android:orientation="vertical" 
+        >
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center" />
+    </RelativeLayout>
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white_color"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" >
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="72dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="公司名称:"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+                    <TextView
+                        android:id="@+id/tv_gsmc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/textView1"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5px"
+                    android:background="@color/black2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" >
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="72dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="经营模式:"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+                    <TextView
+                        android:id="@+id/tv_jyms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/textView2"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5px"
+                    android:background="@color/black2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" >
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="72dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="所在地区:"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+                    <TextView
+                        android:id="@+id/tv_szdq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/textView3"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5px"
+                    android:background="@color/black2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="72dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="主营产品:"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp" >
+
+                        <TextView
+                            android:id="@+id/tv_zycp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:textColor="@color/base_color_text_black"
+                            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/black2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white_color"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" >
+
+                    <TextView
+                        android:id="@+id/textView131"
+                        android:layout_width="72dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="满意程度:"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+                    <ImageView
+                        android:id="@+id/img_mycd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/textView131"
+                        android:text="TextView"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/black2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white_color"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" >
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="72dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="联系人:"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+                    <TextView
+                        android:id="@+id/tv_lxr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/textView7"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5px"
+                    android:background="@color/black2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" >
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="72dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="联系电话:"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+                    <TextView
+                        android:id="@+id/tv_lxdh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/textView8"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5px"
+                    android:background="@color/black2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" >
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="72dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="联系地址:"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+                    <TextView
+                        android:id="@+id/tv_lxdz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/textView9"
+                        android:textColor="@color/base_color_text_black"
+                        android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5px"
+                    android:background="@color/black2" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

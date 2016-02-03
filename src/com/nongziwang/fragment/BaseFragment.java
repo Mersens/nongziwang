@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 public abstract class BaseFragment extends Fragment {
-	private  Toast mToast;
 	private Activity activity;
 	protected boolean isVisible;
 	private HeadView mHeadView;

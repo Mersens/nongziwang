@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/layout_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_color"
+        android:orientation="vertical" 
+        >
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white_color" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/imageView1"
+            android:text="通过"
+            android:textColor="@color/base_color_text_black"
+            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+
+        <TextView
+            android:id="@+id/tv_rz_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/textView1"
+            android:textColor="@color/title_yellow_text_color"
+            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:text="企业名称认证信息" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white_color" >
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="公司名称:"
+            android:textColor="@color/base_color_text_black"
+            android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
+        <TextView
+            android:id="@+id/tv_gs_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/textView4"
+            android:layout_centerVertical="true"
+            android:textColor="@color/base_color_text_black"
+            android:textSize="@dimen/textSize_svprogresshuddefault_msg" 
+             />
+    </RelativeLayout>
+
+</LinearLayout>

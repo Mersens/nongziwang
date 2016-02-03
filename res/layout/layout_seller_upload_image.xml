@@ -65,7 +65,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="84dp" >
+            android:layout_height="72dp" 
+            android:layout_marginTop="4dp"
+            >
 
             <RelativeLayout
                 android:layout_width="78dp"
@@ -84,37 +86,36 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1" >
 
-                <ImageView
+                <com.nongziwang.view.ProcessImageView
                     android:id="@+id/image_yyzz"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/android" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/jy_drltsz_btn_addperson" />
 
-                <ImageView
+                <com.nongziwang.view.ProcessImageView
                     android:id="@+id/image_swdj"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/android" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/jy_drltsz_btn_addperson" />
 
-                <ImageView
+                <com.nongziwang.view.ProcessImageView
                     android:id="@+id/image_zzjg"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/android" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/jy_drltsz_btn_addperson" />
             </LinearLayout>
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -143,7 +144,8 @@
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/actionbar_hight"
-            android:layout_margin="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/button_bg"
             android:enabled="true"
             android:text="@string/tv_tj"

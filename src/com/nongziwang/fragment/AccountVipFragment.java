@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.nongziwang.activity.LoginActivity;
 import com.nongziwang.activity.ResetPhoneNumberFragmentActivity;
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.db.NongziDao;
@@ -23,7 +24,9 @@ import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.PhotoUtil;
 import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.utils.StringUtils;
+import com.nongziwang.view.DialogWaiting;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -61,6 +64,7 @@ public class AccountVipFragment extends BaseFragment {
 	private NongziDao dao;
 	private String userid;
 	private UserBean user;
+	private DialogWaiting dialog;
 
 
 	@Override
@@ -141,6 +145,12 @@ public class AccountVipFragment extends BaseFragment {
 		params.put("qq", qq);
 		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
 			@Override
+			public void onStart() {
+				dialog =new DialogWaiting(getActivity());
+				dialog.show();
+				super.onStart();
+			}
+			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code =JsonUtils.getCode(arg2);
 				if("0".equals(code)){
@@ -159,8 +169,13 @@ public class AccountVipFragment extends BaseFragment {
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				// TODO Auto-generated method stub
-				
+				Log.e(TAG, arg2==null?"":arg2);
+				Toast.makeText(getActivity(), "ÐÞ¸ÄÊ§°Ü£¡", Toast.LENGTH_LONG).show();
+			}
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				dialog.dismiss();
 			}
 		});
 

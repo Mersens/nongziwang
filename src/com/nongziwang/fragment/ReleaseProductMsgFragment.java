@@ -2,7 +2,9 @@ package com.nongziwang.fragment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.http.Header;
@@ -45,6 +47,7 @@ import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.view.DialogTips;
 import com.nongziwang.view.DialogWaiting;
 import com.nongziwang.view.FlowLayout;
+import com.nongziwang.view.ProcessImageView;
 
 
 public class ReleaseProductMsgFragment extends BaseFragment {
@@ -56,6 +59,7 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 	private FlowLayout flowlayout;
 	private MarginLayoutParams lp;
 	private int index = 0;
+	private List<ProcessImageView> imageviewlist=new ArrayList<ProcessImageView>();
 	public static final String UPLAODE_URL = AppConstants.SERVICE_ADDRESS
 			+ "chanpin/gotoUpChanpinImg";
 	public static final String URL = AppConstants.SERVICE_ADDRESS
@@ -191,16 +195,26 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 						.show();
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
+			
+			@Override
+			public void onProgress(long bytesWritten, long totalSize) {
+				// TODO Auto-generated method stub
+				super.onProgress(bytesWritten, totalSize);
+				int count = (int) ((bytesWritten * 1.0 / totalSize) * 100);  
+				imageviewlist.get(index-1).setProgress(count);
+			}
+			
 
 		});
 	}
 
 	private void setImage(Bitmap bitmap) {
 		if (bitmap != null) {
-			ImageView imageview = new ImageView(getActivity());
+			ProcessImageView imageview = new ProcessImageView(getActivity());
 			imageview.setScaleType(ScaleType.FIT_XY);
 			imageview.setImageBitmap(bitmap);
 			flowlayout.addView(imageview, lp);
+			imageviewlist.add(imageview);
 			index++;
 		}
 	}
@@ -243,8 +257,6 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 			sbf.append(entry.getValue()+",");
 		}
 		String ids[]=param.split(":");
-
-
 		
 		RequestParams params=new RequestParams();
 		params.put("userid",userid );
@@ -274,21 +286,16 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 			
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				super.onStart();
 				getActivity().runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
 						dialog=new DialogWaiting(getActivity());
 						dialog.show();
 					}
 				});
 
-			}
-
-			
-			
+			}			
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code =JsonUtils.getCode(arg2);
@@ -296,7 +303,7 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 					Toast.makeText(getActivity(), "用户id为空！", Toast.LENGTH_SHORT).show();
 				}else if("1".equals(code)){
 					DialogTips dialog = new DialogTips(getActivity(),
-							"发布成功？", "确定");
+							"发布成功!", "确定");
 					dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialogInterface, int userId) {
 							intentAction(getActivity(), ProductManagementFragmentActivity.class);

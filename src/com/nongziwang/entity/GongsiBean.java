@@ -16,6 +16,8 @@ public class GongsiBean {
 	private String yingyezhizhao; //营业执照图片路径
 	private String shuiwudengjizheng; //税务登记证图片路径
 	private String zuzhijigoudaimazheng; //组织机构代码图片路径
+	private String gsstatic;//公司状态
+
 	@Override
 	public String toString() {
 		return "GongsiBean [gongsiid=" + gongsiid + ", gongsiname="
@@ -30,6 +32,15 @@ public class GongsiBean {
 	}
 	public GongsiBean(){
 		
+	}
+	public String getGsstatic() {
+		return gsstatic;
+	}
+	public void setGsstatic(String gsstatic) {
+		this.gsstatic = gsstatic;
+	}
+	public void setArea(String area) {
+		this.area = area;
 	}
 	public String getGongsiid() {
 		return gongsiid;

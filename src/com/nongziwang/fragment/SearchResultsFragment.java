@@ -88,8 +88,6 @@ public class SearchResultsFragment extends BaseFragment implements
 	private void initDatas() {
 		pinpaiid = SearchResultsFragmentActivity.pinpaiid;
 		yongtuid = SearchResultsFragmentActivity.yongtuid;
-		System.out.println("pinpaiid-------------"+pinpaiid);
-		System.out.println("yongtuid-------------"+yongtuid);
 		RequestParams params = new RequestParams();
 		params.put("currpage", currpage + "");
 		params.put("keywords", param);

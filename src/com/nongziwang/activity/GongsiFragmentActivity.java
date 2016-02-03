@@ -28,9 +28,11 @@ import com.nongziwang.utils.ImageLoadOptions;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.ListUtils;
 import com.nongziwang.utils.SharePreferenceUtil;
+import com.nongziwang.view.DialogTips;
+import com.nongziwang.view.DialogWaiting;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
+import com.nongziwang.view.ProcessImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -38,17 +40,13 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -64,7 +62,7 @@ OnClickListener{
 	private List<MyRegion> areas;
 	private MyArrayAdapter provincesAdapter, citysAdapter, areasAdapter;
 	private NongziDao dao;
-	private ImageView image_yyzz, image_swdj, image_zzjg;
+	private ProcessImageView image_yyzz, image_swdj, image_zzjg;
 	private Bitmap bitmap;
 	private Context context;
 	private Button btn_submit;
@@ -85,6 +83,7 @@ OnClickListener{
 	private GongsiBean gongsibean;
 	private RelativeLayout layout_loading;
 	private boolean isUpdate=false;
+	private DialogWaiting dialog;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -97,7 +96,6 @@ OnClickListener{
 		initViews();
 		initEvent();
 		initDatas();
-
 	}
 
 
@@ -120,9 +118,12 @@ OnClickListener{
 		edt_gscz = (EditText) findViewById(R.id.edt_gscz);
 		edt_lxr = (EditText)findViewById(R.id.edt_lxr);
 		edt_lxdh = (EditText) findViewById(R.id.edt_lxdh);
-		image_zzjg = (ImageView) findViewById(R.id.image_zzjg);
-		image_yyzz = (ImageView) findViewById(R.id.image_yyzz);
-		image_swdj = (ImageView) findViewById(R.id.image_swdj);
+		image_zzjg = (ProcessImageView) findViewById(R.id.image_zzjg);
+		image_yyzz = (ProcessImageView) findViewById(R.id.image_yyzz);
+		image_swdj = (ProcessImageView) findViewById(R.id.image_swdj);
+		image_yyzz.isProgress(false);
+		image_swdj.isProgress(false);
+		image_zzjg.isProgress(false);
 		spinner_province = (Spinner) findViewById(R.id.spinner_province);
 		spinner_city = (Spinner) findViewById(R.id.spinner_city);
 		spinner_area = (Spinner) findViewById(R.id.spinner_area);
@@ -204,7 +205,6 @@ OnClickListener{
 		image_swdj.setOnClickListener(this);
 		image_zzjg.setOnClickListener(this);
 		btn_submit.setOnClickListener(this);
-		// edt_gongsiname.setKeyListener(null);
 
 	}
 
@@ -232,7 +232,6 @@ OnClickListener{
 			}
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
-				System.out.println(arg2);
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
 					Toast.makeText(context, "找不到该公司信息!", Toast.LENGTH_SHORT)
@@ -240,15 +239,11 @@ OnClickListener{
 				} else if ("1".equals(code)) {
 					try {
 						gongsibean = JsonUtils.getGongsiInfo(arg2);
-						
 						setDatas();
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
 				}
-
 			}
 
 			@Override
@@ -298,7 +293,6 @@ OnClickListener{
 		if(initCityIndex!=0){
 			spinner_city.setSelection(initCityIndex, true);
 		}
-		
 		List<MyRegion> list1=dao.findAllAreasByCityId(citys.get(initCityIndex).getId());
 		areas.clear();
 		areas.addAll(list1);
@@ -306,7 +300,6 @@ OnClickListener{
 		if(initCityIndex!=0){
 			spinner_area.setSelection(initAreaIndex,true);
 		}
-		
 	}
 
 	public static Fragment getInstance(String params) {
@@ -317,8 +310,6 @@ OnClickListener{
 		return fragment;
 
 	}
-
-
 
 	@Override
 	public void onClick(View v) {
@@ -338,7 +329,6 @@ OnClickListener{
 		case R.id.btn_submit:
 			doSubmit();
 			break;
-
 		}
 	}
 	
@@ -346,6 +336,9 @@ OnClickListener{
 	private boolean isSwdj = false;
 	private boolean isZzjg = false;
 
+	private boolean isYyzzSuccess = false;
+	private boolean isSwdjSuccess = false;
+	private boolean isZzjgSuccess = false;
 	public void selectImage() {
 		Intent intent = new Intent(Intent.ACTION_PICK, null);
 		intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
@@ -368,25 +361,24 @@ OnClickListener{
 			if (bitmap != null) {
 				if (isYyzz) {
 					image_yyzz.setImageBitmap(bitmap);
+					image_yyzz.isProgress(true);
 					upLoadeYyzzImage(path);
 					isYyzz = false;
 				}
 				if (isSwdj) {
 					image_swdj.setImageBitmap(bitmap);
+					image_swdj.isProgress(true);
 					upLoadeSwdjImage(path);
 					isSwdj = false;
 				}
 				if (isZzjg) {
 					image_zzjg.setImageBitmap(bitmap);
+					image_zzjg.isProgress(true);
 					upLoadeZzjgImage(path);
 					isZzjg = false;
-
 				}
 			}
-
-
 		}
-
 	}
 
 	public void upLoadeYyzzImage(String path) {
@@ -408,11 +400,12 @@ OnClickListener{
 				String code = JsonUtils.getCode(arg2);
 				if ("1".equals(code)) {
 					try {
+
 						JSONObject jsonObject = new JSONObject(arg2);
 						String url = jsonObject.getString("zhengjianurl");
+						isYyzzSuccess=true;
 						map.put("yyzz", url);
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -424,7 +417,6 @@ OnClickListener{
 					Toast.makeText(context, "文件为空 !", Toast.LENGTH_SHORT)
 							.show();
 				}
-
 			}
 
 			@Override
@@ -433,7 +425,13 @@ OnClickListener{
 				Toast.makeText(context, "上传失败!", Toast.LENGTH_SHORT).show();
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
-
+			@Override
+			public void onProgress(long bytesWritten, long totalSize) {
+				// TODO Auto-generated method stub
+				super.onProgress(bytesWritten, totalSize);
+				int count = (int) ((bytesWritten * 1.0 / totalSize) * 100);  
+				image_yyzz.setProgress(count);
+			}
 		});
 	}
 
@@ -450,17 +448,17 @@ OnClickListener{
 		}
 
 		HttpUtils.doPost(UPLAODE_URL, params, new TextHttpResponseHandler() {
-
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("1".equals(code)) {
 					try {
+						
 						JSONObject jsonObject = new JSONObject(arg2);
 						String url = jsonObject.getString("zhengjianurl");
+						isSwdjSuccess=true;
 						map.put("swdj", url);
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -472,7 +470,6 @@ OnClickListener{
 					Toast.makeText(context, "文件为空 !", Toast.LENGTH_SHORT)
 							.show();
 				}
-
 			}
 
 			@Override
@@ -482,6 +479,13 @@ OnClickListener{
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
 
+			@Override
+			public void onProgress(long bytesWritten, long totalSize) {
+				// TODO Auto-generated method stub
+				super.onProgress(bytesWritten, totalSize);
+				int count = (int) ((bytesWritten * 1.0 / totalSize) * 100);  
+				image_swdj.setProgress(count);
+			}
 		});
 	}
 
@@ -492,13 +496,11 @@ OnClickListener{
 			try {
 				params.put("zhengjianimg", file);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 
 		HttpUtils.doPost(UPLAODE_URL, params, new TextHttpResponseHandler() {
-
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
@@ -506,6 +508,7 @@ OnClickListener{
 					try {
 						JSONObject jsonObject = new JSONObject(arg2);
 						String url = jsonObject.getString("zhengjianurl");
+					    isZzjgSuccess = true;
 						map.put("zzjg", url);
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
@@ -520,7 +523,6 @@ OnClickListener{
 					Toast.makeText(context, "文件为空 !", Toast.LENGTH_SHORT)
 							.show();
 				}
-
 			}
 
 			@Override
@@ -529,7 +531,12 @@ OnClickListener{
 				Toast.makeText(context, "上传失败!", Toast.LENGTH_SHORT).show();
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
-
+			@Override
+			public void onProgress(long bytesWritten, long totalSize) {
+				super.onProgress(bytesWritten, totalSize);
+				int count = (int) ((bytesWritten * 1.0 / totalSize) * 100);  
+				image_zzjg.setProgress(count);
+			}
 		});
 	}
 
@@ -550,14 +557,17 @@ OnClickListener{
 				|| TextUtils.isEmpty(edt_lxdhs) || TextUtils.isEmpty(edt_gsjcs)) {
 			Toast.makeText(context, "请完善公司信息！", Toast.LENGTH_SHORT).show();
 			return;
-
 		}
-
 		int provinceIdex = spinner_province.getSelectedItemPosition();
 		int cityIndex = spinner_city.getSelectedItemPosition();
 		int areaIndex = spinner_area.getSelectedItemPosition();
 		if (provinceIdex == 0 || cityIndex == 0 || areaIndex == 0) {
 			Toast.makeText(context, "请选择所属区域！", Toast.LENGTH_SHORT).show();
+			return;
+		}
+
+		if(!isYyzzSuccess || !isSwdjSuccess || !isZzjgSuccess){
+			Toast.makeText(context, "证件照片上传未完成！", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if (map.size() != 3) {
@@ -583,7 +593,9 @@ OnClickListener{
 		params.put("yingyezhizhao", map.get("yyzz"));
 		params.put("shuiwudengjizheng", map.get("swdj"));
 		params.put("zuzhijigoudaimazheng", map.get("zzjg"));
+
 		if(isUpdate){
+			params.put("gongsiid", gongsibean.getGongsiid());
 			doUpdate(params);
 		}else{
 			doAdd(params);	
@@ -593,7 +605,11 @@ OnClickListener{
 	
 	public void doAdd(RequestParams params){
 		HttpUtils.doPost(ADD_URL, params, new TextHttpResponseHandler() {
-
+			public void onStart() {
+				dialog =new DialogWaiting(GongsiFragmentActivity.this);
+				dialog.show();
+				super.onStart();
+			}
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
@@ -605,6 +621,9 @@ OnClickListener{
 						JSONObject jsonObject = new JSONObject(arg2);
 						String gongsiid = jsonObject.getString("gongsiid");
 						dao.updateCompanyId(userid, gongsiid);
+						DialogTips dialog = new DialogTips(GongsiFragmentActivity.this, "添加成功！", "确定");
+						dialog.show();
+						dialog = null;
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -628,12 +647,23 @@ OnClickListener{
 				Toast.makeText(context, "修改失败!", Toast.LENGTH_SHORT).show();
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
+			
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+				dialogDismiss();
+			}
 		});
 	}
 	
 	public void doUpdate(RequestParams params){
 		HttpUtils.doPost(UPDATE_URL, params, new TextHttpResponseHandler() {
-
+			public void onStart() {
+				dialog =new DialogWaiting(GongsiFragmentActivity.this);
+				dialog.show();
+				super.onStart();
+			}
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
@@ -645,10 +675,10 @@ OnClickListener{
 						JSONObject jsonObject = new JSONObject(arg2);
 						String gongsiid = jsonObject.getString("gongsiid");
 						dao.updateCompanyId(userid, gongsiid);
-						Toast.makeText(context, "修改成功！", Toast.LENGTH_SHORT)
-						.show();
+						DialogTips dialog = new DialogTips(GongsiFragmentActivity.this, "修改成功！", "确定");
+						dialog.show();
+						dialog = null;
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -673,6 +703,21 @@ OnClickListener{
 				Toast.makeText(context, "修改失败!", Toast.LENGTH_SHORT).show();
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
+			
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+				dialogDismiss();
+			}
 		});
+	
+	}
+	
+	public void dialogDismiss(){
+		if(dialog!=null && dialog.isShowing()){
+			dialog.dismiss();
+		}
+		
 	}
 }

@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!-- 扫描二维码需要的权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -27,15 +27,17 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- 拨打电话权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name="com.nongziwang.application.CustomApplcation"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.nongziwang.activity.SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -105,11 +107,14 @@
         <activity android:name="com.nongziwang.activity.CaptureActivity" />
         <activity android:name="com.nongziwang.activity.GongsiFragmentActivity" />
         <activity android:name="com.nongziwang.activity.WebViewActivity" />
-        
+        <activity android:name="com.nongziwang.main.MainActivity" />
+        <activity android:name="com.nongziwang.activity.GongsiDetailFragmentActivity" />
+
         <!-- 验证码倒计时服务 -->
         <service
             android:name="com.nongziwang.service.RegisterCodeTimerService"
             android:enabled="true" >
         </service>
     </application>
+
 </manifest>

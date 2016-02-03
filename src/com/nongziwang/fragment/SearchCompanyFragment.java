@@ -9,6 +9,7 @@ import org.json.JSONException;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.nongziwang.activity.GongsiDetailFragmentActivity;
 import com.nongziwang.adapter.SearchCompanyAdapter;
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.entity.CompanyBean;
@@ -19,12 +20,15 @@ import com.nongziwang.view.XListView;
 import com.nongziwang.view.XListView.IXListViewListener;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -53,9 +57,23 @@ IXListViewListener, EventListener{
 	private void initViews() {
 		layout_loading=(RelativeLayout) view.findViewById(R.id.layout_loading);
 		listview_search_other=(XListView) view.findViewById(R.id.listview_search_other);
-		listview_search_other.setPullLoadEnable(false);
-		listview_search_other.setPullRefreshEnable(false);
+		listview_search_other.setPullLoadEnable(true);
+		listview_search_other.setPullRefreshEnable(true);
 		listview_search_other.setXListViewListener(this);
+		listview_search_other.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				CompanyBean bean=lists.get(position-1);
+				Intent intent = new Intent(getActivity(), GongsiDetailFragmentActivity.class);
+				intent.putExtra("dianpuid", bean.getDianpuid());
+				intent.putExtra("gongsiid", bean.getGongsiid());
+				startActivity(intent);
+				getActivity().overridePendingTransition(R.anim.left_in,
+						R.anim.left_out);
+			}
+		});
 
 	}
 	
@@ -77,7 +95,6 @@ IXListViewListener, EventListener{
 						adapter=new SearchCompanyAdapter(list, getActivity());
 						listview_search_other.setAdapter(adapter);
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}else if("2".equals(code)){
@@ -99,8 +116,6 @@ IXListViewListener, EventListener{
 				layout_loading.setVisibility(View.GONE);
 			}
 		});
-		
-		
 	}
 	
 	public static Fragment getInstance(String params) {
@@ -114,18 +129,83 @@ IXListViewListener, EventListener{
 	
 	@Override
 	protected void lazyLoad() {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
-		
+		currpage=1;
+		RequestParams params=new RequestParams();
+		params.put("currpage", currpage + "");
+		params.put("keywords", param);
+		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code=JsonUtils.getCode(arg2);
+				if("0".equals(code)){
+					Toast.makeText(context, "当前页码输入不正确!", Toast.LENGTH_SHORT)
+					.show();
+				}else if("1".equals(code)){
+					try {
+						lists.clear();
+						List<CompanyBean> refreslist=JsonUtils.getCompanyInfo(arg2);
+						lists.addAll(refreslist);
+						adapter.setList(refreslist);
+						adapter.notifyDataSetChanged();
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}else if("2".equals(code)){
+					Toast.makeText(context, "没有查询到符合的公司信息!", Toast.LENGTH_SHORT)
+					.show();
+				}
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				// TODO Auto-generated method stub
+				Log.e(TAG, arg2 == null ? "" : arg2);
+				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT)
+						.show();
+			}
+
+		});
 	}
 	@Override
 	public void onLoadMore() {
-		// TODO Auto-generated method stub
-		
+		currpage++;
+		RequestParams params=new RequestParams();
+		params.put("currpage", currpage + "");
+		params.put("keywords", param);
+		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code=JsonUtils.getCode(arg2);
+				if("0".equals(code)){
+					Toast.makeText(context, "当前页码输入不正确!", Toast.LENGTH_SHORT)
+					.show();
+				}else if("1".equals(code)){
+					try {
+						List<CompanyBean> loadmorelist=JsonUtils.getCompanyInfo(arg2);
+						lists.addAll(loadmorelist);
+						adapter.addAll(loadmorelist);
+						adapter.notifyDataSetChanged();
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}else if("2".equals(code)){
+					Toast.makeText(context, "没有查询到符合的公司信息!", Toast.LENGTH_SHORT)
+					.show();
+				}
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+				// TODO Auto-generated method stub
+				Log.e(TAG, arg2 == null ? "" : arg2);
+				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT)
+						.show();
+			}
+		});
 	}
 
 }

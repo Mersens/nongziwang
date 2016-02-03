@@ -51,7 +51,6 @@ public class ProductManagementFragmentActivity extends BaseActivity{
 			@Override
 			public void onClick() {
 				finishActivity();
-				
 			}
 		});
 		
@@ -77,8 +76,8 @@ public class ProductManagementFragmentActivity extends BaseActivity{
 		tv_wtg.setOnClickListener(new MyOnClickListener(2));
 		tv_yxj.setOnClickListener(new MyOnClickListener(3));
 		viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-		viewPager.setCurrentItem(0);
 		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+		viewPager.setCurrentItem(0);
 	}
 	private void initImageView() {
 		bmpW = BitmapFactory.decodeResource(getResources(),

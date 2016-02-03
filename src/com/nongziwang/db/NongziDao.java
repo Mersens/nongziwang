@@ -54,7 +54,9 @@ public interface NongziDao {
 	
 	//修改用户的公司id
 	public void updateCompanyId(String userid,String companyid);
-		
+	
+	//修改公司状态
+	public void updateGsStatic(String userid,String gsstatic);
 	
 
 }

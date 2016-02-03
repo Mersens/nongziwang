@@ -137,7 +137,6 @@ public class CommonSearchFragment extends BaseFragment {
 				String code=JsonUtils.getCode(arg2);
 				if(!TextUtils.isEmpty(code)){
 					if("0".equals(code)){
-						Toast.makeText(getActivity(), "没有对应的类目信息!", Toast.LENGTH_LONG).show();
 						isSuccess=false;
 					}else if("1".equals(code)){
 						try {
@@ -149,7 +148,6 @@ public class CommonSearchFragment extends BaseFragment {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
 					}
 				}
 			}

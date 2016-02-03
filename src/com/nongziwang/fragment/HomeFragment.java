@@ -143,7 +143,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 					Throwable arg3) {
 				Toast.makeText(getActivity(), " ˝æ›º”‘ÿ ß∞‹£°", Toast.LENGTH_SHORT).show();
 				Log.e(TAG, arg2==null?"":arg2);
-
 			}
 			
 			@Override
@@ -259,7 +258,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		case R.id.layout_zhongzi:
 			intentAction(getActivity(), TypeSearchFragmentActivity.class,
 					CommonSearchFragment.ZHONGZI);
-
 			break;
 		case R.id.layout_nongyao:
 			intentAction(getActivity(), TypeSearchFragmentActivity.class,

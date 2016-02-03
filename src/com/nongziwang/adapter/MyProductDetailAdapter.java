@@ -2,13 +2,16 @@ package com.nongziwang.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nongziwang.activity.MyShopsFragmentActivity;
 import com.nongziwang.entity.ChanPinBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.ImageLoadOptions;
@@ -60,11 +63,17 @@ public class MyProductDetailAdapter extends BaseListAdapter<ChanPinBean>{
 
 		@Override
 		public void onClick(View v) {
-			
+	      intentAction((Activity)context, MyShopsFragmentActivity.class,list.get(pos).getDianpuid());
 		}
 		
 	}
-	
+	public <T> void intentAction(Activity context, Class<T> cls,String params) {
+		Intent intent = new Intent(context, cls);
+		intent.putExtra("params", params);
+		context.startActivity(intent);
+		context.overridePendingTransition(R.anim.left_in,
+				R.anim.left_out);
+	}
 	static class ViewHolder{
 		private ImageView pro_image;
 		private ImageView img_dp_logo;

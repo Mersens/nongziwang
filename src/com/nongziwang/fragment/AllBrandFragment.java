@@ -9,18 +9,14 @@ import org.json.JSONException;
 
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.SearchResultsFragmentActivity;
-import com.nongziwang.adapter.CommonSearchResultsAdapter;
 import com.nongziwang.adapter.PinPaiResultsAdapter;
-import com.nongziwang.adapter.UseshResultsAdapter;
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.entity.PinPaiBean;
-import com.nongziwang.entity.UsesBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.view.XListView;
 import com.nongziwang.view.XListView.IXListViewListener;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +26,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -65,7 +60,7 @@ IXListViewListener, EventListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				PinPaiBean bean=lists.get(position);
+				PinPaiBean bean=lists.get(position-1);
 				Intent intent=new Intent(SearchResultsFragmentActivity.ACTION_PINPAIID);
 				intent.putExtra("pinpaiid",bean.getPinpaiid() );
 				context.sendBroadcast(intent);

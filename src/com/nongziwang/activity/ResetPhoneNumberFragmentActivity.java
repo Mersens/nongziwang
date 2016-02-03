@@ -32,7 +32,9 @@ public class ResetPhoneNumberFragmentActivity extends BaseActivity{
 				new OnLeftClickListener() {
 					@Override
 					public void onClick() {
-						finishActivity();
+						finish();
+						overridePendingTransition(R.anim.right_in,
+								R.anim.right_out);
 					}
 				});
 	}
@@ -77,7 +79,9 @@ public class ResetPhoneNumberFragmentActivity extends BaseActivity{
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-			finishActivity();
+			finish();
+			overridePendingTransition(R.anim.right_in,
+					R.anim.right_out);
 			return true;
 		}
 		return false;

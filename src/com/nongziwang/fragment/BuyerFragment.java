@@ -10,8 +10,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -44,6 +47,7 @@ import com.nongziwang.activity.SettingActivity;
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.db.NongziDao;
 import com.nongziwang.db.NongziDaoImpl;
+import com.nongziwang.entity.GongsiBean;
 import com.nongziwang.entity.UserBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
@@ -82,6 +86,9 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			+ "userinfo/gotoUpHeadImg";
 	private static final String USERINFO_URL = AppConstants.SERVICE_ADDRESS
 			+ "userinfo/getUserInfoById";
+	public static final String ACTION_UPDATE = "action_update";
+	private static final String GONGSIDATA_URL = AppConstants.SERVICE_ADDRESS
+			+ "gongsi/getGongsiDataById";
 	private NongziDao dao;
 	private String userid = null;
 	private UserBean user;
@@ -94,22 +101,12 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		dao = new NongziDaoImpl(getActivity().getApplicationContext());
 		userid = SharePreferenceUtil.getInstance(
 				getActivity().getApplicationContext()).getUserId();
-		if(!TextUtils.isEmpty(userid)){
-			getUserInfo();
-		}
+		registerBoradcastReceiver();
 		initViews();
 		initEvent();
 		return view;
 	}
 
-	Handler handler=new Handler(){
-		public void handleMessage(android.os.Message msg) {
-			if(msg.arg1==200){
-				initDatas();
-			}
-		};
-	};
-	
 	private void initViews() {
 		tv_name = (TextView) view.findViewById(R.id.tv_name);
 		buyer_user_head = (CircleImageView) view
@@ -140,17 +137,17 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 				getActivity().getApplicationContext()).getUserId();
 		if (!TextUtils.isEmpty(userid)) {
 			UserBean user = dao.findUserInfoById(userid);
-			if (null != user) {
-				tv_name.setText(user.getUsername());
-				tv_name.setVisibility(View.VISIBLE);
-				tv_login.setVisibility(View.GONE);
-			}
+			tv_name.setText(user.getUsername());
+			tv_name.setVisibility(View.VISIBLE);
+			tv_login.setVisibility(View.GONE);
+
 		} else {
 			tv_name.setVisibility(View.GONE);
 			tv_login.setVisibility(View.VISIBLE);
 		}
 	}
-	public void getUserInfo(){
+
+	public void getUserInfo() {
 		RequestParams params = new RequestParams();
 		params.put("userid", userid);
 		HttpUtils.doPost(USERINFO_URL, params, new TextHttpResponseHandler() {
@@ -162,20 +159,57 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 						try {
 							UserBean user = JsonUtils.getUserInfo(arg2);
 							dao.updateUserInfo(user, userid);
+							if (!TextUtils.isEmpty(user.getCompanyid())) {
+								doGetGsDatas(user.getCompanyid());
+							}
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
 					}
 				}
 			}
+
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				   Log.e(TAG, arg2 == null ? "" : arg2);
+				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
 
 		});
 	}
+
+	private void doGetGsDatas(String gongsiid) {
+		RequestParams params = new RequestParams();
+		params.put("gongsiid", gongsiid);
+
+		HttpUtils.doPost(GONGSIDATA_URL, params, new TextHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code = JsonUtils.getCode(arg2);
+				if ("0".equals(code)) {
+					Toast.makeText(getActivity(), "找不到该公司信息!",
+							Toast.LENGTH_SHORT).show();
+				} else if ("1".equals(code)) {
+					try {
+						GongsiBean gongsibean = JsonUtils.getGongsiInfo(arg2);
+						dao.updateGsStatic(userid, gongsibean.getGsstatic());
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+				Toast.makeText(getActivity(), "获取信息失败!", Toast.LENGTH_SHORT)
+						.show();
+				Log.e(TAG, arg2 == null ? "" : arg2);
+			}
+
+		});
+	}
+
 	private void initEvent() {
 		buyer_user_head.setOnClickListener(this);
 		layout_myaccount.setOnClickListener(this);
@@ -222,7 +256,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		} else {
 			doSelect(v.getId());
 		}
-
 	}
 
 	public void doSelect(int id) {
@@ -237,43 +270,24 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			intentAction(getActivity(), FbxjdActivity.class);
 			break;
 		case R.id.layout_rele_pro:
-			user= dao.findUserInfoById(userid);
-			if (null != user) {
-				if (!TextUtils.isEmpty(user.getCompanyid())) {
-					intentAction(getActivity(),
-							ReleaseProductFragmentActivity.class);
-				} else {
-					DialogTips dialog = new DialogTips(getActivity(), "温馨提示",
-							"您未开通公司,是否选择开通?", "确定", true, true);
-					dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialogInterface,
-								int userId) {
-							intentAction(getActivity(),
-									GongsiFragmentActivity.class);
-						}
-					});
-					dialog.show();
-					dialog = null;
-				}
-
-			}
-
+			doRelePro();
 			break;
 		case R.id.layout_pro:
 			intentAction(getActivity(), ProductManagementFragmentActivity.class);
 			break;
 		case R.id.layout_ckdp:
 			user = dao.findUserInfoById(userid);
-			if(user!=null){
-				if(!TextUtils.isEmpty(user.getDianpuid())){
-					intentAction(getActivity(), MyShopsFragmentActivity.class);
-				}else{
-					DialogTips dialog = new DialogTips(getActivity(), "您未开通店铺！", "确定");
+			if (user != null) {
+				if (!TextUtils.isEmpty(user.getDianpuid())) {
+					intentAction(getActivity(), MyShopsFragmentActivity.class,
+							user.getDianpuid());
+				} else {
+					DialogTips dialog = new DialogTips(getActivity(),
+							"您未开通店铺！", "确定");
 					dialog.show();
 					dialog = null;
 				}
 			}
-			
 			break;
 		case R.id.layout_myfootprint:
 			intentAction(getActivity(), MyFootprintActivity.class);
@@ -285,6 +299,48 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			intentAction(getActivity(), SettingActivity.class);
 			break;
 		}
+	}
+
+	private void doRelePro() {
+		user = dao.findUserInfoById(userid);
+		if (null != user) {
+			if (!TextUtils.isEmpty(user.getCompanyid())) {
+				String gsstatic = user.getGsstatic();
+				String tips = null;
+				if (!TextUtils.isEmpty(gsstatic)) {
+					if ("0".equals(gsstatic)) {
+						tips = "您的公司还未审核！";
+						DialogTips dialog = new DialogTips(getActivity(), tips,
+								"确定");
+						dialog.show();
+						dialog = null;
+					} else if ("1".equals(gsstatic)) {
+						intentAction(getActivity(),
+								ReleaseProductFragmentActivity.class);
+					} else if ("2".equals(gsstatic)) {
+						tips = "您的公司审核未通过！";
+						DialogTips dialog = new DialogTips(getActivity(), tips,
+								"确定");
+						dialog.show();
+						dialog = null;
+					}
+				}
+
+			} else {
+				DialogTips dialog = new DialogTips(getActivity(), "温馨提示",
+						"您未开通公司,是否选择开通?", "确定", true, true);
+				dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialogInterface,
+							int userId) {
+						intentAction(getActivity(),
+								GongsiFragmentActivity.class);
+					}
+				});
+				dialog.show();
+				dialog = null;
+			}
+		}
+
 	}
 
 	public void showAvatarPop() {
@@ -428,10 +484,30 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void onStart() {
-		Message msg=new Message();
-		msg.arg1=200;
-		handler.sendMessageDelayed(msg,500);
 		super.onStart();
+		initDatas();
+		getUserInfo();
 	}
 
+	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action.equals(ACTION_UPDATE)) {
+				initDatas();
+			}
+		}
+	};
+
+	public void registerBoradcastReceiver() {
+		IntentFilter myIntentFilter = new IntentFilter();
+		myIntentFilter.addAction(ACTION_UPDATE);
+		getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		getActivity().unregisterReceiver(mBroadcastReceiver);
+	}
 }

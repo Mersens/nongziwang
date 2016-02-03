@@ -156,7 +156,6 @@ public class ProductFragment extends BaseFragment {
 									.getName(), feiliaolist);
 							adapter.notifyDataSetChanged();
 						} catch (JSONException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}

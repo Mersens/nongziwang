@@ -52,6 +52,7 @@ public class ProductManagementFragment extends BaseFragment implements
 	private XListView listView;
 	private String param;
 	public static int xinxiststic = 0;
+	private boolean isPrepared;
 	private String userid;
 	private static final String URL = AppConstants.SERVICE_ADDRESS
 			+ "chanpin/getChanpinByStatic";
@@ -78,9 +79,10 @@ public class ProductManagementFragment extends BaseFragment implements
 		param = getArguments().getString("params");
 		userid = SharePreferenceUtil.getInstance(
 				getActivity().getApplicationContext()).getUserId();
+		isPrepared = true;
 		initViews();
 		initEvent();
-		initDatas();
+		lazyLoad();
 		return view;
 	}
 
@@ -116,8 +118,11 @@ public class ProductManagementFragment extends BaseFragment implements
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
-				adapter.configCheckMap(isChecked);
-				adapter.notifyDataSetChanged();
+				if(adapter!=null){
+					adapter.configCheckMap(isChecked);
+					adapter.notifyDataSetChanged();
+				}
+
 
 			}
 		});
@@ -125,6 +130,9 @@ public class ProductManagementFragment extends BaseFragment implements
 		tv_plxj.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if(adapter==null){
+					return;
+				}
 				if (isShangjia) {
 					DialogTips dialog = new DialogTips(getActivity(), "温馨提示",
 							"您确定要上架?", "确定", true, true);
@@ -154,6 +162,9 @@ public class ProductManagementFragment extends BaseFragment implements
 		tv_del.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if(adapter==null){
+					return;
+				}
 				DialogTips dialog = new DialogTips(getActivity(), "温馨提示",
 						"您确定要删除?", "确定", true, true);
 				dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
@@ -164,7 +175,6 @@ public class ProductManagementFragment extends BaseFragment implements
 				});
 				dialog.show();
 				dialog = null;
-
 			}
 
 		});
@@ -428,10 +438,13 @@ public class ProductManagementFragment extends BaseFragment implements
 			}
 		}
 		return mlist;
-
 	}
 
-	private void initDatas() {
+	@Override
+	protected void lazyLoad() {
+		if (!isPrepared || !isVisible) {
+			return;
+		}
 		switch (Integer.parseInt(param)) {
 		case 0:
 			xinxiststic = 1;
@@ -465,14 +478,12 @@ public class ProductManagementFragment extends BaseFragment implements
 						adapter = new MyProductAdapter(list, getActivity());
 						listView.setAdapter(adapter);
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				} else if ("2".equals(code)) {
 					Toast.makeText(getActivity(), "没有产品信息!", Toast.LENGTH_SHORT)
 							.show();
 				}
-
 			}
 
 			@Override
@@ -481,22 +492,14 @@ public class ProductManagementFragment extends BaseFragment implements
 				Log.e(TAG, arg2 == null ? "" : arg2);
 				Toast.makeText(getActivity(), "获取失败!", Toast.LENGTH_SHORT)
 						.show();
-
 			}
 
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				super.onFinish();
 				layout_loading.setVisibility(View.GONE);
 			}
 		});
-
-	}
-
-	@Override
-	protected void lazyLoad() {
-
 	}
 
 	public static Fragment getInstance(String params) {
@@ -514,7 +517,6 @@ public class ProductManagementFragment extends BaseFragment implements
 
 	@Override
 	public void onLoadMore() {
-		// TODO Auto-generated method stub
 
 	}
 

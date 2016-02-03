@@ -1,5 +1,4 @@
 package com.nongziwang.activity;
-import junit.framework.Test;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;

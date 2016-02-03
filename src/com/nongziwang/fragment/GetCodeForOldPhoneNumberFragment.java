@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.nongziwang.activity.LoginActivity;
 import com.nongziwang.activity.RegisterActivity;
 import com.nongziwang.activity.ResetPhoneNumberFragmentActivity;
 import com.nongziwang.application.AppConstants;
@@ -35,6 +36,7 @@ import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.RegisterCodeTimer;
 import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.utils.StringUtils;
+import com.nongziwang.view.DialogWaiting;
 
 public class GetCodeForOldPhoneNumberFragment extends BaseFragment {
 	private View view;
@@ -48,6 +50,7 @@ public class GetCodeForOldPhoneNumberFragment extends BaseFragment {
 	private static final String TAG="GetCodeForOldPhoneNumberFragment";
 	private static final String URL=AppConstants.SERVICE_ADDRESS+"send/sendrandByPhone";
 	private String yzm=null;
+	private DialogWaiting dialog;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -79,9 +82,9 @@ public class GetCodeForOldPhoneNumberFragment extends BaseFragment {
 	}
 
 	private void initEvent() {
-		RegisterCodeTimerService.setHandler(mCodeHandler);
 		mIntent = new Intent(getActivity(),
 				RegisterCodeTimerService.class);
+		RegisterCodeTimerService.setHandler(mCodeHandler);
 		userid=SharePreferenceUtil.getInstance(getActivity().getApplicationContext()).getUserId();
 		dao=new NongziDaoImpl(getActivity().getApplicationContext());
 		UserBean user=dao.findUserInfoById(userid);
@@ -93,7 +96,6 @@ public class GetCodeForOldPhoneNumberFragment extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				doGetCode();
-
 			}
 		});
 
@@ -112,13 +114,19 @@ public class GetCodeForOldPhoneNumberFragment extends BaseFragment {
 		}
 		getActivity().startService(mIntent);
 		RequestParams params=new RequestParams();
-		params.put("userphone", "telnum");
+		params.put("userphone", telnum);
 		params.put("msgflag", "3");
 		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
 			@Override
+			public void onStart() {
+				dialog =new DialogWaiting(getActivity());
+				dialog.show();
+				super.onStart();
+			}
+			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code= JsonUtils.getCode(arg2);
-				if(TextUtils.isEmpty(code)){
+				if(!TextUtils.isEmpty(code)){
 					if("0".equals(code)){
 						Toast.makeText(getActivity(), "手机号码格式不正确!", Toast.LENGTH_LONG).show();
 					} else if("1".equals(code)){
@@ -138,6 +146,13 @@ public class GetCodeForOldPhoneNumberFragment extends BaseFragment {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
 				Log.e(TAG, arg2==null?"":arg2);
+				Toast.makeText(getActivity(), "获取验证码失败!", Toast.LENGTH_LONG).show();
+			}
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+				dialog.dismiss();
 			}
 		});
 
@@ -145,12 +160,16 @@ public class GetCodeForOldPhoneNumberFragment extends BaseFragment {
 
 	public void doNext() {
 		String code=edt_getcode.getText().toString().trim();
-		if(TextUtils.isEmpty(code)){
+		if(TextUtils.isEmpty(code) ){
 			Toast.makeText(getActivity(), "验证码为空!", Toast.LENGTH_LONG).show();
 		    return;
 		}
 		if(!StringUtils.isQQNum(code)){
 			Toast.makeText(getActivity(), "验证码格式错误!", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if(TextUtils.isEmpty(yzm) ){
+			Toast.makeText(getActivity(), "验证码错误!", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if(!yzm.equals(code)){
@@ -160,6 +179,7 @@ public class GetCodeForOldPhoneNumberFragment extends BaseFragment {
 		Intent mIntent = new Intent(
 				ResetPhoneNumberFragmentActivity.ACTION_GETNEWCODE);
 		getActivity().sendBroadcast(mIntent);
+		getActivity().stopService(mIntent);
 	}
 
 	public static Fragment getInstance(String params) {
@@ -169,15 +189,16 @@ public class GetCodeForOldPhoneNumberFragment extends BaseFragment {
 		fragment.setArguments(bundle);
 		return fragment;
 	}
-
+	
 	@Override
 	protected void lazyLoad() {
 
 	}
-	@Override
-	public void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
-		getActivity().stopService(mIntent);
+@Override
+public void onDestroy() {
+	super.onDestroy();
+	if(mIntent!=null){
+		getActivity().stopService(mIntent);	
 	}
+}
 }

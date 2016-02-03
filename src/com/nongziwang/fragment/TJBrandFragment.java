@@ -66,7 +66,7 @@ IXListViewListener, EventListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				PinPaiBean bean=lists.get(position);
+				PinPaiBean bean=lists.get(position-1);
 				Intent intent=new Intent(SearchResultsFragmentActivity.ACTION_PINPAIID);
 				intent.putExtra("pinpaiid",bean.getPinpaiid() );
 				context.sendBroadcast(intent);

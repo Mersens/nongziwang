@@ -14,6 +14,7 @@ import com.nongziwang.entity.CompanyBean;
 import com.nongziwang.entity.DianPuBean;
 import com.nongziwang.entity.FootprintBean;
 import com.nongziwang.entity.GongsiBean;
+import com.nongziwang.entity.GongsiDetailBean;
 import com.nongziwang.entity.LeiMuBean;
 import com.nongziwang.entity.NewsBean;
 import com.nongziwang.entity.NewsDatialBean;
@@ -112,8 +113,8 @@ public class JsonUtils {
 			bean.setCompanyid(jsonObject.getString("gongsiid"));
 		else
 			bean.setCompanyid("");
-
 		bean.setHtmlid("");
+		bean.setGsstatic("");
 
 		return bean;
 	}
@@ -264,12 +265,12 @@ public class JsonUtils {
 			bean.setChanpinimg(obj.getString("chanpinimg"));
 			bean.setCityname(obj.getString("cityname"));
 			bean.setJiage(obj.getString("jiage"));
-			if(obj.has("province")){
+			if (obj.has("province")) {
 				bean.setProvince(obj.getString("province"));
-			}else{
+			} else {
 				bean.setProvince("暂无");
 			}
-			
+
 			list.add(bean);
 
 		}
@@ -283,14 +284,12 @@ public class JsonUtils {
 		JSONArray array = new JSONArray(jsonObject.getString("yongtulist"));
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject obj = (JSONObject) array.get(i);
-			if(obj.has("yongtuid") && obj.has("yongtuname")){
+			if (obj.has("yongtuid") && obj.has("yongtuname")) {
 				UsesBean bean = new UsesBean();
 				bean.setUsesid(obj.getString("yongtuid"));
 				bean.setUsesname(obj.getString("yongtuname"));
 				list.add(bean);
 			}
-
-			
 
 		}
 
@@ -313,24 +312,26 @@ public class JsonUtils {
 		}
 		return list;
 	}
+
 	public static List<PinPaiBean> getTjPinPaiInfo(String str)
 			throws JSONException {
 		List<PinPaiBean> list = new ArrayList<PinPaiBean>();
 		JSONObject jsonObject = new JSONObject(str);
-		JSONArray array = new JSONArray(jsonObject.getString("tuijianpinpailist"));
+		JSONArray array = new JSONArray(
+				jsonObject.getString("tuijianpinpailist"));
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject obj = (JSONObject) array.get(i);
-			if(obj.has("pinpaiid") && obj.has("pinpainame")){
+			if (obj.has("pinpaiid") && obj.has("pinpainame")) {
 				PinPaiBean bean = new PinPaiBean();
 				bean.setPinpaiid(obj.getString("pinpaiid"));
 				bean.setPinpainame(obj.getString("pinpainame"));
 				list.add(bean);
 			}
 
-
 		}
 		return list;
 	}
+
 	public static List<CompanyBean> getCompanyInfo(String str)
 			throws JSONException {
 		List<CompanyBean> list = new ArrayList<CompanyBean>();
@@ -370,6 +371,7 @@ public class JsonUtils {
 		bean.setShuiwudengjizheng(jsonObject.getString("shuiwudengji"));
 		bean.setYingyezhizhao(jsonObject.getString("yingyezhizhao"));
 		bean.setZuzhijigoudaimazheng(jsonObject.getString("jigoudaima"));
+		bean.setGsstatic(jsonObject.getString("static"));
 
 		return bean;
 
@@ -453,15 +455,15 @@ public class JsonUtils {
 			bean.setTitle(obj.getString("title"));
 			bean.setJiage(obj.getString("jiage"));
 			list.add(bean);
-
 		}
 		dianpubean.setChanpinlist(list);
 		return dianpubean;
 
 	}
 
-	public static ChanPinBean getChanPinDetailInfo(String str) throws JSONException{
-		ChanPinBean bean=new ChanPinBean();
+	public static ChanPinBean getChanPinDetailInfo(String str)
+			throws JSONException {
+		ChanPinBean bean = new ChanPinBean();
 		JSONObject jsonObject = new JSONObject(str);
 		bean.setChanpinid(jsonObject.getString("chanpinid"));
 		bean.setTitle(jsonObject.getString("title"));
@@ -473,5 +475,54 @@ public class JsonUtils {
 		bean.setChanpinimg(jsonObject.getString("chanpinimg"));
 		return bean;
 	}
-	
+
+	public static GongsiDetailBean getGongsiDetail(String str)
+			throws JSONException {
+		GongsiDetailBean bean = new GongsiDetailBean();
+		JSONObject jsonObject = new JSONObject(str);
+		if (jsonObject.has("dianputype")) {
+			bean.setDianputype(jsonObject.getString("dianputype"));
+		} else {
+			bean.setDianputype("");
+		}
+		if (jsonObject.has("diqu")) {
+			bean.setDiqu(jsonObject.getString("diqu"));
+		} else {
+			bean.setDiqu("");
+		}
+		if (jsonObject.has("gongsiname")) {
+			bean.setGongsiname(jsonObject.getString("gongsiname"));
+		} else {
+			bean.setGongsiname("");
+		}
+		if (jsonObject.has("lianxidizhi")) {
+			bean.setLianxidizhi(jsonObject.getString("lianxidizhi"));
+		} else {
+			bean.setLianxidizhi("");
+		}
+		if (jsonObject.has("lianxiren")) {
+			bean.setLianxiren(jsonObject.getString("lianxiren"));
+		} else {
+			bean.setLianxiren("");
+		}
+		if (jsonObject.has("lianxirendianhua")) {
+			bean.setLianxirendianhua(jsonObject.getString("lianxirendianhua"));
+		} else {
+			bean.setLianxirendianhua("");
+		}
+		if (jsonObject.has("manyidu")) {
+			bean.setManyidu(jsonObject.getString("manyidu"));
+		} else {
+			bean.setManyidu(jsonObject.getString(""));
+		}
+		if (jsonObject.has("zhuyingchanpin")) {
+			bean.setZhuyingchanpin(jsonObject.getString("zhuyingchanpin"));
+		} else {
+			bean.setZhuyingchanpin("");
+		}
+
+		return bean;
+
+	}
+
 }

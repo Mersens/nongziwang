@@ -31,7 +31,7 @@ public class RegisterCodeTimerService extends Service {
 	public void onStart(Intent intent, int startId) {
 		// TODO Auto-generated method stub
 		super.onStart(intent, startId);
-		mCodeTimer = new RegisterCodeTimer(120000, 1000, mHandler);
+		mCodeTimer = new RegisterCodeTimer(60000, 1000, mHandler);
 		mCodeTimer.start();
 	}
 

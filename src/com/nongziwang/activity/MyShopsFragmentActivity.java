@@ -40,13 +40,14 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 	public static final String ACTION_HIDE="hide";
 	private static final String URL=AppConstants.SERVICE_ADDRESS+"dianpu/gotoDianpuIndex";
 	private static final String ALL_URL=AppConstants.SERVICE_ADDRESS+"dianpu/getAllDianpuChanpin";
+	private String id;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
-		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_myshops_main);
 		registerBoradcastReceiver();
+		id=getIntent().getStringExtra("params");
 		initViews();
 		initEvent();
 		addFragment(URL, false);
@@ -76,7 +77,6 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 		layout_dianpu.setOnClickListener(this);
 		layout_shangpin.setOnClickListener(this);
 		img_menu_back.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				finishActivity();
@@ -85,7 +85,7 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 	}
 
 	public Fragment creatFragment(String params) {
-		return MyShopsFragment.getInstance(params);
+		return MyShopsFragment.getInstance(params,id);
 	}
 
 	public void addFragment(String params, boolean isAnim) {
@@ -137,7 +137,6 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 			tv_shangpin.setTextColor(getResources().getColor(
 					R.color.title_yellow_text_color));
 			view_shangpin.setVisibility(View.VISIBLE);
-
 			break;
 		}
 	}

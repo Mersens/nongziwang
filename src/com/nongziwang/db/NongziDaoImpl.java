@@ -138,12 +138,12 @@ public class NongziDaoImpl implements NongziDao {
 	public void addUserInfo(UserBean user) {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		db.execSQL(
-				"insert into usertb(userid,username,userpwd,userphone,qq,xingming,addtime,companyid,htmlid,touxiang,dianpuid) values(?,?,?,?,?,?,?,?,?,?,?)",
+				"insert into usertb(userid,username,userpwd,userphone,qq,xingming,addtime,companyid,htmlid,touxiang,dianpuid,gsstatic) values(?,?,?,?,?,?,?,?,?,?,?,?)",
 				new Object[] { user.getUserid(), user.getUsername(),
 						user.getUserpwd(), user.getUserphone(), user.getQq(),
 						user.getXingming(), user.getAddtime(),
 						user.getCompanyid(), user.getHtmlid(),
-						user.getTouxiang(), user.getDianpuid() });
+						user.getTouxiang(), user.getDianpuid() ,user.getGsstatic()});
 		db.close();
 
 	}
@@ -184,6 +184,10 @@ public class NongziDaoImpl implements NongziDao {
 			String dianpuid = cursor.getString(cursor
 					.getColumnIndex("dianpuid"));
 			user.setDianpuid(dianpuid);
+			String gsstatic = cursor.getString(cursor
+					.getColumnIndex("gsstatic"));
+			user.setGsstatic(gsstatic);
+			
 			list.add(user);
 		}
 		cursor.close();
@@ -235,6 +239,14 @@ public class NongziDaoImpl implements NongziDao {
 						user.getCompanyid(), user.getHtmlid(),
 						user.getTouxiang(), user.getDianpuid(), userid });
 		db.close();
+	}
+
+	@Override
+	public void updateGsStatic(String userid, String gsstatic) {
+		SQLiteDatabase db = helper.getWritableDatabase();
+		db.execSQL("UPDATE usertb SET gsstatic=? where userid=?",
+				new Object[] { gsstatic, userid });
+		db.close();		
 	}
 
 }

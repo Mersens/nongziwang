@@ -46,8 +46,6 @@ public class ForgetPasswordActivity extends BaseActivity {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_forget_psd);
 		RegisterCodeTimerService.setHandler(mCodeHandler);
-		mIntent = new Intent(ForgetPasswordActivity.this,
-				RegisterCodeTimerService.class);
 		initViews();
 		initEvent();
 
@@ -116,10 +114,8 @@ public class ForgetPasswordActivity extends BaseActivity {
 			ShowToast("电话号码不正确！");
 			return;
 		}
-		if (!isNetworkAvailable()) {
-			ShowToast("没有可用网络，请检查网络设置!");
-			return;
-		}
+		mIntent = new Intent(ForgetPasswordActivity.this,
+				RegisterCodeTimerService.class);
 		map.put("num", tel_number);
 		startService(mIntent);
 		RequestParams params = new RequestParams();

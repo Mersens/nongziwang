@@ -22,7 +22,6 @@ public class IndustryInfoAdapter extends BaseListAdapter<NewsBean>{
 		this.list=list;
 	}
 
-	
 	@Override
 	public View getContentView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder=null;
@@ -41,7 +40,7 @@ public class IndustryInfoAdapter extends BaseListAdapter<NewsBean>{
 		ImageLoader.getInstance().displayImage(bean.getImgsrc(), holder.info_image,
 				ImageLoadOptions.getOptions());
 		holder.tv_title.setText(bean.getTitle());
-		holder.tv_msg.setText(bean.getCenter().trim());
+		holder.tv_msg.setText(bean.getCenter().toString().trim());
 		holder.tv_time.setText(DateUtil.getStamp2Time(bean.getAddtime()));
 		return convertView;
 	}

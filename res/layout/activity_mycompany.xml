@@ -369,7 +369,6 @@
                         android:layout_centerInParent="true"
                         android:text="@string/tv_lxdh" />
                 </RelativeLayout>
-
                 <EditText
                     android:id="@+id/edt_lxdh"
                     android:layout_width="0dp"
@@ -383,7 +382,6 @@
                     android:textSize="@dimen/text_mid_size" >
                 </EditText>
             </LinearLayout>
-
             <include layout="@layout/layout_seller_upload_image" />
         </LinearLayout>
     </ScrollView>

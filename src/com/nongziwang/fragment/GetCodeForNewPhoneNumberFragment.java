@@ -80,10 +80,11 @@ public class GetCodeForNewPhoneNumberFragment extends BaseFragment {
 	}
 
 	private void initEvent() {
+		mIntent = new Intent(getActivity(),
+				RegisterCodeTimerService.class);
 		userid = SharePreferenceUtil.getInstance(
 				getActivity().getApplicationContext()).getUserId();
 		RegisterCodeTimerService.setHandler(mCodeHandler);
-		mIntent = new Intent(getActivity(), RegisterCodeTimerService.class);
 		btn_getcode.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -109,17 +110,14 @@ public class GetCodeForNewPhoneNumberFragment extends BaseFragment {
 					.show();
 			return;
 		}
-		if (StringUtils.isMobileNum(num)) {
+		if (!StringUtils.isMobileNum(num)) {
 			Toast.makeText(getActivity(), "电话号码格式不正确！", Toast.LENGTH_LONG)
 					.show();
 			return;
 		}
-		if (!isNetworkAvailable()) {
-			Toast.makeText(getActivity(), "没有可用网络，请检查网络设置!", Toast.LENGTH_LONG)
-					.show();
-			return;
-		}
+
 		map.put("num", num);
+
 		getActivity().startService(mIntent);
 		RequestParams params = new RequestParams();
 		params.put("userphone", num);
@@ -158,7 +156,6 @@ public class GetCodeForNewPhoneNumberFragment extends BaseFragment {
 			}
 
 		});
-
 	}
 
 	public void doFinish() {
@@ -182,7 +179,6 @@ public class GetCodeForNewPhoneNumberFragment extends BaseFragment {
 		params.put("userphone", num);
 		params.put("yanzhengma", code);
 		HttpUtils.doPost(UPDATEURL, params, new TextHttpResponseHandler() {
-
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
@@ -194,8 +190,10 @@ public class GetCodeForNewPhoneNumberFragment extends BaseFragment {
 					} else if ("1".equals(code)) {
 						Toast.makeText(getActivity(), " 新手机绑定成功！",
 								Toast.LENGTH_LONG).show();
-						finishActivity();
-
+						getActivity().stopService(mIntent);
+						getActivity().finish();
+						getActivity().overridePendingTransition(R.anim.right_in,
+								R.anim.right_out);
 					} else if ("2".equals(code)) {
 						Toast.makeText(getActivity(), "用户信息不存在！",
 								Toast.LENGTH_LONG).show();
@@ -239,11 +237,14 @@ public class GetCodeForNewPhoneNumberFragment extends BaseFragment {
 
 	}
 
-	@Override
-	public void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
-		getActivity().stopService(mIntent);
+@Override
+public void onDestroy() {
+	// TODO Auto-generated method stub
+	super.onDestroy();
+	if(mIntent!=null){
+		getActivity().stopService(mIntent);	
 	}
+	
+}
 
 }
