@@ -9,6 +9,7 @@ import org.apache.http.Header;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.LoginActivity;
+import com.nongziwang.activity.ProductUpdateActivity;
 import com.nongziwang.entity.ChanPinBean;
 import com.nongziwang.fragment.ProductManagementFragment;
 import com.nongziwang.main.R;
@@ -20,14 +21,18 @@ import com.nongziwang.view.DialogTips;
 import com.nongziwang.view.DialogWaiting;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -53,7 +58,6 @@ public class MyProductAdapter extends BaseListAdapter<ChanPinBean> {
 		for (int i = 0; i < list.size(); i++) {
 			isCheckMap.put(i, bool);
 		}
-
 	}
 
 	@Override
@@ -78,6 +82,7 @@ public class MyProductAdapter extends BaseListAdapter<ChanPinBean> {
 			holder.tv_update = (TextView) convertView
 					.findViewById(R.id.tv_update);
 			holder.tv_xj = (TextView) convertView.findViewById(R.id.tv_xj);
+			holder.layout_cz=(RelativeLayout) convertView.findViewById(R.id.layout_cz);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -94,9 +99,12 @@ public class MyProductAdapter extends BaseListAdapter<ChanPinBean> {
 			holder.tv_xj.setText("下架");
 		}
 
-		if (ProductManagementFragment.xinxiststic == 0
-				|| ProductManagementFragment.xinxiststic == 2) {
-			holder.tv_update.setVisibility(View.GONE);
+		if (ProductManagementFragment.xinxiststic == 0) {
+			holder.layout_cz.setVisibility(View.GONE);
+			holder.checkbox.setVisibility(View.GONE);
+
+		}
+		if(ProductManagementFragment.xinxiststic == 2){
 			holder.tv_xj.setVisibility(View.GONE);
 		}
 		holder.tv_update.setOnClickListener(new MyOnClickListener(position,
@@ -145,6 +153,7 @@ public class MyProductAdapter extends BaseListAdapter<ChanPinBean> {
 		private TextView tv_jy_static;
 		private TextView tv_update;
 		private TextView tv_xj;
+		private RelativeLayout layout_cz;
 	}
 
 	class MyOnClickListener implements OnClickListener {
@@ -160,7 +169,21 @@ public class MyProductAdapter extends BaseListAdapter<ChanPinBean> {
 		public void onClick(View v) {
 			switch (style) {
 			case UPDATE:
+				DialogTips dialogtips = new DialogTips(context, "温馨提示",
+						"您确定要修改?", "确定", true, true);
+				dialogtips.SetOnSuccessListener(new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialogInterface,
+							int userId) {
+						Intent intent = new Intent(context, ProductUpdateActivity.class);
+						intent.putExtra("params", list.get(pos).getChanpinid());
+						context.startActivity(intent);
+						((Activity) context).overridePendingTransition(R.anim.left_in,
+								R.anim.left_out);
 
+					}
+				});
+				dialogtips.show();
+				dialogtips = null;
 				break;
 			case UPDOWN:
 				if (isShngjia) {
@@ -174,7 +197,6 @@ public class MyProductAdapter extends BaseListAdapter<ChanPinBean> {
 					});
 					dialog.show();
 					dialog = null;
-
 				} else {
 					DialogTips dialog = new DialogTips(context, "温馨提示",
 							"您确定要下架?", "确定", true, true);

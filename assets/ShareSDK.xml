@@ -50,10 +50,10 @@
 			易信好友        http://open.yixin.im/
 			明道	           http://open.mingdao.com/
 			Line           http://media.line.me/zh-hant/
-			Pocket         http://getpocket.com/developer/apps/new
+			Pocket         http://getpocket.com/developer/apps/new
     -->
 
-    <ShareSDK AppKey="androidv1101" />
+    <ShareSDK AppKey="f579b3df4afb" />
  <!-- 修改成你在sharesdk后台注册的应用的appkey" -->
 
 
@@ -85,7 +85,6 @@
         Id="3"
         ShareByAppClient="false"
         SortId="3" />
-
     <!--
     	Wechat微信和WechatMoments微信朋友圈的appid是一样的；
     
@@ -132,22 +131,6 @@
         ShareByAppClient="true"
         SortId="7" />
 
-    <Facebook
-        ConsumerKey="107704292745179"
-        ConsumerSecret="38053202e1a5fe26c80c753071f0b573"
-        Enable="true"
-        Id="8"
-        RedirectUrl="http://mob.com"
-        SortId="8" />
-
-    <Twitter
-        CallbackUrl="http://mob.com"
-        ConsumerKey="LRBM0H75rWrU9gNHvlEAA2aOy"
-        ConsumerSecret="gbeWsZvA9ELJSdoBzJ5oLKX0TU09UOwrzdGfo9Tg7DjyGuMe8G"
-        Enable="true"
-        Id="9"
-        SortId="9" />
-
     <Renren
         ApiKey="fc5b8aed373c4c27a05b712acba0f8c3"
         AppId="226427"
@@ -164,32 +147,6 @@
         RedirectUri="http://www.sharesdk.cn"
         SortId="11" />
 
-    <Email
-        Enable="true"
-        Id="12"
-        SortId="12" />
-
-    <ShortMessage
-        Enable="true"
-        Id="13"
-        SortId="13" />
-
-    <Douban
-        ApiKey="031a96a3aa8b28af094fc3eaffa17a0d"
-        Enable="true"
-        Id="16"
-        RedirectUri="http://mob.com"
-        Secret="2e675e730571b75d"
-        SortId="16" />
-
-    <YouDao
-        ConsumerKey="dcde25dca105bcc36884ed4534dab940"
-        ConsumerSecret="d98217b4020e7f1874263795f44838fe"
-        Enable="true"
-        HostType="product"
-        Id="17"
-        RedirectUri="http://www.sharesdk.cn/"
-        SortId="17" />
 
     <SohuSuishenkan
         AppKey="e16680a815134504b746c86e08a19db0"

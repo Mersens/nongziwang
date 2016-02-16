@@ -6,10 +6,13 @@ import android.os.Message;
 
 import com.nongziwang.main.MainActivity;
 import com.nongziwang.main.R;
+import com.nongziwang.utils.GuidedUtil;
 
 public class SplashActivity extends BaseActivity {
     private static final long SPLASH_DELAY_MILLIS = 3000;
+    boolean isFirst = false;
     private static final int GO_HOME = 0X00;
+    private static final int GO_GUIDE = 0X01;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -18,6 +21,10 @@ public class SplashActivity extends BaseActivity {
             	intentAction(SplashActivity.this,MainActivity.class);
             	finish();
             	break;
+            case GO_GUIDE:
+            	intentAction(SplashActivity.this,GuideActivity.class);
+            	finish();
+                break;
             }
             super.handleMessage(msg);
         }
@@ -29,6 +36,11 @@ public class SplashActivity extends BaseActivity {
 		init();
 	}
 	private void init() {
-	mHandler.sendEmptyMessageDelayed(GO_HOME, SPLASH_DELAY_MILLIS);
+    isFirst=GuidedUtil.getInstance(getApplicationContext()).isFirst();
+	if(isFirst){
+		 mHandler.sendEmptyMessageDelayed(GO_GUIDE, SPLASH_DELAY_MILLIS);
+	}else{
+		 mHandler.sendEmptyMessageDelayed(GO_HOME, SPLASH_DELAY_MILLIS);
+	}
 	}
 }

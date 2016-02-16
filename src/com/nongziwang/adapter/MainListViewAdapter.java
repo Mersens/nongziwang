@@ -3,11 +3,18 @@ package com.nongziwang.adapter;
 import java.util.List;
 import java.util.Map;
 
+import com.nongziwang.activity.ProductDetailFragmentActivity;
+import com.nongziwang.activity.TypeSearchFragmentActivity;
+import com.nongziwang.entity.IndexBean;
+import com.nongziwang.fragment.CommonSearchFragment;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.ImageLoadOptions;
+import com.nongziwang.utils.ToastUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,11 +24,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainListViewAdapter extends BaseAdapter {
-	private List<List<String>> list;
+	private List<List<IndexBean>> list;
 	private Context context;
 	public LayoutInflater mInflater;
 
-	public MainListViewAdapter(List<List<String>> list, Context context) {
+	public MainListViewAdapter(List<List<IndexBean>> list, Context context) {
 		this.list = list;
 		this.context = context;
 		mInflater = LayoutInflater.from(context);
@@ -64,14 +71,14 @@ public class MainListViewAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		List<String> imglist = list.get(position);
-		ImageLoader.getInstance().displayImage(imglist.get(0), holder.img_left,
-				ImageLoadOptions.getOptions());
-		ImageLoader.getInstance().displayImage(imglist.get(1),
+		List<IndexBean> imglist = list.get(position);
+		ImageLoader.getInstance().displayImage(imglist.get(0).getImgsrc(),
+				holder.img_left, ImageLoadOptions.getOptions());
+		ImageLoader.getInstance().displayImage(imglist.get(1).getImgsrc(),
 				holder.img_right_top, ImageLoadOptions.getOptions());
-		ImageLoader.getInstance().displayImage(imglist.get(2),
+		ImageLoader.getInstance().displayImage(imglist.get(2).getImgsrc(),
 				holder.img_right_bottom_left, ImageLoadOptions.getOptions());
-		ImageLoader.getInstance().displayImage(imglist.get(3),
+		ImageLoader.getInstance().displayImage(imglist.get(3).getImgsrc(),
 				holder.img_right_bottom_right, ImageLoadOptions.getOptions());
 		holder.img_left.setOnClickListener(new MyOnClickListener(position,
 				Type.LEFT));
@@ -108,22 +115,40 @@ public class MainListViewAdapter extends BaseAdapter {
 		public void onClick(View v) {
 			switch (type) {
 			case LEFT:
-
+				if (list.get(pos).get(0).getId().equals("1")) {
+					intentAction(context, TypeSearchFragmentActivity.class,
+							CommonSearchFragment.HUAFEI);
+				} else if (list.get(pos).get(0).getId().equals("2")) {
+					intentAction(context, TypeSearchFragmentActivity.class,
+							CommonSearchFragment.NONGYAO);
+				} else if (list.get(pos).get(0).getId().equals("3")) {
+					intentAction(context, TypeSearchFragmentActivity.class,
+							CommonSearchFragment.ZHONGZI);
+				}
 				break;
 			case RIGHT_TOP:
+				intentAction(context, ProductDetailFragmentActivity.class, list
+						.get(pos).get(1).getId());
 
 				break;
 			case RIGHT_BOTTOM_LEFT:
+				intentAction(context, ProductDetailFragmentActivity.class, list
+						.get(pos).get(2).getId());
 
 				break;
 			case RIGHT_BOTTOM_RIGHT:
-				
+				intentAction(context, ProductDetailFragmentActivity.class, list
+						.get(pos).get(3).getId());
 				break;
-
 			}
-
 		}
-
 	}
 
+	public <T> void intentAction(Context context, Class<T> cls, String params) {
+		Intent intent = new Intent(context, cls);
+		intent.putExtra("params", params);
+		context.startActivity(intent);
+		((Activity) context).overridePendingTransition(R.anim.left_in,
+				R.anim.left_out);
+	}
 }

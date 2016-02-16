@@ -80,7 +80,6 @@ public class ProductDetailMoreFragment extends BaseFragment implements
 						 bean=JsonUtils.getChanPinDetailInfo(arg2);
 						 setDatas();
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					

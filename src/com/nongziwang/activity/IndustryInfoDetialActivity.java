@@ -48,7 +48,6 @@ public class IndustryInfoDetialActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentView(R.layout.layout_industry_info_detial);
-		// ≥ı ºªØShareSDK
 		ShareSDK.initSDK(this);
 		isNews = getIntent().getBooleanExtra("isNews", false);
 		newsid = getIntent().getStringExtra("newsid");
@@ -68,7 +67,6 @@ public class IndustryInfoDetialActivity extends BaseActivity {
 					@Override
 					public void onClick() {
 						finishActivity();
-
 					}
 				}, new OnRightClickListener() {
 

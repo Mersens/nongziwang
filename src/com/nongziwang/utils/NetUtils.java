@@ -6,7 +6,6 @@ import android.net.NetworkInfo;
 
 public class NetUtils {
 
-	// 判断网络连接状�?
 	public static boolean isNetworkConnected(Context context) {
 		if (context != null) {
 			ConnectivityManager mConnectivityManager = (ConnectivityManager) context
@@ -20,7 +19,6 @@ public class NetUtils {
 		return false;
 	}
 
-	// 判断wifi状�?
 	public static boolean isWifiConnected(Context context) {
 		if (context != null) {
 			ConnectivityManager mConnectivityManager = (ConnectivityManager) context
@@ -34,7 +32,6 @@ public class NetUtils {
 		return false;
 	}
 
-	// 判断移动网络
 	public static boolean isMobileConnected(Context context) {
 		if (context != null) {
 			ConnectivityManager mConnectivityManager = (ConnectivityManager) context
@@ -48,7 +45,6 @@ public class NetUtils {
 		return false;
 	}
 
-	// 获取连接类型
 	public static int getConnectedType(Context context) {
 		if (context != null) {
 			ConnectivityManager mConnectivityManager = (ConnectivityManager) context

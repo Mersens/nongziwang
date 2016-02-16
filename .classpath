@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/ShareSDK-Wechat-Core-2.6.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/ShareSDK-Wechat-Favorite-2.6.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b/ShareSDK for Android/nongziwang/libs/ShareSDK-Wechat-Moments-2.6.6.jar"/>
+	<classpathentry kind="lib" path="libs/ShareSDK-SinaWeibo-2.6.6.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

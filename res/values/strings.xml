@@ -107,5 +107,6 @@
     <string name="tv_sczj">上传证件：</string>
     <string name="tv_img_tips">提示：请上传扫描件或复印件，需以图片形式上传每个文件小于2M</string>
     <string name="tv_tj">提交</string>
+    <string name="tv_ljty">立即体验</string>
 
 </resources>

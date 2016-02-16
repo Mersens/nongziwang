@@ -31,7 +31,6 @@ public class InfoFragment extends BaseFragment implements OnPageChangeListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		view = inflater.inflate(R.layout.layout_info, container, false);
 		initViews();
 		initEvent();
@@ -64,7 +63,6 @@ public class InfoFragment extends BaseFragment implements OnPageChangeListener {
 		initTab();// ¶¯Ì¬²úÉúRadioButton
 		initViewPager();
 		rgChannel.check(0);
-
 	}
 
 	private void initTab() {
@@ -103,7 +101,6 @@ public class InfoFragment extends BaseFragment implements OnPageChangeListener {
 	class PageFragmentAdapter extends FragmentPagerAdapter {
 		public PageFragmentAdapter(FragmentManager fm) {
 			super(fm);
-
 		}
 
 		@Override

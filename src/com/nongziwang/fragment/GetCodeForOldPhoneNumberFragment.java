@@ -179,7 +179,6 @@ public class GetCodeForOldPhoneNumberFragment extends BaseFragment {
 		Intent mIntent = new Intent(
 				ResetPhoneNumberFragmentActivity.ACTION_GETNEWCODE);
 		getActivity().sendBroadcast(mIntent);
-		getActivity().stopService(mIntent);
 	}
 
 	public static Fragment getInstance(String params) {

@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,8 +17,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -32,7 +28,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.FbxjdActivity;
@@ -120,7 +115,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 				.findViewById(R.id.layout_myaccount);
 		layout_setting = (RelativeLayout) view
 				.findViewById(R.id.layout_setting);
-
 		layout_myfootprint = (RelativeLayout) view
 				.findViewById(R.id.layout_myfootprint);
 		tv_login = (TextView) view.findViewById(R.id.tv_login);
@@ -137,11 +131,14 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 				getActivity().getApplicationContext()).getUserId();
 		if (!TextUtils.isEmpty(userid)) {
 			UserBean user = dao.findUserInfoById(userid);
+			ImageLoader.getInstance().displayImage(user.getTouxiang(),
+					buyer_user_head, ImageLoadOptions.getOptionsLoading());
 			tv_name.setText(user.getUsername());
 			tv_name.setVisibility(View.VISIBLE);
 			tv_login.setVisibility(View.GONE);
 
 		} else {
+			buyer_user_head.setImageResource(R.drawable.icon_user_img);
 			tv_name.setVisibility(View.GONE);
 			tv_login.setVisibility(View.VISIBLE);
 		}
@@ -181,7 +178,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 	private void doGetGsDatas(String gongsiid) {
 		RequestParams params = new RequestParams();
 		params.put("gongsiid", gongsiid);
-
 		HttpUtils.doPost(GONGSIDATA_URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
@@ -206,7 +202,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 						.show();
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
-
 		});
 	}
 
@@ -216,17 +211,16 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		layout_setting.setOnClickListener(this);
 		layout_myfootprint.setOnClickListener(this);
 		layout_fbxjd.setOnClickListener(this);
+		layout_rele_pro.setOnClickListener(this);
+		layout_pro.setOnClickListener(this);
+		layout_ckdp.setOnClickListener(this);
+		layout_gsgl.setOnClickListener(this);
 		tv_login.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				intentAction(getActivity(), LoginActivity.class);
 			}
 		});
-		layout_rele_pro.setOnClickListener(this);
-		layout_pro.setOnClickListener(this);
-		layout_ckdp.setOnClickListener(this);
-		layout_gsgl.setOnClickListener(this);
-
 	}
 
 	public static Fragment getInstance(String params) {
@@ -239,6 +233,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 
 	@Override
 	protected void lazyLoad() {
+		
 	}
 
 	@Override
@@ -325,7 +320,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 						dialog = null;
 					}
 				}
-
 			} else {
 				DialogTips dialog = new DialogTips(getActivity(), "温馨提示",
 						"您未开通公司,是否选择开通?", "确定", true, true);
@@ -340,7 +334,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 				dialog = null;
 			}
 		}
-
 	}
 
 	public void showAvatarPop() {
@@ -378,7 +371,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 				saveCropAvator(data);
 			}
 			break;
-
 		}
 	}
 
@@ -400,7 +392,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 		intent.putExtra("return-data", true);
 		intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-		intent.putExtra("noFaceDetection", true); // no face detection
+		intent.putExtra("noFaceDetection", true); 
 		startActivityForResult(intent, requestCode);
 	}
 

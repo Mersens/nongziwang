@@ -356,7 +356,7 @@ public class FbxjdActivity extends BaseActivity {
 					ShowToast("有空值!");
 				} else if ("1".equals(code)) {
 					DialogTips dialog = new DialogTips(FbxjdActivity.this,
-							"添加成功？", "确定");
+							"添加成功!", "确定");
 					dialog.show();
 					dialog = null;
 					resetDatas();
@@ -378,11 +378,9 @@ public class FbxjdActivity extends BaseActivity {
 					Throwable arg3) {
 				Log.e(TAG, arg2 == null ? "" : arg2);
 				ShowToast("添加失败！");
-
 			}
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				super.onFinish();
 				dialog.dismiss();
 

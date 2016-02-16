@@ -3,10 +3,8 @@ package com.nongziwang.fragment;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
-
 import org.apache.http.Header;
 import org.json.JSONException;
-
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.ProductDetailFragmentActivity;
@@ -72,7 +70,6 @@ public class SearchResultsFragment extends BaseFragment implements
 	}
 
 	private void initEvent() {
-
 		productlistview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,

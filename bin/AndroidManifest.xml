@@ -107,6 +107,8 @@
         <activity android:name="com.nongziwang.activity.CaptureActivity" />
         <activity android:name="com.nongziwang.activity.GongsiFragmentActivity" />
         <activity android:name="com.nongziwang.activity.WebViewActivity" />
+         <activity android:name="com.nongziwang.activity.ProductUpdateActivity" />
+        <activity android:name="com.nongziwang.activity.GuideActivity" />
         <activity android:name="com.nongziwang.main.MainActivity" />
         <activity android:name="com.nongziwang.activity.GongsiDetailFragmentActivity" />
 

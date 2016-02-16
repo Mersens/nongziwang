@@ -1,6 +1,9 @@
 package com.nongziwang.entity;
 
-public class ChanPinBean {
+import java.io.Serializable;
+
+public class ChanPinBean  implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String chanpinid ;//产品id
 	private String pinpai;// 产品品牌
 	private String title ;//产品名称
@@ -21,11 +24,29 @@ public class ChanPinBean {
 	private String province;// 省份名称
 	private String cityname;// 城市名称
 	private String dianpuname;// 店铺名称
+	private String yongtuname;// 产品用途
+	private String chengfenname;// 产品成分
 
 	public ChanPinBean(){
 		
 	}
 	
+	public String getYongtuname() {
+		return yongtuname;
+	}
+
+	public void setYongtuname(String yongtuname) {
+		this.yongtuname = yongtuname;
+	}
+
+	public String getChengfenname() {
+		return chengfenname;
+	}
+
+	public void setChengfenname(String chengfenname) {
+		this.chengfenname = chengfenname;
+	}
+
 	public String getProvince() {
 		return province;
 	}

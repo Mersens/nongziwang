@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
@@ -75,7 +74,6 @@ public class ProductDetailFragmentActivity extends BaseActivity implements OnCli
 			fragment = ProductDetailMoreFragment.getInstance(params);
 			break;
 		}
-		
 		return fragment;
 
 	}

@@ -45,7 +45,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	public static boolean isConnected=false;
 	public static final String ACTION_NETWORK_TRUE="action_network_true"; 
 	public static final String ACTION_NETWORK_FALSE="action_network_false"; 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -49,17 +50,16 @@ import com.nongziwang.view.DialogWaiting;
 import com.nongziwang.view.FlowLayout;
 import com.nongziwang.view.ProcessImageView;
 
-
 public class ReleaseProductMsgFragment extends BaseFragment {
 	private View view;
 	private Button btn_next;
 	private String param;
-	private EditText edt_title, edt_gjz, edt_yt, edt_cf, edt_pp, edt_ms,
-			edt_xq;
+	private EditText edt_title, edt_gjz, edt_yt, edt_cf, edt_pp, edt_ms,edt_jg,
+			edt_xq,edt_dw;
 	private FlowLayout flowlayout;
 	private MarginLayoutParams lp;
 	private int index = 0;
-	private List<ProcessImageView> imageviewlist=new ArrayList<ProcessImageView>();
+	private List<ProcessImageView> imageviewlist = new ArrayList<ProcessImageView>();
 	public static final String UPLAODE_URL = AppConstants.SERVICE_ADDRESS
 			+ "chanpin/gotoUpChanpinImg";
 	public static final String URL = AppConstants.SERVICE_ADDRESS
@@ -71,6 +71,7 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 	private UserBean user;
 	private NongziDao dao;
 	private DialogWaiting dialog;
+	private ImageView img_add;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,11 +81,13 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 		dao = new NongziDaoImpl(getActivity());
 		initViews();
 		initEvent();
-
 		return view;
 	}
 
 	private void initViews() {
+		edt_dw=(EditText) view.findViewById(R.id.edt_dw);
+		img_add=(ImageView) view.findViewById(R.id.img_add);
+		edt_jg=(EditText) view.findViewById(R.id.edt_jg);
 		edt_xq = (EditText) view.findViewById(R.id.edt_xq);
 		flowlayout = (FlowLayout) view.findViewById(R.id.flowlayout);
 		edt_title = (EditText) view.findViewById(R.id.edt_title);
@@ -99,10 +102,7 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 		lp.leftMargin = 10;
 		lp.rightMargin = 10;
 		lp.topMargin = 5;
-		ImageView imageview = new ImageView(getActivity());
-		imageview.setImageResource(R.drawable.jy_drltsz_btn_addperson);
-		flowlayout.addView(imageview, lp);
-		imageview.setOnClickListener(new OnClickListener() {
+		img_add.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (index > 7) {
@@ -111,10 +111,9 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 				Intent intent = new Intent(Intent.ACTION_PICK, null);
 				intent.setDataAndType(
 						MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-				startActivityForResult(intent, 1);
+				startActivityForResult(intent, 1);				
 			}
 		});
-
 	}
 
 	private void initEvent() {
@@ -128,7 +127,7 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 				doFinish();
 			}
 		});
-		
+
 	}
 
 	@Override
@@ -142,7 +141,7 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 			int dex = cursor
 					.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
 			String path = cursor.getString(dex);
-			Bitmap bitmap = BitmapUtils.getBitMap(path);
+			Bitmap bitmap =BitmapUtils.getBitMap(path);
 			cursor.close();
 			upLoadeImag(path);
 			setImage(bitmap);
@@ -163,7 +162,6 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 		}
 
 		HttpUtils.doPost(UPLAODE_URL, params, new TextHttpResponseHandler() {
-
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
@@ -195,16 +193,14 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 						.show();
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
-			
+
 			@Override
 			public void onProgress(long bytesWritten, long totalSize) {
 				// TODO Auto-generated method stub
 				super.onProgress(bytesWritten, totalSize);
-				int count = (int) ((bytesWritten * 1.0 / totalSize) * 100);  
-				imageviewlist.get(index-1).setProgress(count);
+				int count = (int) ((bytesWritten * 1.0 / totalSize) * 100);
+				imageviewlist.get(index - 1).setProgress(count);
 			}
-			
-
 		});
 	}
 
@@ -228,113 +224,157 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 	}
 
 	public void doFinish() {
-		String xq =edt_xq.getText().toString().trim();
-		String title = edt_title.getText().toString().trim();
-		String gjz = edt_gjz.getText().toString().trim();
-		String yt = edt_yt.getText().toString().trim();
-		String cf = edt_cf.getText().toString().trim();
-		String pp = edt_pp.getText().toString().trim();
-		String ms = edt_ms.getText().toString().trim();
-		if (TextUtils.isEmpty(title) || TextUtils.isEmpty(gjz)
-				|| TextUtils.isEmpty(yt) || TextUtils.isEmpty(cf)
-				|| TextUtils.isEmpty(pp) || TextUtils.isEmpty(ms)||TextUtils.isEmpty(xq)) {
-			Toast.makeText(getActivity(), "请完善信息!", Toast.LENGTH_SHORT)
-			.show();
+		String dw=edt_dw.getText().toString().replaceAll(" ", "");
+		String jg=edt_jg.getText().toString().replaceAll(" ", "");
+		String xq = edt_xq.getText().toString().replaceAll(" ", "");
+		String title = edt_title.getText().toString().replaceAll(" ", "");
+		String gjz = edt_gjz.getText().toString().replaceAll(" ", "");
+		String yt = edt_yt.getText().toString().replaceAll(" ", "");
+		String cf = edt_cf.getText().toString().replaceAll(" ", "");
+		String pp = edt_pp.getText().toString().replaceAll(" ", "");
+		String ms = edt_ms.getText().toString().replaceAll(" ", "");
+		if (TextUtils.isEmpty(title) || TextUtils.isEmpty(gjz) || TextUtils.isEmpty(jg)
+				|| TextUtils.isEmpty(yt) || TextUtils.isEmpty(cf) || TextUtils.isEmpty(dw)
+				|| TextUtils.isEmpty(pp) || TextUtils.isEmpty(ms)
+				|| TextUtils.isEmpty(xq)) {
+			Toast.makeText(getActivity(), "请完善信息!", Toast.LENGTH_SHORT).show();
 			return;
+		}
 
-		}
-		if(map.size()==0){
-			Toast.makeText(getActivity(), "请上传图片!", Toast.LENGTH_SHORT)
-			.show();
+		if (!isSuitLen(title, 60)) {
+			Toast.makeText(getActivity(), "商品标题内容过长!", Toast.LENGTH_SHORT)
+					.show();
 			return;
 		}
-		if(TextUtils.isEmpty(param)){
-			Toast.makeText(getActivity(), "类目ID为空!", Toast.LENGTH_SHORT)
-			.show();
+		if (!isSuitLen(gjz, 30)) {
+			Toast.makeText(getActivity(), "关键字内容过长!", Toast.LENGTH_SHORT)
+					.show();
 			return;
 		}
-		for(Map.Entry<String, String> entry:map.entrySet()){
-			sbf.append(entry.getValue()+",");
+		if (!isSuitLen(yt, 30)) {
+			Toast.makeText(getActivity(), "主要用途内容过长!", Toast.LENGTH_SHORT)
+					.show();
+			return;
 		}
-		String ids[]=param.split(":");
-		
-		RequestParams params=new RequestParams();
-		params.put("userid",userid );
+		if (!isSuitLen(cf, 30)) {
+			Toast.makeText(getActivity(), "主要成分内容过长!", Toast.LENGTH_SHORT)
+					.show();
+			return;
+		}
+		if (!isSuitLen(pp, 30)) {
+			Toast.makeText(getActivity(), "品牌内容过长!", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if (!isSuitLen(ms, 200)) {
+			Toast.makeText(getActivity(), "商品描述内容过长!", Toast.LENGTH_SHORT)
+					.show();
+			return;
+		}
+		if (!isSuitLen(xq, 200)) {
+			Toast.makeText(getActivity(), "商品详情内容过长!", Toast.LENGTH_SHORT)
+					.show();
+			return;
+		}
+		if (map.size() == 0) {
+			Toast.makeText(getActivity(), "请上传图片!", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if (TextUtils.isEmpty(param)) {
+			Toast.makeText(getActivity(), "类目ID为空!", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		for (Map.Entry<String, String> entry : map.entrySet()) {
+			sbf.append(entry.getValue() + ",");
+		}
+		String ids[] = param.split(":");
+		RequestParams params = new RequestParams();
+		params.put("userid", userid);
 		params.put("gongsiid", user.getCompanyid());
-		params.put("title",title );
-		if(ids.length==2){
-			params.put("chanpinleimu2",ids[0] );
+		params.put("title", title);
+		if (ids.length == 2) {
+			params.put("chanpinleimu2", ids[0]);
 			params.put("chanpinleimu3", ids[1]);
-		}else {
-			params.put("chanpinleimu2",ids[0] );
+		} else {
+			params.put("chanpinleimu2", ids[0]);
 			params.put("chanpinleimu3", "");
 		}
 
-		params.put("keyword",gjz );
+		params.put("keyword", gjz);
 		params.put("yongtuname", yt);
 		params.put("chengfenname", cf);
 		params.put("miaoshu", ms);
 		params.put("pinpainame", pp);
 		params.put("offerDetail", xq);
+		params.put("jiage", jg);
+		params.put("unit", dw);
 		params.put("chanpinimgs", sbf.toString());
 		doCompleat(params);
-
 	}
 
 	private void doCompleat(RequestParams params) {
 		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
-			
+
 			@Override
 			public void onStart() {
 				super.onStart();
 				getActivity().runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						dialog=new DialogWaiting(getActivity());
+						dialog = new DialogWaiting(getActivity());
 						dialog.show();
 					}
 				});
 
-			}			
+			}
+
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
-				String code =JsonUtils.getCode(arg2);
-				if("0".equals(code)){
-					Toast.makeText(getActivity(), "用户id为空！", Toast.LENGTH_SHORT).show();
-				}else if("1".equals(code)){
-					DialogTips dialog = new DialogTips(getActivity(),
-							"发布成功!", "确定");
+				String code = JsonUtils.getCode(arg2);
+				if ("0".equals(code)) {
+					Toast.makeText(getActivity(), "用户id为空！", Toast.LENGTH_SHORT)
+							.show();
+				} else if ("1".equals(code)) {
+					DialogTips dialog = new DialogTips(getActivity(), "发布成功!",
+							"确定");
 					dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialogInterface, int userId) {
-							intentAction(getActivity(), ProductManagementFragmentActivity.class);
+						public void onClick(DialogInterface dialogInterface,
+								int userId) {
+							intentAction(getActivity(),
+									ProductManagementFragmentActivity.class);
 							getActivity().finish();
 						}
 					});
 					dialog.show();
 					dialog = null;
-				}else if("2".equals(code)){
-					Toast.makeText(getActivity(), "用户信息不存在！", Toast.LENGTH_SHORT).show();
-				}else if("3".equals(code)){
-					Toast.makeText(getActivity(), "公司id为空！", Toast.LENGTH_SHORT).show();
-				}else if("4".equals(code)){
-					Toast.makeText(getActivity(), "公司信息不存在！", Toast.LENGTH_SHORT).show();
-				}else if("5".equals(code)){
-					Toast.makeText(getActivity(), "产品信息填写不完整！", Toast.LENGTH_SHORT).show();
-				}else if("6".equals(code)){
-					Toast.makeText(getActivity(), "产品分类选择不正确！", Toast.LENGTH_SHORT).show();
-				}else if("7".equals(code)){
-					Toast.makeText(getActivity(), "产品分类不存在！", Toast.LENGTH_SHORT).show();
+				} else if ("2".equals(code)) {
+					Toast.makeText(getActivity(), "用户信息不存在！",
+							Toast.LENGTH_SHORT).show();
+				} else if ("3".equals(code)) {
+					Toast.makeText(getActivity(), "公司id为空！", Toast.LENGTH_SHORT)
+							.show();
+				} else if ("4".equals(code)) {
+					Toast.makeText(getActivity(), "公司信息不存在！",
+							Toast.LENGTH_SHORT).show();
+				} else if ("5".equals(code)) {
+					Toast.makeText(getActivity(), "产品信息填写不完整！",
+							Toast.LENGTH_SHORT).show();
+				} else if ("6".equals(code)) {
+					Toast.makeText(getActivity(), "产品分类选择不正确！",
+							Toast.LENGTH_SHORT).show();
+				} else if ("7".equals(code)) {
+					Toast.makeText(getActivity(), "产品分类不存在！",
+							Toast.LENGTH_SHORT).show();
 				}
-				
-				
 			}
-			
+
 			@Override
-			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				Log.e(TAG, arg2==null?"":arg2);
-				Toast.makeText(getActivity(), "添加失败！", Toast.LENGTH_SHORT).show();
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+				Log.e(TAG, arg2 == null ? "" : arg2);
+				Toast.makeText(getActivity(), "添加失败！", Toast.LENGTH_SHORT)
+						.show();
 			}
-			
+
 			@Override
 			public void onFinish() {
 				// TODO Auto-generated method stub
@@ -342,7 +382,15 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 				dialog.dismiss();
 			}
 		});
-		
+
+	}
+
+	public boolean isSuitLen(String str, int limit) {
+		if (str.length() > limit) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	@Override

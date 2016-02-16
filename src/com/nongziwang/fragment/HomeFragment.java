@@ -13,6 +13,7 @@ import com.nongziwang.activity.TypeSearchFragmentActivity;
 import com.nongziwang.adapter.MainListViewAdapter;
 import com.nongziwang.adapter.ViewPagerAdapter;
 import com.nongziwang.application.AppConstants;
+import com.nongziwang.entity.IndexBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.ImageLoadOptions;
@@ -53,7 +54,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 	private LinearLayout layout_nongyao;
 	private LinearLayout layout_nongji;
 	private LinearLayout layout_nongmo;
-	private Map<String,List<String>> mapdatas;
+	private Map<String,List<IndexBean>> mapdatas;
 	private MainListViewAdapter adapter;
 	private DialogWaiting dialog;
 	private static final String BANNER_URL = AppConstants.SERVICE_ADDRESS
@@ -94,13 +95,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		layout_nongji.setOnClickListener(this);
 		layout_nongmo.setOnClickListener(this);
 		listView.addHeaderView(bannersView);
-	}
-
-	@SuppressLint("ViewHolder")
-	private void initDatas() {
-
 		layout_search.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -111,8 +106,11 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 
 			}
 		});
+	}
 
-
+	@SuppressLint("ViewHolder")
+	private void initDatas() {
+		
 		HttpUtils.doPost(BANNER_URL, new TextHttpResponseHandler() {
 			@Override
 			public void onStart() {
@@ -125,7 +123,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				try {
 					mapdatas=JsonUtils.getIndexImg(arg2);
-					List<List<String>> list=new ArrayList<List<String>>();
+					List<List<IndexBean>> list=new ArrayList<List<IndexBean>>();
 					list.add(mapdatas.get("huafei"));
 					list.add(mapdatas.get("nongyao"));
 					list.add(mapdatas.get("zhongzi"));
@@ -133,7 +131,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 					adapter=new MainListViewAdapter(list, getActivity());
 					listView.setAdapter(adapter);
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -154,12 +151,11 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 				}
 			}
 		});
-
 	}
 
 	public void setBanners() {
 		initListener();
-		List<String> list=mapdatas.get("banner");
+		List<IndexBean> list=mapdatas.get("banner");
 		int len = list.size();
 		View view = null;
 		ImageView imageview;
@@ -168,7 +164,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		for (int i = 0; i < len; i++) {
 			view = mInflater.inflate(R.layout.imageview_layout, null);
 			imageview = (ImageView) view.findViewById(R.id.viewpager_imageview);
-			ImageLoader.getInstance().displayImage(list.get(i), imageview,
+			ImageLoader.getInstance().displayImage(list.get(i).getImgsrc(), imageview,
 					ImageLoadOptions.getOptions());
 			lists.add(view);
 		}
@@ -191,7 +187,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 					isScrolled = true;
 					break;
 				case 0:
-
 					if (viewpager.getCurrentItem() == viewpager.getAdapter()
 							.getCount() - 1 && !isScrolled) {
 						viewpager.setCurrentItem(0);
@@ -219,7 +214,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 
 	protected void initRunnable() {
 		viewpagerRunnable = new Runnable() {
-
 			@Override
 			public void run() {
 				int nowIndex = viewpager.getCurrentItem();
@@ -253,7 +247,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.layout_huafei:
 			intentAction(getActivity(), TypeSearchFragmentActivity.class,
-					CommonSearchFragment.HUAFEI);
+					CommonSearchFragment.HUAFEI); 
 			break;
 		case R.id.layout_zhongzi:
 			intentAction(getActivity(), TypeSearchFragmentActivity.class,
@@ -262,20 +256,15 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		case R.id.layout_nongyao:
 			intentAction(getActivity(), TypeSearchFragmentActivity.class,
 					CommonSearchFragment.NONGYAO);
-
 			break;
 		case R.id.layout_nongji:
 			intentAction(getActivity(), TypeSearchFragmentActivity.class,
 					CommonSearchFragment.NONGJI);
-
 			break;
 		case R.id.layout_nongmo:
 			intentAction(getActivity(), TypeSearchFragmentActivity.class,
 					CommonSearchFragment.NONGMO);
-
 			break;
 		}
-
 	}
-
 }

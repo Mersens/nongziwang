@@ -3,8 +3,6 @@ package com.nongziwang.activity;
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -29,15 +27,7 @@ import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.utils.StringUtils;
 import com.nongziwang.view.DialogWaiting;
 import com.nongziwang.view.HeadView.OnLeftClickListener;
-import com.sina.weibo.sdk.auth.AuthInfo;
-import com.sina.weibo.sdk.auth.Oauth2AccessToken;
-import com.sina.weibo.sdk.auth.WeiboAuthListener;
-import com.sina.weibo.sdk.auth.sso.SsoHandler;
-import com.sina.weibo.sdk.exception.WeiboException;
-import com.tencent.connect.common.Constants;
-import com.tencent.tauth.IUiListener;
-import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
+
 
 public class LoginActivity extends BaseActivity implements OnClickListener {
 	private EditText edt_name;
@@ -46,10 +36,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private TextView tv_forget_psd, tv_user_regist;
 	private DialogWaiting dialog;
 	private ImageView image_qq, image_weixin, image_sina;
-	public static Tencent mTencent;
-	private SsoHandler mSsoHandler;
-	private AuthInfo mAuthInfo;
-	private Oauth2AccessToken mAccessToken;
+
+
 	private static final String LOGIN_URL = AppConstants.SERVICE_ADDRESS
 			+ "login/gotoLogin";
 	private static final String USERINFO_URL = AppConstants.SERVICE_ADDRESS
@@ -62,10 +50,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_login);
-		mTencent = Tencent.createInstance(AppConstants.APP_ID, this);
-		mAuthInfo = new AuthInfo(this, AppConstants.APP_KEY,
-				AppConstants.REDIRECT_URL, AppConstants.SCOPE);
-		mSsoHandler = new SsoHandler(this, mAuthInfo);
+
 		dao = new NongziDaoImpl(this);
 		initViews();
 		initEvent();
@@ -117,15 +102,13 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			finish();
 			break;
 		case R.id.image_sina:
-			ShowToast("点击新浪登录");
-			onClickSinaLogin();
+
 			break;
 		case R.id.image_weixin:
-			ShowToast("点击微信登录");
+
 			break;
 		case R.id.image_qq:
-			// 点击QQ登录
-			onClickQQLogin();
+
 			break;
 		}
 	}
@@ -265,127 +248,4 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
-	public void onClickQQLogin() {
-		if (!mTencent.isSessionValid()) {
-			mTencent.login(this, "all", loginListener);
-		}
-	}
-
-	public void onClickSinaLogin() {
-		mSsoHandler.authorizeClientSso(new AuthListener());
-	}
-
-	class AuthListener implements WeiboAuthListener {
-
-		@Override
-		public void onComplete(Bundle values) {
-			mAccessToken = Oauth2AccessToken.parseAccessToken(values);
-			if (mAccessToken.isSessionValid()) {
-
-			} else {
-				// 当您注册的应用程序签名不正确时，就会收到错误Code，请确保签名正确
-				String code = values.getString("code", "");
-				ShowToast(code);
-			}
-		}
-
-		@Override
-		public void onCancel() {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void onWeiboException(WeiboException arg0) {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
-
-	/**
-	 * qq授权登录
-	 * 
-	 * @param jsonObject
-	 */
-	public static void initOpenidAndToken(JSONObject jsonObject) {
-		try {
-			String token = jsonObject.getString(Constants.PARAM_ACCESS_TOKEN);
-			String expires = jsonObject.getString(Constants.PARAM_EXPIRES_IN);
-			String openId = jsonObject.getString(Constants.PARAM_OPEN_ID);
-			if (!TextUtils.isEmpty(token) && !TextUtils.isEmpty(expires)
-					&& !TextUtils.isEmpty(openId)) {
-				mTencent.setAccessToken(token, expires);
-				mTencent.setOpenId(openId);
-			}
-		} catch (Exception e) {
-		}
-	}
-
-	IUiListener loginListener = new BaseUiListener() {
-		@Override
-		protected void doComplete(JSONObject values) {
-			initOpenidAndToken(values);
-		}
-	};
-
-	/**
-	 * qq登录回调接口
-	 * 
-	 * @author Mersens
-	 *
-	 */
-	private class BaseUiListener implements IUiListener {
-
-		@Override
-		public void onCancel() {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void onComplete(Object arg0) {
-			if (null == arg0) {
-				ShowToast("返回为null");
-				return;
-			}
-			JSONObject jsonResponse = (JSONObject) arg0;
-			if (null != jsonResponse && jsonResponse.length() == 0) {
-				ShowToast("返回为空");
-				return;
-			}
-			ShowToast(arg0.toString());
-			doComplete((JSONObject) arg0);
-		}
-
-		protected void doComplete(JSONObject values) {
-
-		}
-
-		@Override
-		public void onError(UiError arg0) {
-
-		}
-
-	}
-
-	/**
-	 * 防止登录成功后无法成功回传数据,此方法必须添加
-	 * 
-	 */
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.d("TAG", "-->onActivityResult " + requestCode + " resultCode="
-				+ resultCode);
-		if (requestCode == Constants.REQUEST_LOGIN
-				|| requestCode == Constants.REQUEST_APPBAR) {
-			Tencent.onActivityResultData(requestCode, resultCode, data,
-					loginListener);
-		}
-
-		if (mSsoHandler != null) {
-			mSsoHandler.authorizeCallBack(requestCode, resultCode, data);
-		}
-
-		super.onActivityResult(requestCode, resultCode, data);
-	}
 }

@@ -80,13 +80,21 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:orientation="vertical" >
-
+            android:orientation="horizontal" >
+            <ImageView
+                android:id="@+id/img_add"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/jy_drltsz_btn_addperson"
+                />
             <com.nongziwang.view.FlowLayout
                 android:id="@+id/flowlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" >
+                android:layout_marginLeft="8dp" 
+                android:layout_marginRight="8dp"
+                >
             </com.nongziwang.view.FlowLayout>
         </LinearLayout>
 

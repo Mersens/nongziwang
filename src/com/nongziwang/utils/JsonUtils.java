@@ -15,6 +15,8 @@ import com.nongziwang.entity.DianPuBean;
 import com.nongziwang.entity.FootprintBean;
 import com.nongziwang.entity.GongsiBean;
 import com.nongziwang.entity.GongsiDetailBean;
+import com.nongziwang.entity.ImgBean;
+import com.nongziwang.entity.IndexBean;
 import com.nongziwang.entity.LeiMuBean;
 import com.nongziwang.entity.NewsBean;
 import com.nongziwang.entity.NewsDatialBean;
@@ -209,27 +211,38 @@ public class JsonUtils {
 		return bean;
 	}
 
-	public static Map<String, List<String>> getIndexImg(String str)
+	public static Map<String, List<IndexBean>> getIndexImg(String str)
 			throws JSONException {
-		Map<String, List<String>> map = new HashMap<String, List<String>>();
-		List<String> bannerlist = new ArrayList<String>();
-		List<String> huafeilist = new ArrayList<String>();
-		List<String> nongyaolist = new ArrayList<String>();
-		List<String> zhongzilist = new ArrayList<String>();
+		Map<String, List<IndexBean>> map = new HashMap<String, List<IndexBean>>();
+		List<IndexBean> bannerlist = new ArrayList<IndexBean>();
+		List<IndexBean> huafeilist = new ArrayList<IndexBean>();
+		List<IndexBean> nongyaolist = new ArrayList<IndexBean>();
+		List<IndexBean> zhongzilist = new ArrayList<IndexBean>();
 		// banner数据
 		JSONObject jsonObject = new JSONObject(str);
 		JSONArray array = new JSONArray(jsonObject.getString("bannerlist"));
-		for (int i = 0; i < 3; i++) {
-			JSONObject obj = (JSONObject) array.get(0);
-			bannerlist.add(obj.getString("banner"));
+		for (int i = 0; i < array.length(); i++) {
+			IndexBean bean=new IndexBean();
+			JSONObject obj = (JSONObject) array.get(i);
+			bean.setImgsrc(obj.getString("banner"));
+			bannerlist.add(bean);
 		}
 		map.put("banner", bannerlist);
 		// 化肥数据
 		JSONArray huafeiarray = new JSONArray(
 				jsonObject.getString("huafeilist"));
 		for (int i = 0; i < huafeiarray.length(); i++) {
+			IndexBean bean=new IndexBean();
 			JSONObject obj = (JSONObject) huafeiarray.get(i);
-			huafeilist.add(obj.getString("huafei"));
+			if(obj.has("leimuid")){
+				bean.setId(obj.getString("leimuid"));
+			}
+			if(obj.has("chanpinid")){
+				bean.setId(obj.getString("chanpinid"));
+			}
+			bean.setImgsrc(obj.getString("huafei"));
+			bean.setName(obj.getString("name"));
+			huafeilist.add(bean);
 		}
 		map.put("huafei", huafeilist);
 
@@ -237,8 +250,17 @@ public class JsonUtils {
 		JSONArray nongyaoarray = new JSONArray(
 				jsonObject.getString("nongyaolist"));
 		for (int i = 0; i < nongyaoarray.length(); i++) {
+			IndexBean bean=new IndexBean();
 			JSONObject obj = (JSONObject) nongyaoarray.get(i);
-			nongyaolist.add(obj.getString("nongyao"));
+			if(obj.has("leimuid")){
+				bean.setId(obj.getString("leimuid"));
+			}
+			if(obj.has("chanpinid")){
+				bean.setId(obj.getString("chanpinid"));
+			}
+			bean.setImgsrc(obj.getString("nongyao"));
+			bean.setName(obj.getString("name"));
+			nongyaolist.add(bean);
 		}
 		map.put("nongyao", nongyaolist);
 		// 种子数据
@@ -246,7 +268,16 @@ public class JsonUtils {
 				jsonObject.getString("zhongzilist"));
 		for (int i = 0; i < zhongziarray.length(); i++) {
 			JSONObject obj = (JSONObject) zhongziarray.get(i);
-			zhongzilist.add(obj.getString("zhongzi"));
+			IndexBean bean=new IndexBean();
+			if(obj.has("leimuid")){
+				bean.setId(obj.getString("leimuid"));
+			}
+			if(obj.has("chanpinid")){
+				bean.setId(obj.getString("chanpinid"));
+			}
+			bean.setImgsrc(obj.getString("zhongzi"));
+			bean.setName(obj.getString("name"));
+			zhongzilist.add(bean);
 		}
 		map.put("zhongzi", zhongzilist);
 		return map;
@@ -525,4 +556,49 @@ public class JsonUtils {
 
 	}
 
+	public static List<ChanPinBean> getChanPinInfoByid(String str)throws JSONException{
+		List<ChanPinBean> list=new ArrayList<ChanPinBean>();
+		JSONObject jsonObject = new JSONObject(str);
+		JSONArray array = new JSONArray(jsonObject.getString("chanpinlist"));
+		for (int i = 0; i < array.length(); i++) {
+			JSONObject obj = (JSONObject) array.get(i);
+			ChanPinBean bean = new ChanPinBean();
+			bean.setAddtime(obj.getString("addtime"));//
+			bean.setChanpinid(obj.getString("chanpinid"));//
+			bean.setChanpinimg(obj.getString("chanpinimg"));//
+			bean.setDetail(obj.getString("detail"));//
+			bean.setDianpuid(obj.getString("dianpuid"));//
+			bean.setGongsiid(obj.getString("gongsiid"));//
+			bean.setHtmlid(obj.getString("htmlid"));//
+			bean.setJiage(obj.getString("jiage"));//
+			bean.setKeyword(obj.getString("keyword"));//
+			bean.setMiaoshu(obj.getString("miaoshu"));//
+			bean.setPinpai(obj.getString("pinpai"));//
+			bean.setTitle(obj.getString("title"));//
+			bean.setUserid(obj.getString("userid"));//
+			bean.setUnit(obj.getString("unit"));//
+			bean.setXinxiststic(obj.getString("xinxiststic"));//
+			bean.setYongtuname(obj.getString("yongtuname"));
+			bean.setChengfenname(obj.getString("chengfenname"));
+			list.add(bean);
+		}
+		
+		return list;
+	}
+	
+	public static List<ImgBean> getChanpinImgList(String str) throws JSONException{
+		List<ImgBean> list=new ArrayList<ImgBean>();
+		JSONObject jsonObject = new JSONObject(str);
+		JSONArray array = new JSONArray(jsonObject.getString("chanpinimglist"));
+		for (int i = 0; i < array.length(); i++) {
+			JSONObject obj = (JSONObject) array.get(i);
+			ImgBean bean=new ImgBean();
+			bean.setImgid(obj.getString("imgid"));
+			bean.setImgsrc(obj.getString("imgsrc"));
+			list.add(bean);
+		}
+		return list;
+		
+	}
+	
 }

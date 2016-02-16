@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.http.Header;
 import org.json.JSONException;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.nongziwang.activity.ProductDetailFragmentActivity;
 import com.nongziwang.adapter.MyProductAdapter;
 import com.nongziwang.adapter.MyProductAdapter.ViewHolder;
 import com.nongziwang.application.AppConstants;
@@ -71,6 +73,8 @@ public class ProductManagementFragment extends BaseFragment implements
 	private StringBuffer sbf;
 	private DialogWaiting dialog;
 	private boolean isShangjia = false;
+	private RelativeLayout layout_cz,layout_tool;
+	private Context  context;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,6 +83,7 @@ public class ProductManagementFragment extends BaseFragment implements
 		param = getArguments().getString("params");
 		userid = SharePreferenceUtil.getInstance(
 				getActivity().getApplicationContext()).getUserId();
+		context=view.getContext();
 		isPrepared = true;
 		initViews();
 		initEvent();
@@ -92,11 +97,12 @@ public class ProductManagementFragment extends BaseFragment implements
 		btn_check_all = (CheckBox) view.findViewById(R.id.btn_check_all);
 		layout_loading = (RelativeLayout) view
 				.findViewById(R.id.layout_loading);
+		layout_cz=(RelativeLayout) view.findViewById(R.id.layout_cz);
+		layout_tool=(RelativeLayout) view.findViewById(R.id.layout_tool);
 		listView = (XListView) view.findViewById(R.id.listView);
 		listView.setPullLoadEnable(false);
 		listView.setPullRefreshEnable(false);
 		listView.setXListViewListener(this);
-
 	}
 
 	private void initEvent() {
@@ -104,15 +110,9 @@ public class ProductManagementFragment extends BaseFragment implements
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				if (view.getTag() instanceof ViewHolder) {
-					ViewHolder holder = (ViewHolder) view.getTag();
-					// 会自动出发CheckBox的checked事件
-					holder.checkbox.toggle();
-
-				}
-
+				String chanpinid=lists.get(position-1).getChanpinid();
+				intentAction(getActivity(),ProductDetailFragmentActivity.class,chanpinid);
 			}
-
 		});
 		btn_check_all.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
@@ -122,7 +122,6 @@ public class ProductManagementFragment extends BaseFragment implements
 					adapter.configCheckMap(isChecked);
 					adapter.notifyDataSetChanged();
 				}
-
 
 			}
 		});
@@ -134,7 +133,7 @@ public class ProductManagementFragment extends BaseFragment implements
 					return;
 				}
 				if (isShangjia) {
-					DialogTips dialog = new DialogTips(getActivity(), "温馨提示",
+					DialogTips dialog = new DialogTips(context, "温馨提示",
 							"您确定要上架?", "确定", true, true);
 					dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialogInterface,
@@ -145,7 +144,7 @@ public class ProductManagementFragment extends BaseFragment implements
 					dialog.show();
 					dialog = null;
 				} else {
-					DialogTips dialog = new DialogTips(getActivity(), "温馨提示",
+					DialogTips dialog = new DialogTips(context, "温馨提示",
 							"您确定要下架?", "确定", true, true);
 					dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialogInterface,
@@ -156,7 +155,6 @@ public class ProductManagementFragment extends BaseFragment implements
 					dialog.show();
 					dialog = null;
 				}
-
 			}
 		});
 		tv_del.setOnClickListener(new OnClickListener() {
@@ -165,7 +163,7 @@ public class ProductManagementFragment extends BaseFragment implements
 				if(adapter==null){
 					return;
 				}
-				DialogTips dialog = new DialogTips(getActivity(), "温馨提示",
+				DialogTips dialog = new DialogTips(context, "温馨提示",
 						"您确定要删除?", "确定", true, true);
 				dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialogInterface,
@@ -184,7 +182,7 @@ public class ProductManagementFragment extends BaseFragment implements
 	public void doShangJiaCheck() {
 		List<Integer> list = getCheckNum();
 		if (list.size() == 0) {
-			DialogTips dialog = new DialogTips(getActivity(), "请选择需要上架的信息！",
+			DialogTips dialog = new DialogTips(context, "请选择需要上架的信息！",
 					"确定");
 			dialog.show();
 			dialog = null;
@@ -206,14 +204,9 @@ public class ProductManagementFragment extends BaseFragment implements
 		HttpUtils.doPost(SHANGJIA_URL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onStart() {
-				getActivity().runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						dialog = new DialogWaiting(getActivity()
-								);
-						dialog.show();
-					}
-				});
+				dialog = new DialogWaiting(context
+						);
+				dialog.show();
 
 				super.onStart();
 			}
@@ -222,7 +215,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(getActivity(), "产品id为空!", Toast.LENGTH_SHORT)
+					Toast.makeText(context, "产品id为空!", Toast.LENGTH_SHORT)
 							.show();
 				} else if ("1".equals(code)) {
 					int count = adapter.getCount();
@@ -231,7 +224,7 @@ public class ProductManagementFragment extends BaseFragment implements
 						adapter.getCheckMap().remove(n);
 						adapter.remove(position);
 					}
-					DialogTips dialog = new DialogTips(getActivity(), "上架成功！",
+					DialogTips dialog = new DialogTips(context, "上架成功！",
 							"确定");
 					dialog.show();
 					dialog = null;
@@ -243,7 +236,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(getActivity(), "上架失败!", Toast.LENGTH_SHORT)
+				Toast.makeText(context, "上架失败!", Toast.LENGTH_SHORT)
 				.show();
 				Log.e(TAG, arg2==null?"":arg2);
 			}
@@ -264,7 +257,7 @@ public class ProductManagementFragment extends BaseFragment implements
 
 		List<Integer> list = getCheckNum();
 		if (list.size() == 0) {
-			DialogTips dialog = new DialogTips(getActivity(), "请选择需要下架的信息！",
+			DialogTips dialog = new DialogTips(context, "请选择需要下架的信息！",
 					"确定");
 			dialog.show();
 			dialog = null;
@@ -289,7 +282,7 @@ public class ProductManagementFragment extends BaseFragment implements
 				getActivity().runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						dialog = new DialogWaiting(getActivity()
+						dialog = new DialogWaiting(context
 								);
 						dialog.show();
 					}
@@ -302,7 +295,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(getActivity(), "产品id为空!", Toast.LENGTH_SHORT)
+					Toast.makeText(context, "产品id为空!", Toast.LENGTH_SHORT)
 							.show();
 				} else if ("1".equals(code)) {
 					int count = adapter.getCount();
@@ -311,7 +304,7 @@ public class ProductManagementFragment extends BaseFragment implements
 						adapter.getCheckMap().remove(n);
 						adapter.remove(position);
 					}
-					DialogTips dialog = new DialogTips(getActivity(), "下架成功！",
+					DialogTips dialog = new DialogTips(context, "下架成功！",
 							"确定");
 					dialog.show();
 					dialog = null;
@@ -323,7 +316,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(getActivity(), "下架失败!", Toast.LENGTH_SHORT)
+				Toast.makeText(context, "下架失败!", Toast.LENGTH_SHORT)
 				.show();
 				Log.e(TAG, arg2==null?"":arg2);
 
@@ -345,7 +338,7 @@ public class ProductManagementFragment extends BaseFragment implements
 
 		List<Integer> list = getCheckNum();
 		if (list.size() == 0) {
-			DialogTips dialog = new DialogTips(getActivity(), "请选择需要删除的信息！",
+			DialogTips dialog = new DialogTips(context, "请选择需要删除的信息！",
 					"确定");
 			dialog.show();
 			dialog = null;
@@ -370,7 +363,7 @@ public class ProductManagementFragment extends BaseFragment implements
 				getActivity().runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						dialog = new DialogWaiting(getActivity());
+						dialog = new DialogWaiting(context);
 						dialog.show();
 					}
 				});
@@ -382,7 +375,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(getActivity(), "产品id为空!", Toast.LENGTH_SHORT)
+					Toast.makeText(context, "产品id为空!", Toast.LENGTH_SHORT)
 							.show();
 				} else if ("1".equals(code)) {
 					int count = adapter.getCount();
@@ -391,7 +384,7 @@ public class ProductManagementFragment extends BaseFragment implements
 						adapter.getCheckMap().remove(n);
 						adapter.remove(position);
 					}
-					DialogTips dialog = new DialogTips(getActivity(), "删除成功！",
+					DialogTips dialog = new DialogTips(context, "删除成功！",
 							"确定");
 					dialog.show();
 					dialog = null;
@@ -403,7 +396,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(getActivity(), "删除失败!", Toast.LENGTH_SHORT)
+				Toast.makeText(context, "删除失败!", Toast.LENGTH_SHORT)
 				.show();
 				Log.e(TAG, arg2==null?"":arg2);
 			}
@@ -430,7 +423,6 @@ public class ProductManagementFragment extends BaseFragment implements
 		Map<Integer, Boolean> map = adapter.getCheckMap();
 		// 获取当前的数据数量
 		int count = adapter.getCount();
-
 		// 进行遍历
 		for (int i = 0; i < count; i++) {
 			if (map.get(i) != null && map.get(i)) {
@@ -461,6 +453,13 @@ public class ProductManagementFragment extends BaseFragment implements
 			xinxiststic = 3;
 			break;
 		}
+		if(xinxiststic==0){
+			layout_tool.setVisibility(View.GONE);
+			layout_cz.setVisibility(View.GONE);
+		}
+		if(xinxiststic==2){
+			tv_plxj.setVisibility(View.GONE);
+		}
 		RequestParams params = new RequestParams();
 		params.put("userid", userid);
 		params.put("xinxiststic", xinxiststic);
@@ -469,7 +468,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(getActivity(), "该用户没有店铺!",
+					Toast.makeText(context, "该用户没有店铺!",
 							Toast.LENGTH_SHORT).show();
 				} else if ("1".equals(code)) {
 					try {
@@ -481,7 +480,7 @@ public class ProductManagementFragment extends BaseFragment implements
 						e.printStackTrace();
 					}
 				} else if ("2".equals(code)) {
-					Toast.makeText(getActivity(), "没有产品信息!", Toast.LENGTH_SHORT)
+					Toast.makeText(context, "没有产品信息!", Toast.LENGTH_SHORT)
 							.show();
 				}
 			}
@@ -490,7 +489,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(getActivity(), "获取失败!", Toast.LENGTH_SHORT)
+				Toast.makeText(context, "获取失败!", Toast.LENGTH_SHORT)
 						.show();
 			}
 
