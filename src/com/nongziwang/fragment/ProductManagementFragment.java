@@ -110,6 +110,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				System.out.println(lists.get(position-1));
 				String chanpinid=lists.get(position-1).getChanpinid();
 				intentAction(getActivity(),ProductDetailFragmentActivity.class,chanpinid);
 			}

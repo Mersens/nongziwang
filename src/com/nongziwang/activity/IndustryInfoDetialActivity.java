@@ -62,11 +62,18 @@ public class IndustryInfoDetialActivity extends BaseActivity {
 		title = (TextView) findViewById(R.id.title);
 		tv_time = (TextView) findViewById(R.id.tv_time);
 		ftv = (FlowTextView) findViewById(R.id.ftv);
-		setDefaultViewMethod(R.drawable.ic_menu_back, "行业资讯",
+		setLeftWithTitleViewMethod(R.drawable.ic_menu_back, "行业资讯", new OnLeftClickListener() {
+			@Override
+			public void onClick() {
+				finishActivity();
+			}
+		});
+		
+		/*setDefaultViewMethod(R.drawable.ic_menu_back, "行业资讯",
 				R.drawable.icon_share_light, new OnLeftClickListener() {
 					@Override
 					public void onClick() {
-						finishActivity();
+						
 					}
 				}, new OnRightClickListener() {
 
@@ -74,7 +81,7 @@ public class IndustryInfoDetialActivity extends BaseActivity {
 					public void onClick() {
 						showShare(IndustryInfoDetialActivity.this, null, true);
 					}
-				});
+				});*/
 		setHeadViewBg(R.color.white_color);
 
 	}
@@ -132,24 +139,6 @@ public class IndustryInfoDetialActivity extends BaseActivity {
 
 	}
 
-	public void initDatas() {
-		if (isNews) {
-			if (newsdatialbean != null) {
-				title.setText(newsdatialbean.getTitle());
-				tv_time.setText(newsdatialbean.getAddtime());
-				ftv.setText(newsdatialbean.getCenter());
-				tv_from.setText("101农资网");
-			}
-		} else {
-			if (zhuantibean != null) {
-				title.setText(zhuantibean.getZhuantiname());
-				tv_time.setText(zhuantibean.getAddtime());
-				ftv.setText(zhuantibean.getCenter());
-				tv_from.setText("101农资网");
-			}
-		}
-	}
-
 	public void doSearchZhuanTiDetial() {
 		RequestParams params = new RequestParams();
 		params.put("zhuantiid", newsid);
@@ -194,41 +183,63 @@ public class IndustryInfoDetialActivity extends BaseActivity {
 		});
 
 	}
-
-	public static void showShare(Context context, String platformToShare,
+	public void initDatas() {
+		if (isNews) {
+			if (newsdatialbean != null) {
+				title.setText(newsdatialbean.getTitle());
+				tv_time.setText(newsdatialbean.getAddtime());
+				ftv.setText(newsdatialbean.getCenter());
+				tv_from.setText("101农资网");
+			}
+		} else {
+			if (zhuantibean != null) {
+				title.setText(zhuantibean.getZhuantiname());
+				tv_time.setText(zhuantibean.getAddtime());
+				ftv.setText(zhuantibean.getCenter());
+				tv_from.setText("101农资网");
+			}
+		}
+	}
+	public  void showShare(Context context, String platformToShare,
 			boolean showContentEdit) {
 		OnekeyShare oks = new OnekeyShare();
 		oks.setSilent(!showContentEdit);
 		if (platformToShare != null) {
 			oks.setPlatform(platformToShare);
 		}
-		// ShareSDK快捷分享提供两个界面第一个是九宫格 CLASSIC 第二个是SKYBLUE
-		oks.setTheme(OnekeyShareTheme.CLASSIC);
-		// 令编辑页面显示为Dialog模式
-		oks.setDialogMode();
-		// 在自动授权时可以禁用SSO方式
-		oks.disableSSOWhenAuthorize();
 
-		// 分享时Notification的图标和文字 2.5.9以后的版本不调用此方法
-		// oks.setNotification(R.drawable.ic_launcher,
-		// getString(R.string.app_name));
-		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-		oks.setTitle("分享");
+		oks.setTheme(OnekeyShareTheme.CLASSIC);
+		oks.setDialogMode();
+		oks.disableSSOWhenAuthorize();
+		if(isNews){
+			if (newsdatialbean != null) {
+				setShareData(context, oks, newsdatialbean.getTitle(), newsdatialbean.getCenter(), newsdatialbean.getNewsimg());
+			}
+		}else{
+			if (zhuantibean != null) {
+				setShareData(context, oks, zhuantibean.getZhuantiname(), zhuantibean.getCenter(), zhuantibean.getImgsrc());
+			}
+		}
+	}
+	
+	public void setShareData(Context context,OnekeyShare oks,String title,String text,String imgsrc){
+		oks.setTitle(title);
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-		oks.setTitleUrl("http://sharesdk.cn");
+		oks.setTitleUrl("http://www.nz101.com/");
 		// text是分享文本，所有平台都需要这个字段
-		oks.setText("我是分享文本");
+		oks.setText(text);
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-		oks.setImagePath("/sdcard/test.jpg");// 确保SDcard下面存在此张图片
+		//oks.setImagePath(imgsrc);// 确保SDcard下面存在此张图片
+		oks.setImageUrl(imgsrc);
 		// url仅在微信（包括好友和朋友圈）中使用
-		oks.setUrl("http://sharesdk.cn");
+		oks.setUrl("http://www.nz101.com/");
 		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
-		oks.setComment("我是测试评论文本");
+		//oks.setComment("我是测试评论文本");
 		// site是分享此内容的网站名称，仅在QQ空间使用
-		oks.setSite("农资网");
+		oks.setSite("101农资网");
+		
 		// siteUrl是分享此内容的网站地址，仅在QQ空间使用
-		oks.setSiteUrl("http://sharesdk.cn");
-		// 启动分享GUI
+		oks.setSiteUrl("http://www.nz101.com/");
 		oks.show(context);
 	}
 }

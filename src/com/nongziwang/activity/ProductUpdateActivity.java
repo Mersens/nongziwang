@@ -53,7 +53,6 @@ public class ProductUpdateActivity extends BaseActivity {
 	private String id;
 	private int index = 0;
 	private int addindex = 0;
-	private boolean isAdd=false;
 	private MarginLayoutParams lp;
 	private List<ChanPinBean> chanpinbeans;
 	private List<ImgBean> maplist;
@@ -108,6 +107,7 @@ public class ProductUpdateActivity extends BaseActivity {
 		edt_ms.setText(bean.getMiaoshu());
 		edt_xq.setText(bean.getDetail());
 		edt_jg.setText(bean.getJiage());
+		edt_dw.setText(bean.getUnit());
 		if (maplist != null && maplist.size() > 0) {
 			for (int i = 0; i < maplist.size(); i++) {
 				ProcessImageView imageview = new ProcessImageView(
@@ -160,11 +160,65 @@ public class ProductUpdateActivity extends BaseActivity {
 			String path = cursor.getString(dex);
 			Bitmap bitmap = BitmapUtils.getBitMap(path);
 			cursor.close();
-			setAddImage(bitmap); 
-			upLoadeImag(path,index);
-			
+			setAddImage(bitmap);
+			upLoadeAddImag(path);
+
 		}
 
+	}
+
+	private void upLoadeAddImag(final String path) {
+		RequestParams params = new RequestParams();
+		File file = new File(path);
+		if (file != null) {
+			try {
+				params.put("chanpinimg", file);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		HttpUtils.doPost(UPDATEIMGURL, params, new TextHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				String code = JsonUtils.getCode(arg2);
+				if ("1".equals(code)) {
+					try {
+						JSONObject jsonObject = new JSONObject(arg2);
+						String url = jsonObject.getString("chanpinimg");
+						map.put(url, url);
+
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				} else if ("2".equals(code)) {
+
+					ShowToast("资源太大!");
+				} else if ("0".equals(code)) {
+					ShowToast("文件为空！");
+
+				}
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+
+				ShowToast("上传失败!");
+				Log.e(TAG, arg2 == null ? "" : arg2);
+			}
+
+			@Override
+			public void onProgress(long bytesWritten, long totalSize) {
+				// TODO Auto-generated method stub
+				super.onProgress(bytesWritten, totalSize);
+				int count = (int) ((bytesWritten * 1.0 / totalSize) * 100);
+				imageviewlist.get(addindex + maplist.size() - 1).setProgress(
+						count);
+			}
+
+		});
 	}
 
 	private void upLoadeImag(final String path, final int id) {
@@ -187,26 +241,24 @@ public class ProductUpdateActivity extends BaseActivity {
 					try {
 						JSONObject jsonObject = new JSONObject(arg2);
 						String url = jsonObject.getString("chanpinimg");
-						if(isAdd){
-							map.put(url, url);
-						}else{
-							map.put(maplist.get(id).getImgid(), url);	
-						}
-						
+						map.put(maplist.get(id).getImgid(), url);
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
 				} else if ("2".equals(code)) {
 					ShowToast("资源太大!");
+				}
 
-				} else if ("3".equals(code)) {
+				else if ("0".equals(code)) {
 					ShowToast("文件为空！");
+
 				}
 			}
 
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
+
 				ShowToast("上传失败!");
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
@@ -216,20 +268,10 @@ public class ProductUpdateActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				super.onProgress(bytesWritten, totalSize);
 				int count = (int) ((bytesWritten * 1.0 / totalSize) * 100);
-				if(isAdd){
-					imageviewlist.get(addindex + maplist.size()-1).setProgress(count);
-				}else{
-				   imageviewlist.get(index).setProgress(count);
-				}
-				
+				imageviewlist.get(index).setProgress(count);
+
 			}
-			@Override
-			public void onFinish() {
-				super.onFinish();
-				if(isAdd){
-				isAdd=false;
-				}
-			}
+
 		});
 	}
 
@@ -238,15 +280,16 @@ public class ProductUpdateActivity extends BaseActivity {
 			imageviewlist.get(index).setImageBitmap(bitmap);
 		}
 	}
-	
-	public void setAddImage(Bitmap bitmap){
+
+	public void setAddImage(Bitmap bitmap) {
 		if (bitmap != null) {
-		ProcessImageView imageview = new ProcessImageView(
-				ProductUpdateActivity.this);
-		imageview.isProgress(true);
-		imageview.setImageBitmap(bitmap);
-		imageviewlist.add(imageview);
-		addindex++;
+			ProcessImageView imageview = new ProcessImageView(
+					ProductUpdateActivity.this);
+			imageview.isProgress(true);
+			imageview.setImageBitmap(bitmap);
+			imageviewlist.add(imageview);
+			flowlayout.addView(imageview, lp);
+			addindex++;
 		}
 	}
 
@@ -255,7 +298,11 @@ public class ProductUpdateActivity extends BaseActivity {
 				new OnLeftClickListener() {
 					@Override
 					public void onClick() {
-						finishActivity();
+						Intent intent = new Intent(ProductUpdateActivity.this, ProductManagementFragmentActivity.class);
+						startActivity(intent);
+						overridePendingTransition(R.anim.right_in,
+								R.anim.right_out);
+						finish();
 					}
 				});
 		btn_next.setOnClickListener(new OnClickListener() {
@@ -264,14 +311,13 @@ public class ProductUpdateActivity extends BaseActivity {
 				doFilter();
 			}
 		});
-		
+
 		img_add.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (addindex + maplist.size() > 8) {
+				if (addindex + maplist.size() > 7) {
 					return;
 				}
-				isAdd=true;
 				Intent intent = new Intent(Intent.ACTION_PICK, null);
 				intent.setDataAndType(
 						MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
@@ -377,7 +423,7 @@ public class ProductUpdateActivity extends BaseActivity {
 		Gson gson = new Gson();
 		String chanpinImgJsonString = gson.toJson(map);
 		params.put("chanpinImgJsonString", chanpinImgJsonString);
-		doUpdate(params);
+		 doUpdate(params);
 	}
 
 	private void doUpdate(RequestParams params) {
@@ -394,7 +440,11 @@ public class ProductUpdateActivity extends BaseActivity {
 				String code = JsonUtils.getCode(arg2);
 				if ("1".equals(code)) {
 					ShowToast("修改成功！");
-					finishActivity();
+					Intent intent = new Intent(ProductUpdateActivity.this, ProductManagementFragmentActivity.class);
+					startActivity(intent);
+					overridePendingTransition(R.anim.right_in,
+							R.anim.right_out);
+					finish();
 				} else if ("0".equals(code)) {
 					ShowToast("该产品信息不存在!");
 				} else if ("2".equals(code)) {

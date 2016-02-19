@@ -33,7 +33,6 @@ public class RegisterSetInfoActivity extends BaseActivity {
 			+ "userinfo/getUserInfoById";
 
 	private static final String TAG = "RegisterSetInfoActivity";
-
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -67,30 +66,7 @@ public class RegisterSetInfoActivity extends BaseActivity {
 				doFinish();
 			}
 		});
-		edt_psd_again.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-			}
 
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				String nick = edt_nick.getText().toString();
-				String psd1 = edt_psd.getText().toString();
-				String psd2 = edt_psd_again.getText().toString();
-				if (!TextUtils.isEmpty(psd1) && !TextUtils.isEmpty(psd2)
-						&& !TextUtils.isEmpty(nick)) {
-					btn_finish.setEnabled(true);
-				} else {
-					btn_finish.setEnabled(false);
-				}
-			}
-		});
 	}
 
 	public void doFinish() {
@@ -127,7 +103,7 @@ public class RegisterSetInfoActivity extends BaseActivity {
 						JSONObject jsonObject;
 						try {
 							jsonObject = new JSONObject(arg2);
-							String userid = jsonObject.getString("userid ");
+							String userid = jsonObject.getString("userid");
 							getUserInfo(userid);
 							ShowToast("×¢²á³É¹¦£¡");
 							finishActivity();

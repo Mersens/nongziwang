@@ -14,15 +14,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SearchResultsAdapter extends BaseListAdapter<ProductBean> {
-
+public class SearchResultsAdapter extends BaseListAdapter<ProductBean>{
+	
 	private List<ProductBean> list;
 	public SearchResultsAdapter(List<ProductBean> list, Context context) {
 		super(list, context);
 		this.list= list;
-		// TODO Auto-generated constructor stub
-	}
 
+	}
 	@Override
 	public View getContentView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
@@ -74,4 +73,5 @@ public class SearchResultsAdapter extends BaseListAdapter<ProductBean> {
 		private TextView tv_address;
 		private ImageView img_cart;
 	}
+
 }

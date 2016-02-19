@@ -29,6 +29,17 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/base_color_text_black"
+                android:textSize="@dimen/common_text_size"
+                android:text="产品详情" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -43,7 +54,9 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="8dp"
-                android:src="@drawable/icon_fenxiang" />
+                android:src="@drawable/icon_fenxiang" 
+                android:visibility="gone"
+                />
 
         </RelativeLayout>
 

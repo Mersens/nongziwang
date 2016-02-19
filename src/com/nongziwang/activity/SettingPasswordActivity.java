@@ -26,12 +26,14 @@ public class SettingPasswordActivity extends BaseActivity {
 	private static final String URL = AppConstants.SERVICE_ADDRESS
 			+ "findpwd/gotoUpdatePassword";
 	private static final String TAG="SettingPasswordActivity";
+	private String userid;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_setting_psd);
+		userid=getIntent().getStringExtra("params");
 		initViews();
 		initEvent();
 	}
@@ -72,6 +74,7 @@ public class SettingPasswordActivity extends BaseActivity {
 			return;
 		}
 		RequestParams params = new RequestParams();
+		params.put("userid",userid);
 		params.put("userpwd", psd);
 		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
 			@Override
@@ -101,7 +104,6 @@ public class SettingPasswordActivity extends BaseActivity {
 					Throwable arg3) {
 				ShowToast("…Ë÷√ ß∞‹£°");
 				Log.e(TAG, arg2==null?"":arg2);
-
 			}
 		});
 

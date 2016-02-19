@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
-import com.nongziwang.activity.LoginActivity;
 import com.nongziwang.activity.ResetPhoneNumberFragmentActivity;
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.db.NongziDao;
@@ -290,7 +289,6 @@ public class AccountVipFragment extends BaseFragment {
 			e.printStackTrace();
 		}
 		HttpUtils.doPost(HEADURL, params,new TextHttpResponseHandler() {
-			
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code =JsonUtils.getCode(arg2);
@@ -303,7 +301,6 @@ public class AccountVipFragment extends BaseFragment {
 						dao.updateUserHeadById(userid, path);
 						Toast.makeText(getActivity(), "上传成功！", Toast.LENGTH_LONG).show();
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}else if("2".equals(code)){
@@ -319,12 +316,10 @@ public class AccountVipFragment extends BaseFragment {
 				Toast.makeText(getActivity(), "图片上传失败！", Toast.LENGTH_LONG).show();
 			}
 		});
-		// 上传头像
 	}
 
 	@Override
 	protected void lazyLoad() {
-		// TODO Auto-generated method stub
 
 	}
 

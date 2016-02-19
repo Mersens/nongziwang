@@ -22,6 +22,8 @@ int anim popup_outdowntoup 0x7f040014
 int anim right_in 0x7f040015
 int anim right_out 0x7f040016
 int anim shrink_from_top 0x7f040017
+int anim top_down 0x7f040018
+int anim top_up 0x7f040019
 int attr DialogSpotColor 0x7f0100cb
 int attr DialogSpotCount 0x7f0100cc
 int attr DialogTitleAppearance 0x7f0100c9

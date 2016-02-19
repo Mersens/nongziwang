@@ -10,7 +10,6 @@ import org.json.JSONException;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
-import com.nongziwang.activity.SearchFragmentActivity;
 import com.nongziwang.activity.SearchResultsFragmentActivity;
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.db.NongziDao;
@@ -112,6 +111,8 @@ public class ProductFragment extends BaseFragment {
 				Intent intent = new Intent(getActivity(),
 						SearchResultsFragmentActivity.class);
 				intent.putExtra("params",name);
+				String leimuid=map.get(key).get(childPosition).getLeimuid();
+				intent.putExtra("leimuid",leimuid);
 				startActivity(intent);
 				getActivity().overridePendingTransition(R.anim.bottom_open, 0);
 

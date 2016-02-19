@@ -25,6 +25,7 @@ public class ProductDetailAdapter extends BaseListAdapter<String>{
 		mWebView.getSettings().setUseWideViewPort(true);
 		mWebView.getSettings().setLoadWithOverviewMode(true);
 		mWebView.getSettings().setBlockNetworkImage(false);
+		mWebView.getSettings().setTextZoom(240);
 		mWebView.loadDataWithBaseURL(null,list.get(position), "text/html",  "utf-8", null);
 		return view;
 	}

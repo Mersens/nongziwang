@@ -14,30 +14,45 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
+/**
+ * 
+ * @title CustomApplcation
+ * @description:TODO
+ * @author Mersens
+ * @time 2016年1月16日
+ */
 public class CustomApplcation extends Application {
 	public static CustomApplcation mInstance;
-	// 运用list来保存们每一个activity是关键
+	// 运用list来保存们每一个activity是关键,传说这是应用最优雅的退出方式
 	private List<Activity> mList = new LinkedList<Activity>();
-	
+
 	@Override
 	public void onCreate() {
-		// TODO Auto-generated method stub
 		super.onCreate();
 		CrashHandler.getInstance().init(getApplicationContext());
 		initImageLoader(getApplicationContext());
 	}
-	//单例模式，双重校验锁
+
+	// 单例模式，双重校验锁
 	public static CustomApplcation getInstance() {
-		if(mInstance==null){
+		if (mInstance == null) {
 			synchronized (CustomApplcation.class) {
-				if(mInstance==null){
-					mInstance=new CustomApplcation();	
+				if (mInstance == null) {
+					mInstance = new CustomApplcation();
 				}
 			}
 		}
 		return mInstance;
 	}
-	/** 初始化ImageLoader */
+
+	/**
+	 * 
+	 * @Title: initImageLoader 
+	 * @Description: 初始化ImageLoader
+	 * @author Mersens
+	 * @param context
+	 * @throws
+	 */
 	public static void initImageLoader(Context context) {
 		File cacheDir = StorageUtils.getOwnCacheDirectory(context,
 				"imageloader/Cache");// 获取到缓存的目录地址
@@ -58,7 +73,7 @@ public class CustomApplcation extends Application {
 		// Initialize ImageLoader with configuration.
 		ImageLoader.getInstance().init(config);// 全局初始化此配置
 	}
-	
+
 	// add Activity
 	public void addActivity(Activity activity) {
 		mList.add(activity);
@@ -77,5 +92,5 @@ public class CustomApplcation extends Application {
 			System.exit(0);
 		}
 	}
-	
+
 }

@@ -3,8 +3,10 @@ package com.nongziwang.fragment;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
+
 import org.apache.http.Header;
 import org.json.JSONException;
+
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.ProductDetailFragmentActivity;
@@ -26,8 +28,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -41,11 +45,14 @@ public class SearchResultsFragment extends BaseFragment implements
 	private List<ProductBean> lists = new ArrayList<ProductBean>();
 	private static final String URL = AppConstants.SERVICE_ADDRESS
 			+ "chanpinsousuo/getChanpinSousuoByKeywords";
+	private static final String LEIMUIDURL = AppConstants.SERVICE_ADDRESS
+			+ "chanpinsousuo/getChanpinByLeimuId";
 	private static final String TAG = "SearchResultsFragment";
 	private int currpage = 1;
 	private Context context;
 	private String pinpaiid = null;
 	private String yongtuid = null;
+	private String leimuid=null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,11 +87,13 @@ public class SearchResultsFragment extends BaseFragment implements
 						bean.getChanpinid());
 			}
 		});
+
 	}
 
 	private void initDatas() {
 		pinpaiid = SearchResultsFragmentActivity.pinpaiid;
 		yongtuid = SearchResultsFragmentActivity.yongtuid;
+		leimuid=SearchResultsFragmentActivity.leimuid;
 		RequestParams params = new RequestParams();
 		params.put("currpage", currpage + "");
 		params.put("keywords", param);
@@ -94,10 +103,13 @@ public class SearchResultsFragment extends BaseFragment implements
 		if (!TextUtils.isEmpty(yongtuid)) {
 			params.put("yongtuid", yongtuid);
 		}
-		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+		if(!TextUtils.isEmpty(leimuid)){
+			params.put("leimuid", leimuid);
+		}
+
+		HttpUtils.doPost(leimuid==null?URL:LEIMUIDURL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
-
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
 					Toast.makeText(context, " 当前页码输入不正确!", Toast.LENGTH_SHORT)
@@ -105,17 +117,20 @@ public class SearchResultsFragment extends BaseFragment implements
 				} else if ("1".equals(code)) {
 					try {
 						List<ProductBean> list = JsonUtils.getProductInfo(arg2);
+						if(list.size()<10){
+							productlistview.setPullLoadEnable(false);
+						}
 						lists.addAll(list);
 						adapter = new SearchResultsAdapter(list, context);
 						productlistview.setAdapter(adapter);
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
 				} else if ("2".equals(code)) {
 					Toast.makeText(context, " 没有符合的产品信息!", Toast.LENGTH_SHORT)
 							.show();
+
 				}
 			}
 
@@ -124,7 +139,6 @@ public class SearchResultsFragment extends BaseFragment implements
 					Throwable arg3) {
 				Log.e(TAG, arg2 == null ? "" : arg2);
 				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT).show();
-
 			}
 
 			@Override
@@ -148,7 +162,6 @@ public class SearchResultsFragment extends BaseFragment implements
 
 	@Override
 	protected void lazyLoad() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -164,7 +177,10 @@ public class SearchResultsFragment extends BaseFragment implements
 		if (!TextUtils.isEmpty(yongtuid)) {
 			params.put("yongtuid", yongtuid);
 		}
-		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+		if(!TextUtils.isEmpty(leimuid)){
+			params.put("leimuid", leimuid);
+		}
+		HttpUtils.doPost(leimuid==null?URL:LEIMUIDURL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
@@ -177,10 +193,14 @@ public class SearchResultsFragment extends BaseFragment implements
 						List<ProductBean> list1 = JsonUtils
 								.getProductInfo(arg2);
 						lists.addAll(list1);
-						adapter.setList(list1);
-						adapter.notifyDataSetChanged();
+						if(adapter!=null){
+							adapter=null;
+						}
+						adapter = new SearchResultsAdapter(list1,
+								getActivity());
+						productlistview.setAdapter(adapter);
+						onLoadFinsh();
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				} else if ("2".equals(code)) {
@@ -194,6 +214,12 @@ public class SearchResultsFragment extends BaseFragment implements
 					Throwable arg3) {
 				Log.e(TAG, arg2 == null ? "" : arg2);
 				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT).show();
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				onLoadFinsh();
 			}
 		});
 
@@ -211,7 +237,10 @@ public class SearchResultsFragment extends BaseFragment implements
 		if (!TextUtils.isEmpty(yongtuid)) {
 			params.put("yongtuid", yongtuid);
 		}
-		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+		if(!TextUtils.isEmpty(leimuid)){
+			params.put("leimuid", leimuid);
+		}
+		HttpUtils.doPost(leimuid==null?URL:LEIMUIDURL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
@@ -229,6 +258,8 @@ public class SearchResultsFragment extends BaseFragment implements
 						lists.addAll(list2);
 						adapter.addAll(list2);
 						adapter.notifyDataSetChanged();
+						onLoadFinsh();
+						
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -245,8 +276,18 @@ public class SearchResultsFragment extends BaseFragment implements
 				Log.e(TAG, arg2 == null ? "" : arg2);
 				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT).show();
 			}
+			
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+				onLoadFinsh();
+			}
 
 		});
 	}
-
+	public void onLoadFinsh(){
+		productlistview.stopLoadMore();
+		productlistview.stopRefresh();
+	}
 }

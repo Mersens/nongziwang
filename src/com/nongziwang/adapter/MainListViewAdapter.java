@@ -1,17 +1,13 @@
 package com.nongziwang.adapter;
 
 import java.util.List;
-import java.util.Map;
-
 import com.nongziwang.activity.ProductDetailFragmentActivity;
 import com.nongziwang.activity.TypeSearchFragmentActivity;
 import com.nongziwang.entity.IndexBean;
 import com.nongziwang.fragment.CommonSearchFragment;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.ImageLoadOptions;
-import com.nongziwang.utils.ToastUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +17,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class MainListViewAdapter extends BaseAdapter {
 	private List<List<IndexBean>> list;
@@ -129,7 +124,6 @@ public class MainListViewAdapter extends BaseAdapter {
 			case RIGHT_TOP:
 				intentAction(context, ProductDetailFragmentActivity.class, list
 						.get(pos).get(1).getId());
-
 				break;
 			case RIGHT_BOTTOM_LEFT:
 				intentAction(context, ProductDetailFragmentActivity.class, list

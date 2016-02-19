@@ -78,7 +78,7 @@ public class FlowTextView extends RelativeLayout {
         mLinkPaint.setTextSize(mTextsize);
         mLinkPaint.setColor(Color.BLUE);
         mLinkPaint.setUnderlineText(true);
-        this.setBackgroundColor(Color.TRANSPARENT);
+        this.setBackgroundColor(Color.WHITE);
     }
 
     private void readAttrs(Context context, AttributeSet attrs) {
@@ -93,7 +93,7 @@ public class FlowTextView extends RelativeLayout {
         mSpacingAdd = ta.getDimensionPixelSize(0, 0);  // 0 is the index in the array, 0 is the default
         mSpacingMult = ta.getFloat(1, 1.0f);  // 1 is the index in the array, 1.0f is the default
         mTextsize = ta.getDimension(2, mTextsize); // 2 is the index in the array of the textSize attribute
-        mTextColor = ta.getColor(3, Color.BLACK); // 3 is the index of the array of the textColor attribute
+        mTextColor = ta.getColor(3, mTextColor); // 3 is the index of the array of the textColor attribute
         ta.recycle();
     }
 

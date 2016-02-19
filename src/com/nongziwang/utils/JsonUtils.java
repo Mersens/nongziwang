@@ -293,8 +293,16 @@ public class JsonUtils {
 			ProductBean bean = new ProductBean();
 			bean.setChanpinid(obj.getString("chanpinid"));
 			bean.setTitle(obj.getString("title"));
-			bean.setChanpinimg(obj.getString("chanpinimg"));
-			bean.setCityname(obj.getString("cityname"));
+			if(obj.has("chanpinimg")){
+				bean.setChanpinimg(obj.getString("chanpinimg"));
+			}else {
+				bean.setChanpinimg("");
+			}
+			if(obj.has("cityname")){
+				bean.setCityname(obj.getString("cityname"));
+			}else{
+				bean.setCityname("");
+			}
 			bean.setJiage(obj.getString("jiage"));
 			if (obj.has("province")) {
 				bean.setProvince(obj.getString("province"));

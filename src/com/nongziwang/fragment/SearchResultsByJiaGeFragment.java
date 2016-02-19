@@ -44,12 +44,15 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 	private List<ProductBean> lists=new ArrayList<ProductBean>();
 	private static final String URL = AppConstants.SERVICE_ADDRESS
 			+ "chanpinsousuo/getChanpinSousuoByKeywords";
+	private static final String LEIMUIDURL = AppConstants.SERVICE_ADDRESS
+			+ "chanpinsousuo/getChanpinByLeimuId";
 	private static final String TAG = "SearchResultsFragment";
 	private int currpage = 1;
 	private  int jiagepaixu=0;
 	private Context context;
 	private String pinpaiid = null;
 	private String yongtuid = null;
+	private String leimuid=null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,6 +93,7 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 	private void initDatas() {
 		pinpaiid = SearchResultsFragmentActivity.pinpaiid;
 		yongtuid = SearchResultsFragmentActivity.yongtuid;
+		leimuid=SearchResultsFragmentActivity.leimuid;
 		RequestParams params = new RequestParams();
 		params.put("currpage", currpage + "");
 		params.put("keywords", param);
@@ -100,7 +104,10 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 		if (!TextUtils.isEmpty(yongtuid)) {
 			params.put("yongtuid", yongtuid);
 		}
-		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+		if(!TextUtils.isEmpty(leimuid)){
+			params.put("leimuid", leimuid);
+		}
+		HttpUtils.doPost(leimuid==null?URL:LEIMUIDURL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
@@ -172,7 +179,10 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 		if (!TextUtils.isEmpty(yongtuid)) {
 			params.put("yongtuid", yongtuid);
 		}
-		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+		if(!TextUtils.isEmpty(leimuid)){
+			params.put("leimuid", leimuid);
+		}
+		HttpUtils.doPost(leimuid==null?URL:LEIMUIDURL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
@@ -184,8 +194,13 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 						lists.clear();
 						List<ProductBean> list1 = JsonUtils.getProductInfo(arg2);
 						lists.addAll(list1);
-						adapter.setList(list1);
-						adapter.notifyDataSetChanged();
+						if(adapter!=null){
+							adapter=null;
+						}
+						adapter = new SearchResultsAdapter(list1,
+								getActivity());
+						productlistview.setAdapter(adapter);
+						onLoadFinsh();
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -202,6 +217,12 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 				Log.e(TAG, arg2 == null ? "" : arg2);
 				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT)
 						.show();
+			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				onLoadFinsh();
 			}
 		});
 
@@ -220,7 +241,10 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 		if (!TextUtils.isEmpty(yongtuid)) {
 			params.put("yongtuid", yongtuid);
 		}
-		HttpUtils.doPost(URL, params, new TextHttpResponseHandler() {
+		if(!TextUtils.isEmpty(leimuid)){
+			params.put("leimuid", leimuid);
+		}
+		HttpUtils.doPost(leimuid==null?URL:LEIMUIDURL, params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
@@ -237,6 +261,7 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 						lists.addAll(list2);
 						adapter.addAll(list2);
 						adapter.notifyDataSetChanged();
+						onLoadFinsh();
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -254,8 +279,17 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT)
 						.show();
 			}
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				onLoadFinsh();
+			}
 
 		});
 	}
-
+	public void onLoadFinsh(){
+		productlistview.stopLoadMore();
+		productlistview.stopRefresh();
+	}
 }

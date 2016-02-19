@@ -38,7 +38,10 @@ public class ForgetPasswordActivity extends BaseActivity {
 	private Map<String, String> map = new HashMap<String, String>();
 	private static final String URL = AppConstants.SERVICE_ADDRESS
 			+ "send/sendrandByPhone";
+	private static final String FIRSTURL = AppConstants.SERVICE_ADDRESS
+			+ "findpwd/gotoFindPassword";
 	private static final String TAG = "ForgetPasswordActivity";
+	private String userid=null;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -46,6 +49,8 @@ public class ForgetPasswordActivity extends BaseActivity {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_forget_psd);
 		RegisterCodeTimerService.setHandler(mCodeHandler);
+		mIntent = new Intent(ForgetPasswordActivity.this,
+				RegisterCodeTimerService.class);
 		initViews();
 		initEvent();
 
@@ -100,12 +105,15 @@ public class ForgetPasswordActivity extends BaseActivity {
 			ShowToast("验证码输入有误！");
 			return;
 		}
-		intentAction(ForgetPasswordActivity.this, SettingPasswordActivity.class);
+		if(TextUtils.isEmpty(userid)){
+			return;
+		}
+		intentAction(ForgetPasswordActivity.this, SettingPasswordActivity.class,userid);
 		finish();
 	}
 
 	public void doGetCode() {
-		String tel_number = et_tel_or_email.getText().toString().trim();
+		final String tel_number = et_tel_or_email.getText().toString().trim();
 		if (TextUtils.isEmpty(tel_number)) {
 			ShowToast("电话号码或邮箱不能为空！");
 			return;
@@ -114,8 +122,7 @@ public class ForgetPasswordActivity extends BaseActivity {
 			ShowToast("电话号码不正确！");
 			return;
 		}
-		mIntent = new Intent(ForgetPasswordActivity.this,
-				RegisterCodeTimerService.class);
+
 		map.put("num", tel_number);
 		startService(mIntent);
 		RequestParams params = new RequestParams();
@@ -135,6 +142,7 @@ public class ForgetPasswordActivity extends BaseActivity {
 							String yzm = jsonObject.getString("yanzhengma");
 							if (!TextUtils.isEmpty(yzm)) {
 								map.put("code", yzm);
+								getUsetid(tel_number);
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -148,12 +156,42 @@ public class ForgetPasswordActivity extends BaseActivity {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Log.e(TAG, arg2);
+				    ShowToast("获取验证码失败！");
+				    Log.e(TAG, arg2==null?"":arg2);
 			}
 
 		});
+
+		
 	}
 
+	public void getUsetid(String tel_number){
+		RequestParams params1 = new RequestParams();
+		params1.put("userphone", tel_number);
+		params1.put("yanzhengma", map.get("code"));
+		HttpUtils.doPost(FIRSTURL, params1, new TextHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				System.out.println(arg2);
+				String code=JsonUtils.getCode(arg2);
+				if(code.equals("1")){
+					try {
+						JSONObject jsonObject = new JSONObject(arg2);
+						userid = jsonObject.getString("userid");
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
+			    Log.e(TAG, arg2==null?"":arg2);
+			}
+		});
+	}
+	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();

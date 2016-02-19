@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONException;
 
+import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.SearchResultsFragmentActivity;
 import com.nongziwang.adapter.CommonSearchResultsAdapter;
@@ -24,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +45,10 @@ IXListViewListener, EventListener {
 	private RelativeLayout layout_loading;
 	private Context context;
 	private static final String URL=AppConstants.SERVICE_ADDRESS+"chanpinsousuo/getChanpinYongtu";
+	private static final String LEIMUIDURL = AppConstants.SERVICE_ADDRESS
+			+ "chanpinsousuo/getYongtuByLeimuId";
 	private static final String TAG = "UsesResultsFragment";
+	private String leimuid=null;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -73,13 +78,20 @@ IXListViewListener, EventListener {
 	}
 	
 	public void initDatas(){
-		HttpUtils.doPost(URL, new TextHttpResponseHandler() {
+		leimuid=SearchResultsFragmentActivity.leimuid;
+		RequestParams params=new RequestParams();
+		if(!TextUtils.isEmpty(leimuid)){
+			params.put("leimuid", leimuid);
+		}
+		HttpUtils.doPost(leimuid==null?URL:LEIMUIDURL,params, new TextHttpResponseHandler() {
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
-
 				String code=JsonUtils.getCode(arg2);
 				if("0".equals(code)){
 					Toast.makeText(context, "没有产品用途!",
+							Toast.LENGTH_SHORT).show();
+				}else if("2".equals(code)){
+					Toast.makeText(context, "该类目下没有用途!",
 							Toast.LENGTH_SHORT).show();
 				}else if("1".equals(code)){
 					try {
@@ -88,7 +100,6 @@ IXListViewListener, EventListener {
 						adapter=new UseshResultsAdapter(list, context);
 						listview_search_other.setAdapter(adapter);
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -96,14 +107,12 @@ IXListViewListener, EventListener {
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				// TODO Auto-generated method stub
 				Log.e(TAG, arg2 == null ? "" : arg2);
 				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT)
 						.show();
 			}
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				super.onFinish();
 				layout_loading.setVisibility(View.GONE);
 			}

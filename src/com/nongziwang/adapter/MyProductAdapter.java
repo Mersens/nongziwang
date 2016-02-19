@@ -179,6 +179,7 @@ public class MyProductAdapter extends BaseListAdapter<ChanPinBean> {
 						context.startActivity(intent);
 						((Activity) context).overridePendingTransition(R.anim.left_in,
 								R.anim.left_out);
+						((Activity) context).finish();
 
 					}
 				});

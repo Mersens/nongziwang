@@ -28,7 +28,6 @@ public class UsesFragment extends BaseFragment{
 	
 
 	private void initViews() {
-		// TODO Auto-generated method stub
 		
 	}
 	public static Fragment getInstance(String params) {

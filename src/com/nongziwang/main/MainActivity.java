@@ -169,6 +169,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		dialog = null;
 	}
 
+	//发送广播，更新用户信息
 	@Override
 	protected void onStart() {
 		super.onStart();

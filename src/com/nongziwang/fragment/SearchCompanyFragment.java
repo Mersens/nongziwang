@@ -149,8 +149,12 @@ IXListViewListener, EventListener{
 						lists.clear();
 						List<CompanyBean> refreslist=JsonUtils.getCompanyInfo(arg2);
 						lists.addAll(refreslist);
-						adapter.setList(refreslist);
-						adapter.notifyDataSetChanged();
+						if(adapter!=null){
+							adapter=null;
+						}
+						adapter=new SearchCompanyAdapter(refreslist, getActivity());
+						listview_search_other.setAdapter(adapter);
+						onLoadFinsh();
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
@@ -207,5 +211,8 @@ IXListViewListener, EventListener{
 			}
 		});
 	}
-
+	public void onLoadFinsh(){
+		listview_search_other.stopLoadMore();
+		listview_search_other.stopRefresh();
+	}
 }

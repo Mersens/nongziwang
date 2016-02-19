@@ -218,7 +218,6 @@ public class BaseActivity extends FragmentActivity{
 				R.anim.right_out);
 	}
 	
-	
 	public  void setHeadViewBg(int resid){
 		mHeadView.setHeadViewBackground(resid);
 	}

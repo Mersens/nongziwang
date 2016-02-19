@@ -11,8 +11,8 @@
 
         <ImageView
             android:id="@+id/pro_img"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="92dp"
+            android:layout_height="92dp"
             android:layout_margin="5dp"
             android:src="@drawable/android" />
 
@@ -28,15 +28,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="2dp"
                 android:layout_weight="1"
                 android:text="顶收——花生、薯类等多用型药肥"
                 android:textColor="@color/base_color_text_black"
-                android:textSize="16sp" />
+               android:maxLines="2"
+                android:lineSpacingExtra="2dp"
+                android:textSize="@dimen/text_size" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:layout_weight="1" >
 
                 <LinearLayout
@@ -50,7 +53,7 @@
                         android:id="@+id/tv_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
+                        android:layout_marginBottom="2dp"
                         android:text="¥100起"
                         android:textColor="@color/red_text_color"
                         android:textSize="@dimen/text_size" />
@@ -60,6 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="河南省 郑州市"
+                        android:layout_marginBottom="2dp"
                         android:textSize="@dimen/text_size" />
                 </LinearLayout>
 

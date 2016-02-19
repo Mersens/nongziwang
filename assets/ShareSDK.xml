@@ -60,13 +60,13 @@
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
 
     <SinaWeibo
+        Id="1"
+        SortId="1"
         AppKey="568898243"
         AppSecret="38a4f8204cc784f81f9f0daaf31e02e3"
-        Enable="true"
-        Id="1"
         RedirectUrl="http://www.sharesdk.cn"
         ShareByAppClient="false"
-        SortId="1" />
+        Enable="true" />
 
     <TencentWeibo
         AppKey="801307650"

@@ -136,7 +136,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			tv_name.setText(user.getUsername());
 			tv_name.setVisibility(View.VISIBLE);
 			tv_login.setVisibility(View.GONE);
-
 		} else {
 			buyer_user_head.setImageResource(R.drawable.icon_user_img);
 			tv_name.setVisibility(View.GONE);
@@ -448,7 +447,8 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 						JSONObject jsonObject = new JSONObject(arg2);
 						String path = jsonObject.getString("touxiang");
 						dao.updateUserHeadById(userid, path);
-
+						ImageLoader.getInstance().displayImage(path,
+								buyer_user_head, ImageLoadOptions.getOptionsLoading());
 						Toast.makeText(getActivity(), "上传成功！",
 								Toast.LENGTH_LONG).show();
 					} catch (JSONException e) {

@@ -11,7 +11,6 @@ import org.json.JSONException;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.SearchResultsFragmentActivity;
-import com.nongziwang.adapter.TypeSearchAdapter;
 import com.nongziwang.application.AppConstants;
 import com.nongziwang.db.NongziDao;
 import com.nongziwang.db.NongziDaoImpl;
@@ -118,7 +117,7 @@ public class CommonSearchFragment extends BaseFragment {
 				if(isSuccess && childlist!=null && childlist.size()>0){
 					String key = grouplist.get(groupPosition).getName();
 					String name=map.get(key).get(childPosition).getName();
-					intentAction(name);
+					intentAction(name,map.get(key).get(childPosition).getLeimuid());
 				}
 			
 				return false;
@@ -161,7 +160,7 @@ public class CommonSearchFragment extends BaseFragment {
 			public void onFinish() {
 				super.onFinish();
 				if(!isSuccess){
-					intentAction(grouplist.get(groupPosition).getName());
+					intentAction(grouplist.get(groupPosition).getName(),grouplist.get(groupPosition).getLeimuid());
 				}
 			}
 		});
@@ -170,7 +169,7 @@ public class CommonSearchFragment extends BaseFragment {
 	}
 	
 	
-	public void intentAction(String params){
+	public void intentAction(String params,String leimuid){
 		if (!dao.findHistoryIsExist(params)) {
 			if (TextUtils.isEmpty(userid)) {
 				dao.addSearchHistory("1", params);
@@ -181,6 +180,7 @@ public class CommonSearchFragment extends BaseFragment {
 		Intent intent = new Intent(getActivity(),
 				SearchResultsFragmentActivity.class);
 		intent.putExtra("params",params);
+		intent.putExtra("leimuid",leimuid);
 		startActivity(intent);
 		getActivity().overridePendingTransition(R.anim.bottom_open, 0);
 

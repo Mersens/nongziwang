@@ -37,7 +37,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private DialogWaiting dialog;
 	private ImageView image_qq, image_weixin, image_sina;
 
-
 	private static final String LOGIN_URL = AppConstants.SERVICE_ADDRESS
 			+ "login/gotoLogin";
 	private static final String USERINFO_URL = AppConstants.SERVICE_ADDRESS
@@ -50,7 +49,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_login);
-
 		dao = new NongziDaoImpl(this);
 		initViews();
 		initEvent();
@@ -83,7 +81,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		btn_login.setOnClickListener(this);
 		tv_forget_psd.setOnClickListener(this);
 		tv_user_regist.setOnClickListener(this);
-
 	}
 
 	@Override
@@ -95,7 +92,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.tv_forget_psd:
 			intentAction(LoginActivity.this, ForgetPasswordActivity.class);
-			finish();
 			break;
 		case R.id.tv_user_regist:
 			intentAction(LoginActivity.this, RegisterActivity.class);
@@ -105,7 +101,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 			break;
 		case R.id.image_weixin:
-
+			
 			break;
 		case R.id.image_qq:
 
@@ -176,16 +172,17 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 							jsonObject = new JSONObject(arg2);
 							String userid = jsonObject.getString("userid");
 							getUserInfo(userid, name, psd);
-							ShowToast("µÇÂ¼³É¹¦£¡"); 
-							finishActivity();
 						} catch (JSONException e) {
 							e.printStackTrace();
-							dialog.dismiss();
+							dialogDismiss();
+							 ShowToast("µÇÂ¼Ê§°Ü£¡");
 						}
 					} else if ("2".equals(code)) {
 						ShowToast("ÕË»§Ãû²»´æÔÚ!");
+						dialogDismiss();
 					} else if ("3".equals(code)) {
 						ShowToast("ÓÃ»§ÃÜÂëÊäÈë´íÎó!");
+						dialogDismiss();
 					}
 				}
 			}
@@ -195,12 +192,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 					Throwable arg3) {
 				    Log.e(TAG, arg2 == null ? "" : arg2);
 				    ShowToast("µÇÂ¼Ê§°Ü£¡");
-			}
-
-			@Override
-			public void onFinish() {
-				dialogDismiss();
-				super.onFinish();
+				    dialogDismiss();
 			}
 		});
 	}
@@ -215,8 +207,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("1".equals(code)) {
-						// Êý¾ÝÇëÇó³É¹¦
 						try {
+							ShowToast("µÇÂ¼³É¹¦£¡"); 
 							SharePreferenceUtil.getInstance(
 									getApplicationContext()).setUserId(userid);
 							SharePreferenceUtil.getInstance(
@@ -227,18 +219,30 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 							UserBean user = JsonUtils.getUserInfo(arg2);
 							user.setUserpwd(MD5Util.MD5(psd));
 							dao.addUserInfo(user);
+							finishActivity();
 						} catch (JSONException e) {
 							e.printStackTrace();
+							dialogDismiss();
 						}
+					}else{
+					    ShowToast("µÇÂ¼Ê§°Ü£¡");
+					    dialogDismiss();
 					}
 				}
 			}
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Log.e(TAG, arg2 == null ? "" : arg2);
+				    Log.e(TAG, arg2 == null ? "" : arg2);
+				    ShowToast("µÇÂ¼Ê§°Ü£¡");
+				    dialogDismiss();
 			}
-
+			
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				dialogDismiss();
+			}
 		});
 	}
 

@@ -20,7 +20,6 @@ import com.nongziwang.utils.ImageLoadOptions;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.view.DialogWaiting;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -98,7 +97,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		layout_search.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(),
 						SearchFragmentActivity.class);
 				startActivity(intent);
@@ -114,7 +112,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		HttpUtils.doPost(BANNER_URL, new TextHttpResponseHandler() {
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 				super.onStart();
 				dialog=new DialogWaiting(getActivity());
 				dialog.show();
@@ -144,7 +141,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 			
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				super.onFinish();
 				if(dialog!=null && dialog.isShowing()){
 					dialog.dismiss();
@@ -227,12 +223,10 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 			}
 		};
 		handler.postDelayed(viewpagerRunnable, TIME);
-
 	}
 
 	@Override
 	public void onDestroyView() {
-		// TODO Auto-generated method stub
 		super.onDestroyView();
 		handler.removeCallbacks(viewpagerRunnable);
 	}

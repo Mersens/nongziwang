@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +22,7 @@ import com.nongziwang.application.AppConstants;
 import com.nongziwang.fragment.MyShopsFragment;
 import com.nongziwang.main.R;
 import com.nongziwang.view.CircleImageView;
+import com.nongziwang.view.HeadView.OnLeftClickListener;
 
 public class MyShopsFragmentActivity extends BaseActivity implements
 		OnClickListener {
@@ -41,6 +43,7 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 	private static final String URL=AppConstants.SERVICE_ADDRESS+"dianpu/gotoDianpuIndex";
 	private static final String ALL_URL=AppConstants.SERVICE_ADDRESS+"dianpu/getAllDianpuChanpin";
 	private String id;
+
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -80,6 +83,13 @@ public class MyShopsFragmentActivity extends BaseActivity implements
 			@Override
 			public void onClick(View v) {
 				finishActivity();
+			}
+		});
+		setLeftWithTitleViewMethod(R.drawable.ic_menu_back, "²é¿´µêÆÌ", new OnLeftClickListener() {
+			
+			@Override
+			public void onClick() {
+				finishActivity();				
 			}
 		});
 	}
@@ -156,8 +166,10 @@ public class MyShopsFragmentActivity extends BaseActivity implements
         public void onReceive(Context context, Intent intent) {  
             String action = intent.getAction();
             if(action.equals(ACTION_SHOW)){  
+            	layout_top.startAnimation(AnimationUtils.loadAnimation(MyShopsFragmentActivity.this, R.anim.top_down));
             	layout_top.setVisibility(View.VISIBLE);
             } else if(action.equals(ACTION_HIDE)){  
+            	layout_top.startAnimation(AnimationUtils.loadAnimation(MyShopsFragmentActivity.this, R.anim.top_up));
             	layout_top.setVisibility(View.GONE);
             }
         }  
@@ -171,7 +183,6 @@ public class MyShopsFragmentActivity extends BaseActivity implements
     
     @Override
     protected void onDestroy() {
-    	// TODO Auto-generated method stub
     	super.onDestroy();
     	unregisterReceiver(mBroadcastReceiver);
     }

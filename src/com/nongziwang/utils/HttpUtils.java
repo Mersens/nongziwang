@@ -16,7 +16,7 @@ import com.loopj.android.http.RequestParams;
 public class HttpUtils {
 	private static AsyncHttpClient client = new AsyncHttpClient();
 	static {
-		client.setTimeout(12000); // 设置请求超时
+		client.setTimeout(12000); // 设置连接超时
 	}
 
 	/**

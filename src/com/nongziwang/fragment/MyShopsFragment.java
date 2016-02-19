@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.http.Header;
 import org.json.JSONException;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,12 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.MyShopsFragmentActivity;
+import com.nongziwang.activity.ProductDetailFragmentActivity;
 import com.nongziwang.adapter.MyShopsAdapter;
 import com.nongziwang.entity.ChanPinBean;
 import com.nongziwang.entity.DianPuBean;
@@ -38,16 +42,13 @@ public class MyShopsFragment extends BaseFragment {
 	private DianPuBean dianpubean;
 	private List<ChanPinBean> list;
 	private static final String TAG = "MyShopsFragment";
-
-
+	private Context context;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		if(view!=null){
-			return view;
-		}
 		view = inflater.inflate(R.layout.layout_myproduct, container, false);
+		context=view.getContext();
 		url = getArguments().getString("params");
 		dianpuid=getArguments().getString("id");
 		initViews();
@@ -67,11 +68,12 @@ public class MyShopsFragment extends BaseFragment {
 			private int pos;
 			private boolean isSend = false;
 			private boolean isShow = true;
+			private boolean isFirst=false;
 
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				if (view.getFirstVisiblePosition() == 0 && pos == 0) {
-					if (isShow) {
+				if (view.getFirstVisiblePosition() == 0 && pos == 0 ) {
+					if (isShow && isFirst) {
 						Intent mIntent = new Intent(
 								MyShopsFragmentActivity.ACTION_SHOW);
 						getActivity().sendBroadcast(mIntent);
@@ -86,6 +88,7 @@ public class MyShopsFragment extends BaseFragment {
 						getActivity().sendBroadcast(mIntent);
 						isSend = true;
 						isShow = true;
+						isFirst=true;
 					}
 				}
 			}
@@ -96,10 +99,16 @@ public class MyShopsFragment extends BaseFragment {
 				pos = firstVisibleItem;
 			}
 		});
+		
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				String chanpinid=list.get(position).getChanpinid();
+				intentAction(getActivity(), ProductDetailFragmentActivity.class,chanpinid);
+			}
+		});
 	}
-	
-
-	
 	
 	public void initDatas() {
 		RequestParams params = new RequestParams();
@@ -109,7 +118,7 @@ public class MyShopsFragment extends BaseFragment {
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(getActivity(), " 店铺id为空!",
+					Toast.makeText(context, " 店铺id为空!",
 							Toast.LENGTH_SHORT).show();
 				} else if ("1".equals(code)) {
 					try {
@@ -122,10 +131,10 @@ public class MyShopsFragment extends BaseFragment {
 					}
 
 				} else if ("2".equals(code)) {
-					Toast.makeText(getActivity(), "该店铺不存在!", Toast.LENGTH_SHORT)
+					Toast.makeText(context, "该店铺不存在!", Toast.LENGTH_SHORT)
 							.show();
-				} else if ("2".equals(code)) {
-					Toast.makeText(getActivity(), "该店铺下没有产品!",
+				} else if ("3".equals(code)) {
+					Toast.makeText(context, "该店铺下没有产品!",
 							Toast.LENGTH_SHORT).show();
 				}
 
@@ -134,7 +143,7 @@ public class MyShopsFragment extends BaseFragment {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(getActivity(), "数据获取失败!", Toast.LENGTH_SHORT)
+				Toast.makeText(context, "数据获取失败!", Toast.LENGTH_SHORT)
 						.show();
 				Log.e(TAG, arg2 == null ? "" : arg2);
 
@@ -142,7 +151,6 @@ public class MyShopsFragment extends BaseFragment {
 			
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				super.onFinish();
 				MyShopsFragmentActivity.layout_loading.setVisibility(View.GONE);
 			}

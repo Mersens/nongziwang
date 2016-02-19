@@ -31,7 +31,7 @@ import com.nongziwang.main.R;
 
 public class SearchResultsFragmentActivity extends BaseActivity implements
 		OnClickListener {
-	private String params;
+	private String params=null;
 	private ImageView image_back, image_search;
 	private Spinner spinner;
 	private TextView tv_moren, tv_pinpai, tv_yongtu, tv_jiage;
@@ -45,6 +45,7 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 	public static String yongtuid=null;
 	public static final String ACTION_PINPAIID="action_pinpaiid";
 	public static final String ACTION_YONGTUID="action_yongtuid";
+	public static String leimuid=null;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -53,6 +54,7 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 		setContentView(R.layout.layout_search_result);
 		registerBoradcastReceiver();
 		params = getIntent().getStringExtra("params");
+		leimuid=getIntent().getStringExtra("leimuid");
 		sp_pos=getIntent().getIntExtra("sp_pos",0);
 		mInflater = LayoutInflater.from(this);
 		initViews();
@@ -127,7 +129,6 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 	}
 	 class MyArrayAdapter extends ArrayAdapter<String>{
 		 private String str[];
-
 		public MyArrayAdapter(Context context, int resource, String[] objects) {
 			super(context, resource, objects);
 			str=objects;
@@ -187,7 +188,7 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 			fm.beginTransaction().remove(fragment).commit();
 		}
 		fragment = creatFragment(style, params);
-		fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).add(R.id.fragmentContainer, fragment).commit();
+		fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).replace(R.id.fragmentContainer, fragment).commit();
 	}
 
 	@Override
@@ -264,14 +265,14 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
 
 	public void resetColor(int i) {
 
-		tv_moren.setTextColor(getResources().getColor(R.color.gray_text_color));
+		tv_moren.setTextColor(getResources().getColor(R.color.base_color_text_black));
 		tv_pinpai
-				.setTextColor(getResources().getColor(R.color.gray_text_color));
+				.setTextColor(getResources().getColor(R.color.base_color_text_black));
 		tv_pinpai.setBackgroundResource(R.drawable.spinner_ab_default_holo_light_am);
 		tv_yongtu
-				.setTextColor(getResources().getColor(R.color.gray_text_color));
+				.setTextColor(getResources().getColor(R.color.base_color_text_black));
 		tv_yongtu.setBackgroundResource(R.drawable.spinner_ab_default_holo_light_am);
-		tv_jiage.setTextColor(getResources().getColor(R.color.gray_text_color));
+		tv_jiage.setTextColor(getResources().getColor(R.color.base_color_text_black));
 	}
 	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){  
         @Override  
@@ -279,12 +280,14 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
             String action = intent.getAction();  
             if(action.equals(ACTION_PINPAIID)){  
             	pinpaiid=intent.getStringExtra("pinpaiid");
-            	yongtuid=null;
+    			index = 0;
+    			setColor(0);
             	addFragment(Style.MOREN, params);
             } 
             if(action.equals(ACTION_YONGTUID)){
             	yongtuid=intent.getStringExtra("yongtuid");
-            	pinpaiid=null;
+    			index = 0;
+    			setColor(0);
             	addFragment(Style.MOREN, params);
             }
         }  
@@ -297,11 +300,16 @@ public class SearchResultsFragmentActivity extends BaseActivity implements
         registerReceiver(mBroadcastReceiver, myIntentFilter);  
     }  
     
-    
     @Override
     protected void onDestroy() {
-    	// TODO Auto-generated method stub
     	super.onDestroy();
     	unregisterReceiver(mBroadcastReceiver);
+    	resetDatas();
+    }
+    
+    public void resetDatas(){
+    	pinpaiid=null;
+    	yongtuid=null;
+        leimuid=null;
     }
 }

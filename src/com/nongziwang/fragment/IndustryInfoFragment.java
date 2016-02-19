@@ -20,6 +20,7 @@ import com.nongziwang.view.XListView;
 import com.nongziwang.view.XListView.IXListViewListener;
 
 import android.content.Intent;
+import android.content.Loader.OnLoadCanceledListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -96,7 +97,6 @@ public class IndustryInfoFragment extends BaseFragment implements
 						R.anim.left_out);
 			}
 		});
-
 	}
 
 	public static Fragment getInstance(String params) {
@@ -160,15 +160,13 @@ public class IndustryInfoFragment extends BaseFragment implements
 								Toast.LENGTH_LONG).show();
 					} else if ("1".equals(code)) {
 						try {
-
-							List<NewsBean>newslist = JsonUtils.getNewsInfo(arg2);
-
-							if (newslist != null && newslist.size() > 0) {
-								if (newslist.size() < 10) {
+							List<NewsBean> newslist1 = JsonUtils.getNewsInfo(arg2);
+							if (newslist1 != null && newslist1.size() > 0) {
+								if (newslist1.size() < 10) {
 									listView.setPullLoadEnable(false);
 								}
-								lists.addAll(newslist);
-								adapter = new IndustryInfoAdapter(newslist,
+								lists.addAll(newslist1);
+								adapter = new IndustryInfoAdapter(newslist1,
 										getActivity());
 								listView.setAdapter(adapter);
 							}
@@ -276,9 +274,13 @@ public class IndustryInfoFragment extends BaseFragment implements
 							lists.clear();
 							List<NewsBean> newslist = JsonUtils.getNewsInfo(arg2);
 							lists.addAll(newslist);
-							adapter.setList(newslist);
-							adapter.notifyDataSetChanged();
-
+							if(adapter!=null){
+								adapter=null;
+							}
+							adapter = new IndustryInfoAdapter(newslist,
+									getActivity());
+							listView.setAdapter(adapter);
+							onLoadFinsh();
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -301,13 +303,13 @@ public class IndustryInfoFragment extends BaseFragment implements
 				Toast.makeText(getActivity(), "刷新数据失败!", Toast.LENGTH_SHORT)
 						.show();
 			}
-
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				super.onFinish();
-				listView.stopRefresh();
+				onLoadFinsh();
 			}
+
+
 		});
 
 	}
@@ -327,10 +329,15 @@ public class IndustryInfoFragment extends BaseFragment implements
 					} else if ("1".equals(code)) {
 						try {
 							lists.clear();
-							List<NewsBean> zhuangtilist = JsonUtils.getZhuanTiInfo(arg2);
-							adapter.setList(zhuangtilist);
-							lists.addAll(zhuangtilist);
-							adapter.notifyDataSetChanged();
+							List<NewsBean> zhuangtilist1 = JsonUtils.getZhuanTiInfo(arg2);
+							lists.addAll(zhuangtilist1);
+							if(adapter!=null){
+								adapter=null;
+							}
+							adapter = new IndustryInfoAdapter(zhuangtilist1,
+									getActivity());
+							listView.setAdapter(adapter);
+							onLoadFinsh();
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -350,12 +357,12 @@ public class IndustryInfoFragment extends BaseFragment implements
 				Toast.makeText(getActivity(), "刷新数据失败!", Toast.LENGTH_LONG)
 						.show();
 			}
-
 			@Override
 			public void onFinish() {
 				super.onFinish();
-				listView.stopRefresh();
+				onLoadFinsh();
 			}
+
 		});
 	}
 
@@ -374,13 +381,14 @@ public class IndustryInfoFragment extends BaseFragment implements
 								Toast.LENGTH_LONG).show();
 					} else if ("1".equals(code)) {
 						try {
-							List<NewsBean> list = JsonUtils.getNewsInfo(arg2);
-							if (list.size() < 10) {
+							List<NewsBean> list2 = JsonUtils.getNewsInfo(arg2);
+							if (list2.size() < 10) {
 								listView.setPullLoadEnable(false);
 							}
-							lists.addAll(list);
-							adapter.addAll(list);
+							lists.addAll(list2);
+							adapter.addAll(list2);
 							adapter.notifyDataSetChanged();
+							onLoadFinsh();
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -405,13 +413,13 @@ public class IndustryInfoFragment extends BaseFragment implements
 				Toast.makeText(getActivity(), "刷新数据失败!", Toast.LENGTH_SHORT)
 						.show();
 			}
-
+			
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				super.onFinish();
-				listView.stopLoadMore();
+				onLoadFinsh();
 			}
+
 		});
 
 	}
@@ -430,14 +438,16 @@ public class IndustryInfoFragment extends BaseFragment implements
 								Toast.LENGTH_LONG).show();
 					} else if ("1".equals(code)) {
 						try {
-							List<NewsBean> list = JsonUtils
+							List<NewsBean> list3 = JsonUtils
 									.getZhuanTiInfo(arg2);
-							if (list.size() < 10) {
+							if (list3.size() < 10) {
 								listView.setPullLoadEnable(false);
 							}
-							adapter.addAll(list);
-							lists.addAll(list);
+							
+							lists.addAll(list3);
+							adapter.addAll(list3);
 							adapter.notifyDataSetChanged();
+							onLoadFinsh();
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
@@ -445,7 +455,6 @@ public class IndustryInfoFragment extends BaseFragment implements
 						listView.setPullLoadEnable(false);
 						Toast.makeText(getActivity(), "没有专题数据!",
 								Toast.LENGTH_LONG).show();
-						
 					}
 				}
 			}
@@ -462,7 +471,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 			@Override
 			public void onFinish() {
 				super.onFinish();
-				listView.stopLoadMore();
+				onLoadFinsh();
 			}
 		});
 	}
@@ -481,7 +490,11 @@ public class IndustryInfoFragment extends BaseFragment implements
 			doNewsOnLoadMore();
 		else
 			doZhuanTiOnLoadMore();
-
+	}
+	
+	public void onLoadFinsh(){
+		listView.stopLoadMore();
+		listView.stopRefresh();
 	}
 
 }

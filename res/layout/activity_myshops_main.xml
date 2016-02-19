@@ -3,12 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+    <include
+        android:id="@+id/common_actionbar"
+        layout="@layout/layout_actionbar" />
+    
+        <RelativeLayout
+        android:id="@+id/layout_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_color"
+        android:orientation="vertical"
+        
+        android:visibility="gone"
+         >
 
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center" />
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/actionbar_hight"
         android:background="@color/base_color_text_gray"
-        android:orientation="horizontal" >
+        android:orientation="horizontal" 
+        android:visibility="gone"
+        >
 
         <ImageView
             android:id="@+id/img_menu_back"
@@ -31,7 +53,9 @@
             android:baselineAligned="false"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:orientation="horizontal" >
+            android:orientation="horizontal" 
+            android:visibility="gone"
+            >
 
             <ImageView
                 android:id="@+id/spinner"
@@ -82,45 +106,35 @@
             android:layout_marginBottom="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:src="@drawable/barcode_normal" />
+            android:src="@drawable/barcode_normal" 
+            android:visibility="gone"
+            />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
-
-    <RelativeLayout
-        android:id="@+id/layout_loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white_color"
         android:orientation="vertical" 
-        android:visibility="gone"
         >
 
-        <ProgressBar
-            android:id="@+id/progressBar1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center" />
-    </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/layout_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            
+             >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="112dp"
+                android:layout_height="100dp"
                 android:background="@drawable/img_shop"
                 android:orientation="vertical" >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp" >
+                    android:layout_height="wrap_content" >
 
                     <ImageView
                         android:id="@+id/image_share"
@@ -130,7 +144,9 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="8dp"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/icon_fenxiang" />
+                        android:src="@drawable/icon_fenxiang"
+                        android:visibility="gone"
+                         />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -256,11 +272,16 @@
             </LinearLayout>
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/base_color_text_gray"
+            />
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
+            android:background="@color/base_color_text_gray"
             android:layout_height="0dp"
-            android:layout_marginTop="4dp"
             android:layout_weight="1" >
         </FrameLayout>
     </LinearLayout>
