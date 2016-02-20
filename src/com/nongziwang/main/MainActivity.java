@@ -21,7 +21,7 @@ import com.nongziwang.view.DialogTips;
 /**
  * 
  * @title MainActivity
- * @description:TODO
+ * @description:MainActivity
  * @author Mersens
  * @time 2016Äê1ÔÂ8ÈÕ
  */
@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		img_product = (ImageView) findViewById(R.id.img_product);
 		img_info = (ImageView) findViewById(R.id.img_info);
 		img_user = (ImageView) findViewById(R.id.img_user);
-
+		
 		mTabs[0] = layout_home;
 		mTabs[1] = layout_product;
 		mTabs[2] = layout_info;

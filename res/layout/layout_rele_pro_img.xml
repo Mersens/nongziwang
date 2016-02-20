@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="图片和详细说明"
+                android:text="@string/tv_tp_sm"
                 android:textColor="@color/base_color_text_black"
                 android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
         </RelativeLayout>
@@ -52,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="商品图片："
+                        android:text="@string/tv_sptp"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                 </RelativeLayout>
@@ -68,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="您可以上传8张图片大小不超过5M，支持jpg,jpeg,gif,bmb格式"
+                        android:text="@string/tv_sc_tips"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="10sp" />
                 </RelativeLayout>
@@ -121,7 +121,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="4dp"
-                        android:text="商品描述："
+                        android:text="@string/tv_ms"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                 </RelativeLayout>
@@ -135,7 +135,7 @@
                     android:background="@drawable/editbox_background_normal"
                     android:ems="10"
                     android:gravity="top"
-                    android:hint="200字以内"
+                    android:hint="@string/tv_rbyn"
                     android:maxLines="12"
                     android:minLines="6"
                     android:textColor="@color/base_color_text_black"
@@ -167,7 +167,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="4dp"
-                        android:text="商品详情："
+                        android:text="@string/tv_xq"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                 </RelativeLayout>
@@ -181,7 +181,7 @@
                     android:background="@drawable/editbox_background_normal"
                     android:ems="10"
                     android:gravity="top"
-                    android:hint="200字以内"
+                    android:hint="@string/tv_rbyn"
                     android:maxLines="12"
                     android:minLines="6"
                     android:textColor="@color/base_color_text_black"

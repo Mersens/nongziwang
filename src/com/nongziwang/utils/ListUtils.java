@@ -21,7 +21,6 @@ public class ListUtils {
     		MyRegion myregion=list.get(i);
     		if(key.equals(myregion.getName())){
     			return myregion.getId();
-    			
     		}
     	}
 		return null;

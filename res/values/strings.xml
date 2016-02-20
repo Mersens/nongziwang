@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">101农资网</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -108,5 +109,46 @@
     <string name="tv_img_tips">提示：请上传扫描件或复印件，需以图片形式上传每个文件小于2M</string>
     <string name="tv_tj">提交</string>
     <string name="tv_ljty">立即体验</string>
+    <string name="tv_jbcs">商品基本参数：</string>
+    <string name="tv_jbcs_tips">(填错商品属性讲可能导致商品下架或搜索不到，请准确填写商品属性！)</string>
+    <string name="tv_spbt">商品标题：</string>
+    <string name="tv_sixty">60字以内</string>
+    <string name="tv_keys">关键字：</string>
+    <string name="tv_thirty">30字以内</string>
+    <string name="tv_zyyt">主要用途：</string>
+    <string name="tv_zycf">主要成分：</string>
+    <string name="tv_pp">品牌：</string>
+    <string name="tv_dw">单位：</string>
+    <string name="tv_spjg">商品价格：</string>
+    <string name="tv_finish">完成</string>
+    <string name="tv_tp_sm">图片和详细说明</string>
+    <string name="tv_sptp">商品图片：</string>
+    <string name="tv_sc_tips">您可以上传8张图片大小不超过5M，支持jpg,jpeg,gif,bmb格式</string>
+    <string name="tv_ms">商品描述：</string>
+    <string name="tv_rbyn">200字以内</string>
+    <string name="tv_xq">商品详情：</string>
+    <string name="tv_check_all">全选</string>
+    <string name="tv_plxj">批量下架</string>
+    <string name="tv_del">删除</string>
+    <string name="tv_cpxx">产品信息</string>
+    <string name="tv_fbsj">发布时间</string>
+    <string name="tv_zxjy">在线交易</string>
+    <string name="tv_cz">操作</string>
+    <string name="tv_update">修改</string>
+    <string name="tv_xj">下架</string>
+    <string name="tv_qbsp">全部商品</string>
+    <string name="tv_dpsy">店铺首页</string>
+    <string name="tv_grzlgl">个人资料管理</string>
+    <string name="tv_jbxx">基本信息</string>
+    <string name="tv_tx">头像：</string>
+    <string name="tv_zsxm">真实姓名：</string>
+    <string name="tv_sj">手机号码：</string>
+    <string name="tv_yyz">[已验证]</string>
+    <string name="tv_qq">QQ：</string>
+    <string name="tv_qd">确定</string>
+    <string name="tv_dlmm">登录密码</string>
+    <string name="tv_dlmm_tips">互联网账号存在被盗分险,建议您定期更改密码以保证账户安全。</string>
+    <string name="tv_sjyz">手机验证</string>
+    <string name="tv_sjyz_tips">您验证的手机：157****0385若已丢失或停用，立即更换，避免账号被盗。</string>
 
 </resources>

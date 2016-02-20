@@ -18,8 +18,10 @@ import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.ImageLoadOptions;
 import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.utils.ToastUtils;
 import com.nongziwang.view.DialogWaiting;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -101,7 +103,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 						SearchFragmentActivity.class);
 				startActivity(intent);
 				getActivity().overridePendingTransition(R.anim.bottom_open, 0);
-
 			}
 		});
 	}
@@ -135,7 +136,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(getActivity(), "数据加载失败！", Toast.LENGTH_SHORT).show();
+				ToastUtils.showMessage(getActivity(), "数据加载失败！");
 				Log.e(TAG, arg2==null?"":arg2);
 			}
 			

@@ -16,7 +16,7 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="个人资料管理"
+            android:text="@string/tv_grzlgl"
             android:textColor="@color/base_color_text_black"
             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
 
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="基本信息"
+            android:text="@string/tv_jbxx"
             android:textColor="@color/base_color_text_black"
             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
 
@@ -38,7 +38,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="84dp"
                 android:layout_height="wrap_content"
-                android:text="头像："
+                android:text="@string/tv_tx"
                 android:textColor="@color/base_color_text_black"
                 android:textSize="@dimen/text_size" />
 
@@ -61,7 +61,7 @@
                 android:layout_width="84dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="真实姓名："
+                android:text="@string/tv_zsxm"
                 android:textColor="@color/base_color_text_black"
                 android:textSize="@dimen/text_size" />
 
@@ -89,7 +89,7 @@
                 android:layout_width="84dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="手机号码："
+                android:text="@string/tv_sj"
                 android:textColor="@color/base_color_text_black"
                 android:textSize="@dimen/text_size" />
 
@@ -103,7 +103,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="157****0385"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/text_size" />
 
@@ -114,7 +113,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/tv_tel"
-                    android:text="[已验证]"
+                    android:text="@string/tv_yyz"
                     android:textColor="@color/title_yellow_text_color"
                     android:textSize="@dimen/text_size" />
 
@@ -125,7 +124,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@+id/textView8"
-                    android:text="修改"
+                    android:text="@string/tv_update"
                     android:textColor="@color/red_text_color"
                     android:textSize="@dimen/text_size" />
             </RelativeLayout>
@@ -141,7 +140,7 @@
                 android:layout_width="84dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="QQ："
+                android:text="@string/tv_qq"
                 android:textColor="@color/base_color_text_black"
                 android:textSize="@dimen/text_size" />
 
@@ -168,7 +167,7 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/button_bg"
             android:enabled="true"
-            android:text="确定"
+            android:text="@string/tv_qd"
             android:textColor="@color/white_color"
             android:textSize="@dimen/common_text_size" />
     </LinearLayout>

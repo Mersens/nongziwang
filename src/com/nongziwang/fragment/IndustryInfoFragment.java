@@ -16,11 +16,11 @@ import com.nongziwang.entity.NewsBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.utils.ToastUtils;
 import com.nongziwang.view.XListView;
 import com.nongziwang.view.XListView.IXListViewListener;
 
 import android.content.Intent;
-import android.content.Loader.OnLoadCanceledListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -31,7 +31,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 /**
  * 
@@ -73,9 +72,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 
 	private void initViews() {
 		listView = (XListView) view.findViewById(R.id.listView);
-		// 不允许上拉加载
 		listView.setPullLoadEnable(true);
-		// 允许下拉
 		listView.setPullRefreshEnable(true);
 		listView.setXListViewListener(this);
 		layout_loading = (RelativeLayout) view
@@ -105,7 +102,6 @@ public class IndustryInfoFragment extends BaseFragment implements
 		bundle.putString("params", params);
 		fragment.setArguments(bundle);
 		return fragment;
-
 	}
 
 	@Override
@@ -156,8 +152,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("0".equals(code)) {
-						Toast.makeText(getActivity(), "typeid为空!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "typeid为空!");
 					} else if ("1".equals(code)) {
 						try {
 							List<NewsBean> newslist1 = JsonUtils.getNewsInfo(arg2);
@@ -176,11 +171,9 @@ public class IndustryInfoFragment extends BaseFragment implements
 							e.printStackTrace();
 						}
 					} else if ("2".equals(code)) {
-						Toast.makeText(getActivity(), "页码输入错误!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "页码输入错误!");
 					} else if ("3".equals(code)) {
-						Toast.makeText(getActivity(), "没有相关新闻!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "没有相关新闻!");
 					}
 				}
 			}
@@ -190,8 +183,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 					Throwable arg3) {
 				// TODO Auto-generated method stub
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(getActivity(), "请求数据失败!", Toast.LENGTH_SHORT)
-						.show();
+				ToastUtils.showMessage(getActivity(), "请求数据失败!");
 			}
 
 			@Override
@@ -212,8 +204,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("0".equals(code)) {
-						Toast.makeText(getActivity(), "当前页码输入不正确!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "当前页码输入不正确!");
 					} else if ("1".equals(code)) {
 						try {
 							List<NewsBean> zhuangtilist = JsonUtils.getZhuanTiInfo(arg2);
@@ -232,8 +223,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 							e.printStackTrace();
 						}
 					} else if ("2".equals(code)) {
-						Toast.makeText(getActivity(), "没有专题数据!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "没有专题数据!");
 					}
 				}
 			}
@@ -243,8 +233,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 					Throwable arg3) {
 				// TODO Auto-generated method stub
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(getActivity(), "请求数据失败!", Toast.LENGTH_LONG)
-						.show();
+				ToastUtils.showMessage(getActivity(), "请求数据失败!");
 			}
 
 			@Override
@@ -267,8 +256,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("0".equals(code)) {
-						Toast.makeText(getActivity(), "typeid为空!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "typeid为空!");
 					} else if ("1".equals(code)) {
 						try {
 							lists.clear();
@@ -286,11 +274,9 @@ public class IndustryInfoFragment extends BaseFragment implements
 							e.printStackTrace();
 						}
 					} else if ("2".equals(code)) {
-						Toast.makeText(getActivity(), "页码输入错误!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "页码输入错误!");
 					} else if ("3".equals(code)) {
-						Toast.makeText(getActivity(), "没有相关新闻!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "没有相关新闻!");
 					}
 				}
 			}
@@ -300,8 +286,8 @@ public class IndustryInfoFragment extends BaseFragment implements
 					Throwable arg3) {
 				// TODO Auto-generated method stub
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(getActivity(), "刷新数据失败!", Toast.LENGTH_SHORT)
-						.show();
+				ToastUtils.showMessage(getActivity(), "刷新数据失败!");
+
 			}
 			@Override
 			public void onFinish() {
@@ -324,8 +310,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("0".equals(code)) {
-						Toast.makeText(getActivity(), "当前页码输入不正确!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "当前页码输入不正确!");
 					} else if ("1".equals(code)) {
 						try {
 							lists.clear();
@@ -343,8 +328,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 							e.printStackTrace();
 						}
 					} else if ("2".equals(code)) {
-						Toast.makeText(getActivity(), "没有专题数据!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "没有专题数据!");
 					}
 				}
 			}
@@ -354,8 +338,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 					Throwable arg3) {
 				// TODO Auto-generated method stub
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(getActivity(), "刷新数据失败!", Toast.LENGTH_LONG)
-						.show();
+				ToastUtils.showMessage(getActivity(), "刷新数据失败!");
 			}
 			@Override
 			public void onFinish() {
@@ -377,8 +360,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("0".equals(code)) {
-						Toast.makeText(getActivity(), "typeid为空!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "typeid为空!");
 					} else if ("1".equals(code)) {
 						try {
 							List<NewsBean> list2 = JsonUtils.getNewsInfo(arg2);
@@ -394,12 +376,10 @@ public class IndustryInfoFragment extends BaseFragment implements
 							e.printStackTrace();
 						}
 					} else if ("2".equals(code)) {
-						Toast.makeText(getActivity(), "页码输入错误!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "页码输入错误!");
 					} else if ("3".equals(code)) {
 						listView.setPullLoadEnable(false);
-						Toast.makeText(getActivity(), "没有相关新闻!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "没有相关新闻!");
 						
 					}
 				}
@@ -410,8 +390,8 @@ public class IndustryInfoFragment extends BaseFragment implements
 					Throwable arg3) {
 				// TODO Auto-generated method stub
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(getActivity(), "刷新数据失败!", Toast.LENGTH_SHORT)
-						.show();
+				ToastUtils.showMessage(getActivity(), "刷新数据失败!");
+
 			}
 			
 			@Override
@@ -434,8 +414,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("0".equals(code)) {
-						Toast.makeText(getActivity(), "当前页码输入不正确!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "当前页码输入不正确!");
 					} else if ("1".equals(code)) {
 						try {
 							List<NewsBean> list3 = JsonUtils
@@ -453,8 +432,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 						}
 					} else if ("2".equals(code)) {
 						listView.setPullLoadEnable(false);
-						Toast.makeText(getActivity(), "没有专题数据!",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "没有专题数据!");
 					}
 				}
 			}
@@ -464,8 +442,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 					Throwable arg3) {
 				// TODO Auto-generated method stub
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(getActivity(), "加载数据失败!", Toast.LENGTH_LONG)
-						.show();
+				ToastUtils.showMessage(getActivity(), "加载数据失败!");
 			}
 
 			@Override

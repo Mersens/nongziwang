@@ -18,28 +18,22 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	// 程序的Context对象
 	private Context mContext;
 
-	/** 保证只有一个CrashHandler实例 */
 	private CrashHandler() {
 
 	}
 
-	/** 获取CrashHandler实例 ,单例模式 */
+	/** 获取CrashHandler实例 ,单例模式双重校验锁 */
 	public static CrashHandler getInstance() {
-		if(INSTANCE==null){
+		if (INSTANCE == null) {
 			synchronized (CrashHandler.class) {
-				if(INSTANCE==null){
-					INSTANCE=new CrashHandler();
+				if (INSTANCE == null) {
+					INSTANCE = new CrashHandler();
 				}
 			}
 		}
 		return INSTANCE;
 	}
 
-	/**
-	 * 初始化
-	 * 
-	 * @param context
-	 */
 	public void init(Context context) {
 		mContext = context;
 		// 获取系统默认的UncaughtException处理器
@@ -54,9 +48,9 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	@Override
 	public void uncaughtException(Thread thread, Throwable ex) {
 		if (mDefaultHandler != null) {
-			 //程序出现异常时，进入该函数
-			 //CustomApplcation.getInstance().exit();
-			 mDefaultHandler.uncaughtException(thread, ex); 
+			// 程序出现异常时，进入该函数
+			//CustomApplcation.getInstance().exit();
+			mDefaultHandler.uncaughtException(thread, ex);
 		}
 	}
 

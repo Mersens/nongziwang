@@ -145,25 +145,21 @@ public class InfoFragment extends BaseFragment implements OnPageChangeListener {
 
 	@Override
 	protected void lazyLoad() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onPageSelected(int arg0) {
-		// TODO Auto-generated method stub
 		setTab(arg0);
 	}
 }

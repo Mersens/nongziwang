@@ -17,19 +17,23 @@ import android.content.Context;
 /**
  * 
  * @title CustomApplcation
- * @description:TODO
+ * @description:Android的Applcation设置和初始化全局配置
  * @author Mersens
- * @time 2016年1月16日
+ * @time 2016年2月16日
  */
+
 public class CustomApplcation extends Application {
+	// Applcation实例
 	public static CustomApplcation mInstance;
-	// 运用list来保存们每一个activity是关键,传说这是应用最优雅的退出方式
+	// 运用list来保存们每一个activity是关键,传说这是安卓应用最优雅的退出方式
 	private List<Activity> mList = new LinkedList<Activity>();
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		// 初始化系统级的异常监控
 		CrashHandler.getInstance().init(getApplicationContext());
+		// 初始化ImageLoader
 		initImageLoader(getApplicationContext());
 	}
 
@@ -47,7 +51,7 @@ public class CustomApplcation extends Application {
 
 	/**
 	 * 
-	 * @Title: initImageLoader 
+	 * @Title: initImageLoader
 	 * @Description: 初始化ImageLoader
 	 * @author Mersens
 	 * @param context

@@ -15,7 +15,6 @@
             android:layout_height="72dp"
             android:layout_margin="5dp"
             android:scaleType="centerInside"
-            android:src="@drawable/image_yumi"
              />
 
         <LinearLayout
@@ -33,8 +32,7 @@
                 android:layout_marginTop="4dp"
                 android:textColor="@color/base_color_text_black"
                 android:textSize="@dimen/text_size"
-                android:singleLine="true"
-                android:text="全国玉米市场行情分析" />
+                android:singleLine="true"/>
 
             <TextView
                 android:id="@+id/tv_msg"
@@ -45,8 +43,7 @@
                 android:textSize="13sp"
                 android:maxLines="2"
                 android:lineSpacingExtra="2dp"
-                android:ellipsize="end"
-                android:text="目前全国新季玉米供应充足，国储陈粮库存巨大" />
+                android:ellipsize="end" />
 
                 <TextView
                     android:id="@+id/tv_time"
@@ -55,8 +52,7 @@
                     android:layout_gravity="right"
                     android:layout_marginRight="4dp"
                     android:layout_marginBottom="2dp"
-                    android:textSize="@dimen/text_small_size"
-                    android:text="2015-12-16" />
+                    android:textSize="@dimen/text_small_size" />
         </LinearLayout>
     </LinearLayout>
 

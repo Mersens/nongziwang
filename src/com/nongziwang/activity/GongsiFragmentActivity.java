@@ -234,8 +234,7 @@ OnClickListener{
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(context, "找不到该公司信息!", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("找不到该公司信息!");
 				} else if ("1".equals(code)) {
 					try {
 						gongsibean = JsonUtils.getGongsiInfo(arg2);
@@ -249,7 +248,7 @@ OnClickListener{
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(context, "获取信息失败!", Toast.LENGTH_SHORT).show();
+				ShowToast("获取信息失败!");
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
 			
@@ -410,19 +409,17 @@ OnClickListener{
 					}
 
 				} else if ("2".equals(code)) {
-					Toast.makeText(context, "图片资源太大 !", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("图片资源太大 !");
 
 				} else if ("3".equals(code)) {
-					Toast.makeText(context, "文件为空 !", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("文件为空 !");
 				}
 			}
 
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(context, "上传失败!", Toast.LENGTH_SHORT).show();
+				ShowToast("上传失败!");
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
 			@Override
@@ -463,19 +460,17 @@ OnClickListener{
 					}
 
 				} else if ("2".equals(code)) {
-					Toast.makeText(context, "图片资源太大 !", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("图片资源太大 !");
 
 				} else if ("3".equals(code)) {
-					Toast.makeText(context, "文件为空 !", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("文件为空 !");
 				}
 			}
 
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(context, "上传失败!", Toast.LENGTH_SHORT).show();
+				ShowToast("上传失败!");
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
 
@@ -516,19 +511,17 @@ OnClickListener{
 					}
 
 				} else if ("2".equals(code)) {
-					Toast.makeText(context, "图片资源太大 !", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("图片资源太大 !");
 
 				} else if ("3".equals(code)) {
-					Toast.makeText(context, "文件为空 !", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("文件为空 !");
 				}
 			}
 
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(context, "上传失败!", Toast.LENGTH_SHORT).show();
+				ShowToast("上传失败!");
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
 			@Override
@@ -555,23 +548,23 @@ OnClickListener{
 				|| TextUtils.isEmpty(edt_xxdzs) || TextUtils.isEmpty(edt_gsdhs)
 				|| TextUtils.isEmpty(edt_gsczs) || TextUtils.isEmpty(edt_lxrs)
 				|| TextUtils.isEmpty(edt_lxdhs) || TextUtils.isEmpty(edt_gsjcs)) {
-			Toast.makeText(context, "请完善公司信息！", Toast.LENGTH_SHORT).show();
+			ShowToast("请完善公司信息！");
 			return;
 		}
 		int provinceIdex = spinner_province.getSelectedItemPosition();
 		int cityIndex = spinner_city.getSelectedItemPosition();
 		int areaIndex = spinner_area.getSelectedItemPosition();
 		if (provinceIdex == 0 || cityIndex == 0 || areaIndex == 0) {
-			Toast.makeText(context, "请选择所属区域！", Toast.LENGTH_SHORT).show();
+			ShowToast("请选择所属区域！");
 			return;
 		}
 
 		if(!isYyzzSuccess || !isSwdjSuccess || !isZzjgSuccess){
-			Toast.makeText(context, "证件照片上传未完成！", Toast.LENGTH_SHORT).show();
+			ShowToast("证件照片上传未完成！");
 			return;
 		}
 		if (map.size() != 3) {
-			Toast.makeText(context, "证件照片地址不完善！", Toast.LENGTH_SHORT).show();
+			ShowToast("证件照片地址不完善！");
 			return;
 		}
 		String provinceid = provinces.get(provinceIdex).getId();
@@ -600,7 +593,6 @@ OnClickListener{
 		}else{
 			doAdd(params);	
 		}
-
 	}
 	
 	public void doAdd(RequestParams params){
@@ -614,8 +606,7 @@ OnClickListener{
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(context, "公司信息填写不完整！", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("公司信息填写不完整！");
 				} else if ("1".equals(code)) {
 					try {
 						JSONObject jsonObject = new JSONObject(arg2);
@@ -630,13 +621,11 @@ OnClickListener{
 					}
 
 				} else if ("2".equals(code)) {
-					Toast.makeText(context, "该公司名称已被使用！", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("该公司名称已被使用！");
 				} else if ("3".equals(code)) {
-					Toast.makeText(context, "该公司简称已被使用！", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("该公司简称已被使用！");
 				} else if ("4".equals(code)) {
-					Toast.makeText(context, "添加失败！", Toast.LENGTH_SHORT).show();
+					ShowToast("添加失败！");
 				}
 
 			}
@@ -668,8 +657,7 @@ OnClickListener{
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(context, "公司信息填写不完整！", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("公司信息填写不完整！");
 				} else if ("1".equals(code)) {
 					try {
 						JSONObject jsonObject = new JSONObject(arg2);
@@ -683,16 +671,14 @@ OnClickListener{
 					}
 
 				} else if ("2".equals(code)) {
-					Toast.makeText(context, "找不到该公司信息！", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("找不到该公司信息！");
 				} else if ("3".equals(code)) {
-					Toast.makeText(context, "该公司名称已被使用！", Toast.LENGTH_SHORT)
-							.show();
+					ShowToast("该公司名称已被使用！");
 				} else if ("4".equals(code)) {
-					Toast.makeText(context, "该公司简称已被使用！", Toast.LENGTH_SHORT).show();
+					ShowToast("该公司简称已被使用！");
 				}
 				else if ("5".equals(code)) {
-					Toast.makeText(context, "修改失败！", Toast.LENGTH_SHORT).show();
+					ShowToast("修改失败！");
 				}
 
 			}
@@ -700,7 +686,7 @@ OnClickListener{
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(context, "修改失败!", Toast.LENGTH_SHORT).show();
+				ShowToast("修改失败！");
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
 			

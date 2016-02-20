@@ -17,6 +17,7 @@ import com.nongziwang.utils.DateUtil;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.ImageLoadOptions;
 import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.utils.ToastUtils;
 import com.nongziwang.view.DialogTips;
 import com.nongziwang.view.DialogWaiting;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -249,8 +250,7 @@ public class MyProductAdapter extends BaseListAdapter<ChanPinBean> {
 					@Override
 					public void onFailure(int arg0, Header[] arg1, String arg2,
 							Throwable arg3) {
-						Toast.makeText(context, "上架失败!", Toast.LENGTH_SHORT)
-								.show();
+						ToastUtils.showMessage(context, "上架失败!");
 					}
 
 					@Override
@@ -279,8 +279,7 @@ public class MyProductAdapter extends BaseListAdapter<ChanPinBean> {
 					public void onSuccess(int arg0, Header[] arg1, String arg2) {
 						String code = JsonUtils.getCode(arg2);
 						if ("0".equals(code)) {
-							Toast.makeText(context, "产品id为空!",
-									Toast.LENGTH_SHORT).show();
+							ToastUtils.showMessage(context, "产品id为空!");
 						} else if ("1".equals(code)) {
 							getCheckMap().remove(pos);
 							remove(pos);
@@ -295,8 +294,7 @@ public class MyProductAdapter extends BaseListAdapter<ChanPinBean> {
 					@Override
 					public void onFailure(int arg0, Header[] arg1, String arg2,
 							Throwable arg3) {
-						Toast.makeText(context, "上架失败!", Toast.LENGTH_SHORT)
-								.show();
+						ToastUtils.showMessage(context, "上架失败!");
 					}
 
 					@Override

@@ -14,7 +14,6 @@ import com.nongziwang.main.R;
 public class AccountSafeFragment extends BaseFragment {
 	private View view;
 	private Button btn_reset_password, btn_reset_phonenumber;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

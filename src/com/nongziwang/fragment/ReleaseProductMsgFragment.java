@@ -45,6 +45,7 @@ import com.nongziwang.utils.BitmapUtils;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.SharePreferenceUtil;
+import com.nongziwang.utils.ToastUtils;
 import com.nongziwang.view.DialogTips;
 import com.nongziwang.view.DialogWaiting;
 import com.nongziwang.view.FlowLayout;
@@ -178,12 +179,9 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 					}
 
 				} else if ("2".equals(code)) {
-					Toast.makeText(context, "图片资源太大 !",
-							Toast.LENGTH_SHORT).show();
-
+					ToastUtils.showMessage(context, "图片资源太大 !");
 				} else if ("3".equals(code)) {
-					Toast.makeText(context, "文件为空 !", Toast.LENGTH_SHORT)
-							.show();
+					ToastUtils.showMessage(context, "文件为空 !");
 				}
 
 			}
@@ -191,8 +189,7 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(context, "上传失败!", Toast.LENGTH_SHORT)
-						.show();
+				ToastUtils.showMessage(context, "上传失败!");
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
 
@@ -239,50 +236,44 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 				|| TextUtils.isEmpty(yt) || TextUtils.isEmpty(cf) || TextUtils.isEmpty(dw)
 				|| TextUtils.isEmpty(pp) || TextUtils.isEmpty(ms)
 				|| TextUtils.isEmpty(xq)) {
-			Toast.makeText(context, "请完善信息!", Toast.LENGTH_SHORT).show();
+			ToastUtils.showMessage(context, "请完善信息!");
 			return;
 		}
 
 		if (!isSuitLen(title, 60)) {
-			Toast.makeText(context, "商品标题内容过长!", Toast.LENGTH_SHORT)
-					.show();
+			ToastUtils.showMessage(context, "商品标题内容过长!");
 			return;
 		}
 		if (!isSuitLen(gjz, 30)) {
-			Toast.makeText(context, "关键字内容过长!", Toast.LENGTH_SHORT)
-					.show();
+			ToastUtils.showMessage(context, "关键字内容过长!");
 			return;
 		}
 		if (!isSuitLen(yt, 30)) {
-			Toast.makeText(context, "主要用途内容过长!", Toast.LENGTH_SHORT)
-					.show();
+			ToastUtils.showMessage(context, "主要用途内容过长!");
 			return;
 		}
 		if (!isSuitLen(cf, 30)) {
-			Toast.makeText(context, "主要成分内容过长!", Toast.LENGTH_SHORT)
-					.show();
+			ToastUtils.showMessage(context, "主要成分内容过长!");
 			return;
 		}
 		if (!isSuitLen(pp, 30)) {
-			Toast.makeText(context, "品牌内容过长!", Toast.LENGTH_SHORT).show();
+			ToastUtils.showMessage(context, "品牌内容过长!");
 			return;
 		}
 		if (!isSuitLen(ms, 200)) {
-			Toast.makeText(context, "商品描述内容过长!", Toast.LENGTH_SHORT)
-					.show();
+			ToastUtils.showMessage(context, "商品描述内容过长!");
 			return;
 		}
 		if (!isSuitLen(xq, 200)) {
-			Toast.makeText(context, "商品详情内容过长!", Toast.LENGTH_SHORT)
-					.show();
+			ToastUtils.showMessage(context, "商品详情内容过长!");
 			return;
 		}
 		if (map.size() == 0) {
-			Toast.makeText(context, "请上传图片!", Toast.LENGTH_SHORT).show();
+			ToastUtils.showMessage(context, "请上传图片!");
 			return;
 		}
 		if (TextUtils.isEmpty(param)) {
-			Toast.makeText(context, "类目ID为空!", Toast.LENGTH_SHORT).show();
+			ToastUtils.showMessage(context, "类目ID为空!");
 			return;
 		}
 		for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -333,8 +324,7 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(getActivity(), "用户id为空！", Toast.LENGTH_SHORT)
-							.show();
+					ToastUtils.showMessage(context, "用户id为空！");
 				} else if ("1".equals(code)) {
 					DialogTips dialog = new DialogTips(getActivity(), "发布成功!",
 							"确定");
@@ -349,23 +339,17 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 					dialog.show();
 					dialog = null;
 				} else if ("2".equals(code)) {
-					Toast.makeText(context, "用户信息不存在！",
-							Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(context, "用户信息不存在！");
 				} else if ("3".equals(code)) {
-					Toast.makeText(context, "公司id为空！", Toast.LENGTH_SHORT)
-							.show();
+					ToastUtils.showMessage(context, "公司id为空");
 				} else if ("4".equals(code)) {
-					Toast.makeText(context, "公司信息不存在！",
-							Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(context, "公司信息不存在！");
 				} else if ("5".equals(code)) {
-					Toast.makeText(context, "产品信息填写不完整！",
-							Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(context, "产品信息填写不完整！");
 				} else if ("6".equals(code)) {
-					Toast.makeText(context, "产品分类选择不正确！",
-							Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(context, "产品分类选择不正确！");
 				} else if ("7".equals(code)) {
-					Toast.makeText(context, "产品分类不存在！",
-							Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(context, "产品分类不存在！");
 				}
 			}
 
@@ -373,8 +357,7 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(context, "添加失败！", Toast.LENGTH_SHORT)
-						.show();
+				ToastUtils.showMessage(context, "添加失败！");
 			}
 
 			@Override

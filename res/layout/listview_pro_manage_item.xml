@@ -39,7 +39,7 @@
                 android:layout_marginRight="2dp"
                 android:layout_marginTop="6dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/android" />
+                />
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -54,7 +54,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:singleLine="true"
-                    android:text="调节剂土壤调理肥"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="11sp" />
 
@@ -63,7 +62,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:text="强力抗倒伏"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/text_small_size" />
             </LinearLayout>
@@ -79,7 +77,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="2015.12.29"
                 android:textColor="@color/base_color_text_black"
                 android:textSize="@dimen/text_mid_size" />
         </RelativeLayout>
@@ -88,7 +85,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" >
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,10 +97,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="2dp"
-                    android:text="未开通"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/text_mid_size" />
-
             </LinearLayout>
         </RelativeLayout>
 
@@ -126,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="修改"
+                    android:text="@string/tv_update"
                     android:textColor="@color/title_yellow_text_color"
                     android:textSize="@dimen/text_mid_size" />
 
@@ -135,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="下架"
+                    android:text="@string/tv_xj"
                     android:textColor="@color/title_yellow_text_color"
                     android:textSize="@dimen/text_mid_size" />
             </LinearLayout>

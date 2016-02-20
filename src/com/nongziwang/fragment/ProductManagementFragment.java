@@ -37,6 +37,7 @@ import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.SharePreferenceUtil;
+import com.nongziwang.utils.ToastUtils;
 import com.nongziwang.view.DialogTips;
 import com.nongziwang.view.DialogWaiting;
 import com.nongziwang.view.XListView;
@@ -216,8 +217,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(context, "产品id为空!", Toast.LENGTH_SHORT)
-							.show();
+					ToastUtils.showMessage(context, "产品id为空!");
 				} else if ("1".equals(code)) {
 					int count = adapter.getCount();
 					for (int n : list) {
@@ -237,8 +237,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(context, "上架失败!", Toast.LENGTH_SHORT)
-				.show();
+				ToastUtils.showMessage(context, "上架失败!");
 				Log.e(TAG, arg2==null?"":arg2);
 			}
 
@@ -296,8 +295,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(context, "产品id为空!", Toast.LENGTH_SHORT)
-							.show();
+					ToastUtils.showMessage(context, "产品id为空!");
 				} else if ("1".equals(code)) {
 					int count = adapter.getCount();
 					for (int n : list) {
@@ -317,8 +315,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(context, "下架失败!", Toast.LENGTH_SHORT)
-				.show();
+				ToastUtils.showMessage(context, "下架失败!");
 				Log.e(TAG, arg2==null?"":arg2);
 
 			}
@@ -368,7 +365,6 @@ public class ProductManagementFragment extends BaseFragment implements
 						dialog.show();
 					}
 				});
-
 				super.onStart();
 			}
 
@@ -376,8 +372,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(context, "产品id为空!", Toast.LENGTH_SHORT)
-							.show();
+					ToastUtils.showMessage(context, "产品id为空!");
 				} else if ("1".equals(code)) {
 					int count = adapter.getCount();
 					for (int n : list) {
@@ -397,8 +392,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(context, "删除失败!", Toast.LENGTH_SHORT)
-				.show();
+				ToastUtils.showMessage(context, "删除失败!");
 				Log.e(TAG, arg2==null?"":arg2);
 			}
 
@@ -469,8 +463,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(context, "该用户没有店铺!",
-							Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(context, "该用户没有店铺!");
 				} else if ("1".equals(code)) {
 					try {
 						List<ChanPinBean> list = JsonUtils.getChanPinInfo(arg2);
@@ -481,8 +474,7 @@ public class ProductManagementFragment extends BaseFragment implements
 						e.printStackTrace();
 					}
 				} else if ("2".equals(code)) {
-					Toast.makeText(context, "没有产品信息!", Toast.LENGTH_SHORT)
-							.show();
+					ToastUtils.showMessage(context, "没有产品信息!");
 				}
 			}
 
@@ -490,8 +482,7 @@ public class ProductManagementFragment extends BaseFragment implements
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(context, "获取失败!", Toast.LENGTH_SHORT)
-						.show();
+				ToastUtils.showMessage(context, "获取失败!");
 			}
 
 			@Override

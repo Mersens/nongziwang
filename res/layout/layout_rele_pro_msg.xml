@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="商品基本参数："
+                    android:text="@string/tv_jbcs"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
 
@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textView1"
-                    android:text="(填错商品属性讲可能导致商品下架或搜索不到，请准确填写商品属性！)"
+                    android:text="@string/tv_jbcs_tips"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="10sp" />
             </RelativeLayout>
@@ -71,7 +71,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_alignParentTop="true"
                             android:layout_marginTop="4dp"
-                            android:text="商品标题："
+                            android:text="@string/tv_spbt"
                             android:textColor="@color/base_color_text_black"
                             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                     </RelativeLayout>
@@ -84,7 +84,7 @@
                         android:background="@drawable/editbox_background_normal"
                         android:ems="10"
                         android:gravity="top"
-                        android:hint="60字以内"
+                        android:hint="@string/tv_sixty"
                         android:maxLines="10"
                         android:minLines="8"
                         android:textColor="@color/base_color_text_black"
@@ -119,7 +119,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="关键字："
+                            android:text="@string/tv_keys"
                             android:textColor="@color/base_color_text_black"
                             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                     </RelativeLayout>
@@ -133,7 +133,7 @@
                         android:background="@drawable/editbox_background_normal"
                         android:ems="10"
                         android:gravity="top"
-                        android:hint="30字以内"
+                        android:hint="@string/tv_thirty"
                         android:maxLines="3"
                         android:minLines="5"
                         android:textColor="@color/base_color_text_black"
@@ -165,7 +165,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="主要用途："
+                            android:text="@string/tv_zyyt"
                             android:textColor="@color/base_color_text_black"
                             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                     </RelativeLayout>
@@ -179,7 +179,7 @@
                         android:background="@drawable/editbox_background_normal"
                         android:ems="10"
                         android:gravity="top"
-                        android:hint="30字以内"
+                        android:hint="@string/tv_thirty"
                         android:maxLines="3"
                         android:minLines="5"
                         android:textColor="@color/base_color_text_black"
@@ -211,7 +211,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="主要成分："
+                            android:text="@string/tv_zycf"
                             android:textColor="@color/base_color_text_black"
                             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                     </RelativeLayout>
@@ -225,7 +225,7 @@
                         android:background="@drawable/editbox_background_normal"
                         android:ems="10"
                         android:gravity="top"
-                        android:hint="30字以内"
+                        android:hint="@string/tv_thirty"
                         android:maxLines="3"
                         android:minLines="5"
                         android:textColor="@color/base_color_text_black"
@@ -257,7 +257,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="品牌："
+                            android:text="@string/tv_pp"
                             android:textColor="@color/base_color_text_black"
                             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                     </RelativeLayout>
@@ -271,7 +271,7 @@
                         android:background="@drawable/editbox_background_normal"
                         android:ems="10"
                         android:gravity="top"
-                        android:hint="30字以内"
+                        android:hint="@string/tv_thirty"
                         android:maxLines="3"
                         android:minLines="5"
                         android:textColor="@color/base_color_text_black"
@@ -301,7 +301,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="单位："
+                            android:text="@string/tv_dw"
                             android:textColor="@color/base_color_text_black"
                             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                     </RelativeLayout>
@@ -342,7 +342,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="商品价格："
+                            android:text="@string/tv_spjg"
                             android:textColor="@color/base_color_text_black"
                             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                     </RelativeLayout>
@@ -371,7 +371,7 @@
                 android:layout_margin="25dp"
                 android:background="@drawable/button_bg"
                 android:enabled="true"
-                android:text="完成"
+                android:text="@string/tv_finish"
                 android:textColor="@color/white_color"
                 android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
         </LinearLayout>

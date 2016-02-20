@@ -19,6 +19,7 @@ import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.SharePreferenceUtil;
+import com.nongziwang.utils.ToastUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -148,8 +149,7 @@ public class ProductFragment extends BaseFragment {
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("0".equals(code)) {
-						Toast.makeText(getActivity(), "没有对应的类目信息!",
-								Toast.LENGTH_SHORT).show();
+						ToastUtils.showMessage(getActivity(), "没有对应的类目信息!");
 					} else if ("1".equals(code)) {
 						try {
 							feiliaolist = JsonUtils.getLeiMuByInfo(arg2);
@@ -183,8 +183,7 @@ public class ProductFragment extends BaseFragment {
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("0".equals(code)) {
-						Toast.makeText(getActivity(), "没有对应的类目信息!",
-								Toast.LENGTH_SHORT).show();
+						ToastUtils.showMessage(getActivity(), "没有对应的类目信息!");
 					} else if ("1".equals(code)) {
 						try {
 							nongyaolist = JsonUtils.getLeiMuByInfo(arg2);
@@ -192,7 +191,6 @@ public class ProductFragment extends BaseFragment {
 									.getName(), nongyaolist);
 							adapter.notifyDataSetChanged();
 						} catch (JSONException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -219,8 +217,7 @@ public class ProductFragment extends BaseFragment {
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("0".equals(code)) {
-						Toast.makeText(getActivity(), "没有对应的类目信息!",
-								Toast.LENGTH_SHORT).show();
+						ToastUtils.showMessage(getActivity(), "没有对应的类目信息!");
 					} else if ("1".equals(code)) {
 						try {
 							zhongzilist = JsonUtils.getLeiMuByInfo(arg2);
@@ -255,8 +252,7 @@ public class ProductFragment extends BaseFragment {
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("0".equals(code)) {
-						Toast.makeText(getActivity(), "没有对应的类目信息!",
-								Toast.LENGTH_SHORT).show();
+						ToastUtils.showMessage(getActivity(), "没有对应的类目信息!");
 					} else if ("1".equals(code)) {
 						try {
 							nongjilist = JsonUtils.getLeiMuByInfo(arg2);
@@ -291,8 +287,7 @@ public class ProductFragment extends BaseFragment {
 				String code = JsonUtils.getCode(arg2);
 				if (!TextUtils.isEmpty(code)) {
 					if ("0".equals(code)) {
-						Toast.makeText(getActivity(), "没有对应的类目信息!",
-								Toast.LENGTH_SHORT).show();
+						ToastUtils.showMessage(getActivity(), "没有对应的类目信息!");
 					} else if ("1".equals(code)) {
 						try {
 							nongmolist = JsonUtils.getLeiMuByInfo(arg2);

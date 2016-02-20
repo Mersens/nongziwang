@@ -111,7 +111,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		HttpUtils.cancelRequest(this);
 	}

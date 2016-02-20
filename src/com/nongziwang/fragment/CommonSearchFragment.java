@@ -29,17 +29,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ExpandableListView.OnGroupExpandListener;
-
+/**
+ * 
+ * @title CommonSearchFragment
+ * @description:Type类型数据
+ * @author Mersens
+ * @time 2016年2月19日
+ */
 public class CommonSearchFragment extends BaseFragment {
 	private View view;
 	private TextView tv_type;
@@ -89,7 +92,6 @@ public class CommonSearchFragment extends BaseFragment {
 				for (int i = 0, count = type_listview.getExpandableListAdapter()
 						.getGroupCount(); i < count; i++) {
 					if (groupPosition != i) {
-						// 关闭其他分组
 						type_listview.collapseGroup(i);
 					}
 				}
@@ -119,7 +121,6 @@ public class CommonSearchFragment extends BaseFragment {
 					String name=map.get(key).get(childPosition).getName();
 					intentAction(name,map.get(key).get(childPosition).getLeimuid());
 				}
-			
 				return false;
 			}
 		});
@@ -144,7 +145,6 @@ public class CommonSearchFragment extends BaseFragment {
 							map.put(grouplist.get(groupPosition).getName(), childlist);
 							adapter.notifyDataSetChanged();
 						} catch (JSONException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -153,7 +153,6 @@ public class CommonSearchFragment extends BaseFragment {
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				
 				
 			}
 			@Override
@@ -185,7 +184,6 @@ public class CommonSearchFragment extends BaseFragment {
 		getActivity().overridePendingTransition(R.anim.bottom_open, 0);
 
 	}
-	
 	
 	public static Fragment getInstance(String type) {
 		CommonSearchFragment fragment = new CommonSearchFragment();
@@ -236,10 +234,8 @@ public class CommonSearchFragment extends BaseFragment {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
 					}
 				}
-
 			}
 
 			@Override
@@ -249,12 +245,8 @@ public class CommonSearchFragment extends BaseFragment {
 
 			}
 		});
-
-		
-
 	}
 
-	
 	class ExpandableListAdapter extends BaseExpandableListAdapter{
 		@Override
 		public int getGroupCount() {
@@ -348,28 +340,19 @@ public class CommonSearchFragment extends BaseFragment {
 
 		@Override
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
-
 			return true;
 		}
 	}
 
-
 	class GroupHolder {
 		TextView group_name;
 		ImageView image_indicator;
-		
-
 	}
 
 	class ChildHolder {
 		TextView child_name;
 	}
 
-	
-	
-	
-	
-	
 	@Override
 	protected void lazyLoad() {
 

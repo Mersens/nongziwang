@@ -26,7 +26,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:layout_toRightOf="@+id/imageView1"
-            android:text="登录密码"
+            android:text="@string/tv_dlmm"
             android:textColor="@color/base_color_text_black"
             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
 
@@ -37,7 +37,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView1"
             android:layout_toLeftOf="@+id/btn_reset_password"
-            android:text="互联网账号存在被盗分险,建议您定期更改密码以保证账户安全。"
+            android:text="@string/tv_dlmm_tips"
             android:layout_marginLeft="4dp"
             android:singleLine="true"
             android:textColor="@color/title_yellow_text_color"
@@ -54,7 +54,7 @@
             android:enabled="true"
             android:textColor="@color/white_color"
             android:textSize="@dimen/text_mid_size" 
-            android:text="修改" />
+            android:text="@string/tv_update" />
 
     </RelativeLayout>
 
@@ -80,7 +80,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:layout_toRightOf="@+id/imageView2"
-            android:text="手机验证"
+            android:text="@string/tv_sjyz"
             android:textColor="@color/base_color_text_black"
             android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
 
@@ -91,7 +91,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView2"
             android:layout_toLeftOf="@+id/btn_reset_phonenumber"
-            android:text="您验证的手机：157****0385若已丢失或停用，立即更换，避免账号被盗。"
+            android:text="@string/tv_sjyz_tips"
             android:layout_marginLeft="4dp"
             android:singleLine="true"
             android:textColor="@color/title_yellow_text_color"
@@ -108,7 +108,7 @@
             android:enabled="true"
             android:textColor="@color/white_color"
             android:textSize="@dimen/text_mid_size" 
-            android:text="修改" />
+            android:text="@string/tv_update" />
     </RelativeLayout>
 
 </LinearLayout>

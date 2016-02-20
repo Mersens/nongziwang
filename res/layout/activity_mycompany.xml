@@ -385,5 +385,4 @@
             <include layout="@layout/layout_seller_upload_image" />
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

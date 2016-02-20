@@ -35,7 +35,7 @@
             android:layout_marginLeft="4dp"
             android:button="@drawable/cart_radio_check"
             android:paddingLeft="4dp"
-            android:text="全选"
+            android:text="@string/tv_check_all"
             android:textColor="@color/base_color_text_black"
             android:textSize="@dimen/text_size" />
 
@@ -47,7 +47,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/btn_check_all"
             android:background="@drawable/pro_tv_bg"
-            android:text="批量下架"
+            android:text="@string/tv_plxj"
             android:textColor="@color/base_color_text_black"
             android:textSize="@dimen/text_size" />
 
@@ -59,7 +59,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/tv_plxj"
             android:background="@drawable/pro_tv_bg"
-            android:text="删除"
+            android:text="@string/tv_del"
             android:textColor="@color/base_color_text_black"
             android:textSize="@dimen/text_size" />
     </RelativeLayout>
@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="产品信息"
+                    android:text="@string/tv_cpxx"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/text_mid_size" />
             </RelativeLayout>
@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="发布时间"
+                    android:text="@string/tv_fbsj"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/text_mid_size" />
             </RelativeLayout>
@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="在线交易"
+                    android:text="@string/tv_zxjy"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/text_mid_size" />
             </RelativeLayout>
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="操作"
+                    android:text="@string/tv_cz"
                     android:textColor="@color/base_color_text_black"
                     android:textSize="@dimen/text_mid_size" />
             </RelativeLayout>

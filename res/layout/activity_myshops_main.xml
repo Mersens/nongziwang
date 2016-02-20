@@ -162,6 +162,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="12dp"
                         android:layout_marginBottom="8dp"
+                        android:src="@drawable/icon_user_img"
                         />
 
                     <TextView
@@ -206,7 +207,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="店铺首页"
+                            android:text="@string/tv_dpsy"
                             android:textColor="@color/title_yellow_text_color"
                             android:textSize="@dimen/text_size" />
                     </LinearLayout>
@@ -255,7 +256,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="全部商品" />
+                            android:text="@string/tv_qbsp" />
                     </LinearLayout>
 
                     <View

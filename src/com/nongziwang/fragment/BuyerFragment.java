@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.FbxjdActivity;
@@ -50,6 +53,7 @@ import com.nongziwang.utils.ImageLoadOptions;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.PhotoUtil;
 import com.nongziwang.utils.SharePreferenceUtil;
+import com.nongziwang.utils.ToastUtils;
 import com.nongziwang.view.CircleImageView;
 import com.nongziwang.view.DialogTips;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -182,8 +186,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(getActivity(), "找不到该公司信息!",
-							Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(getActivity(), "找不到该公司信息!");
 				} else if ("1".equals(code)) {
 					try {
 						GongsiBean gongsibean = JsonUtils.getGongsiInfo(arg2);
@@ -197,8 +200,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(getActivity(), "获取信息失败!", Toast.LENGTH_SHORT)
-						.show();
+				ToastUtils.showMessage(getActivity(), "获取信息失败!");
 				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
 		});
@@ -440,8 +442,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(getActivity(), "用户不存在！", Toast.LENGTH_LONG)
-							.show();
+					ToastUtils.showMessage(getActivity(), "用户不存在！");
 				} else if ("1".equals(code)) {
 					try {
 						JSONObject jsonObject = new JSONObject(arg2);
@@ -449,18 +450,15 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 						dao.updateUserHeadById(userid, path);
 						ImageLoader.getInstance().displayImage(path,
 								buyer_user_head, ImageLoadOptions.getOptionsLoading());
-						Toast.makeText(getActivity(), "上传成功！",
-								Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(getActivity(), "上传成功!");
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				} else if ("2".equals(code)) {
-					Toast.makeText(getActivity(), "资源太大！", Toast.LENGTH_LONG)
-							.show();
+					ToastUtils.showMessage(getActivity(), "资源太大！");
 				} else if ("3".equals(code)) {
-					Toast.makeText(getActivity(), "文件为空！", Toast.LENGTH_LONG)
-							.show();
+					ToastUtils.showMessage(getActivity(), "文件为空!");
 				}
 			}
 
@@ -468,8 +466,7 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(getActivity(), "图片上传失败！", Toast.LENGTH_LONG)
-						.show();
+				ToastUtils.showMessage(getActivity(), "图片上传失败！");
 			}
 		});
 	}

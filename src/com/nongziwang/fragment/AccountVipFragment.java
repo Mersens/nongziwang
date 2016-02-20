@@ -23,10 +23,12 @@ import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.PhotoUtil;
 import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.utils.StringUtils;
+import com.nongziwang.utils.ToastUtils;
 import com.nongziwang.view.DialogWaiting;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -44,7 +46,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AccountVipFragment extends BaseFragment {
 	private View view;
@@ -64,12 +65,14 @@ public class AccountVipFragment extends BaseFragment {
 	private String userid;
 	private UserBean user;
 	private DialogWaiting dialog;
+	private Context context;
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.layout_account_vip, container, false);
+		context=view.getContext();
 		dao=new NongziDaoImpl(getActivity().getApplicationContext());
 		userid=SharePreferenceUtil.getInstance(getActivity().getApplicationContext()).getUserId();
 		initViews();
@@ -126,15 +129,15 @@ public class AccountVipFragment extends BaseFragment {
 		final String name=edt_name.getText().toString().trim();
 		final String qq =edt_qq.getText().toString().trim();
 		if(TextUtils.isEmpty(name)){
-			Toast.makeText(getActivity(), "姓名为空！", Toast.LENGTH_LONG).show();
+			ToastUtils.showMessage(context, "姓名为空！");
 			return;
 		}
 		if(TextUtils.isEmpty(qq)){
-			Toast.makeText(getActivity(), "QQ为空！", Toast.LENGTH_LONG).show();
+			ToastUtils.showMessage(context, "QQ为空！");
 			return;
 		}
 		if(!StringUtils.isQQNum(qq)){
-			Toast.makeText(getActivity(), "QQ格式错误！", Toast.LENGTH_LONG).show();
+			ToastUtils.showMessage(context, "QQ格式错误！");
 			return;
 		}
 		final String id= SharePreferenceUtil.getInstance(getActivity().getApplicationContext()).getUserId();
@@ -153,23 +156,23 @@ public class AccountVipFragment extends BaseFragment {
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code =JsonUtils.getCode(arg2);
 				if("0".equals(code)){
-					Toast.makeText(getActivity(), "用户id,姓名,或qq号码为空！", Toast.LENGTH_LONG).show();
+					ToastUtils.showMessage(context, "用户id,姓名,或qq号码为空！");
 				}else if("1".equals(code)){
 					dao.updateNameAndQq(userid, name, qq);
-					Toast.makeText(getActivity(), "用户信息修改成功！", Toast.LENGTH_LONG).show();
+					ToastUtils.showMessage(context, "用户信息修改成功！");
 				}else if("2".equals(code)){
-					Toast.makeText(getActivity(), "用户信息不存在！", Toast.LENGTH_LONG).show();
+					ToastUtils.showMessage(context, "用户信息不存在！");
 				}else if("3".equals(code)){
-					Toast.makeText(getActivity(), "姓名格式不正确！", Toast.LENGTH_LONG).show();
+					ToastUtils.showMessage(context, "姓名格式不正确！");
 				}else if("4".equals(code)){
-					Toast.makeText(getActivity(), "qq号码格式不正确！", Toast.LENGTH_LONG).show();
+					ToastUtils.showMessage(context, "qq号码格式不正确！");
 				}
 			}
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
 				Log.e(TAG, arg2==null?"":arg2);
-				Toast.makeText(getActivity(), "修改失败！", Toast.LENGTH_LONG).show();
+				ToastUtils.showMessage(context, "修改失败！");
 			}
 			@Override
 			public void onFinish() {
@@ -293,27 +296,27 @@ public class AccountVipFragment extends BaseFragment {
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code =JsonUtils.getCode(arg2);
 				if("0".equals(code)){
-					Toast.makeText(getActivity(), "用户不存在！", Toast.LENGTH_LONG).show();
+					ToastUtils.showMessage(context, "用户不存在！");
 				}else if("1".equals(code)){
 					try {
 						JSONObject jsonObject = new JSONObject(arg2);
 						String path = jsonObject.getString("touxiang");
 						dao.updateUserHeadById(userid, path);
-						Toast.makeText(getActivity(), "上传成功！", Toast.LENGTH_LONG).show();
+						ToastUtils.showMessage(context, "上传成功！");
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
 				}else if("2".equals(code)){
-					Toast.makeText(getActivity(), "资源太大！", Toast.LENGTH_LONG).show();
+					ToastUtils.showMessage(context, "资源太大！");
 				}else if("3".equals(code)){
-					Toast.makeText(getActivity(), "文件为空！", Toast.LENGTH_LONG).show();
+					ToastUtils.showMessage(context, "文件为空！");
 				}
 			}
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
 				Log.e(TAG, arg2==null?"":arg2);
-				Toast.makeText(getActivity(), "图片上传失败！", Toast.LENGTH_LONG).show();
+				ToastUtils.showMessage(context, "图片上传失败！");
 			}
 		});
 	}

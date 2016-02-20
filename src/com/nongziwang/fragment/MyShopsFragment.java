@@ -31,6 +31,7 @@ import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.ImageLoadOptions;
 import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.utils.ToastUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class MyShopsFragment extends BaseFragment {
@@ -118,8 +119,7 @@ public class MyShopsFragment extends BaseFragment {
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code = JsonUtils.getCode(arg2);
 				if ("0".equals(code)) {
-					Toast.makeText(context, " 店铺id为空!",
-							Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(context, " 店铺id为空!");
 				} else if ("1".equals(code)) {
 					try {
 						dianpubean = JsonUtils.getDianPuInfo(arg2);
@@ -131,11 +131,9 @@ public class MyShopsFragment extends BaseFragment {
 					}
 
 				} else if ("2".equals(code)) {
-					Toast.makeText(context, "该店铺不存在!", Toast.LENGTH_SHORT)
-							.show();
+					ToastUtils.showMessage(context, "该店铺不存在!");
 				} else if ("3".equals(code)) {
-					Toast.makeText(context, "该店铺下没有产品!",
-							Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(context, "该店铺下没有产品!");
 				}
 
 			}
@@ -143,8 +141,7 @@ public class MyShopsFragment extends BaseFragment {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				Toast.makeText(context, "数据获取失败!", Toast.LENGTH_SHORT)
-						.show();
+				ToastUtils.showMessage(context, "数据获取失败!");
 				Log.e(TAG, arg2 == null ? "" : arg2);
 
 			}

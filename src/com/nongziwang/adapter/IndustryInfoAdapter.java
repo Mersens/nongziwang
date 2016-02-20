@@ -40,6 +40,7 @@ public class IndustryInfoAdapter extends BaseListAdapter<NewsBean>{
 		ImageLoader.getInstance().displayImage(bean.getImgsrc(), holder.info_image,
 				ImageLoadOptions.getOptions());
 		holder.tv_title.setText(bean.getTitle());
+		//去除空白字符， 不限于空格
 		holder.tv_msg.setText(bean.getCenter().toString().replaceAll("\\s*", ""));
 		holder.tv_time.setText(DateUtil.getStamp2Time(bean.getAddtime()));
 		return convertView;
