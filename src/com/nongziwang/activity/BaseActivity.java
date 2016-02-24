@@ -124,7 +124,7 @@ public class BaseActivity extends FragmentActivity{
 	 */
 	public void ShowToast(String text) {
 		if (mToast == null) {
-			mToast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+			mToast = Toast.makeText(activity, text, Toast.LENGTH_SHORT);
 		} else {
 			mToast.setText(text);
 		}
@@ -138,7 +138,7 @@ public class BaseActivity extends FragmentActivity{
 	 */
 	public void ShowToast(int srcid) {
 		if (mToast == null) {
-			mToast = Toast.makeText(this, srcid, Toast.LENGTH_SHORT);
+			mToast = Toast.makeText(activity, srcid, Toast.LENGTH_SHORT);
 		} else {
 			mToast.setText(srcid);
 		}

@@ -109,4 +109,6 @@ public class BrandFragment extends BaseFragment implements OnClickListener{
 		tv_all.setTextColor(getResources().getColor(R.color.gray_text_color));		
 	}
 
+
+
 }

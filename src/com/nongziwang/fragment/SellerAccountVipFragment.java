@@ -589,4 +589,5 @@ public class SellerAccountVipFragment extends BaseFragment implements
 
 	}
 
+
 }

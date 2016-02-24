@@ -1,6 +1,7 @@
 package com.nongziwang.fragment;
 
 import com.nongziwang.main.R;
+import com.nongziwang.utils.NetUtils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,14 +20,18 @@ public class UserCenterFragment extends BaseFragment {
 	private BroadcastReceiver mBroadcastReceiver;
 	public static final String BROADCAST_ACTION_BUY = "com.nongziwang.fragment.BuyerFragment";
 	public static final String BROADCAST_ACTION_SELL = "com.nongziwang.fragment.SellerFragment";
-
+	public static final String ACTION_IUSERCENTERFRAGMENT = "usercenterfragment";
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		view = inflater.inflate(R.layout.layout_usercenter, container, false);
 		initEvent();
-		addFragment(Style.BUYER, null,false);
+		if (NetUtils.isNetworkConnected(getActivity())) {
+			addFragment(Style.BUYER, null,false);
+		}else{
+			addFragment(Style.NO_NET, null,false);
+		}
 		return view;
 	}
 
@@ -35,6 +40,7 @@ public class UserCenterFragment extends BaseFragment {
 		IntentFilter intentFilter = new IntentFilter();
 		intentFilter.addAction(BROADCAST_ACTION_BUY);
 		intentFilter.addAction(BROADCAST_ACTION_SELL);
+		intentFilter.addAction(ACTION_IUSERCENTERFRAGMENT);
 		getActivity().registerReceiver(mBroadcastReceiver, intentFilter);
 	}
 
@@ -54,7 +60,7 @@ public class UserCenterFragment extends BaseFragment {
 	}
 
 	public enum Style {
-		BUYER, SELLER;
+		NO_NET,BUYER, SELLER;
 	}
 
 	public Fragment creatFragment(Style style, String params) {
@@ -65,6 +71,9 @@ public class UserCenterFragment extends BaseFragment {
 			break;
 		case SELLER:
 			fragment = SellerFragment.getInstance(params);
+			break;
+		case NO_NET:
+			fragment = NetWorkFragment.getInstance(ACTION_IUSERCENTERFRAGMENT);
 			break;
 		}
 
@@ -95,12 +104,16 @@ public class UserCenterFragment extends BaseFragment {
 				addFragment(Style.BUYER, null,true);
 			} else if (action.equals(BROADCAST_ACTION_SELL)) {
 				addFragment(Style.SELLER, null,true);
+			}else if(action.equals(ACTION_IUSERCENTERFRAGMENT)){
+				if (NetUtils.isNetworkConnected(getActivity())) {
+					addFragment(Style.BUYER, null,false);
+				}
 			}
 		}
 	}
 
 	@Override
 	protected void lazyLoad() {
-		// TODO Auto-generated method stub
 	}
+
 }

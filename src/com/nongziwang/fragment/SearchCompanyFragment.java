@@ -16,6 +16,7 @@ import com.nongziwang.entity.CompanyBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.utils.ToastUtils;
 import com.nongziwang.view.XListView;
 import com.nongziwang.view.XListView.IXListViewListener;
 
@@ -86,11 +87,13 @@ IXListViewListener, EventListener{
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code=JsonUtils.getCode(arg2);
 				if("0".equals(code)){
-					Toast.makeText(context, "当前页码输入不正确!", Toast.LENGTH_SHORT)
-					.show();
+					ToastUtils.showMessage(context, "当前页码输入不正确!");
 				}else if("1".equals(code)){
 					try {
 						List<CompanyBean> list=JsonUtils.getCompanyInfo(arg2);
+						if(list.size()<10){
+						listview_search_other.setPullLoadEnable(false);
+						}
 						lists.addAll(list);
 						adapter=new SearchCompanyAdapter(list, getActivity());
 						listview_search_other.setAdapter(adapter);
@@ -98,17 +101,14 @@ IXListViewListener, EventListener{
 						e.printStackTrace();
 					}
 				}else if("2".equals(code)){
-					Toast.makeText(context, "没有查询到符合的公司信息!", Toast.LENGTH_SHORT)
-					.show();
+					ToastUtils.showMessage(context, "没有查询到符合的公司信息!");
 				}
 			}
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				// TODO Auto-generated method stub
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT)
-						.show();
+				ToastUtils.showMessage(context, "请求数据失败!");
 			}
 			@Override
 			public void onFinish() {
@@ -142,12 +142,14 @@ IXListViewListener, EventListener{
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code=JsonUtils.getCode(arg2);
 				if("0".equals(code)){
-					Toast.makeText(context, "当前页码输入不正确!", Toast.LENGTH_SHORT)
-					.show();
+					ToastUtils.showMessage(context, "当前页码输入不正确!");
 				}else if("1".equals(code)){
 					try {
 						lists.clear();
 						List<CompanyBean> refreslist=JsonUtils.getCompanyInfo(arg2);
+						if(refreslist.size()<10){
+						listview_search_other.setPullLoadEnable(false);
+						}
 						lists.addAll(refreslist);
 						if(adapter!=null){
 							adapter=null;
@@ -159,17 +161,14 @@ IXListViewListener, EventListener{
 						e.printStackTrace();
 					}
 				}else if("2".equals(code)){
-					Toast.makeText(context, "没有查询到符合的公司信息!", Toast.LENGTH_SHORT)
-					.show();
+					ToastUtils.showMessage(context, "没有查询到符合的公司信息!");
 				}
 			}
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				// TODO Auto-generated method stub
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT)
-						.show();
+				ToastUtils.showMessage(context, "请求数据失败!");
 			}
 
 		});
@@ -185,8 +184,7 @@ IXListViewListener, EventListener{
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code=JsonUtils.getCode(arg2);
 				if("0".equals(code)){
-					Toast.makeText(context, "当前页码输入不正确!", Toast.LENGTH_SHORT)
-					.show();
+					ToastUtils.showMessage(context, "当前页码输入不正确!");
 				}else if("1".equals(code)){
 					try {
 						List<CompanyBean> loadmorelist=JsonUtils.getCompanyInfo(arg2);
@@ -197,17 +195,14 @@ IXListViewListener, EventListener{
 						e.printStackTrace();
 					}
 				}else if("2".equals(code)){
-					Toast.makeText(context, "没有查询到符合的公司信息!", Toast.LENGTH_SHORT)
-					.show();
+					ToastUtils.showMessage(context, "没有查询到符合的公司信息!");
 				}
 			}
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				// TODO Auto-generated method stub
 				Log.e(TAG, arg2 == null ? "" : arg2);
-				Toast.makeText(context, "请求数据失败!", Toast.LENGTH_SHORT)
-						.show();
+				ToastUtils.showMessage(context, "请求数据失败!");
 			}
 		});
 	}
@@ -215,4 +210,5 @@ IXListViewListener, EventListener{
 		listview_search_other.stopLoadMore();
 		listview_search_other.stopRefresh();
 	}
+
 }

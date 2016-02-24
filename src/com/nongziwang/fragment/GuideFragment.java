@@ -68,4 +68,5 @@ public class GuideFragment extends BaseFragment {
 		return fragment;
 
 	}
+
 }

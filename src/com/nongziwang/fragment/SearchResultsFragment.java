@@ -290,4 +290,5 @@ public class SearchResultsFragment extends BaseFragment implements
 		productlistview.stopLoadMore();
 		productlistview.stopRefresh();
 	}
+
 }

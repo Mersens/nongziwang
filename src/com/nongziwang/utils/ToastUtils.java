@@ -9,18 +9,24 @@ import android.widget.Toast;
  * @title ToastUtils
  * @description:Toast工具类
  * @author Mersens
- * @time 2016年2月16日
+ * @time 2016年1月16日
  */
 public class ToastUtils {
 	private static Handler handler = new Handler(Looper.getMainLooper());
 	private static Toast toast = null;
 
 	public static void showMessage(final Context act, final String msg) {
-		showMessage(act, msg, Toast.LENGTH_SHORT);
+		if(act!=null){
+			showMessage(act, msg, Toast.LENGTH_SHORT);
+		}
+		
 	}
 
 	public static void showMessage(final Context act, final int msg) {
-		showMessage(act, msg, Toast.LENGTH_SHORT);
+		if(act!=null){
+			showMessage(act, msg, Toast.LENGTH_SHORT);
+		}
+		
 	}
 
 	public static void showMessage(final Context act, final int msg,

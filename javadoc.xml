@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" additionalparam=" -encoding UTF-8 -charset UTF-8" author="true" classpath="libs/universal-image-loader-1.9.2_sources.jar;../appcompat_v7/bin/appcompat_v7.jar;libs/android-async-http-1.4.8.jar;C:\Users\Administrator\Desktop\ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b\ShareSDK for Android\nongziwang\libs\MobCommons.jar;libs/libammsdk.jar;C:\Users\Administrator\Desktop\ShareSDK-Android-2.6.6-4a3490a637045588a3cad4a85b9ec26b\ShareSDK for Android\nongziwang\libs\MobTools.jar;libs/core.jar;../appcompat_v7/libs/android-support-v7-appcompat.jar;libs/android-support-v4.jar;libs/gson-2.1.jar;libs/mta-sdk-1.6.2.jar;libs/open_sdk_r5509.jar" destdir="F:\doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="com.nongziwang.adapter,com.nongziwang.db,com.zxing.android.view,com.nongziwang.helper,com.nongziwang.activity,com.nongziwang.utils,com.nongziwang.service,com.nongziwang.fragment,com.nongziwang.listeners,com.nongziwang.entity,com.nongziwang.view,com.zxing.android.camera,com.nongziwang.main,com.nongziwang.application,com.zxing.android.decoding,android.support.v7.appcompat" source="1.7" sourcepath="gen;src" splitindex="true" use="true" version="true">
+            <link href="file:/F:/农资网doc/"/>
+            <link href="file:/E:/BaiduYunDownload/android-sdk_r24.3.2-windows/android-sdk_r24.3.2-windows/android-sdk-windows/docs/reference"/>
+        </javadoc>
+    </target>
+</project>

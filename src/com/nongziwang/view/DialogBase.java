@@ -6,8 +6,6 @@ import com.nongziwang.main.R;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.DialogInterface.OnDismissListener;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
@@ -42,7 +40,6 @@ public abstract class DialogBase extends Dialog {
 	private final int MATCH_PARENT = android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 	private boolean isCancel = true;//默认是否可点击back按键/点击外部区域取消对话框
-	
 	
 	public boolean isCancel() {
 		return isCancel;

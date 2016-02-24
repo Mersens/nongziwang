@@ -72,7 +72,6 @@ public class ForgetPasswordActivity extends BaseActivity {
 					}
 				});
 		btn_next.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				doNext();

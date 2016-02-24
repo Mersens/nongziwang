@@ -29,7 +29,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -499,4 +498,6 @@ public class BuyerFragment extends BaseFragment implements OnClickListener {
 		super.onDestroy();
 		getActivity().unregisterReceiver(mBroadcastReceiver);
 	}
+
+
 }

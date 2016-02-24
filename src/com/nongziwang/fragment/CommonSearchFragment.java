@@ -19,6 +19,7 @@ import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.SharePreferenceUtil;
+import com.nongziwang.utils.ToastUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -223,7 +224,7 @@ public class CommonSearchFragment extends BaseFragment {
 				String code=JsonUtils.getCode(arg2);
 				if(!TextUtils.isEmpty(code)){
 					if("0".equals(code)){
-						Toast.makeText(getActivity(), "没有对应的类目信息!", Toast.LENGTH_SHORT).show();
+						ToastUtils.showMessage(getActivity(), "没有对应的类目信息!");
 					}else if("1".equals(code)){
 						try {
 							grouplist=JsonUtils.getLeiMuByInfo(arg2);
@@ -231,8 +232,7 @@ public class CommonSearchFragment extends BaseFragment {
 							adapter=new ExpandableListAdapter();
 							type_listview.setAdapter(adapter);
 						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+ 							e.printStackTrace();
 						}
 					}
 				}
@@ -250,7 +250,6 @@ public class CommonSearchFragment extends BaseFragment {
 	class ExpandableListAdapter extends BaseExpandableListAdapter{
 		@Override
 		public int getGroupCount() {
-			// TODO Auto-generated method stub
 			return grouplist.size();
 		}
 
@@ -262,7 +261,6 @@ public class CommonSearchFragment extends BaseFragment {
 
 		@Override
 		public Object getGroup(int groupPosition) {
-			// TODO Auto-generated method stub
 			return grouplist.get(groupPosition);
 		}
 
@@ -275,19 +273,16 @@ public class CommonSearchFragment extends BaseFragment {
 
 		@Override
 		public long getGroupId(int groupPosition) {
-			// TODO Auto-generated method stub
 			return groupPosition;
 		}
 
 		@Override
 		public long getChildId(int groupPosition, int childPosition) {
-			// TODO Auto-generated method stub
 			return childPosition;
 		}
 
 		@Override
 		public boolean hasStableIds() {
-			// TODO Auto-generated method stub
 			return true;
 		}
 
@@ -357,5 +352,6 @@ public class CommonSearchFragment extends BaseFragment {
 	protected void lazyLoad() {
 
 	}
+
 
 }

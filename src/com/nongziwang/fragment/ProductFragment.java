@@ -18,11 +18,18 @@ import com.nongziwang.entity.LeiMuBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.utils.NetUtils;
 import com.nongziwang.utils.SharePreferenceUtil;
 import com.nongziwang.utils.ToastUtils;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,7 +38,6 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.Toast;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,28 +63,36 @@ public class ProductFragment extends BaseFragment {
 	private List<LeiMuBean> nongjilist = new ArrayList<LeiMuBean>();
 	private List<LeiMuBean> nongmolist = new ArrayList<LeiMuBean>();
 	private NongziDao dao;
-	 private String userid = null;
-	 
+	private String userid = null;
+	public static final String ACTION_PRODUCTFRAGMENT = "productfragment";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		view = inflater.inflate(R.layout.layout_find_product, container, false);
+		initHeadView();
+		registerBoradcastReceiver();
 		mInflater = LayoutInflater.from(getActivity());
 		dao = new NongziDaoImpl(getActivity().getApplicationContext());
-		initViews();
-		initEvent();
+		if (NetUtils.isNetworkConnected(getActivity())) {
+			initViews();
+			initEvent();
+		} else {
+			addNoNetWorkFragment();
+		}
 		return view;
 	}
 
-	private void initViews() {
-
+	public void initHeadView() {
 		setOnlyTileViewMethod(view, "ÕÒ²úÆ·");
 		setHeadViewBg(R.color.actionbar_blue_color);
 		setHeadViewTitleColor(getResources().getColor(R.color.white_color));
+	}
+
+	private void initViews() {
 		listView = (ExpandableListView) view.findViewById(R.id.listView);
-		listView.setGroupIndicator(null); 
+		listView.setGroupIndicator(null);
 		listView.setOnGroupExpandListener(new OnGroupExpandListener() {
 
 			@Override
@@ -97,10 +111,10 @@ public class ProductFragment extends BaseFragment {
 			public boolean onChildClick(ExpandableListView parent, View v,
 					int groupPosition, int childPosition, long id) {
 
-				userid = SharePreferenceUtil.getInstance(getActivity().getApplicationContext())
-						.getUserId();
+				userid = SharePreferenceUtil.getInstance(
+						getActivity().getApplicationContext()).getUserId();
 				String key = grouplist.get(groupPosition).getName();
-				String name=map.get(key).get(childPosition).getName();
+				String name = map.get(key).get(childPosition).getName();
 				if (!dao.findHistoryIsExist(name)) {
 					if (TextUtils.isEmpty(userid)) {
 						dao.addSearchHistory("1", name);
@@ -111,9 +125,9 @@ public class ProductFragment extends BaseFragment {
 
 				Intent intent = new Intent(getActivity(),
 						SearchResultsFragmentActivity.class);
-				intent.putExtra("params",name);
-				String leimuid=map.get(key).get(childPosition).getLeimuid();
-				intent.putExtra("leimuid",leimuid);
+				intent.putExtra("params", name);
+				String leimuid = map.get(key).get(childPosition).getLeimuid();
+				intent.putExtra("leimuid", leimuid);
 				startActivity(intent);
 				getActivity().overridePendingTransition(R.anim.bottom_open, 0);
 
@@ -225,7 +239,6 @@ public class ProductFragment extends BaseFragment {
 									.getName(), zhongzilist);
 							adapter.notifyDataSetChanged();
 						} catch (JSONException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -260,7 +273,6 @@ public class ProductFragment extends BaseFragment {
 									.getName(), nongjilist);
 							adapter.notifyDataSetChanged();
 						} catch (JSONException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -295,7 +307,6 @@ public class ProductFragment extends BaseFragment {
 									.getName(), nongmolist);
 							adapter.notifyDataSetChanged();
 						} catch (JSONException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -315,7 +326,6 @@ public class ProductFragment extends BaseFragment {
 	class ExpandableListAdapter extends BaseExpandableListAdapter {
 		@Override
 		public int getGroupCount() {
-			// TODO Auto-generated method stub
 			return grouplist.size();
 		}
 
@@ -327,7 +337,6 @@ public class ProductFragment extends BaseFragment {
 
 		@Override
 		public Object getGroup(int groupPosition) {
-			// TODO Auto-generated method stub
 			return grouplist.get(groupPosition);
 		}
 
@@ -340,19 +349,16 @@ public class ProductFragment extends BaseFragment {
 
 		@Override
 		public long getGroupId(int groupPosition) {
-			// TODO Auto-generated method stub
 			return groupPosition;
 		}
 
 		@Override
 		public long getChildId(int groupPosition, int childPosition) {
-			// TODO Auto-generated method stub
 			return childPosition;
 		}
 
 		@Override
 		public boolean hasStableIds() {
-			// TODO Auto-generated method stub
 			return true;
 		}
 
@@ -418,7 +424,6 @@ public class ProductFragment extends BaseFragment {
 
 		@Override
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
-
 			return true;
 		}
 	}
@@ -436,5 +441,50 @@ public class ProductFragment extends BaseFragment {
 	@Override
 	protected void lazyLoad() {
 
+	}
+
+	public void addNoNetWorkFragment() {
+		FragmentManager fm = getFragmentManager();
+		Fragment fragment = fm.findFragmentById(R.id.fragment_product);
+		if (fragment != null) {
+			fm.beginTransaction().remove(fragment);
+		}
+		fragment = creatFragment();
+		fm.beginTransaction().replace(R.id.fragment_product, fragment).commit();
+	}
+
+	public Fragment creatFragment() {
+		return NetWorkFragment.getInstance(ACTION_PRODUCTFRAGMENT);
+	}
+
+	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action.equals(ACTION_PRODUCTFRAGMENT)) {
+				if (NetUtils.isNetworkConnected(getActivity())) {
+					FragmentManager fm = getFragmentManager();
+					Fragment fragment = fm
+							.findFragmentById(R.id.fragment_product);
+					if (fragment != null) {
+						fm.beginTransaction().remove(fragment).commit();
+					}
+					initViews();
+					initEvent();
+				}
+			}
+		}
+	};
+
+	public void registerBoradcastReceiver() {
+		IntentFilter myIntentFilter = new IntentFilter();
+		myIntentFilter.addAction(ACTION_PRODUCTFRAGMENT);
+		getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		getActivity().unregisterReceiver(mBroadcastReceiver);
 	}
 }

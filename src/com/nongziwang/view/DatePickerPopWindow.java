@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 
 public class DatePickerPopWindow extends PopupWindow{
@@ -135,7 +134,6 @@ public class DatePickerPopWindow extends PopupWindow{
 			int n_month = monthView.getCurrentItem() + 1;//ÔÂ
 			initDay(n_year,n_month);
 			selectTime=new StringBuilder().append((yearView.getCurrentItem()+curYear)).append("-").append((monthView.getCurrentItem() + 1) < 10 ? "0" + (monthView.getCurrentItem() + 1) : (monthView.getCurrentItem() + 1)).append("-").append(((dayView.getCurrentItem()+1) < 10) ? "0" + (dayView.getCurrentItem()+1) : (dayView.getCurrentItem()+1)).toString();
-			//Toast.makeText(context, selectTime, Toast.LENGTH_SHORT).show();
 		}
 	};
 	private void initDay(int arg1, int arg2) {

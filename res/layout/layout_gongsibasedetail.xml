@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:background="@color/white_color"
         android:orientation="vertical" 
+        android:visibility="gone"
         >
 
         <ProgressBar
@@ -192,7 +193,6 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@+id/textView131"
-                        android:text="TextView"
                         android:textColor="@color/base_color_text_black"
                         android:textSize="@dimen/textSize_svprogresshuddefault_msg" />
                 </RelativeLayout>

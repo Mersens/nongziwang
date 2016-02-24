@@ -251,4 +251,5 @@ public class SellerFragment extends BaseFragment implements OnClickListener{
 	public void uploadAvatar(String path) {
 		//ÉÏ´«Í·Ïñ
 	}
+
 }

@@ -1,9 +1,9 @@
 package com.nongziwang.entity;
 
 public class MyRegion {
-	private String id;
-	private String name;
-	private String parentid;
+	private String id;//地区id
+	private String name;//地区名字
+	private String parentid;//地区的父类id
 	
 	public MyRegion(String id, String name, String parentid) {
 		this.id = id;

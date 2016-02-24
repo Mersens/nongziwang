@@ -16,6 +16,7 @@ import com.nongziwang.entity.ChanPinBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.utils.ToastUtils;
 import com.nongziwang.view.XListView;
 import com.nongziwang.view.XListView.IXListViewListener;
 
@@ -58,9 +59,7 @@ public class ProductDetailMoreFragment extends BaseFragment implements
 	private void initViews() {
 		layout_loading=(RelativeLayout) view.findViewById(R.id.layout_loading);
 		listView = (XListView) view.findViewById(R.id.listView);
-		//不允许上拉加载
 		listView.setPullLoadEnable(false);
-		// 允许下拉
 		listView.setPullRefreshEnable(true);
 		listView.setXListViewListener(this);
 	}
@@ -74,7 +73,7 @@ public class ProductDetailMoreFragment extends BaseFragment implements
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code =JsonUtils.getCode(arg2);
 				if("0".equals(code)){
-					Toast.makeText(view.getContext(), "产品id 为空!", Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(view.getContext(), "产品id 为空!");
 				}else if("1".equals(code)){
 					try {
 						 bean=JsonUtils.getChanPinDetailInfo(arg2);
@@ -84,12 +83,12 @@ public class ProductDetailMoreFragment extends BaseFragment implements
 					}
 					
 				}else if("2".equals(code)){
-					Toast.makeText(view.getContext(), " 找不到该产品信息!", Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(view.getContext(), "找不到该产品信息!");
 				}
 			}
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				Toast.makeText(view.getContext(), "数据获取失败！", Toast.LENGTH_SHORT).show();
+				ToastUtils.showMessage(view.getContext(), "数据获取失败！");
 				Log.e(TAG, arg2==null?"":arg2);
 			}
 			@Override
@@ -131,5 +130,6 @@ public class ProductDetailMoreFragment extends BaseFragment implements
 	public void onLoadMore() {
 
 	}
+
 
 }

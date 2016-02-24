@@ -326,4 +326,6 @@ public class AccountVipFragment extends BaseFragment {
 
 	}
 
+
+
 }

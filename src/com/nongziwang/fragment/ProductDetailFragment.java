@@ -14,15 +14,9 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
@@ -33,13 +27,10 @@ import com.nongziwang.application.AppConstants;
 import com.nongziwang.entity.ChanPinBean;
 import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
-import com.nongziwang.utils.ImageLoadOptions;
 import com.nongziwang.utils.JsonUtils;
-import com.nongziwang.view.MyScrollView;
+import com.nongziwang.utils.ToastUtils;
 import com.nongziwang.view.XListView;
-import com.nongziwang.view.MyScrollView.OnScrollToBottomListener;
 import com.nongziwang.view.XListView.IXListViewListener;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 @SuppressLint("ClickableViewAccessibility")
 public class ProductDetailFragment extends BaseFragment implements
@@ -89,24 +80,23 @@ IXListViewListener, EventListener{
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code =JsonUtils.getCode(arg2);
 				if("0".equals(code)){
-					Toast.makeText(view.getContext(), "产品id 为空!", Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(view.getContext(), "产品id 为空!");
 				}else if("1".equals(code)){
 					try {
 						 bean=JsonUtils.getChanPinDetailInfo(arg2);
 						 setDatas();
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
 				}else if("2".equals(code)){
-					Toast.makeText(view.getContext(), " 找不到该产品信息!", Toast.LENGTH_SHORT).show();
-				}
+					ToastUtils.showMessage(view.getContext(), "找不到该产品信息!");
+					}
 			}
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
-				Toast.makeText(view.getContext(), "数据获取失败！", Toast.LENGTH_SHORT).show();
+				ToastUtils.showMessage(view.getContext(), "数据获取失败！");
 				Log.e(TAG, arg2==null?"":arg2);
 			}
 			@Override
@@ -128,7 +118,6 @@ IXListViewListener, EventListener{
 
 	@Override
 	protected void lazyLoad() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -152,5 +141,7 @@ IXListViewListener, EventListener{
 		msg.arg1 = ProductDetailFragmentActivity.LOADING;
 		handler.sendMessageDelayed(msg, 1000);
 	}
+
+
 
 }

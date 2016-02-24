@@ -3,7 +3,13 @@ package com.nongziwang.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * 
+ * @title StringUtils
+ * @description:TODO
+ * @author Mersens
+ * @time 2016年1月12日
+ */
 public class StringUtils {
 	/**
 	 * @author Mersens 验证是否为手机号格式
@@ -82,6 +88,11 @@ public class StringUtils {
 
 	}
 	
+
+	/**
+	 * @author 格式化电话号码字符串 如：157****0385
+	 * @return
+	 */
 	public static String getFormatTelNum(String num){
 		StringBuffer sbf=new StringBuffer();
 		if(num==null || "".equals(num)){

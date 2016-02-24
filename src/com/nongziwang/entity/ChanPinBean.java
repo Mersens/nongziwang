@@ -26,6 +26,24 @@ public class ChanPinBean  implements Serializable{
 	private String dianpuname;// 店铺名称
 	private String yongtuname;// 产品用途
 	private String chengfenname;// 产品成分
+	private String yunfei;//运费
+	private String gslogo;
+
+	public String getGslogo() {
+		return gslogo;
+	}
+
+	public void setGslogo(String gslogo) {
+		this.gslogo = gslogo;
+	}
+
+	public String getYunfei() {
+		return yunfei;
+	}
+
+	public void setYunfei(String yunfei) {
+		this.yunfei = yunfei;
+	}
 
 	public ChanPinBean(){
 		

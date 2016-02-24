@@ -150,5 +150,7 @@
     <string name="tv_dlmm_tips">互联网账号存在被盗分险,建议您定期更改密码以保证账户安全。</string>
     <string name="tv_sjyz">手机验证</string>
     <string name="tv_sjyz_tips">您验证的手机：157****0385若已丢失或停用，立即更换，避免账号被盗。</string>
+    <string name="tv_jrdp">进入店铺</string>
+    <string name="tv_cxjz">重新加载</string>
 
 </resources>

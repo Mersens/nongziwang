@@ -71,4 +71,5 @@ public class MyAddressListFragment extends BaseFragment {
 		
 	}
 
+
 }

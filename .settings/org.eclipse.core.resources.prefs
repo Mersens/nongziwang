@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/com/nongziwang/activity/BaseActivity.java=UTF-8
 encoding//src/com/nongziwang/activity/CaptureActivity.java=UTF-8
+encoding//src/com/nongziwang/adapter/MyProductDetailAdapter.java=UTF-8
 encoding//src/com/nongziwang/adapter/MyShopsAdapter.java=UTF-8
 encoding//src/com/nongziwang/adapter/SearchResultsAdapter.java=UTF-8
 encoding//src/com/nongziwang/application/CrashHandler.java=UTF-8

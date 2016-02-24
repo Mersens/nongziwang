@@ -24,8 +24,6 @@ public class MyProductDetailAdapter extends BaseListAdapter<ChanPinBean>{
 		this.list=list;
 	}
 
-	
-
 	@Override
 	public View getContentView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder=null;
@@ -39,19 +37,23 @@ public class MyProductDetailAdapter extends BaseListAdapter<ChanPinBean>{
 			holder.tv_all_sp=(TextView) convertView.findViewById(R.id.tv_all_sp);
 			holder.tv_into_dp=(TextView) convertView.findViewById(R.id.tv_into_dp);
 			holder.tv_dp_name=(TextView) convertView.findViewById(R.id.tv_dp_name);
+			holder.tv_jg=(TextView) convertView.findViewById(R.id.tv_jg);
+			holder.tv_yf=(TextView) convertView.findViewById(R.id.tv_yf);
 			convertView.setTag(holder);
-			
-		}else{
+ 		}else{
 			holder=(ViewHolder) convertView.getTag();
 		}
 
 		ChanPinBean bean=list.get(position);
 		ImageLoader.getInstance().displayImage(bean.getChanpinimg(),holder.pro_image,ImageLoadOptions.getOptions() );
+		ImageLoader.getInstance().displayImage(bean.getGslogo(),holder.img_dp_logo,ImageLoadOptions.getOptions() );
 		holder.tv_title.setText(bean.getTitle());
-		holder.tv_address.setText("∑¢ªı "+bean.getProvince());
+		holder.tv_address.setText("ÂèëË¥ß "+bean.getProvince());
 		holder.tv_dp_name.setText(bean.getDianpuname());
 		holder.tv_all_sp.setOnClickListener(new MyOnClickListener(position));
 		holder.tv_into_dp.setOnClickListener(new MyOnClickListener(position));
+		holder.tv_jg.setText("¬• "+bean.getJiage());
+		holder.tv_yf.setText(bean.getYunfei());
 		return convertView;
 	}
 
@@ -82,5 +84,7 @@ public class MyProductDetailAdapter extends BaseListAdapter<ChanPinBean>{
 		private TextView tv_all_sp;
 		private TextView tv_into_dp;
 		private TextView tv_dp_name;
+		private TextView tv_jg;
+		private TextView tv_yf;
 	}
 }

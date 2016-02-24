@@ -116,4 +116,5 @@ public class GongsiBaseDetailFragment extends BaseFragment{
 		
 	}
 
+
 }

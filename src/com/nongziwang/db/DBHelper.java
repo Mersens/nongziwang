@@ -3,7 +3,13 @@ package com.nongziwang.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+/**
+ * 
+ * @title DBHelper
+ * @description:TODO
+ * @author Mersens
+ * @time 2016年1月20日
+ */
 public class DBHelper extends SQLiteOpenHelper {
 	private static final int VERSION = 2;
 	private static final String NAME = "nongzi.db";
@@ -34,12 +40,12 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL(SQL_USERTB_CREAT);
 	}
 
+	/**当数据库更新时，调用该方法*/
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL(SQL_SEARCH_HISTORY_DROP);
 		db.execSQL(SQL_USERTB_DROP);
 		db.execSQL(SQL_SEARCH_HISTORY_CREAT);
 		db.execSQL(SQL_USERTB_CREAT);
-
 	}
 }

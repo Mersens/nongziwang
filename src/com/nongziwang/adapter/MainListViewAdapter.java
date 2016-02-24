@@ -27,7 +27,6 @@ public class MainListViewAdapter extends BaseAdapter {
 		this.list = list;
 		this.context = context;
 		mInflater = LayoutInflater.from(context);
-
 	}
 
 	@Override
@@ -42,7 +41,6 @@ public class MainListViewAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int position) {
-
 		return position;
 	}
 
@@ -128,7 +126,6 @@ public class MainListViewAdapter extends BaseAdapter {
 			case RIGHT_BOTTOM_LEFT:
 				intentAction(context, ProductDetailFragmentActivity.class, list
 						.get(pos).get(2).getId());
-
 				break;
 			case RIGHT_BOTTOM_RIGHT:
 				intentAction(context, ProductDetailFragmentActivity.class, list

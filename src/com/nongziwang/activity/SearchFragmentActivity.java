@@ -8,11 +8,11 @@ import org.json.JSONException;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +26,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -63,6 +62,7 @@ public class SearchFragmentActivity extends BaseActivity {
 	private String userid = null;
 	private static final String HOTSEARCH_URL = AppConstants.SERVICE_ADDRESS
 			+ "chanpinsousuo/getSousuoKeywords";
+	private static final String TAG="SearchFragmentActivity";
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -100,7 +100,6 @@ public class SearchFragmentActivity extends BaseActivity {
 					}
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -108,7 +107,8 @@ public class SearchFragmentActivity extends BaseActivity {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				// TODO Auto-generated method stub
+				Log.e(TAG, arg2==null?"":arg2);
+				ShowToast("获取热门搜索内容失败！");
 			}
 
 		});
@@ -158,7 +158,6 @@ public class SearchFragmentActivity extends BaseActivity {
 		img_clear.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				search_edit.setText("");
 				img_clear.setVisibility(View.INVISIBLE);
 			}
@@ -167,7 +166,6 @@ public class SearchFragmentActivity extends BaseActivity {
 		btn_search.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				isFromHistory = false;
 				doSearch();
 			}
@@ -185,20 +183,16 @@ public class SearchFragmentActivity extends BaseActivity {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
 				int len = search_edit.getText().toString().length();
 				if (len > 0)
 					img_clear.setVisibility(View.VISIBLE);

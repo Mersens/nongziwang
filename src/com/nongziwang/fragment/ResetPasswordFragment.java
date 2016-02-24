@@ -156,4 +156,6 @@ public class ResetPasswordFragment extends BaseFragment {
 	protected void lazyLoad() {
 
 	}
+
+
 }

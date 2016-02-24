@@ -58,4 +58,7 @@ public class AccountSafeFragment extends BaseFragment {
 	protected void lazyLoad() {
 
 	}
+
+
+
 }

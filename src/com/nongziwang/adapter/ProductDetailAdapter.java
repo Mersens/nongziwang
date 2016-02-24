@@ -1,11 +1,15 @@
 package com.nongziwang.adapter;
 
 import java.util.List;
+
 import com.nongziwang.main.R;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 
 @SuppressLint("SetJavaScriptEnabled")

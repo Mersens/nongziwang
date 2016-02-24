@@ -13,13 +13,12 @@
         android:src="@drawable/icon_no_network" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tv_refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/tv_gray_bg"
-        android:textColor="@color/base_color_text_black"
-        android:textSize="@dimen/common_text_size"
-        android:text="重新加载" />
+        android:layout_margin="12dp"
+        android:background="@drawable/tv_jz_bg"
+        android:textSize="@dimen/text_size"
+        android:text="@string/tv_cxjz" />
 
 </LinearLayout>

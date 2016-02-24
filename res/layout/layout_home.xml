@@ -5,6 +5,11 @@
     android:background="@color/white_color"
     android:orientation="vertical" >
 <include layout="@layout/layout_main_actionbar" />
+<FrameLayout
+        android:id="@+id/fragment_home"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
 
 <ListView
     android:id="@+id/listView"
@@ -13,5 +18,5 @@
     android:dividerHeight="6dp"
     >
 </ListView>
-
+</FrameLayout>
 </LinearLayout>

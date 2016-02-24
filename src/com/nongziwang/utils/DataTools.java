@@ -5,7 +5,7 @@ import android.content.Context;
 /**
  * 
  * @title DataTools
- * @description:dp与px的相互转化
+ * @description:dp,px的相互转化
  * @author Mersens
  * @time 2016年1月8日
  */

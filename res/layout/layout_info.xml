@@ -8,6 +8,13 @@
         android:id="@+id/common_actionbar"
         layout="@layout/layout_actionbar" />
 
+    <FrameLayout
+        android:id="@+id/fragment_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+    </FrameLayout>
+
     <HorizontalScrollView
         android:id="@+id/hvChannel"
         android:layout_width="match_parent"

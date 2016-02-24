@@ -66,7 +66,6 @@ public class RegisterSetInfoActivity extends BaseActivity {
 				doFinish();
 			}
 		});
-
 	}
 
 	public void doFinish() {

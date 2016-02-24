@@ -19,7 +19,6 @@ import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.ToastUtils;
 import com.nongziwang.view.XListView;
 import com.nongziwang.view.XListView.IXListViewListener;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -56,6 +55,7 @@ public class IndustryInfoFragment extends BaseFragment implements
 	private RelativeLayout layout_loading;
 	private int currpage = 1;
 	private int idx = 0;
+	public static final String ACTION_INDUSTRYINFOFRAGMENT = "industryinfofragment";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

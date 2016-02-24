@@ -383,4 +383,6 @@ public class ReleaseProductMsgFragment extends BaseFragment {
 
 	}
 
+
+
 }

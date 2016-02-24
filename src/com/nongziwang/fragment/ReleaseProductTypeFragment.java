@@ -388,4 +388,6 @@ public class ReleaseProductTypeFragment extends BaseFragment {
 
 	}
 
+
+
 }

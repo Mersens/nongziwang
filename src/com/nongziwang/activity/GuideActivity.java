@@ -54,6 +54,7 @@ public class GuideActivity extends BaseActivity{
 
 		public void onPageScrolled(int position, float positionOffset,
 				int positionOffsetPixels) {
+			//设置RadioButton的选中状态
 			((RadioButton) dotLayout.getChildAt(position)).setChecked(true);
 		}
 

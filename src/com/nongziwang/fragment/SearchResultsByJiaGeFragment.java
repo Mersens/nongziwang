@@ -292,4 +292,5 @@ public class SearchResultsByJiaGeFragment extends BaseFragment implements
 		productlistview.stopLoadMore();
 		productlistview.stopRefresh();
 	}
+
 }

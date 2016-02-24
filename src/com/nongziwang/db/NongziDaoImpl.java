@@ -9,7 +9,13 @@ import com.nongziwang.entity.UserBean;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
+/**
+ * 
+ * @title NongziDaoImpl
+ * @description:数据库操作接口的实现类
+ * @author Mersens
+ * @time 2016年1月22日
+ */
 public class NongziDaoImpl implements NongziDao {
 	private DBHelper helper;
 	private Context context;
@@ -23,7 +29,9 @@ public class NongziDaoImpl implements NongziDao {
 	public List<MyRegion> findAllProvinces() {
 		List<MyRegion> list = new ArrayList<MyRegion>();
 		list.add(new MyRegion("1", "请选择", ""));
+		//加载本地数据库文件的管理类
 		CityDBManager dbm = new CityDBManager(context);
+		//打开数据库文件连接
 		dbm.openDatabase();
 		SQLiteDatabase db = dbm.getDatabase();
 		Cursor cursor = db.rawQuery("select * from provincetb ", null);
@@ -42,7 +50,6 @@ public class NongziDaoImpl implements NongziDao {
 
 	@Override
 	public List<MyRegion> findAllCitysByProvincesId(String provinceid) {
-
 		List<MyRegion> list = new ArrayList<MyRegion>();
 		list.add(new MyRegion("1", "请选择", ""));
 		CityDBManager dbm = new CityDBManager(context);

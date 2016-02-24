@@ -50,4 +50,5 @@ public class NetcontentFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 	}
 
+
 }

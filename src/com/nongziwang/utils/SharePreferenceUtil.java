@@ -48,10 +48,12 @@ public class SharePreferenceUtil {
 	public String getUserPsd(){
 		return mSharedPreferences.getString(USER_PSD, null);
 	}
+	
 	public void setUserPsd(String psd){
 		editor.putString(USER_PSD, psd);
 		editor.commit();
 	}
+	//清除数据
 	public void clearData(){
 		editor.clear().commit();
 	}

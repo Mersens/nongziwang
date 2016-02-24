@@ -15,7 +15,7 @@ import android.util.Log;
 /**
  * 
  * @title CityDBManager
- * @description:加载数据库文件和关闭
+ * @description:加载本地数据库文件和关闭
  * @author Mersens
  * @time 2016年1月5日
  */
@@ -44,6 +44,7 @@ public class CityDBManager {
 		return this.database;
 	}
 
+	//打开数据库文件连接
 	private SQLiteDatabase openDatabase(String dbfile) {
 		try {
 			file = new File(dbfile);

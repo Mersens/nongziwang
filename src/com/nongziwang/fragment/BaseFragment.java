@@ -15,12 +15,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public abstract class BaseFragment extends Fragment {
 	private Activity activity;
 	protected boolean isVisible;
 	private HeadView mHeadView;
+
 	/**
 	 * Fragment懒加载，当该Fragment显示时再去加载
 	 */
@@ -40,9 +43,13 @@ public abstract class BaseFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		activity=getActivity();
+		init(inflater);
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
+	private void init(LayoutInflater inflater) {
+		activity=getActivity();
+	}
+
 	/**
 	 * @author Mersens
 	 * setDefaultViewMethod--默认显示左侧按钮，标题和右侧按钮
@@ -173,7 +180,12 @@ public abstract class BaseFragment extends Fragment {
 
 	//提供抽象的加载方法，其子类必须实现
 	protected abstract void lazyLoad();
+
 	
+
+		
+	
+		
 	protected void onInvisible() {
 		
 	}

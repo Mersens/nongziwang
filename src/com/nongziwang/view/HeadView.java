@@ -31,8 +31,6 @@ public class HeadView extends LinearLayout {
 	private OnLeftClickListener onleftclicklistener;
 	private OnRightClickListener onrightclicklistener;
 
-
-
 	public HeadView(Context context) {
 		super(context);
 		init(context);
@@ -71,7 +69,6 @@ public class HeadView extends LinearLayout {
 		if(resid!=0){
 		  header.setBackgroundResource(resid);
 		}
-		
 	}
 	
 	public void setHeadViewTitleColor(int resid){

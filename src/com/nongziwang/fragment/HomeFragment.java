@@ -3,29 +3,17 @@ package com.nongziwang.fragment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.http.Header;
 import org.json.JSONException;
-
-import com.loopj.android.http.TextHttpResponseHandler;
-import com.nongziwang.activity.SearchFragmentActivity;
-import com.nongziwang.activity.TypeSearchFragmentActivity;
-import com.nongziwang.adapter.MainListViewAdapter;
-import com.nongziwang.adapter.ViewPagerAdapter;
-import com.nongziwang.application.AppConstants;
-import com.nongziwang.entity.IndexBean;
-import com.nongziwang.main.R;
-import com.nongziwang.utils.HttpUtils;
-import com.nongziwang.utils.ImageLoadOptions;
-import com.nongziwang.utils.JsonUtils;
-import com.nongziwang.utils.ToastUtils;
-import com.nongziwang.view.DialogWaiting;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
@@ -38,8 +26,29 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.nongziwang.activity.SearchFragmentActivity;
+import com.nongziwang.activity.TypeSearchFragmentActivity;
+import com.nongziwang.adapter.MainListViewAdapter;
+import com.nongziwang.adapter.ViewPagerAdapter;
+import com.nongziwang.application.AppConstants;
+import com.nongziwang.entity.IndexBean;
+import com.nongziwang.main.R;
+import com.nongziwang.utils.HttpUtils;
+import com.nongziwang.utils.ImageLoadOptions;
+import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.utils.NetUtils;
+import com.nongziwang.utils.ToastUtils;
+import com.nongziwang.view.DialogWaiting;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
+/**
+ * 
+ * @title HomeFragment
+ * @description:首页
+ * @author Mersens
+ * @time 2016年2月20日
+ */
 public class HomeFragment extends BaseFragment implements OnClickListener {
 	private View view;
 	private View bannersView;
@@ -55,20 +64,27 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 	private LinearLayout layout_nongyao;
 	private LinearLayout layout_nongji;
 	private LinearLayout layout_nongmo;
-	private Map<String,List<IndexBean>> mapdatas;
+	private Map<String, List<IndexBean>> mapdatas;
 	private MainListViewAdapter adapter;
 	private DialogWaiting dialog;
 	private static final String BANNER_URL = AppConstants.SERVICE_ADDRESS
 			+ "index/getIndexImg";
-	private static final String TAG="HomeFragment";
+	private static final String TAG = "HomeFragment";
+	public static final String ACTION_HOMEFRAGMENT = "homefragment";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.layout_home, container, false);
-		handler = new Handler();
-		initViews();
-		initDatas();
+		registerBoradcastReceiver();
+		if (NetUtils.isNetworkConnected(getActivity())) {
+			handler = new Handler();
+			initViews();
+			initDatas();
+		} else {
+			addNoNetWorkFragment();
+		}
+
 		return view;
 	}
 
@@ -109,24 +125,24 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 
 	@SuppressLint("ViewHolder")
 	private void initDatas() {
-		
 		HttpUtils.doPost(BANNER_URL, new TextHttpResponseHandler() {
 			@Override
 			public void onStart() {
 				super.onStart();
-				dialog=new DialogWaiting(getActivity());
+				dialog = new DialogWaiting(getActivity());
 				dialog.show();
 			}
+
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				try {
-					mapdatas=JsonUtils.getIndexImg(arg2);
-					List<List<IndexBean>> list=new ArrayList<List<IndexBean>>();
+					mapdatas = JsonUtils.getIndexImg(arg2);
+					List<List<IndexBean>> list = new ArrayList<List<IndexBean>>();
 					list.add(mapdatas.get("huafei"));
 					list.add(mapdatas.get("nongyao"));
 					list.add(mapdatas.get("zhongzi"));
 					setBanners();
-					adapter=new MainListViewAdapter(list, getActivity());
+					adapter = new MainListViewAdapter(list, getActivity());
 					listView.setAdapter(adapter);
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -137,13 +153,13 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
 				ToastUtils.showMessage(getActivity(), "数据加载失败！");
-				Log.e(TAG, arg2==null?"":arg2);
+				Log.e(TAG, arg2 == null ? "" : arg2);
 			}
-			
+
 			@Override
 			public void onFinish() {
 				super.onFinish();
-				if(dialog!=null && dialog.isShowing()){
+				if (dialog != null && dialog.isShowing()) {
 					dialog.dismiss();
 				}
 			}
@@ -152,7 +168,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 
 	public void setBanners() {
 		initListener();
-		List<IndexBean> list=mapdatas.get("banner");
+		List<IndexBean> list = mapdatas.get("banner");
 		int len = list.size();
 		View view = null;
 		ImageView imageview;
@@ -161,8 +177,8 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		for (int i = 0; i < len; i++) {
 			view = mInflater.inflate(R.layout.imageview_layout, null);
 			imageview = (ImageView) view.findViewById(R.id.viewpager_imageview);
-			ImageLoader.getInstance().displayImage(list.get(i).getImgsrc(), imageview,
-					ImageLoadOptions.getOptions());
+			ImageLoader.getInstance().displayImage(list.get(i).getImgsrc(),
+					imageview, ImageLoadOptions.getOptions());
 			lists.add(view);
 		}
 		viewpager.setAdapter(new ViewPagerAdapter(getActivity(), lists));
@@ -230,6 +246,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 	public void onDestroyView() {
 		super.onDestroyView();
 		handler.removeCallbacks(viewpagerRunnable);
+		getActivity().unregisterReceiver(mBroadcastReceiver);
 	}
 
 	@Override
@@ -242,7 +259,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.layout_huafei:
 			intentAction(getActivity(), TypeSearchFragmentActivity.class,
-					CommonSearchFragment.HUAFEI); 
+					CommonSearchFragment.HUAFEI);
 			break;
 		case R.id.layout_zhongzi:
 			intentAction(getActivity(), TypeSearchFragmentActivity.class,
@@ -262,4 +279,44 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 			break;
 		}
 	}
+
+	public void addNoNetWorkFragment() {
+		FragmentManager fm = getFragmentManager();
+		Fragment fragment = fm.findFragmentById(R.id.fragment_home);
+		if (fragment != null) {
+			fm.beginTransaction().remove(fragment);
+		}
+		fragment = creatFragment();
+		fm.beginTransaction().replace(R.id.fragment_home, fragment).commit();
+	}
+
+	public Fragment creatFragment() {
+		return NetWorkFragment.getInstance(ACTION_HOMEFRAGMENT);
+	}
+
+	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action.equals(ACTION_HOMEFRAGMENT)) {
+				if (NetUtils.isNetworkConnected(getActivity())) {
+					FragmentManager fm = getFragmentManager();
+					Fragment fragment = fm.findFragmentById(R.id.fragment_home);
+					if (fragment != null) {
+						fm.beginTransaction().remove(fragment).commit();
+					}
+					handler = new Handler();
+					initViews();
+					initDatas();
+				}
+			}
+		}
+	};
+
+	public void registerBoradcastReceiver() {
+		IntentFilter myIntentFilter = new IntentFilter();
+		myIntentFilter.addAction(ACTION_HOMEFRAGMENT);
+		getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
+	}
+
 }

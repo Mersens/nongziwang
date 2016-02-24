@@ -45,7 +45,6 @@ public class JsonUtils {
 			JSONObject jsonObject = new JSONObject(str);
 			result = jsonObject.getString("code");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
@@ -63,7 +62,6 @@ public class JsonUtils {
 			JSONObject jsonObject = new JSONObject(str);
 			result = jsonObject.getString("userid");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
@@ -81,7 +79,6 @@ public class JsonUtils {
 			JSONObject jsonObject = new JSONObject(str);
 			result = jsonObject.getString("imgsrc");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
@@ -512,6 +509,9 @@ public class JsonUtils {
 		bean.setDetail(jsonObject.getString("detail"));
 		bean.setDianpuname(jsonObject.getString("dianpuname"));
 		bean.setChanpinimg(jsonObject.getString("chanpinimg"));
+		bean.setJiage(jsonObject.getString("jiage"));
+		bean.setYunfei(jsonObject.getString("yunfei"));
+		bean.setGslogo(jsonObject.getString("gslogo"));
 		return bean;
 	}
 

@@ -120,4 +120,5 @@ public class CommonOrderFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 
 	}
+
 }
