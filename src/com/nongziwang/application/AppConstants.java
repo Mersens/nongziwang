@@ -14,5 +14,5 @@ public class AppConstants {
 	//用户头像保存地址
 	@SuppressLint("SdCardPath")
 	public static final String MyAvatarDir = "/sdcard/ssdimg/avatar/";
-
+	public static final String ADDRESS="http://www.nz101.com/";
 }

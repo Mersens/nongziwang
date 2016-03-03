@@ -8,7 +8,6 @@ import com.nongziwang.main.R;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SearchCompanyAdapter extends BaseListAdapter<CompanyBean> {

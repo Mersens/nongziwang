@@ -23,7 +23,8 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="4dp" >
+        android:dividerHeight="4dp"
+         >
     </com.nongziwang.view.XListView>
 
 

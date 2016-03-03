@@ -12,6 +12,7 @@ import com.nongziwang.main.R;
 import com.nongziwang.utils.HttpUtils;
 import com.nongziwang.utils.ImageLoadOptions;
 import com.nongziwang.utils.JsonUtils;
+import com.nongziwang.utils.ToastUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.os.Bundle;
@@ -23,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class GongsiBaseDetailFragment extends BaseFragment{
 	private View view;
@@ -65,7 +65,7 @@ public class GongsiBaseDetailFragment extends BaseFragment{
 			public void onSuccess(int arg0, Header[] arg1, String arg2) {
 				String code=JsonUtils.getCode(arg2);
 				if("0".equals(code)){
-					Toast.makeText(getActivity(), "dianpuid为空!", Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(getActivity(), "dianpuid为空!");
 				}else if("1".equals(code)){
 					try {
 						bean=JsonUtils.getGongsiDetail(arg2);
@@ -74,14 +74,14 @@ public class GongsiBaseDetailFragment extends BaseFragment{
 						e.printStackTrace();
 					}
 				}else if("2".equals(code)){
-					Toast.makeText(getActivity(), "没有查询到公司信息!", Toast.LENGTH_SHORT).show();
+					ToastUtils.showMessage(getActivity(), "没有查询到公司信息!");
 				}
 			}
 			
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
 				Log.e(TAG, arg2==null?"":arg2);
-				Toast.makeText(getActivity(), "数据加载失败!", Toast.LENGTH_SHORT).show();
+				ToastUtils.showMessage(getActivity(), "数据加载失败!");
 			}
 			
 			@Override
@@ -115,6 +115,4 @@ public class GongsiBaseDetailFragment extends BaseFragment{
 	protected void lazyLoad() {
 		
 	}
-
-
 }

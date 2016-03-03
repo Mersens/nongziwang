@@ -28,6 +28,15 @@ public class ChanPinBean  implements Serializable{
 	private String chengfenname;// 产品成分
 	private String yunfei;//运费
 	private String gslogo;
+	private String pcurl;
+
+	public String getPcurl() {
+		return pcurl;
+	}
+
+	public void setPcurl(String pcurl) {
+		this.pcurl = pcurl;
+	}
 
 	public String getGslogo() {
 		return gslogo;

@@ -3,6 +3,7 @@ package com.nongziwang.application;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -10,6 +11,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.utils.StorageUtils;
+import com.umeng.socialize.PlatformConfig;
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -35,6 +38,22 @@ public class CustomApplcation extends Application {
 		CrashHandler.getInstance().init(getApplicationContext());
 		// 初始化ImageLoader
 		initImageLoader(getApplicationContext());
+		initPlatformConfig();
+	}
+
+	private void initPlatformConfig() {
+		PlatformConfig.setWeixin("wx26dc3a645ff5132e",
+				"2d22dbe08a570fb390b26aaf60d52e53");
+		// 微信 appid appsecret
+		PlatformConfig.setSinaWeibo("587556322",
+				"81787b013235b2de6c63788ed58e7fb7");
+		// 新浪微博 appkey appsecret
+		PlatformConfig.setQQZone("100424468",
+				"c7394704798a158208a74ab60104f0ba");
+		// QQ和Qzone appid appkey   
+		PlatformConfig.setAlipay("2016030201175920");
+		// 支付宝 appid
+		PlatformConfig.setYixin("yxc0614e80c9304c11b0391514d09f13bf");
 	}
 
 	// 单例模式，双重校验锁

@@ -77,6 +77,7 @@ public class ProductDetailMoreFragment extends BaseFragment implements
 				}else if("1".equals(code)){
 					try {
 						 bean=JsonUtils.getChanPinDetailInfo(arg2);
+						 ProductDetailFragmentActivity.bean=bean;
 						 setDatas();
 					} catch (JSONException e) {
 						e.printStackTrace();

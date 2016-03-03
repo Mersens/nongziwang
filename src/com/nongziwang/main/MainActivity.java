@@ -1,7 +1,6 @@
 package com.nongziwang.main;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -53,20 +52,22 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	public static final String ACTION_NETWORK_TRUE = "action_network_true";
 	public static final String ACTION_NETWORK_FALSE = "action_network_false";
 	private NetReceiver mReceiver;
+	public static final int REQUSET = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		mReceiver = new NetReceiver();
+		initViews();
+		initEvents();
 		IntentFilter mFilter = new IntentFilter();
 		mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
 		registerReceiver(mReceiver, mFilter);
-		initViews();
-		initEvents();
 	}
 
 	private void initViews() {
+
 		f1 = new HomeFragment();
 		f2 = new ProductFragment();
 		f3 = new InfoFragment();
@@ -82,7 +83,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		img_product = (ImageView) findViewById(R.id.img_product);
 		img_info = (ImageView) findViewById(R.id.img_info);
 		img_user = (ImageView) findViewById(R.id.img_user);
-
 		mTabs[0] = layout_home;
 		mTabs[1] = layout_product;
 		mTabs[2] = layout_info;
@@ -191,36 +191,15 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			String action = intent.getAction();
 			if (ConnectivityManager.CONNECTIVITY_ACTION.equals(action)) {
 				boolean isConnected = NetUtils.isNetworkConnected(context);
-		        if (isConnected) {
-
-		        } else {
-		        	//showDialogTips();
-		        }
+				if (isConnected) {
+					
+				} else {
+					
+				}
 			}
 		}
 	}
 
-/*private	void showDialogTips(){
-	DialogTips dialog = new DialogTips(getApplicationContext(), "温馨提示",
-			"没有网络连接，请检查网络设置!", "确定", true, true);
-	dialog.SetOnSuccessListener(new DialogInterface.OnClickListener() {
-		public void onClick(DialogInterface dialogInterface, int userId) {
-			Intent intent=null;
-            //判断手机系统的版本  即API大于10 就是3.0或以上版本 
-            if(android.os.Build.VERSION.SDK_INT>10){
-                intent = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
-            }else{
-                intent = new Intent();
-                ComponentName component = new ComponentName("com.android.settings","com.android.settings.WirelessSettings");
-                intent.setComponent(component);
-                intent.setAction("android.intent.action.VIEW");
-            }
-            startActivity(intent);
-		}
-	});
-	dialog.show();
-	dialog = null;
-	}*/
 	// 发送广播，更新用户信息
 	@Override
 	protected void onStart() {
@@ -234,4 +213,5 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		unregisterReceiver(mReceiver);
 		super.onDestroy();
 	}
+
 }

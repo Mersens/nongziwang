@@ -152,5 +152,8 @@
     <string name="tv_sjyz_tips">您验证的手机：157****0385若已丢失或停用，立即更换，避免账号被盗。</string>
     <string name="tv_jrdp">进入店铺</string>
     <string name="tv_cxjz">重新加载</string>
+    <string name="tv_network_fail">网络请求失败</string>
+    <string name="tv_network_check">请检查您的网络</string>
+    <string name="tv_tips">没有网络连接，请检查您的网络设置</string>
 
 </resources>

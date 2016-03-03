@@ -192,6 +192,7 @@ public class JsonUtils {
 		bean.setCenter(jsonObject.getString("center"));
 		bean.setNewsimg(jsonObject.getString("newsimg"));
 		bean.setAddtime(jsonObject.getString("addtime"));
+		bean.setNewsurl(jsonObject.getString("newsurl"));
 		return bean;
 	}
 
@@ -205,6 +206,7 @@ public class JsonUtils {
 		bean.setCenter(jsonObject.getString("center"));
 		bean.setAddtime(jsonObject.getString("addtime"));
 		bean.setImgsrc(jsonObject.getString("imgsrc"));
+		bean.setZhuantiurl(jsonObject.getString("zhuantiurl"));
 		return bean;
 	}
 
@@ -512,6 +514,7 @@ public class JsonUtils {
 		bean.setJiage(jsonObject.getString("jiage"));
 		bean.setYunfei(jsonObject.getString("yunfei"));
 		bean.setGslogo(jsonObject.getString("gslogo"));
+		bean.setPcurl(jsonObject.getString("pcurl"));
 		return bean;
 	}
 

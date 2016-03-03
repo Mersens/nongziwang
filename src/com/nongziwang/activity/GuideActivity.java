@@ -33,7 +33,7 @@ public class GuideActivity extends BaseActivity{
 
 	private void initViews() {
 		dotLayout = (RadioGroup) findViewById(R.id.advertise_point_group);
-		viewPager = (ViewPager) findViewById(R.id.viewpager);		
+		viewPager = (ViewPager) findViewById(R.id.viewpager);	
 	}
 	
 	private void initEvent() {
@@ -46,6 +46,7 @@ public class GuideActivity extends BaseActivity{
 	public class MyPagerChangeListener implements OnPageChangeListener {
 
 		public void onPageSelected(int position) {
+			
 		}
 
 		public void onPageScrollStateChanged(int arg0) {
@@ -57,7 +58,6 @@ public class GuideActivity extends BaseActivity{
 			//设置RadioButton的选中状态
 			((RadioButton) dotLayout.getChildAt(position)).setChecked(true);
 		}
-
 	}
 	
 	class PageFragmentAdapter extends FragmentPagerAdapter {

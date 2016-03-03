@@ -19,11 +19,9 @@ public class HotSearchAdapter extends BaseListAdapter<String>{
 
 	@Override
 	public View getContentView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
 		View view=mInflater.inflate(R.layout.layout_hotsearch_item, null);
 		TextView tv_name=(TextView) view.findViewById(R.id.tv_name);
 		tv_name.setText(list.get(position));
-		
 		return view;
 	}
 

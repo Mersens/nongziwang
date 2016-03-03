@@ -20,7 +20,6 @@ public class SearchResultsAdapter extends BaseListAdapter<ProductBean>{
 	public SearchResultsAdapter(List<ProductBean> list, Context context) {
 		super(list, context);
 		this.list= list;
-
 	}
 	@Override
 	public View getContentView(int position, View convertView, ViewGroup parent) {
@@ -63,7 +62,6 @@ public class SearchResultsAdapter extends BaseListAdapter<ProductBean>{
 		public void onClick(View v) {
 
 		}
-
 	}
 
 	static class ViewHolder {

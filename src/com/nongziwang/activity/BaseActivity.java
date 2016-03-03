@@ -116,7 +116,6 @@ public class BaseActivity extends FragmentActivity{
 		mHeadView.setLeftViewMethod( leftsrcid, onleftclicklistener);
 	}
 	
-	
 	/**
 	 * @author Mersens
 	 * Toast显示以字符串作为显示内容
@@ -218,10 +217,26 @@ public class BaseActivity extends FragmentActivity{
 				R.anim.right_out);
 	}
 	
+	/**
+	 * 
+	 * @Title: setHeadViewBg 
+	 * @Description: 设置HeadView的背景颜色
+	 * @author Mersens
+	 * @param resid
+	 * @throws
+	 */
 	public  void setHeadViewBg(int resid){
 		mHeadView.setHeadViewBackground(resid);
 	}
 	
+	/**
+	 * 
+	 * @Title: setHeadViewTitleColor 
+	 * @Description:设置HeadView的标题颜色
+	 * @author Mersens
+	 * @param resid
+	 * @throws
+	 */
 	public  void setHeadViewTitleColor(int resid){
 		mHeadView.setHeadViewTitleColor(resid);
 	}

@@ -1,10 +1,13 @@
 package com.nongziwang.fragment;
 
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.http.Header;
 import org.json.JSONException;
+
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.nongziwang.activity.SearchFragmentActivity;
 import com.nongziwang.activity.TypeSearchFragmentActivity;
@@ -40,6 +44,8 @@ import com.nongziwang.utils.JsonUtils;
 import com.nongziwang.utils.NetUtils;
 import com.nongziwang.utils.ToastUtils;
 import com.nongziwang.view.DialogWaiting;
+import com.nongziwang.view.XListView;
+import com.nongziwang.view.XListView.IXListViewListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
@@ -49,10 +55,10 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * @author Mersens
  * @time 2016年2月20日
  */
-public class HomeFragment extends BaseFragment implements OnClickListener {
+public class HomeFragment extends BaseFragment implements OnClickListener,IXListViewListener, EventListener{
 	private View view;
 	private View bannersView;
-	private ListView listView;
+	private XListView listView;
 	private LayoutInflater mInflater;
 	private ViewPager viewpager;
 	private Runnable viewpagerRunnable;
@@ -94,7 +100,10 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		viewpager = (ViewPager) bannersView.findViewById(R.id.viewpager);
 		dotLayout = (RadioGroup) bannersView
 				.findViewById(R.id.advertise_point_group);
-		listView = (ListView) view.findViewById(R.id.listView);
+		listView = (XListView) view.findViewById(R.id.listView);
+		listView.setPullLoadEnable(false);
+		listView.setPullRefreshEnable(true);
+		listView.setXListViewListener(this);
 		layout_huafei = (LinearLayout) bannersView
 				.findViewById(R.id.layout_huafei);
 		layout_zhongzi = (LinearLayout) bannersView
@@ -317,6 +326,49 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		IntentFilter myIntentFilter = new IntentFilter();
 		myIntentFilter.addAction(ACTION_HOMEFRAGMENT);
 		getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
+	}
+
+	@Override
+	public void onRefresh() {
+		handler.removeCallbacks(viewpagerRunnable);
+		HttpUtils.doPost(BANNER_URL, new TextHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String arg2) {
+				try {
+					mapdatas.clear();
+					mapdatas = JsonUtils.getIndexImg(arg2);
+					List<List<IndexBean>> list = new ArrayList<List<IndexBean>>();
+					list.add(mapdatas.get("huafei"));
+					list.add(mapdatas.get("nongyao"));
+					list.add(mapdatas.get("zhongzi"));
+					setBanners();
+					if(adapter!=null){
+						adapter=null;
+					}
+					adapter = new MainListViewAdapter(list, getActivity());
+					listView.setAdapter(adapter);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+				ToastUtils.showMessage(getActivity(), "刷新失败！");
+				Log.e(TAG, arg2 == null ? "" : arg2);
+			}
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				listView.stopRefresh();
+			}
+		});		
+	}
+
+	@Override
+	public void onLoadMore() {
+		
 	}
 
 }

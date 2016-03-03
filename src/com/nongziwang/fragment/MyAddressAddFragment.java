@@ -48,7 +48,6 @@ public class MyAddressAddFragment extends BaseFragment {
 		spinner_province=(Spinner) view.findViewById(R.id.spinner_province);
 		spinner_city=(Spinner) view.findViewById(R.id.spinner_city);
 
-
 	}
 
 
@@ -89,16 +88,12 @@ public class MyAddressAddFragment extends BaseFragment {
 					citys_adapter.notifyDataSetChanged();
 				}
 			}
-
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
 				
 			}
 		});
-		
 	}
-
 
 	public static Fragment getInstance(String params) {
 		MyAddressAddFragment fragment = new MyAddressAddFragment();
@@ -110,7 +105,6 @@ public class MyAddressAddFragment extends BaseFragment {
 	}
 	@Override
 	protected void lazyLoad() {
-		// TODO Auto-generated method stub
 		
 	}
 

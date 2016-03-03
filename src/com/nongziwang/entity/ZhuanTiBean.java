@@ -7,11 +7,20 @@ public class ZhuanTiBean {
 	private String keywords;
 	private String center;
 	private String addtime;
+	private String zhuantiurl;
+
 
 	public ZhuanTiBean(){
 		
 	}
 
+	public String getZhuantiurl() {
+		return zhuantiurl;
+	}
+
+	public void setZhuantiurl(String zhuantiurl) {
+		this.zhuantiurl = zhuantiurl;
+	}
 	public String getZhuantiid() {
 		return zhuantiid;
 	}

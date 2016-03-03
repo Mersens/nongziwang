@@ -6,10 +6,8 @@ public class NewsDatialBean {
 	private String center;
 	private String newsimg;
 	private String addtime;
+	private String newsurl;
 
-	public NewsDatialBean(){
-		
-	}
 	@Override
 	public String toString() {
 		return "NewsDatialBean [newsid=" + newsid + ", title=" + title
@@ -17,6 +15,15 @@ public class NewsDatialBean {
 				+ addtime + "]";
 	}
 
+	public String getNewsurl() {
+		return newsurl;
+	}
+	public void setNewsurl(String newsurl) {
+		this.newsurl = newsurl;
+	}
+	public NewsDatialBean(){
+		
+	}
 	public String getNewsid() {
 		return newsid;
 	}

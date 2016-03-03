@@ -17,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -45,8 +44,6 @@ IXListViewListener, EventListener{
 	private List<ChanPinBean> list;
 	private MyProductDetailAdapter adapter;
 	private Handler handler;
-
-
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,7 +80,9 @@ IXListViewListener, EventListener{
 					ToastUtils.showMessage(view.getContext(), "²úÆ·id Îª¿Õ!");
 				}else if("1".equals(code)){
 					try {
+						
 						 bean=JsonUtils.getChanPinDetailInfo(arg2);
+						 ProductDetailFragmentActivity.bean=bean;
 						 setDatas();
 					} catch (JSONException e) {
 						e.printStackTrace();

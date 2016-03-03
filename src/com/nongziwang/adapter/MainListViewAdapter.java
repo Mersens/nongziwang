@@ -18,6 +18,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+/**
+ * 
+ * @title MainListViewAdapter
+ * @description:Home首页适配器
+ * @author Mersens
+ * @time 2016年2月24日
+ */
 public class MainListViewAdapter extends BaseAdapter {
 	private List<List<IndexBean>> list;
 	private Context context;

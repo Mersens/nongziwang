@@ -49,7 +49,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	public void uncaughtException(Thread thread, Throwable ex) {
 		if (mDefaultHandler != null) {
 			// 程序出现异常时，进入该函数
-			//CustomApplcation.getInstance().exit();
+			CustomApplcation.getInstance().exit();
 			mDefaultHandler.uncaughtException(thread, ex);
 		}
 	}

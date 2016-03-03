@@ -13,10 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class GridViewAdapter extends BaseListAdapter<String>{
-
 	public GridViewAdapter(List<String> list, Context context) {
 		super(list, context);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -31,7 +29,6 @@ public class GridViewAdapter extends BaseListAdapter<String>{
 			holder.tv_money=(TextView) convertView.findViewById(R.id.tv_money);
 			holder.img_more=(ImageView) convertView.findViewById(R.id.img_more);
 			convertView.setTag(holder);
-
 		}else{
 			holder=(ViewHolder) convertView.getTag();
 		}

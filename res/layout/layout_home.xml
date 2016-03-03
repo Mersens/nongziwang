@@ -11,12 +11,12 @@
         android:layout_height="0dip"
         android:layout_weight="1" >
 
-<ListView
+<com.nongziwang.view.XListView
     android:id="@+id/listView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:dividerHeight="6dp"
+    android:divider="@null"
     >
-</ListView>
+</com.nongziwang.view.XListView>
 </FrameLayout>
 </LinearLayout>

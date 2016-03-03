@@ -1,5 +1,9 @@
 # cache for current jar dependency. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
+1455555522000 26938 e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461 D:\Mersens\android5workspace\social_sdk_library_project\libs\httpmime-4.1.3.jar
+1456796524136 26938 e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461 D:\Mersens\android5workspace\nongziwang\libs\httpmime-4.1.3.jar
+1456796524142 250835 764e4521750f4bd622d02787d9d047991469b882 D:\Mersens\android5workspace\nongziwang\libs\umeng_social_sdk.jar
+1455555522000 250835 764e4521750f4bd622d02787d9d047991469b882 D:\Mersens\android5workspace\social_sdk_library_project\libs\umeng_social_sdk.jar
 1449452672346 1184450 e19387dc3b060af32f5401f84fbe246635256955 D:\Mersens\android5workspace\nongziwang\libs\android-support-v4.jar
 1436113551268 1184450 e19387dc3b060af32f5401f84fbe246635256955 D:\Mersens\android5workspace\appcompat_v7\libs\android-support-v4.jar
